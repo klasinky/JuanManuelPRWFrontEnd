@@ -9,7 +9,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class Tab1Page implements OnInit{
 
-  name?:string
+  name?:string;
 
   constructor(private storageService: StorageService) {}
 

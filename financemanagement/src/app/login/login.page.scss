@@ -8,7 +8,7 @@ ion-toolbar {
 }
 
 ion-content {
-    --background: #131312;
+    --background: #f5f5f3;
 
     #header {
         display: flex;
@@ -47,3 +47,17 @@ ion-content {
     }
 
 }
+
+ion-input{
+    font-size: 18px;
+    --padding-top: 20px;
+    --padding-bottom: 15px;
+    --padding-start: 25px;
+    border-radius: 50px;
+    height: 55px;
+    box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+    --highlight-height: 0px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+

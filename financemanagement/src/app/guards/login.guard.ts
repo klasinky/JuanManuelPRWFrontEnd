@@ -18,7 +18,6 @@ export class LoginGuard implements CanActivate {
             resolve(false);
           } else {
             resolve(true);
-           
           }
         })
         .catch(err => {

@@ -22,7 +22,6 @@ export class AuthService {
 
     register(data:any):Observable<any>{
       return this.httpService.post('users/register', data);
-
     }
 
     logout(){

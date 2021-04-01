@@ -50,3 +50,36 @@ ion-content {
     }
 
 }
+
+h1{
+    text-align: center;
+}
+
+ion-input{
+    font-size: 18px;
+    --padding-top: 20px;
+    --padding-bottom: 15px;
+    --padding-start: 25px;
+    border-radius: 50px;
+    height: 55px;
+    box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+    --highlight-height: 0px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.error {
+    font-weight: 300;
+    font-size: 1rem;
+    color:red;
+    margin-bottom: 10px;
+}
+
+.rt-invalid{
+    box-shadow: 1px 1px 10px 0px rgba(241, 6, 6, 0.733);
+}
+
+
+.rt-valid{
+    box-shadow: 1px 1px 10px 0px rgba(6, 241, 57, 0.733);
+}

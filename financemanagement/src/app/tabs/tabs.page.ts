@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { HeaderComponent } from '../components/header/header.component';
+
 
 @Component({
   selector: 'app-tabs',
@@ -8,11 +9,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class TabsPage {
 
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
-  logOut(){
-    this.authService.logout();
-    
-  }
+ 
 
 }

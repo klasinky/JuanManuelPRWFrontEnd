@@ -17,15 +17,64 @@
 <ion-content>
   <h1>Create your <br/> account</h1>
 
-  <form id="form">
-    <app-input placeholder="Your Name"></app-input>
-    <app-input placeholder="Username"></app-input>
-    <app-input type="email" placeholder="Email"></app-input>
-    <app-input type="password" placeholder="Password"></app-input>
-    <app-input type="password" placeholder="Confirm password"></app-input>
-    <ion-button expand="block" shape="round">Register</ion-button>
-  </form>
+  <form [formGroup]="form" id="form">
+    
+    <ion-input formControlName="name" placeholder="Your Name"
+    [class.rt-valid]="this.form.get('name')?.valid "
+    [class.rt-invalid]="this.form.get('name')?.invalid && this.form.get('name')?.touched">
+    </ion-input>
+    
 
+    <ion-input formControlName="username"  placeholder="Username"
+    [class.rt-valid]="this.form.get('username')?.valid"
+    [class.rt-invalid]="this.form.get('username')?.invalid && this.form.get('username')?.touched">
+    </ion-input>
+    
+    <div *ngIf="usernameError" class="ion-text-center">
+      <div *ngFor="let item of usernameErrorMessage">
+        <label class="ion-padding error">{{item}}</label>
+      </div>
+    </div>
+
+    <ion-input formControlName="email" type="email" placeholder="Email"
+    [class.rt-valid]="this.form.get('email')?.valid"
+    [class.rt-invalid]="this.form.get('email')?.invalid && this.form.get('email')?.touched">
+    </ion-input>
+
+    <div *ngIf="emailError" class="ion-text-center">
+      <div *ngFor="let item2 of emailErrorMessage">
+        <label class="ion-padding error">{{item2}}</label>
+      </div>
+    </div>
+    
+
+    <ion-input formControlName="password" type="password" placeholder="Password"
+    [class.rt-valid]="this.form.get('password')?.valid && !this.nonFieldError"
+    [class.rt-invalid]="this.form.get('password')?.invalid && this.form.get('password')?.touched || this.nonFieldError">
+    </ion-input>
+    
+    <div *ngIf="passwordError" class="ion-text-center">
+      <div *ngFor="let item of passwordErrorMessage">
+        <label class="ion-padding error">{{item}}</label>
+      </div>
+    </div>
+    
+    
+    <ion-input formControlName="password_confirmation" type="password" placeholder="Confirm password"
+    [class.rt-valid]="!this.form.hasError('invalid') && this.form.get('password_confirmation')?.valid && !this.nonFieldError"
+    [class.rt-invalid]="this.form.get('password_confirmation')?.invalid && this.form.get('password_confirmation')?.touched
+      || this.form.hasError('invalid') || this.nonFieldError">
+    </ion-input>
+    
+    <div *ngIf="nonFieldError" class="ion-text-center">
+      <div *ngFor="let item of nonFieldErrorMessage">
+        <label class="ion-padding error">{{item}}</label>
+      </div>
+    </div>
+    
+    <ion-button [disabled]='form.invalid' (click)="registerAction()" expand="block" shape="round">Join Us</ion-button>
+  </form>
+  
   
   <p>By pressing 'Join Us' you agree to <br/> our terms & conditions.</p>
 </ion-content>
