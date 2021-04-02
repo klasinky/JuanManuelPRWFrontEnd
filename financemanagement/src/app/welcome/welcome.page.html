@@ -1,0 +1,39 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-text>
+    <h1>Bienvenido.</h1>
+    <p>Comience iniciando sesión <br/>en su cuenta.</p>
+  </ion-text>
+
+  <div class="actions">
+    <div class="login-buttons">
+      <ion-button>
+        <ion-avatar>
+          <img src="../../assets/icon/favicon.png" />
+        </ion-avatar>
+        <ion-label>
+          Facebook
+        </ion-label>
+      </ion-button>
+
+      <ion-button>
+        <ion-avatar>
+          <img src="../../assets/icon/favicon.png" />
+        </ion-avatar>
+        <ion-label>
+          Google
+        </ion-label>
+      </ion-button>
+    </div>
+    <div class="separator">
+      <span>or</span>
+      <span class="line left"></span>
+      <span class="line right"></span>
+    </div>
+
+    <ion-button routerLink="/register" class="signup-btn" expand="block">
+      Registrate con tu Email
+    </ion-button>
+
+    <p class="login">Ya estas registrado? <a routerLink="/login">Inicia sesión</a></p>
+  </div>
+</ion-content>

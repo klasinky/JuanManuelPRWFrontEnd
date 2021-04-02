@@ -1,21 +1,28 @@
+* {
+    font-weight: 450;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 ion-toolbar {
-    --background: #f5f5f3;
+    --background: #151234;
 
     ion-button{
         text-transform: initial;
         font-size: 17px;
+        color: #fff;
     }
 }
 
 ion-content {
-    --background: #f5f5f3;
+    --background: linear-gradient(45deg, #282748 15%, #1d1a3c 100%);
+
 
     #header {
 
         h1{
             font-weight: 700;
             font-size: 26px;
-            color: #010100;
+            color: #fff;
             margin-bottom: 15%;
         }
 
@@ -40,6 +47,7 @@ ion-content {
             border-radius: 50px;
             box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
             --box-shadow: none;
+            --background: linear-gradient(90deg, #8c36a5 0%, #664bdc 100%);
         }
     }
 
@@ -53,6 +61,7 @@ ion-content {
 
 h1{
     text-align: center;
+    color: #fff;
 }
 
 ion-input{
@@ -65,21 +74,24 @@ ion-input{
     box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
     --highlight-height: 0px;
     margin-bottom: 10px;
-    background-color: white;
+    background-color: #2e2b4f;
+    color: #fff;
 }
 
 .error {
     font-weight: 300;
     font-size: 1rem;
-    color:red;
+    color:#C9190B;
     margin-bottom: 10px;
 }
 
 .rt-invalid{
-    box-shadow: 1px 1px 10px 0px rgba(241, 6, 6, 0.733);
+    border: 1px #C9190B solid;
+    border-radius: 50px;
 }
 
 
 .rt-valid{
-    box-shadow: 1px 1px 10px 0px rgba(6, 241, 57, 0.733);
+    border: 1px rgba(6, 241, 57, 0.733) solid;
+    border-radius: 50px;
 }

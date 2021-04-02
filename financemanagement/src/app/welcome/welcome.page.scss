@@ -1,0 +1,104 @@
+* {
+    font-weight: 450;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+ion-content {
+    --background: linear-gradient(45deg, #282748 15%, #1d1a3c 100%);
+}
+
+ion-text{
+    position: absolute;
+    top: 25%;
+
+    h1{
+        font-size: 42px;
+        color: #fff;
+
+    }
+
+    p {
+        font-size: 14px;
+        color: #fff;
+        
+    }
+}
+
+.actions{
+    position: absolute;
+    width: 90%;
+    bottom: 16px;
+}
+
+ion-button {
+    --border-radius: 9px;
+    --box-shadow: none;
+    text-transform: initial;
+    font-size: 12px;
+}
+
+.login-buttons{
+    display: flex;
+    justify-content: space-between;
+
+    ion-button {
+        width: 45%;
+        --background: linear-gradient(90deg, #8c36a5 0%, #664bdc 100%);
+        --color: #fff;
+        --border-style: solid;
+        --border-color: #1d1a3c;
+        --border-width: 0.5px;
+    }
+
+    ion-avatar {
+        height: 12px;
+        width: 12px;
+        margin-right: 7px;
+        margin-bottom: 1px;
+    }
+}
+
+.separator{
+    display: flex;
+    justify-content: center;
+    margin: 8px auto 10px;
+    font-size: 12px;
+    position: relative;
+    color: #fff;
+
+    .line {
+        position: absolute;
+        border-top: 1px solid #dfdfdf;
+        width: 50px;
+        height: 2px;
+        top: 8px;
+    }
+
+    .right{
+        right: 98px;
+    }
+
+    .left{
+        left: 98px;
+    }
+}
+
+.signup-btn {
+    --background: linear-gradient(90deg, #8c36a5 0%, #664bdc 100%);
+    --border-style: solid;
+    --border-color: #1d1a3c;
+    --border-width: 0.5px;
+}
+
+.login {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 16px;
+    color: #fff;
+
+    a{
+        color: #b15fc9;
+        font-weight: 400;
+        margin-left: 5px;
+    }
+}

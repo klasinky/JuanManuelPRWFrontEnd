@@ -16,7 +16,7 @@ export class Tab1Guard implements CanActivate {
           if (res) {
             resolve(true);
           } else {
-            this.router.navigate(['login']);
+            this.router.navigate(['welcome']);
             resolve(false);
           }
         })

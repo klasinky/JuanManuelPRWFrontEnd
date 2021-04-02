@@ -33,6 +33,7 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.getForm();
+    this.form.reset();
   }
 
   getForm() {
