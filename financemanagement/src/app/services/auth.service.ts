@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginInterface } from '../interfaces/loginInterface';
+import { Login } from '../interfaces/login';
 import { HttpService } from './http.service';
 import { StorageService } from './storage.service';
 
@@ -16,13 +16,12 @@ export class AuthService {
     private router: Router
     ) { }
 
-    login(data:LoginInterface): Observable<any>{
+    login(data:Login): Observable<any>{
       return this.httpService.post('users/login', data);
     }
 
     register(data:any):Observable<any>{
       return this.httpService.post('users/register', data);
-
     }
 
     logout(){
