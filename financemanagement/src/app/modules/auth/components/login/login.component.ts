@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthConstants } from '../../../../config/auth=constant';
 import { Login } from '../../../../interfaces/login';
 import { AuthService } from '../../../../services/auth.service';
@@ -18,27 +19,24 @@ export class LoginComponent implements OnInit {
 
   nonFieldError = false;
   nonFieldErrorMessage: String[] = [];
+
+  showLoader = false;
  
   constructor(
     private router: Router,
     private authService: AuthService,
     private storageService: StorageService,
-    private fb: FormBuilder,) {
+    private fb: FormBuilder,
+    private toastr: ToastrService) {
       this.formLogin = this.getForm();
     }
 
   ngOnInit() {
-    const sign_up_btn = document.querySelector("#sign-up-btn") as HTMLButtonElement;
-    sign_up_btn.addEventListener("click", () => {
-      this.formLogin.reset();
-    });
-
-    this.ifChangeInput('email');
-    this.ifChangeInput('password');
-
+    this.ifChangeInput('email', 'nonFieldError');
+    this.ifChangeInput('password', 'nonFieldError');
   }
 
-  getForm() {
+  getForm(): FormGroup {
     return this.fb.group({
       'email': ['', [Validators.required, Validators.email, Validators.minLength(2)]],
       'password': ['', [Validators.required, Validators.minLength(8)]]
@@ -51,19 +49,26 @@ export class LoginComponent implements OnInit {
   loginAction(){
     if(this.formLogin.valid){
       this.clearFiles();
+      this.showLoader = true;
       const dataLogin = {
         email: this.formLogin.value.email,
         password: this.formLogin.value.password
-      }
+      } as Login;
 
       this.authService.login(dataLogin).subscribe(
         (data)=>{
+          this.showLoader = false;
           const token = 'Token '+data.access_token;
           this.storageService.store(AuthConstants.AUTH, token);
           this.storageService.store(AuthConstants.DATAUSER, data.user);
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['dashboard']).then(() => {
+            // Notificación
+            this.toastr.info('Hola ' + data.user.name, 'Bievenido')
+          });
+
         },
         (error)=>{
+          this.showLoader = false;
           const nonFieldError = error.error.non_field_errors;
           this.nonFieldError = true;
           nonFieldError.forEach((element:string) => {
@@ -71,9 +76,6 @@ export class LoginComponent implements OnInit {
           });
         }
       )
-      
-    }else{
-     console.log("false");
     }
   }
 
@@ -82,12 +84,13 @@ export class LoginComponent implements OnInit {
     this.nonFieldErrorMessage = [];
   }
 
-  ifChangeInput(name: any){
+  ifChangeInput(name: any, nameError: any){
     this.formLogin.get(name)?.valueChanges.subscribe(val => {
-      this.nonFieldError = false;
-      this.nonFieldErrorMessage = [];
+      (this as any)[nameError] = false
     });
   }
 
-
+  resetForm(){
+    this.formLogin.reset();
+  }
 }

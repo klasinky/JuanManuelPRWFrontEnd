@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @Component({
   selector: 'app-auth',
@@ -7,6 +9,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
+
+  @ViewChild(LoginComponent) childLogin!: LoginComponent;
+  @ViewChild(RegisterComponent) childRegister!: RegisterComponent;
 
   signUpActive:boolean = false;
   signUpFormActive:boolean = false;
@@ -21,6 +26,7 @@ export class AuthComponent implements OnInit {
    */
   signInMode(){
     this.signUpActive = false;
+    this.childRegister.resetForm();
     setTimeout(()=>{
       this.signUpFormActive = false;
     },1000)
@@ -31,6 +37,7 @@ export class AuthComponent implements OnInit {
    */
   signUpMode(){
     this.signUpActive = true;
+    this.childLogin.resetForm();
     setTimeout(()=>{
       this.signUpFormActive = true;
     },1000)
@@ -38,7 +45,7 @@ export class AuthComponent implements OnInit {
 
   showAlertRegister(_event:boolean):void{
     this.signInMode();
-    this.toastr.success('Ahora inicia sesión','Registro hecho')
+    this.toastr.success('Ahora inicia sesión','Registrado correctamente')
   }
 
 }

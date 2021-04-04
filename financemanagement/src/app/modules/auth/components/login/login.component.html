@@ -21,8 +21,20 @@
       </div>
     </div>
 
-    <button [disabled]='formLogin.invalid' (click)="loginAction()" class="btn solid">Login</button>
+    <button [disabled]='formLogin.invalid' (click)="loginAction()" class="btn">
+      <div *ngIf="!showLoader; else blockLoader">
+        Login
+      </div>
+      <ng-template #blockLoader>
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </ng-template>
 
+
+
+    </button>
+<!--
     <p class="social-text">Or Sign in with social platforms</p>
 
     <div class="social-media">
@@ -42,5 +54,6 @@
         <i class="fab fa-linkedin-in"></i>
       </a>
     </div>
+    -->
     
   </form>

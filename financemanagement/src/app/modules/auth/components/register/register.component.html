@@ -3,7 +3,7 @@
   <div class="input-field"
     [class.is-valid]="this.formRegister.get('name')?.valid "
     [class.is-invalid]="this.formRegister.get('name')?.invalid && this.formRegister.get('name')?.touched">
-    <i class="fas fa-lock"></i>
+    <i class="fas fa-user"></i>
     <input type="text" formControlName="name" placeholder="Your Name"/>
   </div>
   <div class="input-field"
@@ -68,9 +68,5 @@
         <span class="sr-only">Loading...</span>
       </div>
     </ng-template>
-    
-    
     </button>
-
-    <button (click)="testEmit()">HEH</button>
 </form>

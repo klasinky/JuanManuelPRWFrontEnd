@@ -41,18 +41,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.formRegister?.get('username')?.valueChanges.subscribe(val => {
-      this.usernameError = false;
-    });
-    this.formRegister?.get('email')?.valueChanges.subscribe(val => {
-      this.emailError = false;
-    });
-    this.formRegister?.get('password')?.valueChanges.subscribe(val => {
-      this.passwordError = false;
-      this.nonFieldError = false;
-    });
-
+    this.ifChangeInput('username','usernameError');
+    this.ifChangeInput('email','emailError');
+    this.ifChangeInput('password','passwordError');
+    this.ifChangeInput('password','nonFieldError');
   }
 
   getForm(): FormGroup {
@@ -74,10 +66,6 @@ export class RegisterComponent implements OnInit {
       return { invalid: true };
     }
     return null;
-  }
-
-  testEmit(){
-    this.registerDone.emit(true);
   }
 
   registerAction() {
@@ -141,6 +129,16 @@ export class RegisterComponent implements OnInit {
     this.emailErrorMessage = [];
     this.passwordErrorMessage = [];
     this.nonFieldErrorMessage = [];
+  }
+
+  ifChangeInput(name: any, nameError: any){
+    this.formRegister.get(name)?.valueChanges.subscribe(val => {
+      (this as any)[nameError] = false
+    });
+  }
+
+  resetForm(){
+    this.formRegister.reset();
   }
 
 }
