@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthConstants } from '../../../../config/auth=constant';
 import { Login } from '../../../../interfaces/login';
@@ -8,43 +9,55 @@ import { StorageService } from '../../../../services/storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../../auth.component.scss'],
+  styleUrls: ['../../auth.component.scss' , './login.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
 
+  formLogin: FormGroup
 
-  loginData = {
-    email:"",
-    password:""
-  } as Login;
-  
-
+  nonFieldError = false;
+  nonFieldErrorMessage: String[] = [];
+ 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private storageService: StorageService) { }
+    private storageService: StorageService,
+    private fb: FormBuilder,) {
+      this.formLogin = this.getForm();
+    }
 
   ngOnInit() {
+    const sign_up_btn = document.querySelector("#sign-up-btn") as HTMLButtonElement;
+    sign_up_btn.addEventListener("click", () => {
+      this.formLogin.reset();
+    });
+
+    this.ifChangeInput('email');
+    this.ifChangeInput('password');
 
   }
-  
-  validateInput(){
-    /*let email = this.loginData.email.trim()
-    let password = this.loginData.password.trim()
-    //TODO validar email y contraseña
-    return (this.loginData.email && 
-      this.loginData.password && 
-      this.loginData.email.length > 0 &&
-      this.loginData.password.length > 0);*/
+
+  getForm() {
+    return this.fb.group({
+      'email': ['', [Validators.required, Validators.email, Validators.minLength(2)]],
+      'password': ['', [Validators.required, Validators.minLength(8)]]
+    });
   }
 
+  /**
+   * Iniciar sesión
+   */
   loginAction(){
-    console.log("entra al login")
-    //if(this.validateInput()){
-      this.authService.login(this.loginData).subscribe(
+    if(this.formLogin.valid){
+      this.clearFiles();
+      const dataLogin = {
+        email: this.formLogin.value.email,
+        password: this.formLogin.value.password
+      }
+
+      this.authService.login(dataLogin).subscribe(
         (data)=>{
-          console.log(data);
           const token = 'Token '+data.access_token;
           this.storageService.store(AuthConstants.AUTH, token);
           this.storageService.store(AuthConstants.DATAUSER, data.user);
@@ -52,18 +65,29 @@ export class LoginComponent implements OnInit {
         },
         (error)=>{
           const nonFieldError = error.error.non_field_errors;
-          const emailErrors = error.error.email;
-          const passwordErrors = error.error.password;
-          console.log(emailErrors);
-          console.log(passwordErrors);
-          console.log(nonFieldError);
-          
+          this.nonFieldError = true;
+          nonFieldError.forEach((element:string) => {
+            this.nonFieldErrorMessage.push(element);
+          });
         }
       )
       
-    /*}else{
-      console.log("FALSE");
-    }*/
-
+    }else{
+     console.log("false");
+    }
   }
+
+  clearFiles(){
+    this.nonFieldError = false;
+    this.nonFieldErrorMessage = [];
+  }
+
+  ifChangeInput(name: any){
+    this.formLogin.get(name)?.valueChanges.subscribe(val => {
+      this.nonFieldError = false;
+      this.nonFieldErrorMessage = [];
+    });
+  }
+
+
 }
