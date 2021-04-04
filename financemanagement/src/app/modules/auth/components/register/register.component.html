@@ -1,24 +1,76 @@
-<form action="#" class="sign-up-form">
-    <h2 class="title">Sign up</h2>
-    <div class="input-field">
-      <i class="fas fa-lock"></i>
-      <input type="text" placeholder="Name" />
+<form [formGroup]="formRegister" class="sign-up-form">
+  <h2 class="title">Sign up</h2>
+  <div class="input-field"
+    [class.is-valid]="this.formRegister.get('name')?.valid "
+    [class.is-invalid]="this.formRegister.get('name')?.invalid && this.formRegister.get('name')?.touched">
+    <i class="fas fa-lock"></i>
+    <input type="text" formControlName="name" placeholder="Your Name"/>
+  </div>
+  <div class="input-field"
+    [class.is-valid]="this.formRegister.get('username')?.valid && !usernameError"
+    [class.is-invalid]="this.formRegister.get('username')?.invalid && this.formRegister.get('username')?.touched || usernameError">
+    <i class="fas fa-user"></i>
+    <input type="text" formControlName="username" placeholder="Username"/>
+  </div>
+  <div *ngIf="usernameError">
+    <div class="text-center" *ngFor="let item of usernameErrorMessage">
+      <label class="text-danger">{{item}}</label>
     </div>
-    <div class="input-field">
-      <i class="fas fa-user"></i>
-      <input type="text" placeholder="Username" />
+  </div>
+
+  <div class="input-field"
+    [class.is-valid]="this.formRegister.get('email')?.valid && !emailError"
+    [class.is-invalid]="this.formRegister.get('email')?.invalid && this.formRegister.get('email')?.touched || emailError">
+    <i class="fas fa-envelope"></i>
+    <input type="email" formControlName="email" placeholder="Email"/>
+  </div>
+
+  <div *ngIf="emailError">
+    <div class="text-center" *ngFor="let item of emailErrorMessage">
+      <label class="text-danger">{{item}}</label>
     </div>
-    <div class="input-field">
-      <i class="fas fa-envelope"></i>
-      <input type="email" placeholder="Email" />
+  </div>
+  
+  <div class="input-field"
+  [class.is-valid]="this.formRegister.get('password')?.valid && !passwordError && !nonFieldError"
+  [class.is-invalid]="this.formRegister.get('password')?.invalid && this.formRegister.get('password')?.touched 
+  || passwordError || nonFieldError">
+    <i class="fas fa-lock"></i>
+    <input type="password" formControlName="password" placeholder="Password" 
+       />
+  </div>
+  <div *ngIf="passwordError" >
+    <div class="text-center" *ngFor="let item of passwordErrorMessage">
+      <label class="text-danger">{{item}}</label>
     </div>
-    <div class="input-field">
-      <i class="fas fa-lock"></i>
-      <input type="password" placeholder="Password" />
+  </div>
+
+  <div class="input-field" 
+    [class.is-valid]="!this.formRegister.hasError('invalid') && this.formRegister.get('password_confirmation')?.valid 
+    && !passwordError && !nonFieldError"
+    [class.is-invalid]="this.formRegister.get('password_confirmation')?.invalid 
+    && this.formRegister.get('password_confirmation')?.touched
+    || this.formRegister.hasError('invalid') || passwordError || nonFieldError">
+    <i class="fas fa-lock"></i>
+    <input type="password" formControlName="password_confirmation" placeholder="Password confirmation"/>
+  </div>
+  <div *ngIf="nonFieldError" >
+    <div class="text-center" *ngFor="let item of nonFieldErrorMessage">
+      <label class="text-danger">{{item}}</label>
     </div>
-    <div class="input-field">
-      <i class="fas fa-lock"></i>
-      <input type="password" placeholder="Password confirmation" />
+  </div>
+  <button [disabled]='this.formRegister.invalid || showLoader' (click)="registerAction()" class="btn solid">
+    <div *ngIf="!showLoader; else blockLoader">
+      Join Us
     </div>
-    <button class="btn solid">Join Us</button>
-  </form>
+    <ng-template #blockLoader>
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </ng-template>
+    
+    
+    </button>
+
+    <button (click)="testEmit()">HEH</button>
+</form>
