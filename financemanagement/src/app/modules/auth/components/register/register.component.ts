@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Register } from 'src/app/interfaces/register';
@@ -27,6 +27,8 @@ export class RegisterComponent implements OnInit {
   nonFieldErrorMessage: string[] = [];
 
   showLoader = false;
+
+  @Output() registerDone: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     private router: Router,
@@ -74,6 +76,10 @@ export class RegisterComponent implements OnInit {
     return null;
   }
 
+  testEmit(){
+    this.registerDone.emit(true);
+  }
+
   registerAction() {
     
     if (this.formRegister?.valid) {
@@ -90,9 +96,9 @@ export class RegisterComponent implements OnInit {
       this.authService.register(dataRegister).subscribe(
         (data) => {
           console.log(data);
-          //this.router.navigate(['login']);
+          
           this.showLoader = false;
-
+          this.registerDone.emit(true);
         },
         (error) => {
           this.showLoader = false;
