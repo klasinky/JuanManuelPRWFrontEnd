@@ -52,8 +52,6 @@ form {
 }
 
 form.sign-up-form {
-  // opacity: 0;
-  // display: none;
   z-index: 1;
 }
 
@@ -248,15 +246,13 @@ form.sign-in-form {
   left: 25%;
 }
 
-.containerauth.sign-up-mode form.sign-up-form {
-  // opacity: 1;
-  // display: block;
 
+.containerauth.sign-up-mode form.sign-up-form {
   z-index: 2;
 }
 
+
 .containerauth.sign-up-mode form.sign-in-form {
-  // display: none;
   // opacity: 0;
   z-index: 1;
 }

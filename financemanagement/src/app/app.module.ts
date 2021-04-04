@@ -8,7 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +19,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent]
