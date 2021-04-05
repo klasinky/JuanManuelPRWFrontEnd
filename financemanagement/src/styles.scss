@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+$primary-color: #282748;
+$primary-color-hover: #1D1A3C;
+
+$secondary-color: #1D1A3C;
+$secondary-color-hover: #282748;
+
+$alternative-color: #57B894;
+$alternative-color-hover: #4ca182;
+
+$primary-font-color: #ffffff;
+$secondary-font-color: #dbd7d7;
+
+.mobile-nav-active {
+    overflow: hidden;
+  
+    #header {
+      left: 0 !important;
+    }
+  }
+body{
+    background: $primary-color;
+}

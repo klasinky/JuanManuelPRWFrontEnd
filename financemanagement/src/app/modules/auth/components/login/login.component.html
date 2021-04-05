@@ -1,27 +1,59 @@
-<form action="#" class="sign-in-form">
+<form [formGroup]="formLogin" id="form" class="sign-in-form">
     <h2 class="title">Login</h2>
-    <div class="input-field">
+    
+    <div class="input-field" 
+    [class.is-valid]="this.formLogin.get('email')?.valid"
+    [class.is-invalid]="this.formLogin.get('email')?.invalid && this.formLogin.get('email')?.touched || nonFieldError == true">
       <i class="fas fa-user"></i>
-      <input type="text" placeholder="Username" [(ngModel)]="loginData.email" [ngModelOptions]="{standalone: true}"/>
+      <input formControlName="email" type="text" placeholder="Username"/>
     </div>
-    <div class="input-field">
+
+    <div class="input-field" 
+    [class.is-valid]="this.formLogin.get('password')?.valid "
+    [class.is-invalid]="this.formLogin.get('password')?.invalid && this.formLogin.get('password')?.touched || nonFieldError == true">
       <i class="fas fa-lock"></i>
-      <input type="password" placeholder="Password" [(ngModel)]="loginData.password" [ngModelOptions]="{standalone: true}"/>
+      <input formControlName="password" type="password" placeholder="Password"/>
     </div>
-    <button (click)="loginAction()" class="btn solid">Login</button>
+
+    <div *ngIf="nonFieldError" class="text-center">
+      <div *ngFor="let item of nonFieldErrorMessage">
+        <label class="error">{{item}}</label>
+      </div>
+    </div>
+
+    <button [disabled]='formLogin.invalid' (click)="loginAction()" class="btn">
+      <div *ngIf="!showLoader; else blockLoader">
+        Login
+      </div>
+      <ng-template #blockLoader>
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </ng-template>
+
+
+
+    </button>
+<!--
     <p class="social-text">Or Sign in with social platforms</p>
+
     <div class="social-media">
       <a href="#" class="social-icon">
         <i class="fab fa-facebook-f"></i>
       </a>
+
       <a href="#" class="social-icon">
         <i class="fab fa-twitter"></i>
       </a>
+
       <a href="#" class="social-icon">
         <i class="fab fa-google"></i>
       </a>
+
       <a href="#" class="social-icon">
         <i class="fab fa-linkedin-in"></i>
       </a>
     </div>
+    -->
+    
   </form>

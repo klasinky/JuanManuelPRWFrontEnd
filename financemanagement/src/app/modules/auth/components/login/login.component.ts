@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthConstants } from '../../../../config/auth=constant';
 import { Login } from '../../../../interfaces/login';
 import { AuthService } from '../../../../services/auth.service';
@@ -8,62 +10,92 @@ import { StorageService } from '../../../../services/storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../../auth.component.scss'],
+  styleUrls: ['../../auth.component.scss', './login.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
 
+  formLogin: FormGroup
 
-  loginData = {
-    email:"",
-    password:""
-  } as Login;
-  
+  nonFieldError = false;
+  nonFieldErrorMessage: String[] = [];
+
+  showLoader = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private storageService: StorageService) { }
+    private storageService: StorageService,
+    private fb: FormBuilder,
+    private toastr: ToastrService) {
+    this.formLogin = this.getForm();
+  }
 
   ngOnInit() {
-
-  }
-  
-  validateInput(){
-    /*let email = this.loginData.email.trim()
-    let password = this.loginData.password.trim()
-    //TODO validar email y contraseña
-    return (this.loginData.email && 
-      this.loginData.password && 
-      this.loginData.email.length > 0 &&
-      this.loginData.password.length > 0);*/
+    this.ifChangeInput('email', 'nonFieldError');
+    this.ifChangeInput('password', 'nonFieldError');
   }
 
-  loginAction(){
-    console.log("entra al login")
-    //if(this.validateInput()){
-      this.authService.login(this.loginData).subscribe(
-        (data)=>{
-          console.log(data);
-          const token = 'Token '+data.access_token;
-          this.storageService.store(AuthConstants.AUTH, token);
-          this.storageService.store(AuthConstants.DATAUSER, data.user);
-          this.router.navigate(['dashboard']);
+  getForm(): FormGroup {
+    return this.fb.group({
+      'email': ['', [Validators.required, Validators.email, Validators.minLength(2)]],
+      'password': ['', [Validators.required, Validators.minLength(8)]]
+    });
+  }
+
+  /**
+   * Iniciar sesión
+   */
+  loginAction() {
+    if (this.formLogin.valid) {
+      this.clearFiles();
+      this.showLoader = true;
+      const dataLogin = {
+        email: this.formLogin.value.email,
+        password: this.formLogin.value.password
+      } as Login;
+
+      this.authService.login(dataLogin).subscribe(
+        (data) => {
+          const token = 'Token ' + data.access_token;
+          this.storageService.store(AuthConstants.DATAUSER, data.user)
+          this.storageService.store(AuthConstants.AUTH, token)
+            .then(() => {
+              return this.storageService.get(AuthConstants.AUTH);
+            })
+            .then((res: any) => {
+              this.showLoader = false;
+              this.router.navigate(['dashboard']).then(() => {
+                // Notificación
+                this.toastr.info('Hola ' + data.user.name, 'Bievenido')
+
+              })
+            });
         },
-        (error)=>{
+        (error) => {
+          this.showLoader = false;
           const nonFieldError = error.error.non_field_errors;
-          const emailErrors = error.error.email;
-          const passwordErrors = error.error.password;
-          console.log(emailErrors);
-          console.log(passwordErrors);
-          console.log(nonFieldError);
-          
+          this.nonFieldError = true;
+          nonFieldError.forEach((element: string) => {
+            this.nonFieldErrorMessage.push(element);
+          });
         }
       )
-      
-    /*}else{
-      console.log("FALSE");
-    }*/
+    }
+  }
 
+  clearFiles() {
+    this.nonFieldError = false;
+    this.nonFieldErrorMessage = [];
+  }
+
+  ifChangeInput(name: any, nameError: any) {
+    this.formLogin.get(name)?.valueChanges.subscribe(val => {
+      (this as any)[nameError] = false
+    });
+  }
+
+  resetForm() {
+    this.formLogin.reset();
   }
 }

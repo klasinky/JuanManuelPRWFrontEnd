@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @Component({
   selector: 'app-auth',
@@ -7,32 +10,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild(LoginComponent) childLogin!: LoginComponent;
+  @ViewChild(RegisterComponent) childRegister!: RegisterComponent;
+
+  signUpActive:boolean = false;
+  signUpFormActive:boolean = false;
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    const sign_in_btn = document.querySelector("#sign-in-btn");
-    const sign_up_btn = document.querySelector("#sign-up-btn");
-    const container = document.querySelector(".container") as HTMLDivElement;
-    
-    if(sign_up_btn != null && container != null && sign_in_btn != null){
-      sign_up_btn.addEventListener("click", () => {
-        container.classList.add("sign-up-mode");
-      });
-      sign_in_btn.addEventListener("click", () => {
-        container.classList.remove("sign-up-mode");
-      });
-    } 
 
-    /*const sign_in_btn = document.getElementById("#sign-in-btn") as HTMLButtonElement;
-    const sign_up_btn = document.querySelector("#sign-up-btn") as HTMLButtonElement;
-    const container = document.querySelector(".container") as HTMLDivElement;
+  }
 
-    sign_up_btn.addEventListener("click", () => {
-      container.classList.add("sign-up-mode");
-    });
-    
-    sign_in_btn.addEventListener("click", () => {
-      container.classList.remove("sign-up-mode");
-    });*/
+  /**
+   * Cambiar al login
+   */
+  signInMode(){
+    this.signUpActive = false;
+    this.childRegister.resetForm();
+    setTimeout(()=>{
+      this.signUpFormActive = false;
+    },1000)
+  }
+
+  /**
+   * Cambiar al register
+   */
+  signUpMode(){
+    this.signUpActive = true;
+    this.childLogin.resetForm();
+    setTimeout(()=>{
+      this.signUpFormActive = true;
+    },1000)
+  }
+
+  showAlertRegister(_event:boolean):void{
+    this.signInMode();
+    this.toastr.success('Ahora inicia sesión','Registrado correctamente')
+  }
+
+  ngOnDestroy(){
+    console.log("Destroy")
   }
 }

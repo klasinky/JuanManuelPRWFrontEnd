@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,26 @@ export class StorageService {
   async store(storageKey: string, value: any){
 
     const encryptedValue = btoa(escape(JSON.stringify(value)));
-    localStorage.setItem(storageKey, encryptedValue);
+    return Promise.resolve().then(function () {
+      localStorage.setItem(storageKey, encryptedValue);
+  });
   }
+
+
+
 
   async get(storageKey: string){
     const res = await localStorage.getItem(storageKey);
+    
+    if(res){
+      return JSON.parse(unescape(atob(res)));
+    }else{
+      return false;
+    }
+  }
+
+  getWithoutAsync(storageKey:string){
+    const res =  localStorage.getItem(storageKey);
     
     if(res){
       return JSON.parse(unescape(atob(res)));
