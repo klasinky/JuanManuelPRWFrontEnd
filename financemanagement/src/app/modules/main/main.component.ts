@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthConstants } from 'src/app/config/auth=constant';
+import { User } from 'src/app/interfaces/user';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private storageServive: StorageService) { }
 
+  userData!: User;
   ngOnInit(): void {
+    this.getUserData();
+  }
+
+  async getUserData(){
+    this.userData = await this.storageServive.get(AuthConstants.DATAUSER) as User;    
   }
 
 }

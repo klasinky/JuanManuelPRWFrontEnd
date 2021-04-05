@@ -6,6 +6,7 @@ import { MainComponent } from './main.component';
 import { MonthsComponent } from './components/months/months.component';
 import { ListDetailComponent } from './components/months/list-detail/list-detail.component';
 import { OverViewComponent } from './components/months/over-view/over-view.component';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { OverViewComponent } from './components/months/over-view/over-view.compo
     MainComponent,
     MonthsComponent,
     ListDetailComponent,
-    OverViewComponent
+    OverViewComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
