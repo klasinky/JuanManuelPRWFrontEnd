@@ -1,0 +1,29 @@
+<div class="container pt-5">
+    <div class="row align-items-stretch">
+      <div class="c-dashboardInfo color-gradient-success col-lg-4 col-md-6">
+        <div class="wrap">
+          <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Ingresos totales
+            <i class="fas fa-coins    "></i>
+          </h4>
+          
+          <span class="hind-font caption-12 c-dashboardInfo__count">{{ detail?.totalEntries|currency:'EUR' }}</span>
+        </div>
+      </div>
+
+      <div class="c-dashboardInfo color-gradient-error col-lg-4 col-md-6">
+        <div class="wrap">
+          <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Gastos totales
+              <i class="fas fa-wallet"></i>
+          </h4><span  class="hind-font caption-12 c-dashboardInfo__count">{{ detail?.totalExpenses|currency:'EUR' }}</span>
+        </div>
+      </div>
+      <div class="c-dashboardInfo color-gradient-difference col-lg-4 col-md-6">
+        <div class="wrap">
+          <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Diferencia
+              <i class="fas fa-piggy-bank"></i>
+          </h4><span [class.text-danger]="differenceError" [class.text-success]="!differenceError" class="hind-font caption-12 c-dashboardInfo__count">{{ detail?.totalDifference|currency:'EUR' }}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>

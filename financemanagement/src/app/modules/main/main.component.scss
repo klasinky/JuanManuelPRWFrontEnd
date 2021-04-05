@@ -1,0 +1,18 @@
+@import '../../../styles.scss';
+
+#main {
+    margin-left: 300px;
+  }
+  
+  @media (max-width: 1199px) {
+  
+    #header {
+      left: -300px;
+    }
+  
+    #main {
+      margin-left: 0;
+    }
+  
+  }
+  

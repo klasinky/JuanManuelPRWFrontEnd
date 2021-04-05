@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from '../components/dashboard/dashboard.component';
+import { LoggedOffGuard } from '../guards/logged-off.guard';
 
 const routes: Routes = [
   {
@@ -8,7 +8,9 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'dashboard', component: DashboardComponent
+    path: 'dashboard',
+    canActivate: [LoggedOffGuard],
+    loadChildren: () => import('./main/main.module').then(m => m.MainModule)
   }
 ];
 

@@ -7,3 +7,17 @@ $secondary-color-hover: #1D1A3C;
 
 $alternative-color: #57B894;
 $alternative-color-hover: #4ca182;
+
+$primary-font-color: #ffffff;
+$secondary-font-color: #dbd7d7;
+
+.mobile-nav-active {
+    overflow: hidden;
+  
+    #header {
+      left: 0 !important;
+    }
+  }
+body{
+    background: $primary-color;
+}
