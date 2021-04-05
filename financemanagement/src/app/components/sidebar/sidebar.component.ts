@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
   isMobile: boolean = false;
 
   ngOnInit(): void {
-    console.log(this.userData);
+    
     
   }
 

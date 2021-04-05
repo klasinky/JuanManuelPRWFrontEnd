@@ -24,6 +24,16 @@ export class StorageService {
     }
   }
 
+  getWithoutAsync(storageKey:string){
+    const res =  localStorage.getItem(storageKey);
+    
+    if(res){
+      return JSON.parse(unescape(atob(res)));
+    }else{
+      return false;
+    }
+  }
+
   async removeKey(storageKey: string){
     await localStorage.removeItem(storageKey);
   }

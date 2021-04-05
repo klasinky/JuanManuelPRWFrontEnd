@@ -1,12 +1,11 @@
-
 @import '../../../../../../styles.scss';
 
 .card {
     background: $secondary-color;
-    box-shadow: 0px 0px 0px 4px #313058;
+    box-shadow: 2px 20px 30px $secondary-color;
 
     &:hover{
-        background: #313058;
+        background: $secondary-color-hover;
     }
 }
 
