@@ -6,6 +6,7 @@ import { MainComponent } from './main.component';
 import { MonthsComponent } from './components/months/months.component';
 import { ListDetailComponent } from './components/months/list-detail/list-detail.component';
 import { OverViewComponent } from './components/months/over-view/over-view.component';
+import { MomentModule } from 'ngx-moment';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { OverViewComponent } from './components/months/over-view/over-view.compo
   imports: [
     CommonModule,
     MainRoutingModule,
+    MomentModule
   ]
 })
 export class MainModule { }

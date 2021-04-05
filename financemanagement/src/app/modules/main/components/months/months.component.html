@@ -1,3 +1,10 @@
 <p>months works!</p>
 <app-over-view></app-over-view>
-<app-list-detail></app-list-detail>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12" *ngFor="let month of months">
+            <app-list-detail [month]="month"></app-list-detail>
+        </div>
+    </div>
+</div>
