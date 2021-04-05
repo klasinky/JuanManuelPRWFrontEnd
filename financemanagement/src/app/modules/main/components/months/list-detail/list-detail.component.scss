@@ -18,3 +18,13 @@
     color: #E4AAAA;
     background-color: #4c0e0e;
 }
+
+.dropdown-menu:hover , .dropdown-item:hover {
+    color: #E4AAAA;
+    background-color: #4c0e0e;
+}
+
+.dropdown-menu {
+    min-width: 3rem;
+    background: $secondary-color;
+}
