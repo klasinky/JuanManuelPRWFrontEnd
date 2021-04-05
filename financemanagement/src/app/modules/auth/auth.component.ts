@@ -48,4 +48,7 @@ export class AuthComponent implements OnInit {
     this.toastr.success('Ahora inicia sesión','Registrado correctamente')
   }
 
+  ngOnDestroy(){
+    console.log("Destroy")
+  }
 }

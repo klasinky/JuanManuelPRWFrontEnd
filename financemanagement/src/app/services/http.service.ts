@@ -9,16 +9,11 @@ import { AuthConstants } from '../config/auth=constant';
 })
 export class HttpService {
 
-  headers: HttpHeaders;
 
   constructor(private http: HttpClient,
     private storageService: StorageService) {
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `${this.storageService.getWithoutAsync(AuthConstants.AUTH)}`
-    })
-    console.log(this.storageService.getWithoutAsync(AuthConstants.AUTH));
-    
+ 
+
   }
 
   post(serviceName: string, data: any = {}) {
@@ -36,17 +31,34 @@ export class HttpService {
     return this.http.post(url, data, options);
   }
 
-  getAuth(serviceName: string) {
-
+  getAuth(serviceName: string, token?:string) {
+    let headers = this.getHeaders();
+    if (token) {
+      headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      });
+    }
+        
     const url = environment.apiUrl + "/" + serviceName;
-
-    return this.http.get(url, { headers: this.headers })
+    return this.http.get(url, { headers: headers })
 
   }
 
   postAuth(serviceName: string, data = {}) {
-    const url = environment.apiUrl + "/" + serviceName;
-    return this.http.post(url, data, { headers: this.headers })
+  
 
+    const url = environment.apiUrl + "/" + serviceName;
+    return this.http.post(url, data, { headers: this.getHeaders()})
+
+  }
+
+  getHeaders():HttpHeaders{
+    let token = this.storageService.getWithoutAsync(AuthConstants.AUTH)
+
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `${token}`
+    });
   }
 }
