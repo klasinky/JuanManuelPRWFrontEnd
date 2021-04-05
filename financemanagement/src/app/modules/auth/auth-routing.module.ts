@@ -10,7 +10,6 @@ const routes: Routes = [
     { path: 'auth', component: AuthComponent, canActivate: [LoggedInGuard] },
 ];
 
-export const yourRouting = RouterModule.forChild(routes);
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
