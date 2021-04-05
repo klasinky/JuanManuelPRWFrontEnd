@@ -1,1 +1,28 @@
-<p>list-detail works!</p>
+<div class="m-4 card">
+    <div class="card-body">
+        <div class="row align-items-center">
+
+            <div class="col">
+                <h6 class="text-uppercase text-light mb-2">
+                    {{month.date | amParse:'DD/MM/YYYY' | amLocale:'es' | amDateFormat:'MMMM - YYYY'}} 
+                </h6>
+                <div class="row">
+                    <div class="col-6 text-end">
+                        <span class="badge badge-soft-success mt-n1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ingresos">
+                            {{month.total_entries}}€ <i class="fas fa-chevron-up"></i>
+                        </span>
+                    </div>
+                    <div class="col-6 text-start">
+                        <span class="badge badge-pill badge-soft-danger mt-n1" ngbTooltip="Egresos" tooltipClass="badge-soft-success">
+                            {{month.total_expenses}}€ <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-auto">
+                <i class="fas fa-sign-in-alt text-light"></i>
+            </div>
+        </div>
+    </div>
+</div>
