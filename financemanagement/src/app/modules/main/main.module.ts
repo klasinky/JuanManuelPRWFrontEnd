@@ -8,6 +8,7 @@ import { ListDetailComponent } from './components/months/list-detail/list-detail
 import { OverViewComponent } from './components/months/over-view/over-view.component';
 import { MomentModule } from 'ngx-moment';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
+import { BotonCrearComponent } from './components/months/boton-crear/boton-crear.component';
 
 
 
@@ -17,7 +18,8 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
     MonthsComponent,
     ListDetailComponent,
     OverViewComponent,
-    SidebarComponent
+    SidebarComponent,
+    BotonCrearComponent
   ],
   imports: [
     CommonModule,

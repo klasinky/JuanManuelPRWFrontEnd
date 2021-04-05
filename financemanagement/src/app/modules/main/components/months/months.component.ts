@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthConstants } from 'src/app/config/auth=constant';
 import { Months } from 'src/app/interfaces/months';
 import { HttpService } from 'src/app/services/http.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-months',
@@ -38,22 +40,26 @@ export class MonthsComponent implements OnInit {
   //   },
   // ]
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.getMonths()
   }
 
-  getMonths(){
+  async getMonths() {
     this.httpService.getAuth('months/all').subscribe(
-      (data:any)=>{
-        this.months = data.results as Months[];        
+      (data: any) => {
+        this.months = data.results as Months[];
       },
-      (error)=>{
+      (error) => {
         console.log("ERROR ");
         console.log(error);
 
       }
     )
+  }
+
+  addMonth(_month: Months): void {
+    this.months.unshift(_month);
   }
 }

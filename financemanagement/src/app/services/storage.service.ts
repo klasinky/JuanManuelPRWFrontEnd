@@ -11,8 +11,13 @@ export class StorageService {
   async store(storageKey: string, value: any){
 
     const encryptedValue = btoa(escape(JSON.stringify(value)));
-    localStorage.setItem(storageKey, encryptedValue);
+    return Promise.resolve().then(function () {
+      localStorage.setItem(storageKey, encryptedValue);
+  });
   }
+
+
+
 
   async get(storageKey: string){
     const res = await localStorage.getItem(storageKey);
