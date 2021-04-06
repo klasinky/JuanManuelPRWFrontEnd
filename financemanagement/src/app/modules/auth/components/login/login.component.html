@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <button [disabled]='formLogin.invalid' (click)="loginAction()" class="btn">
+    <button [disabled]='formLogin.invalid' (click)="loginAction()" class="btn-auth">
       <div *ngIf="!showLoader; else blockLoader">
         Login
       </div>

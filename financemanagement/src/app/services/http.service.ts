@@ -45,12 +45,14 @@ export class HttpService {
 
   }
 
-  postAuth(serviceName: string, data = {}) {
-  
+  deleteAuth(serviceName: string, id?:number) {
+    const url = (id)?environment.apiUrl + "/" + serviceName + "/" + id : serviceName;
+    return this.http.delete(url, { headers: this.getHeaders()})
+  }
 
+  postAuth(serviceName: string, data = {}) {
     const url = environment.apiUrl + "/" + serviceName;
     return this.http.post(url, data, { headers: this.getHeaders()})
-
   }
 
   getHeaders():HttpHeaders{

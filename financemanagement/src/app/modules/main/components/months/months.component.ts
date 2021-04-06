@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AuthConstants } from 'src/app/config/auth=constant';
 import { Months } from 'src/app/interfaces/months';
 import { HttpService } from 'src/app/services/http.service';
@@ -40,7 +41,9 @@ export class MonthsComponent implements OnInit {
   //   },
   // ]
 
-  constructor(private httpService: HttpService, private storageService: StorageService) { }
+  constructor(private httpService: HttpService, 
+    private storageService: StorageService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getMonths()
@@ -52,8 +55,18 @@ export class MonthsComponent implements OnInit {
         this.months = data.results as Months[];
       },
       (error) => {
-        console.log("ERROR ");
-        console.log(error);
+      }
+    )
+  }
+
+  async deleteMonth(month: Months){
+    this.httpService.deleteAuth(month.url + '').subscribe(
+      (data: any) => {
+        this.months.splice(this.months.indexOf(month), 1);
+        this.toastr.success('Has eliminado el mes correctamente','Mes eliminado');
+      },
+      (error) => {
+        this.toastr.error(error.detail, "Ha ocurrido un error");
 
       }
     )

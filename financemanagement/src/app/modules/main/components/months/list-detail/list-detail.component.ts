@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Months } from '../../../../../interfaces/months';
 
 
@@ -11,13 +11,15 @@ import { Months } from '../../../../../interfaces/months';
 export class ListDetailComponent implements OnInit {
 
   @Input() month!: Months;
+  @Output() deleteMonth: EventEmitter<Months> = new EventEmitter();
 
-  
-
-  constructor() { }
+  constructor( ) { }
 
   ngOnInit(): void {
     
   }
 
+  deleteAction(){
+    this.deleteMonth.emit(this.month);
+  }
 }
