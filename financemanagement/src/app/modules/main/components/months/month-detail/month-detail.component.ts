@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MonthDetail, Months } from 'src/app/interfaces/months';
@@ -48,7 +48,7 @@ export class MonthDetailComponent implements OnInit {
   }
 
   getXls(){
-    
+
   }
 
 }

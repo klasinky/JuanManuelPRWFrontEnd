@@ -1,5 +1,5 @@
 export interface AmountBase {
-    title: string,
+    name: string,
     description: string,
-    
+    amount: number,
 }

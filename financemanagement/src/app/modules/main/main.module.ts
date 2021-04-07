@@ -12,7 +12,7 @@ import { BotonCrearComponent } from './components/months/boton-crear/boton-crear
 import { MonthDetailComponent } from './components/months/month-detail/month-detail.component';
 import { AddAmountBaseComponent } from './components/months/add-amount-base/add-amount-base.component';
 import { ChartMonthComponent } from './components/months/chart-month/chart-month.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -30,7 +30,9 @@ import { ChartMonthComponent } from './components/months/chart-month/chart-month
   imports: [
     CommonModule,
     MainRoutingModule,
-    MomentModule
+    MomentModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class MainModule { }

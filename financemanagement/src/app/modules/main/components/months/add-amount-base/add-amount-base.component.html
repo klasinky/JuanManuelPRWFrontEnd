@@ -1,0 +1,100 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#' + serviceName">
+    Crear {{title}}
+</button>
+
+<!-- Modal -->
+<div class="modal fade" [attr.id]="serviceName" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="manualMode()">Manual</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="xlsMode()">Subir XLS</a>
+                    </li>
+                </ul>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div #manual *ngIf="xlsFormActive == false">
+                <form [formGroup]="formAmountBase">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 input-field mx-auto"
+                            [class.is-valid]="this.formAmountBase.get('name')?.valid"
+                            [class.is-invalid]="this.formAmountBase.get('name')?.invalid && this.formAmountBase.get('name')?.touched">
+                                <i class="fas fa-quote-right"></i>
+                                <input formControlName="name" type="text" placeholder="Nombre"
+                                    id="inputName" autocomplete="off">
+                            </div>
+
+                            <div class="col-12 input-field mx-auto"
+                            [class.is-valid]="this.formAmountBase.get('description')?.valid"
+                            [class.is-invalid]="this.formAmountBase.get('description')?.invalid && this.formAmountBase.get('description')?.touched">
+                                <i class="fas fa-info"></i>
+                                <input formControlName="description" type="text" placeholder="Descripción" 
+                                id="inputDescription" autocomplete="off">
+                            </div>
+
+                            <div class="col-12 input-field mx-auto"
+                            [class.is-valid]="this.formAmountBase.get('amount')?.valid"
+                            [class.is-invalid]="this.formAmountBase.get('amount')?.invalid && this.formAmountBase.get('amount')?.touched">
+                                <i class="fa fa-usd"></i>
+                                <input formControlName="amount" type="number" placeholder="Cuantía"
+                                    id="inputAmount" min=0 autocomplete="off">
+                            </div>
+
+                            <div class="col-12 input-field mx-auto"
+                            [class.is-valid]="this.formAmountBase.get('category')?.valid"
+                            [class.is-invalid]="this.formAmountBase.get('category')?.invalid && this.formAmountBase.get('category')?.touched">
+                                <i class="fas fa-arrow-down"></i>
+                                <select formControlName="category" (change)="changeCity($event)" aria-label="Default select">
+                                    <option value="" disabled>Elige una categoría...</option>
+                                    <option *ngFor="let category of categories" [ngValue]="category.id">
+                                        {{category.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" (click)="postAmountBaseAction()">Subir {{ title | lowercase }}</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div #xls *ngIf="xlsFormActive == true">
+                <form [formGroup]="formXls">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 file-upload input-field mx-auto"
+                            [class.is-valid]="this.formXls.get('xls')?.valid "
+                            [class.is-invalid]="this.formXls.get('xls')?.invalid && this.formXls.get('xls')?.touched">
+                                <label for="file-input">
+                                    <i class="fa fa-upload"></i>
+                                </label>
+                                <span class="ml-auto">{{ (filename.length > 25)? (filename | slice:0:25)+'...':(filename) }}</span>
+                                <input formControlName="xls" id="file-input" (change)="onFileChange($event)" type="file">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Subir archivo</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

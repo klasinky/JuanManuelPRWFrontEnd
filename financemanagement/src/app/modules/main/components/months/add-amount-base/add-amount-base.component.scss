@@ -1,0 +1,70 @@
+@import '../../../../../../styles.scss';
+
+.file-upload>input {
+    display: none;
+}
+
+.input-field label{
+    text-align: center;
+    line-height: 55px;
+    color: #acacac;
+    transition: 0.5s;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+.input-field span {
+    margin-top: auto;
+    margin-bottom: auto;
+    word-wrap: break-word;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+}
+
+.modal-content{
+    background: $primary-color;
+    color: $primary-font-color;
+    .modal-header{
+        background: $secondary-color;
+        border: 0px !important;
+    }
+    .modal-footer{
+        background: $secondary-color;
+        border: 0px !important;
+    }    
+}
+
+.nav-tabs{
+    border: 0px !important;
+    .nav-item{
+        margin-top: 0.5rem;
+        margin-left: 1rem;
+        a {
+            color: $primary-font-color;
+        } 
+        .nav-link::after{
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width .3s;
+        }
+        .nav-link:hover::after{
+            width: 100%;
+            transition: width .3s;
+        }   
+    }
+    .nav-item:hover, .nav-link:hover{
+        border-color: transparent !important;
+        cursor: pointer;
+    }
+}
+
+
+
+
+
+
+
