@@ -22,11 +22,11 @@ export class MonthDetailComponent implements OnInit {
   ngOnInit(): void {
       this.route.params.subscribe(params => {
         try {
-          this.getMonth(JSON.parse(unescape(atob(params.id))))
+          this.getMonth(JSON.parse(unescape(atob(params.id))));
         } catch (error) {
           this.router.navigate(['dashboard']).then(() => {
             // Notificación
-            this.toastr.error('Ha ocurrido un error', 'Error')
+            this.toastr.error('Ha ocurrido un error', 'Error');
           })
         }
       });
