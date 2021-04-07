@@ -13,7 +13,7 @@ import { MonthDetailComponent } from './components/months/month-detail/month-det
 import { AddAmountBaseComponent } from './components/months/add-amount-base/add-amount-base.component';
 import { ChartMonthComponent } from './components/months/chart-month/chart-month.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -25,14 +25,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BotonCrearComponent,
     MonthDetailComponent,
     AddAmountBaseComponent,
-    ChartMonthComponent
+    ChartMonthComponent,
+    
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
     MomentModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxChartsModule,
   ]
 })
 export class MainModule { }

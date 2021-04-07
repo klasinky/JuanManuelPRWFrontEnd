@@ -10,7 +10,6 @@ import { HttpService } from 'src/app/services/http.service';
   styleUrls: ['./month-detail.component.scss']
 })
 export class MonthDetailComponent implements OnInit {
-  
   month?: MonthDetail;
 
   constructor(private httpService: HttpService,

@@ -14,14 +14,17 @@ $primary-font-color: #ffffff;
 $secondary-font-color: #dbd7d7;
 
 .mobile-nav-active {
-    overflow: hidden;
-  
-    #header {
-      left: 0 !important;
-    }
+  overflow: hidden;
+
+  #header {
+    left: 0 !important;
   }
-body{
-    background: $primary-color;
+}
+
+body {
+  background: $primary-color;
+  overflow-x: hidden;
+
 }
 
 
