@@ -12,9 +12,8 @@ import { BotonCrearComponent } from './components/months/boton-crear/boton-crear
 import { MonthDetailComponent } from './components/months/month-detail/month-detail.component';
 import { AddAmountBaseComponent } from './components/months/add-amount-base/add-amount-base.component';
 import { ChartMonthComponent } from './components/months/chart-month/chart-month.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
-
 
 @NgModule({
   declarations: [
@@ -33,6 +32,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CommonModule,
     MainRoutingModule,
     MomentModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgxChartsModule,
   ]
 })

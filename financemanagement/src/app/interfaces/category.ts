@@ -14,3 +14,4 @@ export interface CategoryDetail{
         entries: AmountBase[]
     }
 }
+

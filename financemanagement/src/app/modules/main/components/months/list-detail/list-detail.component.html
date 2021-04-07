@@ -1,8 +1,8 @@
-<div class="m-4 card" (click)="comotuquieras()">
+<div class="m-4 card">
     <div class="card-body">
         <div class="row align-items-center">
 
-            <div class="col">
+            <div class="col" (click)="comotuquieras()">
                 <h6 class="text-uppercase text-light mb-2">
                     {{month.date | amParse:'YYYY/MM' | amLocale:'es' | amDateFormat:'MMMM - YYYY'}}
                 </h6>
