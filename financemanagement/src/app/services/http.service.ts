@@ -31,18 +31,9 @@ export class HttpService {
     return this.http.post(url, data, options);
   }
 
-  getAuth(serviceName: string, token?:string) {
-    let headers = this.getHeaders();
-    if (token) {
-      headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `${token}`
-      });
-    }
-        
-    const url = environment.apiUrl + "/" + serviceName;
-    return this.http.get(url, { headers: headers })
-
+  getAuth(serviceName: string, isUrl:boolean = false) {
+    const url = (isUrl)?serviceName : environment.apiUrl + "/" + serviceName ;
+    return this.http.get(url, { headers: this.getHeaders() })
   }
 
   deleteAuth(serviceName: string, id?:number) {
@@ -50,8 +41,8 @@ export class HttpService {
     return this.http.delete(url, { headers: this.getHeaders()})
   }
 
-  postAuth(serviceName: string, data = {}) {
-    const url = environment.apiUrl + "/" + serviceName;
+  postAuth(serviceName: string, data = {}, isUrl:boolean = false) {
+    const url = (isUrl)?serviceName : environment.apiUrl + "/" + serviceName ;
     return this.http.post(url, data, { headers: this.getHeaders()})
   }
 
