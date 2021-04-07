@@ -12,6 +12,7 @@ import { BotonCrearComponent } from './components/months/boton-crear/boton-crear
 import { MonthDetailComponent } from './components/months/month-detail/month-detail.component';
 import { AddAmountBaseComponent } from './components/months/add-amount-base/add-amount-base.component';
 import { ChartMonthComponent } from './components/months/chart-month/chart-month.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -25,12 +26,14 @@ import { ChartMonthComponent } from './components/months/chart-month/chart-month
     BotonCrearComponent,
     MonthDetailComponent,
     AddAmountBaseComponent,
-    ChartMonthComponent
+    ChartMonthComponent,
+    
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
-    MomentModule
+    MomentModule,
+    NgxChartsModule,
   ]
 })
 export class MainModule { }

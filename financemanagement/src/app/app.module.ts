@@ -18,6 +18,7 @@ import { MomentModule } from 'ngx-moment';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     MomentModule

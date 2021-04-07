@@ -1,3 +1,5 @@
+import {CategoryDetail} from './category';
+
 export interface Months {
     date: string,
     total_entries: number,
@@ -7,6 +9,6 @@ export interface Months {
 }
 
 export interface MonthDetail{
-    categories: String[],
+    categories: CategoryDetail[],
     month: Months
 }
