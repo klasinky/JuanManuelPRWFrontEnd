@@ -64,7 +64,9 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" (click)="postAmountBaseAction()">Subir {{ title | lowercase }}</button>
+                        <button type="button" class="btn btn-primary" [disabled]='formAmountBase.invalid'
+                         (click)="postAmountBaseAction()">Subir {{ title | lowercase }}
+                        </button>
                     </div>
 
                 </form>
@@ -89,7 +91,8 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Subir archivo</button>
+                        <button type="button" class="btn btn-primary" [disabled]='formXls.invalid'
+                        (click)="postAmountBaseXlsAction()">Subir archivo</button>
                     </div>
 
                 </form>

@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AmountBase } from 'src/app/interfaces/amount-base';
 import { HttpService } from 'src/app/services/http.service';
 import { Category } from 'src/app/interfaces/category';
@@ -20,6 +20,7 @@ export class AddAmountBaseComponent implements OnInit {
   @ViewChild('#manual') manualForm: any;
   xlsFormActive: boolean = false;
   filename: string = "Selecciona un archivo.";
+  file?: File;
 
   @Input() isExpense?: boolean; // false = Entry , True = Expense
   title?: string;
@@ -48,6 +49,10 @@ export class AddAmountBaseComponent implements OnInit {
     this.getCategoriesAction();
   }
 
+  /**
+   * 
+   * @returns Retorna el formulario y las validaciones necesarias para el formulario de AmountBase
+   */
   getFormAmountBase() {
     return this.fb.group({
       'name': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(255)]],
@@ -57,6 +62,10 @@ export class AddAmountBaseComponent implements OnInit {
     })
   }
 
+  /**
+   * 
+   * @returns Retorna el formulario y las validaciones necesarias para el formulario de ImportXls
+   */
   getFormXls() {
     return this.fb.group({
       'xls': ['', Validators.required]
@@ -66,23 +75,13 @@ export class AddAmountBaseComponent implements OnInit {
   /**
    * onFileChange al cambiar el fichero, cambiar el filename
    */
-  onFileChange(event: any) {
-    const reader = new FileReader();
+   onFileChange(event: any) {
 
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        this.formXls.patchValue({
-          file: reader.result
-        });
-
-        this.cd.markForCheck();
-      };
-
-      this.filename = file.name;
-    }
+    this.formXls.patchValue({
+      file: event.target.files[0]
+    })
+    this.file = event.target.files[0];
+    this.filename = event.target.files[0].name;
   }
 
   /**
@@ -109,6 +108,9 @@ export class AddAmountBaseComponent implements OnInit {
     this.xlsFormActive = true;
   }
 
+  /**
+   * Agregar un (gasto o ingreso) manualmente
+   */
   postAmountBaseAction() {
     const serviceName = 'months/' + this.idMonth + '/create/' + this.serviceName;
 
@@ -131,9 +133,32 @@ export class AddAmountBaseComponent implements OnInit {
         }
       )
     }
-
   }
 
+  /**
+   * Agregar uno o varios (gastos o ingresos) a partir de un fichero XLS
+   */
+  postAmountBaseXlsAction(){
+    const serviceName = 'months/' + this.idMonth + '/import/' + this.serviceName;
+
+    if(this.formXls.valid){
+      const dataFile = this.file;
+      
+      this.httpService.postXml(serviceName, dataFile).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.toastr.success(data.detail, 'Creado');
+          this.formAmountBase.reset();
+        }, (error) => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  /**
+   * Obtener todas las categorias
+   */
   getCategoriesAction(){
     this.httpService.getAuth('categories/all').subscribe(
       (data: any) => {

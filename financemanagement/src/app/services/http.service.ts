@@ -41,11 +41,30 @@ export class HttpService {
     return this.http.delete(url, { headers: this.getHeaders()})
   }
 
-  postAuth(serviceName: string, data = {}, isUrl:boolean = false) {
+  postAuth(serviceName: string, data:any = {}, isUrl:boolean = false, xls:boolean = false) {
     const url = (isUrl)?serviceName : environment.apiUrl + "/" + serviceName ;
+    if(xls){
+
+    }
     return this.http.post(url, data, { headers: this.getHeaders()})
   }
 
+  postXml(serviceName: string, data:any = {}){
+    const url = environment.apiUrl + "/" + serviceName;
+    let token = this.storageService.getWithoutAsync(AuthConstants.AUTH);
+    const header = new HttpHeaders({
+      'Content-Type': 'application/octet-stream',
+      'Authorization': `${token}`,
+      'Content-Disposition': 'attachment; filename=\""' + data.name + '"\""'
+    });
+    
+    return this.http.post(url, data, { headers: header})
+  }
+
+  /**
+   * 
+   * @returns Objeto de HttpHeader con su configuración
+   */
   getHeaders():HttpHeaders{
     let token = this.storageService.getWithoutAsync(AuthConstants.AUTH)
 
