@@ -148,7 +148,7 @@ export class AddAmountBaseComponent implements OnInit {
         (data: any) => {
           console.log(data);
           this.toastr.success(data.detail, 'Creado');
-          this.formAmountBase.reset();
+          this.clearFiles();
         }, (error) => {
           console.log(error);
         }
@@ -167,5 +167,10 @@ export class AddAmountBaseComponent implements OnInit {
         console.log(error.error.detail);
       }
     )
+  }
+
+   clearFiles(){
+    this.filename = 'Selecciona un archivo.';
+    this.formXls.reset();
   }
 }
