@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -18,6 +18,8 @@ export class AddAmountBaseComponent implements OnInit {
 
   @ViewChild('#xls') xlsForm: any;
   @ViewChild('#manual') manualForm: any;
+  @Output() refreshMonth: EventEmitter<boolean> = new EventEmitter();
+
   xlsFormActive: boolean = false;
   filename: string = "Selecciona un archivo.";
   file?: File;
@@ -128,6 +130,7 @@ export class AddAmountBaseComponent implements OnInit {
           const amountBase = data as AmountBase;
           this.toastr.success(data.detail, 'Creado');
           this.formAmountBase.reset();
+          this.refreshMonth.emit(true);
         }, (error) => {
           console.log(error);
         }
@@ -149,6 +152,7 @@ export class AddAmountBaseComponent implements OnInit {
           console.log(data);
           this.toastr.success(data.detail, 'Creado');
           this.clearFiles();
+          this.refreshMonth.emit(true);
         }, (error) => {
           console.log(error);
         }
@@ -173,4 +177,6 @@ export class AddAmountBaseComponent implements OnInit {
     this.filename = 'Selecciona un archivo.';
     this.formXls.reset();
   }
+
+
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CategoryDetail } from 'src/app/interfaces/category';
 @Component({
@@ -8,7 +8,7 @@ import { CategoryDetail } from 'src/app/interfaces/category';
 })
 
 export class ChartMonthComponent implements OnInit {
-  
+
   @ViewChild('ChartContainer') chartCointainer?: ElementRef;
   @Input() isExpense?: boolean;
   @Input() categories?: CategoryDetail[];
@@ -35,7 +35,17 @@ export class ChartMonthComponent implements OnInit {
 
   }
 
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.setCharts();
+  }
+
   ngOnInit() {
+    this.setCharts();
+
+  }
+
+  setCharts() {
     const single: any[] = [];
     this.categories?.forEach((category: CategoryDetail) => {
       single.push({
@@ -46,24 +56,25 @@ export class ChartMonthComponent implements OnInit {
       })
     })
     Object.assign(this, { single });
-    setTimeout(()=>{
+    setTimeout(() => {
       let x = this.chartCointainer?.nativeElement.offsetWidth;
-      if(x > 480){
-        x= 480;
+      if (x > 480) {
+        x = 480;
       }
-     this.viewX = x;
-    },500);    
+      this.viewX = x;
+    }, 500);
   }
 
   formatingY(value: any) {
     return "€" + value;
   }
 
-  onResize(event:any) {
+  onResize(event: any) {
     let x = this.chartCointainer?.nativeElement.offsetWidth;
-    if(x > 500){
-      x= 500
+    if (x > 500) {
+      x = 500
     }
-   this.viewX = x;
+    this.viewX = x;
   }
+
 }

@@ -11,7 +11,7 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class MonthDetailComponent implements OnInit {
   month?: MonthDetail;
-
+  id:number = 0;
   constructor(private httpService: HttpService,
     private route: ActivatedRoute,
     private router: Router,
@@ -22,7 +22,8 @@ export class MonthDetailComponent implements OnInit {
   ngOnInit(): void {
       this.route.params.subscribe(params => {
         try {
-          this.getMonth(JSON.parse(unescape(atob(params.id))));
+          this.id = JSON.parse(unescape(atob(params.id)));
+          this.getMonth(this.id);
         } catch (error) {
           this.router.navigate(['dashboard']).then(() => {
             // Notificación
@@ -46,8 +47,8 @@ export class MonthDetailComponent implements OnInit {
     )
   }
 
-  getXls(){
-
+  refreshMonth(_event:any){
+    this.getMonth(this.id);
   }
 
 }
