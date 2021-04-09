@@ -10,14 +10,15 @@ import { HttpService } from 'src/app/services/http.service';
   styleUrls: ['./month-detail.component.scss']
 })
 export class MonthDetailComponent implements OnInit {
+
   month?: MonthDetail;
   id:number = 0;
+
   constructor(private httpService: HttpService,
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService) { 
-
-    }
+  }
 
   ngOnInit(): void {
       this.route.params.subscribe(params => {

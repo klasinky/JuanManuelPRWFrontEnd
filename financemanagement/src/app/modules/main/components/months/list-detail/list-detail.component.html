@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row align-items-center">
 
-            <div class="col" (click)="comotuquieras()">
+            <div class="col" (click)="getDetail()">
                 <h6 class="text-uppercase text-light mb-2">
                     {{month.date | amParse:'YYYY/MM' | amLocale:'es' | amDateFormat:'MMMM - YYYY'}}
                 </h6>
@@ -23,7 +23,6 @@
             </div>
 
             <div class="col-auto">
-
                 <div class="text-end">
                     <button class="btn btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -33,8 +32,8 @@
                         <li><a class="dropdown-item" (click)="deleteAction()">Eliminar <i class="far fa-trash-alt"></i></a></li>
                     </ul>
                 </div>
-
             </div>
+
         </div>
     </div>
 </div>

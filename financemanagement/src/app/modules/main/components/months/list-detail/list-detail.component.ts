@@ -24,7 +24,7 @@ export class ListDetailComponent implements OnInit {
     this.deleteMonth.emit(this.month);
   }
 
-  comotuquieras(){
+  getDetail(){
     this.route.navigate(['dashboard/months/detail/' + btoa(escape(JSON.stringify(this.month.id)))]);
   }
 }

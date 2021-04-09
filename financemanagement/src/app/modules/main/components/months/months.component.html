@@ -1,4 +1,4 @@
-<app-over-view></app-over-view>
+<app-over-view *ngIf="months" [months]="months"></app-over-view>
 <div class="container">
     <app-boton-crear (newMonth)="addMonth($event)"></app-boton-crear>
 

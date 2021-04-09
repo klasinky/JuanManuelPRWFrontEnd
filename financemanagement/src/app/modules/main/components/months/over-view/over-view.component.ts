@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Months } from 'src/app/interfaces/months';
 
 @Component({
   selector: 'app-over-view',
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OverViewComponent implements OnInit {
 
+  @Input() months!: Months[];
+
   detail = {
-    totalExpenses: 500.23,
-    totalEntries: 950.23,
-    totalDifference: -200,
+    totalExpenses: 0,
+    totalEntries: 0,
+    totalDifference: 0,
   }
 
   differenceError: boolean = false;
@@ -18,12 +21,26 @@ export class OverViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.getTotal();
     this.getDifferenceColor();
   }
 
   getDifferenceColor() {    
-    this.detail.totalDifference = this.detail?.totalEntries - this.detail?.totalExpenses; 
     this.differenceError = this.detail?.totalDifference <= 0;
+  }
+
+  getTotal(){  
+    let totalExpenses = 0;
+    let totalEntries = 0;
+
+    this.months.forEach(element => {
+      totalExpenses += element.total_expenses;
+      totalEntries += element.total_entries;
+    });
+
+    this.detail.totalEntries = totalEntries;
+    this.detail.totalExpenses = totalExpenses;
+    this.detail.totalDifference = totalEntries - totalExpenses;
   }
 
 }
