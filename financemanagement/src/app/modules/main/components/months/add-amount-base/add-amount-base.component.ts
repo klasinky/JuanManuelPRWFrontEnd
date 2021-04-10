@@ -30,6 +30,11 @@ export class AddAmountBaseComponent implements OnInit {
   idMonth?: number;
   categories?: Category[];
 
+  nameError: boolean = false;
+  nameErrorMessage: String[] = [];
+  fileError: boolean = false;
+  fileErrorMessage: String[] = [];
+
   constructor(private httpService: HttpService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
@@ -37,13 +42,15 @@ export class AddAmountBaseComponent implements OnInit {
     private cd: ChangeDetectorRef) {
     this.formAmountBase = this.getFormAmountBase();
     this.formXls = this.getFormXls();
-
   }
 
   ngOnInit(): void {
-    this.title = (this.isExpense) ? "Gasto" : "Ingresos";
+    this.title = (this.isExpense) ? "Gasto" : "Ingreso";
     this.serviceName = (this.isExpense) ? "expense" : "entry";
     
+    this.ifChangeInput('name', 'nameError');
+    this.ifChangeInput('file', 'fileError');
+
     this.route.params.subscribe(params => {
       this.idMonth = JSON.parse(unescape(atob(params.id)));
     })
@@ -78,13 +85,27 @@ export class AddAmountBaseComponent implements OnInit {
    * onFileChange al cambiar el fichero, cambiar el filename
    */
    onFileChange(event: any) {
+    const reader = new FileReader();
 
-    this.formXls.patchValue({
-      file: event.target.files[0]
-    })
-    this.file = event.target.files[0];
-    this.filename = event.target.files[0].name;
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.formXls.patchValue({
+          file: reader.result
+        });
+
+        this.cd.markForCheck();
+      };
+
+      this.file = file;
+      this.filename = file.name;
+    } else {
+      this.resetForms();
+    }
   }
+
 
   /**
    * 
@@ -117,24 +138,29 @@ export class AddAmountBaseComponent implements OnInit {
     const serviceName = 'months/' + this.idMonth + '/create/' + this.serviceName;
 
     if(this.formAmountBase.valid){
+      this.clearFiles();
+
       const dataAmountBase = {
         name: this.formAmountBase.value.name,
         description: this.formAmountBase.value.description,
         amount: this.formAmountBase.value.amount,
         category: this.formAmountBase.value.category
       } as AmountBase;
-      console.log(dataAmountBase)
 
       this.httpService.postAuth(serviceName, dataAmountBase).subscribe(
         (data: any) => {
-          const amountBase = data as AmountBase;
-          this.toastr.success(data.detail, 'Creado');
+          this.toastr.success("Se ha creado el " + this.title?.toLowerCase() , 'Creado');
           this.formAmountBase.reset();
           this.refreshMonth.emit(true);
         }, (error) => {
-          console.log(error);
+          const nameError = error.error.name;
+          this.nameError = true;
+          nameError.forEach((element: string) => {
+            this.nameErrorMessage.push(element);
+          });
         }
       )
+  
     }
   }
 
@@ -143,18 +169,28 @@ export class AddAmountBaseComponent implements OnInit {
    */
   postAmountBaseXlsAction(){
     const serviceName = 'months/' + this.idMonth + '/import/' + this.serviceName;
-
+    
     if(this.formXls.valid){
+      this.clearFiles();
+
       const dataFile = this.file;
       
       this.httpService.postXml(serviceName, dataFile).subscribe(
         (data: any) => {
-          console.log(data);
-          this.toastr.success(data.detail, 'Creado');
-          this.clearFiles();
-          this.refreshMonth.emit(true);
+          const haveInserts: boolean = (data.inserts.length > 0)? true : false;
+          if (haveInserts) {
+            this.toastr.success(data.detail, 'Creado');
+            this.refreshMonth.emit(true);
+          } else {
+            this.fileError = true;
+            this.fileErrorMessage.push('No se han agregado registros');
+          }
         }, (error) => {
-          console.log(error);
+          const fileError = error.error.file;
+          this.fileError = true;
+          fileError.forEach((element: string) => {
+            this.fileErrorMessage.push(element);
+          });
         }
       )
     }
@@ -173,9 +209,23 @@ export class AddAmountBaseComponent implements OnInit {
     )
   }
 
-   clearFiles(){
+  resetForms(){
     this.filename = 'Selecciona un archivo.';
     this.formXls.reset();
+    this.formAmountBase.reset();
+  }
+
+  ifChangeInput(name: any, nameError: any) {
+    this.formAmountBase.get(name)?.valueChanges.subscribe(val => {
+      (this as any)[nameError] = false
+    });
+  }
+
+  clearFiles() {
+    this.nameError = false;
+    this.fileError = false;
+    this.nameErrorMessage = [];
+    this.fileErrorMessage = [];
   }
 
 

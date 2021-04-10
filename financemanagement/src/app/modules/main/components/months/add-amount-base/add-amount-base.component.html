@@ -26,10 +26,16 @@
                         <div class="row">
                             <div class="col-12 input-field mx-auto"
                             [class.is-valid]="this.formAmountBase.get('name')?.valid"
-                            [class.is-invalid]="this.formAmountBase.get('name')?.invalid && this.formAmountBase.get('name')?.touched">
+                            [class.is-invalid]="this.formAmountBase.get('name')?.invalid && this.formAmountBase.get('name')?.touched || nameError == true">
                                 <i class="fas fa-quote-right"></i>
                                 <input formControlName="name" type="text" placeholder="Nombre"
                                     id="inputName" autocomplete="off">
+                            </div>
+
+                            <div *ngIf="nameError" class="text-center col-12 mx-auto">
+                                <div *ngFor="let item of nameErrorMessage">
+                                  <label class="error">{{item}}</label>
+                                </div>
                             </div>
 
                             <div class="col-12 input-field mx-auto"
@@ -59,6 +65,7 @@
                                     </option>
                                 </select>
                             </div>
+
                         </div>
                     </div>
 
@@ -79,13 +86,20 @@
                         <div class="row">
                             <div class="col-12 file-upload input-field mx-auto"
                             [class.is-valid]="this.formXls.get('xls')?.valid "
-                            [class.is-invalid]="this.formXls.get('xls')?.invalid && this.formXls.get('xls')?.touched">
+                            [class.is-invalid]="this.formXls.get('xls')?.invalid && this.formXls.get('xls')?.touched || fileError == true">
                                 <label for="file-input">
                                     <i class="fa fa-upload"></i>
                                 </label>
                                 <span class="ml-auto">{{ (filename.length > 25)? (filename | slice:0:25)+'...':(filename) }}</span>
                                 <input formControlName="xls" id="file-input" (change)="onFileChange($event)" type="file">
                             </div>
+
+                            <div *ngIf="fileError" class="text-center col-12 mx-auto">
+                                <div *ngFor="let item of fileErrorMessage">
+                                  <label class="error">{{item}}</label>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
