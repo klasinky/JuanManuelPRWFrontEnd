@@ -58,9 +58,9 @@ export class ChartMonthComponent implements OnInit {
     Object.assign(this, { single });
     setTimeout(() => {
       let x = this.chartCointainer?.nativeElement.offsetWidth;
-      if (x > 480) {
-        x = 480;
-      }
+      // if (x > 480) {
+      //   x = 480;
+      // }
       this.viewX = x;
     }, 500);
   }
@@ -71,9 +71,9 @@ export class ChartMonthComponent implements OnInit {
 
   onResize(event: any) {
     let x = this.chartCointainer?.nativeElement.offsetWidth;
-    if (x > 500) {
-      x = 500
-    }
+    // if (x > 500) {
+    //   x = 500
+    // }
     this.viewX = x;
   }
 
