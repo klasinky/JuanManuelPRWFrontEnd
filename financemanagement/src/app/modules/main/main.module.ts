@@ -14,6 +14,7 @@ import { AddAmountBaseComponent } from './components/months/add-amount-base/add-
 import { ChartMonthComponent } from './components/months/chart-month/chart-month.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CategoryDetailComponent } from './components/months/category-detail/category-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MonthDetailComponent,
     AddAmountBaseComponent,
     ChartMonthComponent,
+    CategoryDetailComponent,
     
   ],
   imports: [

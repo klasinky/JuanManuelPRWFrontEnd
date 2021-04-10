@@ -1,0 +1,35 @@
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#' + category?.category?.name + serviceName" aria-expanded="false"
+                aria-controls="collapseOne">
+                {{category?.category?.name}}
+            </button>
+        </h2>
+        <div [attr.id]="category?.category?.name + '' + serviceName" class="accordion-collapse collapse     "
+            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+
+            <div class="card" *ngFor="let item of category_data">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <span class="badge mt-n1" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="{{serviceName}}" [class.badge-soft-danger]="this.isExpense == true"
+                                        [class.badge-soft-success]="this.isExpense == false">
+                                        {{item.amount}}€
+                                        <i class="fas" [class.fa-chevron-down]="this.isExpense == true"
+                                            [class.fa-chevron-up]="this.isExpense == false"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
