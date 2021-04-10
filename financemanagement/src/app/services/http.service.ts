@@ -55,7 +55,8 @@ export class HttpService {
       'Content-Disposition':"attachment; filename='file.xls'"
     });
     
-    return this.http.post(url, data, { headers: header})
+    return this.http.post(url, data, { headers: header, reportProgress: true,
+      observe: 'events'})
   }
 
   /**
