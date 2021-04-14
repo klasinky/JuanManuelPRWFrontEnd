@@ -1,6 +1,6 @@
 <app-over-view *ngIf="months" [months]="months"></app-over-view>
+
 <div class="container">
-    <app-boton-crear (newMonth)="addMonth($event)"></app-boton-crear>
 
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12" *ngFor="let month of months">
@@ -8,3 +8,6 @@
         </div>
     </div>
 </div>
+
+<app-boton-crear (newMonth)="addMonth($event)"></app-boton-crear>
+

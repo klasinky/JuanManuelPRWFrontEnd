@@ -211,8 +211,8 @@ export class AddAmountBaseComponent implements OnInit {
               this.toastr.success('Se han creado '+data.body.inserts.length+" registros", 'Creado');
               this.refreshMonth.emit(true);
             } else {
+              this.toastr.error("No se han agregado registros", 'Error');
               this.fileError = true;
-              this.fileErrorMessage.push('No se han agregado registros');
             }
             this.uploadProgress = 0;
             this.resetForms();
@@ -227,6 +227,7 @@ export class AddAmountBaseComponent implements OnInit {
           this.uploadProgress = 0;
 
           fileError.forEach((element: string) => {
+            this.toastr.error(element, 'Error');
             this.fileErrorMessage.push(element);
           });
         }
@@ -248,6 +249,8 @@ export class AddAmountBaseComponent implements OnInit {
   }
 
   resetForms() {
+    console.log("ResetForm");
+    this.clearFiles();
     this.filename = 'Selecciona un archivo.';
     this.formXls = this.getFormXls();
     this.formAmountBase = this.getFormAmountBase();
