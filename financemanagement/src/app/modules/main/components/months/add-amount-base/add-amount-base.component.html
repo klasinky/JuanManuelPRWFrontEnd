@@ -102,7 +102,7 @@
                                 <label [attr.for]="'xls'+serviceName">
                                     <i class="fa fa-upload"></i>
                                 </label>
-                                <span class="ml-auto">{{ (filename.length > 25)? (filename | slice:0:25)+'...':(filename) }}</span>
+                                <span>{{ (filename.length > 25)? (filename | slice:0:25)+'...':(filename) }}</span>
                                 <input [attr.id]="'xls'+serviceName" formControlName="xls"  (change)="onFileChange($event)" type="file">
                             </div>
 
