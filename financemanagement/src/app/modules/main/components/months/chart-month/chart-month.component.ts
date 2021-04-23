@@ -14,8 +14,7 @@ export class ChartMonthComponent implements OnInit {
   @Input() categories?: CategoryDetail[];
 
   single?: any[];
-  multi?: any[];
-
+  
   viewX: number = 500;
   viewY: number = 300;
 
