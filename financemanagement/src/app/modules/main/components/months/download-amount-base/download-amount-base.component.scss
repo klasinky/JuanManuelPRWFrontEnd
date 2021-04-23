@@ -1,0 +1,14 @@
+@import '../../../../../../assets/scss/variables';
+
+.modal-content{
+    background: $primary-color;
+    color: $primary-font-color;
+    .modal-header{
+        background: $secondary-color;
+        border: 0px !important;
+    }
+    .modal-footer{
+        background: $secondary-color;
+        border: 0px !important;
+    }    
+}
