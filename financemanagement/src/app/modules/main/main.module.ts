@@ -15,6 +15,7 @@ import { ChartMonthComponent } from './components/months/chart-month/chart-month
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CategoryDetailComponent } from './components/months/category-detail/category-detail.component';
+import { DownloadAmountBaseComponent } from './components/months/download-amount-base/download-amount-base.component';
 import { ChartDifferenceComponent } from './components/months/chart-difference/chart-difference.component';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ChartDifferenceComponent } from './components/months/chart-difference/c
     AddAmountBaseComponent,
     ChartMonthComponent,
     CategoryDetailComponent,
+    DownloadAmountBaseComponent,
     ChartDifferenceComponent,
   ],
   imports: [

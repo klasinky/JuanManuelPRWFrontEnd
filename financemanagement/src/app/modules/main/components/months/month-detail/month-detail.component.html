@@ -18,9 +18,12 @@
 
     <div class="col-6 text-start">
       <app-add-amount-base [isExpense]="false" (refreshMonth)="refreshMonth($event)"></app-add-amount-base>
+      <app-download-amount-base [isExpense]="false"></app-download-amount-base>
     </div>
     <div class="col-6 text-end">
       <app-add-amount-base [isExpense]="true" (refreshMonth)="refreshMonth($event)"></app-add-amount-base>
+      <app-download-amount-base [isExpense]="true"></app-download-amount-base>
+
     </div>
   </div>
 

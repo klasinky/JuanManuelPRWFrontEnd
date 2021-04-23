@@ -59,6 +59,16 @@ export class HttpService {
       observe: 'events'})
   }
 
+  getXmlDownload(serviceName: string){
+    const url = environment.apiUrl + "/" + serviceName;
+    let token = this.storageService.getWithoutAsync(AuthConstants.AUTH);
+    const header = new HttpHeaders({
+      'Authorization': `${token}`,
+    });    
+    return this.http.get(url,{ headers: header, reportProgress: true,
+      observe: 'events', responseType: 'blob'})
+  }
+
   /**
    * 
    * @returns Objeto de HttpHeader con su configuración
