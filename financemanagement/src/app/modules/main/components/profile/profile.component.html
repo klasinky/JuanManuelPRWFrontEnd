@@ -1,0 +1,57 @@
+<div class="container pt-5 text-center">
+    <form [formGroup]="formProfile">
+        <div class="row text-light">
+            <div class="col-md-6">
+                <img class="rounded-circle" src="https://www.w3schools.com/howto/img_avatar.png" alt="profile_image">
+            </div>
+            <div class="col-md-6 input-field mx-auto">
+                <i class="fas fa-quote-right"></i>
+                <input type="text" formControlName="name" placeholder="Nombre" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 input-field mx-auto">
+                <i class="fas fa-quote-right"></i>
+                <input type="text" formControlName="email" placeholder="Email" autocomplete="off">
+            </div>
+            <div class="col-md-6 input-field mx-auto">
+                <i class="fas fa-quote-right"></i>
+                <input type="text" formControlName="username" placeholder="Username" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 input-field mx-auto">
+                <i class="fas fa-arrow-down"></i>
+                <select formControlName="currency" aria-label="Default select">
+                    <option value="" disabled>Elige una divisa...</option>
+                    <option>€</option>
+                    <option>$</option>
+                </select>
+            </div>
+            <div class="col-md-6 mt-3">
+                <button class="btn btn-primary">Editar</button>
+            </div>
+        </div>
+    </form>
+    <hr class="text-light">
+
+    <form [formGroup]="formPassword">
+        <div class="row text-light">
+            <div class="col-md-6 input-field mx-auto">
+                <i class="fas fa-quote-right"></i>
+                <input type="text" formControlName="password" placeholder="Contraseña" autocomplete="off">
+            </div>
+
+            <div class="col-md-6 input-field mx-auto">
+                <i class="fas fa-quote-right"></i>
+                <input type="text" formControlName="password_confirmation" placeholder="Confirmar contraseña" autocomplete="off">
+            </div>
+
+            <div class="col-md-12 d-grid gap-2">
+                <button class="btn btn-primary">Editar</button>
+            </div>
+        </div>
+    </form>
+</div>

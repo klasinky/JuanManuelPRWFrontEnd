@@ -1,0 +1,36 @@
+@import '../../../../../assets/scss/variables';
+
+.btn-auth {
+    width: 150px;
+    background-color: $primary-color;
+    border: none;
+    outline: none;
+    height: 49px;
+    border-radius: 49px;
+    border: 2px solid #fff;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+  
+    &:hover{
+      background: $primary-color-hover;
+      color: #fff;
+    }
+  }
+
+  img {
+      width: 15rem;
+      height: 15rem;
+      padding: 1rem;
+  }
+
+  .row:first-child {
+    .input-field{
+        margin-top: 5rem;
+    }
+  }
+  
+  

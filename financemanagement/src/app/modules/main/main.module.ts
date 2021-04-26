@@ -17,6 +17,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CategoryDetailComponent } from './components/months/category-detail/category-detail.component';
 import { DownloadAmountBaseComponent } from './components/months/download-amount-base/download-amount-base.component';
 import { ChartDifferenceComponent } from './components/months/chart-difference/chart-difference.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ChartDifferenceComponent } from './components/months/chart-difference/c
     CategoryDetailComponent,
     DownloadAmountBaseComponent,
     ChartDifferenceComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

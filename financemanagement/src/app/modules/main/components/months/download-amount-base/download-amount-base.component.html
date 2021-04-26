@@ -1,6 +1,8 @@
-<button type="button" class="btn btn-success" (click)="downloadXLS()" data-bs-toggle="modal" [attr.data-bs-target]="'#Download' + serviceName">
+<button type="button" class="btn btn-success" (click)="downloadXLS()" data-bs-toggle="modal"
+  [attr.data-bs-target]="'#Download' + serviceName">
   Descargar {{ title }}
 </button>
+
 <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" [attr.id]="'Download'+serviceName"
   tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -9,6 +11,7 @@
         <h5 class="modal-title">Descargando {{ title }}</h5>
       </div>
       <div class="modal-body">
+
         <div *ngIf="showUploadProgress">
           <div class="text-center m-2">
             <div class="spinner-grow text-light" role="status">
@@ -24,9 +27,12 @@
             </div>
           </div>
         </div>
+
+        <div *ngIf="!showUploadProgress">
+          <button type="button" class="btn btn-block btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        
       </div>
     </div>
-  </div>
-  <div class="modal-footer">
   </div>
 </div>

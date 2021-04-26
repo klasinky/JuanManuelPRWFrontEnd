@@ -33,6 +33,7 @@ export class DownloadAmountBaseComponent implements OnInit {
   downloadXLS() {
     const serviceName = 'months/' + this.idMonth + '/export/' + this.serviceName;
     this.showUploadProgress = true;
+    this.uploadProgress = 0;
     this.httpService.getXmlDownload(serviceName).subscribe(
       (data: any) => {
         
@@ -55,6 +56,8 @@ export class DownloadAmountBaseComponent implements OnInit {
           // a.click();
           // console.log(a)
           window.URL.revokeObjectURL(url);
+          this.showUploadProgress = false;
+          this.toastr.success("Se ha descargado tu reporte", 'Descarga con éxito')
         }
         
 

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoggedOffGuard } from 'src/app/guards/logged-off.guard';
 import { MonthDetailComponent } from './components/months/month-detail/month-detail.component';
 import { MonthsComponent } from './components/months/months.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { MainComponent } from './main.component';
 
 const routes: Routes = [
@@ -11,8 +12,13 @@ const routes: Routes = [
     path: '',
     component: MonthsComponent
   },
-  {path : 'months/detail/:id', component : MonthDetailComponent}
-]
+  {path : 'months/detail/:id', component : MonthDetailComponent},
+  {
+    path: 'profile',
+    component: ProfileComponent
+  },
+],
+
 },
 
 ];
