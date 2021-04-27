@@ -1,11 +1,11 @@
 @import '../../../../../../assets/scss/variables';
 
 .card {
-    background: $secondary-color;
-    box-shadow: 2px 20px 30px $secondary-color;
+    background: $alternative-color;
+    box-shadow: 2px 20px 30px $alternative-color;
 
     &:hover{
-        background: $secondary-color-hover;
+        background: $alternative-color-hover;
     }
     .row > .col{
         cursor: pointer;

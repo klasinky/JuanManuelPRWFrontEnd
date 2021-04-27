@@ -1,11 +1,18 @@
 <form [formGroup]="formLogin" id="form" class="sign-in-form">
+  <div class="row">
+    <div class="col-12">
+      <img src="../../assets/img/logotransparente.svg" class="img-fluid" />
+
+    </div>
+  </div>
+
     <h2 class="title">Login</h2>
     
     <div class="input-field" 
     [class.is-valid]="this.formLogin.get('email')?.valid"
     [class.is-invalid]="this.formLogin.get('email')?.invalid && this.formLogin.get('email')?.touched || nonFieldError == true">
-      <i class="fas fa-user"></i>
-      <input formControlName="email" type="text" placeholder="Username"/>
+      <i class="fas fa-envelope    "></i>
+      <input formControlName="email" type="text" placeholder="Email"/>
     </div>
 
     <div class="input-field" 

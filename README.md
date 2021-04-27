@@ -1,5 +1,7 @@
 # :money_with_wings: Control de Finanzas PRW Frontend :money_with_wings:
 
+![alt text](./financemanagement/src/assets/img/logo.svg)
+
 ---
 ## Autores :man_technologist:
 - Manuel Gonzalez Leal (https://github.com/klasinky)
@@ -63,5 +65,11 @@ npm install
         de auth
     ```
     - Notificación al registrar e iniciar sesión (Toastr)
+### :white_check_mark: Lunes 26 de Abril (1 hora) :white_check_mark:
+    - Creación del componente Profile
 
-
+### :white_check_mark: Martes 27 de Abril (4 horas) :white_check_mark:
+    - Cambiar contraseña (Componente Profile)
+    - Cambios en los estilos y colores de la web
+    - Creación del logo
+    - Arreglos en la interfaz

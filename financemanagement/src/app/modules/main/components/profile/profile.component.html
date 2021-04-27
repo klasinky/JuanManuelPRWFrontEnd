@@ -56,7 +56,7 @@
             <div class="col-md-12 input-field mx-auto" [class.is-valid]="this.formPassword.get('old_password')?.valid"
               [class.is-invalid]="this.formPassword.get('old_password')?.invalid && this.formPassword.get('old_password')?.touched || oldPasswordError == true">
               <i class="fas fa-quote-right"></i>
-              <input type="text" formControlName="old_password" placeholder="Contraseña actual" autocomplete="off">
+              <input type="password" formControlName="old_password" placeholder="Contraseña actual" autocomplete="off">
             </div>
 
             <div *ngIf="oldPasswordError" >
@@ -69,7 +69,7 @@
               [class.is-valid]="this.formPassword.get('new_password')?.valid"
               [class.is-invalid]="this.formPassword.get('new_password')?.invalid && this.formPassword.get('new_password')?.touched || newPasswordError == true">
               <i class="fas fa-quote-right"></i>
-              <input type="text" formControlName="new_password" placeholder="Contraseña nueva"
+              <input type="password" formControlName="new_password" placeholder="Contraseña nueva"
                 autocomplete="off">
             </div>
 
