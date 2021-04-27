@@ -1,0 +1,23 @@
+@import '../../../../../../assets/scss/variables';
+
+.card {
+    background: $secondary-color;
+    box-shadow: 2px 20px 30px $secondary-color;
+
+    &:hover{
+        background: $secondary-color-hover;
+    }
+    .row > .col{
+        cursor: pointer;
+    }
+}
+
+.badge-soft-success {
+    color: #00d97e;
+    background-color: #0e4a4c;
+}
+
+.badge-soft-danger {
+    color: #E4AAAA;
+    background-color: #4c0e0e;
+}

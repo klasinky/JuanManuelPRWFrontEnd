@@ -1,6 +1,6 @@
-@import '../../../../../styles.scss';
+@import '../../../../../assets/scss/variables';
 
 body, *{
-      font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
     background: $primary-color;
 }

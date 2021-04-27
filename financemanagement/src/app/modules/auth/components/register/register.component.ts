@@ -9,7 +9,7 @@ import { StorageService } from 'src/app/services/storage.service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['../../auth.component.scss', './register.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class RegisterComponent implements OnInit {
 

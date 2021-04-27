@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Months } from '../../../../../interfaces/months';
 
 
@@ -11,13 +12,19 @@ import { Months } from '../../../../../interfaces/months';
 export class ListDetailComponent implements OnInit {
 
   @Input() month!: Months;
+  @Output() deleteMonth: EventEmitter<Months> = new EventEmitter();
 
-  
-
-  constructor() { }
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
     
   }
 
+  deleteAction(){
+    this.deleteMonth.emit(this.month);
+  }
+
+  getDetail(){
+    this.route.navigate(['dashboard/months/detail/' + btoa(escape(JSON.stringify(this.month.id)))]);
+  }
 }

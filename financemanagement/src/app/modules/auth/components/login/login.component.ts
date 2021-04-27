@@ -11,7 +11,7 @@ import { StorageService } from '../../../../services/storage.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['../../auth.component.scss', './login.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class LoginComponent implements OnInit {
 

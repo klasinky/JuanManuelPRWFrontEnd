@@ -1,0 +1,53 @@
+<div class="text-center mt-3" *ngIf="month?.categories">
+
+  <div class="row m-2 p-2">
+    <div class="col-12 col-md-6 p-2">
+      <div class="bgsecondary">
+        <br>
+        <h3>Ingresos</h3>
+        <app-chart-month [isExpense]="false" [categories]="month?.categories"></app-chart-month>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 p-2">
+      <div class="bgsecondary">
+        <br>
+        <h3>Gastos</h3>
+        <app-chart-month [isExpense]="true" [categories]="month?.categories"></app-chart-month>
+      </div>
+    </div>
+
+    <div class="col-6 text-start">
+      <app-add-amount-base [isExpense]="false" (refreshMonth)="refreshMonth($event)"></app-add-amount-base>
+      <app-download-amount-base [isExpense]="false"></app-download-amount-base>
+    </div>
+    <div class="col-6 text-end">
+      <app-add-amount-base [isExpense]="true" (refreshMonth)="refreshMonth($event)"></app-add-amount-base>
+      <app-download-amount-base [isExpense]="true"></app-download-amount-base>
+
+    </div>
+  </div>
+
+  <div class="row m-2 p-2">
+
+    <div class="col-12 col-md-4">
+      <div class="row">
+        <div class="col-12" *ngFor="let item of month?.categories">
+          <app-category-detail [category]="item" [isExpense]="false"></app-category-detail>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="row">
+        <div class="col-12" *ngFor="let item of month?.categories">
+          <app-category-detail [category]="item" [isExpense]="true"></app-category-detail>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-2 offset-md-1">
+        <app-chart-difference  [month]="month?.month"></app-chart-difference>
+    </div>
+
+  </div>
+</div>

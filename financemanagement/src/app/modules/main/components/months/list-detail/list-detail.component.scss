@@ -1,4 +1,4 @@
-@import '../../../../../../styles.scss';
+@import '../../../../../../assets/scss/variables';
 
 .card {
     background: $secondary-color;
@@ -6,6 +6,9 @@
 
     &:hover{
         background: $secondary-color-hover;
+    }
+    .row > .col{
+        cursor: pointer;
     }
 }
 
@@ -17,4 +20,15 @@
 .badge-soft-danger {
     color: #E4AAAA;
     background-color: #4c0e0e;
+}
+
+.dropdown-menu:hover , .dropdown-item:hover {
+    color: #E4AAAA;
+    background-color: #4c0e0e;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    min-width: 3rem;
+    background: $secondary-color;
 }

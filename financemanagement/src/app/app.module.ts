@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MomentModule } from 'ngx-moment';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 @NgModule({
@@ -18,6 +19,8 @@ import { MomentModule } from 'ngx-moment';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxSkeletonLoaderModule,
+
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     MomentModule

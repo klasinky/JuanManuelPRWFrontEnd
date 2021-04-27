@@ -31,28 +31,53 @@ export class HttpService {
     return this.http.post(url, data, options);
   }
 
-  getAuth(serviceName: string, token?:string) {
-    let headers = this.getHeaders();
-    if (token) {
-      headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `${token}`
-      });
-    }
-        
-    const url = environment.apiUrl + "/" + serviceName;
-    return this.http.get(url, { headers: headers })
-
+  getAuth(serviceName: string, isUrl:boolean = false) {
+    const url = (isUrl)?serviceName : environment.apiUrl + "/" + serviceName ;
+    return this.http.get(url, { headers: this.getHeaders() })
   }
 
-  postAuth(serviceName: string, data = {}) {
-  
+  deleteAuth(serviceName: string, id?:number) {
+    const url = (id)?environment.apiUrl + "/" + serviceName + "/" + id : serviceName;
+    return this.http.delete(url, { headers: this.getHeaders()})
+  }
 
-    const url = environment.apiUrl + "/" + serviceName;
+  postAuth(serviceName: string, data:any = {}, isUrl:boolean = false) {
+    const url = (isUrl)?serviceName : environment.apiUrl + "/" + serviceName ;
     return this.http.post(url, data, { headers: this.getHeaders()})
-
   }
 
+  patchAuth(serviceName: string, data:any = {}, isUrl:boolean = false) {
+    const url = (isUrl)?serviceName : environment.apiUrl + "/" + serviceName ;
+    return this.http.patch(url, data, { headers: this.getHeaders()})
+  }
+
+  postXml(serviceName: string, data:any = {}){
+    const url = environment.apiUrl + "/" + serviceName;
+    let token = this.storageService.getWithoutAsync(AuthConstants.AUTH);
+    const header = new HttpHeaders({
+      'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Authorization': `${token}`,
+      'Content-Disposition':"attachment; filename='file.xls'"
+    });
+    
+    return this.http.post(url, data, { headers: header, reportProgress: true,
+      observe: 'events'})
+  }
+
+  getXmlDownload(serviceName: string){
+    const url = environment.apiUrl + "/" + serviceName;
+    let token = this.storageService.getWithoutAsync(AuthConstants.AUTH);
+    const header = new HttpHeaders({
+      'Authorization': `${token}`,
+    });    
+    return this.http.get(url,{ headers: header, reportProgress: true,
+      observe: 'events', responseType: 'blob'})
+  }
+
+  /**
+   * 
+   * @returns Objeto de HttpHeader con su configuración
+   */
   getHeaders():HttpHeaders{
     let token = this.storageService.getWithoutAsync(AuthConstants.AUTH)
 

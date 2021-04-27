@@ -1,13 +1,15 @@
 @import '../../../styles.scss';
 
+
 #main {
-    margin-left: 300px;
+    margin-left: 200px;
+    overflow-x: hidden;
   }
   
   @media (max-width: 1199px) {
   
     #header {
-      left: -300px;
+      left: -200px;
     }
   
     #main {

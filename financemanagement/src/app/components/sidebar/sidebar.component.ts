@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,7 +9,7 @@ import { User } from 'src/app/interfaces/user';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
   @Input() userData!: User;
 
   isMobile: boolean = false;
@@ -22,6 +23,9 @@ export class SidebarComponent implements OnInit {
   mobileSideBar(){
     this.isMobile = !this.isMobile;
     document.querySelector("body")?.classList.toggle("mobile-nav-active");
+  }
 
+  logOutAction(){
+    this.authService.logout();
   }
 }

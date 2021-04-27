@@ -1,0 +1,13 @@
+<div class="bgsecondary">
+  <div #ChartDifferenceContainer id="pie-chart-parent">
+    <ngx-charts-pie-grid [view]="[viewX, viewY]" (window)="onResize($event)" (window:resize)="onResize($event)"
+      [scheme]="colorScheme" [results]="single" style="fill: white;">
+      <ng-template #tooltipTemplate let-model="model">
+        <div class="text-center p-1">
+          <h6>{{ model.name }}</h6>
+          <h6>€{{model.value}}</h6>
+        </div>
+      </ng-template>
+    </ngx-charts-pie-grid>
+  </div>
+</div>

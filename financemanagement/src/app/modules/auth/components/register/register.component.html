@@ -59,7 +59,7 @@
       <label class="text-danger">{{item}}</label>
     </div>
   </div>
-  <button [disabled]='this.formRegister.invalid || showLoader' (click)="registerAction()" class="btn solid">
+  <button [disabled]='this.formRegister.invalid || showLoader' (click)="registerAction()" class="btn-auth solid">
     <div *ngIf="!showLoader; else blockLoader">
       Join Us
     </div>
