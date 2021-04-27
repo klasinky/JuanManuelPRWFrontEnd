@@ -51,32 +51,60 @@
           <h2 class="title">Cambiar Contraseña</h2>
         </div>
         <form [formGroup]="formPassword">
+
           <div class="row text-light">
-            <div class="col-md-12 input-field mx-auto">
+            <div class="col-md-12 input-field mx-auto" [class.is-valid]="this.formPassword.get('old_password')?.valid"
+              [class.is-invalid]="this.formPassword.get('old_password')?.invalid && this.formPassword.get('old_password')?.touched || oldPasswordError == true">
               <i class="fas fa-quote-right"></i>
-              <input type="text" formControlName="password" placeholder="Contraseña" autocomplete="off">
+              <input type="text" formControlName="old_password" placeholder="Contraseña actual" autocomplete="off">
             </div>
 
-            <div class="col-md-12 input-field mx-auto">
+            <div *ngIf="oldPasswordError" >
+              <div class="text-center" *ngFor="let item of oldPasswordErrorMessage">
+                <label class="text-danger">{{item}}</label>
+              </div>
+            </div>
+
+            <div class="col-md-12 input-field mx-auto"
+              [class.is-valid]="this.formPassword.get('new_password')?.valid"
+              [class.is-invalid]="this.formPassword.get('new_password')?.invalid && this.formPassword.get('new_password')?.touched || newPasswordError == true">
               <i class="fas fa-quote-right"></i>
-              <input type="text" formControlName="password_confirmation" placeholder="Confirmar contraseña"
+              <input type="text" formControlName="new_password" placeholder="Contraseña nueva"
                 autocomplete="off">
             </div>
 
+            <div *ngIf="newPasswordError" >
+              <div class="text-center" *ngFor="let item of newPasswordErrorMessage">
+                <label class="text-danger">{{item}}</label>
+              </div>
+            </div>
+
             <div class="col-md-12 text-center">
-              <button class="btn btn-auth">Guardar</button>
+              <button [disabled]='this.formPassword.invalid || showLoader' (click)="changeUserPasswordAction()"
+                class="btn-auth solid">
+                <div *ngIf="!showLoader; else blockLoader">
+                  Guardar
+                </div>
+                <ng-template #blockLoader>
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </ng-template>
+              </button>
             </div>
           </div>
+
         </form>
       </div>
     </div>
   </div>
   <div class="row mt-3">
-      <div class="col-md-12">
-          <div class="bgsecondary p-2 text-center">
-              <p class="m-3">Último inicio de sesión: <strong>{{ user?.last_login | amParse:'YYYY/MM/DD HH:mm' | amLocale:'es' | amDateFormat:'YYYY/MM/DD HH:mm'}}</strong> </p>
-          </div>
+    <div class="col-md-12">
+      <div class="bgsecondary p-2 text-center">
+        <p class="m-3">Último inicio de sesión: <strong>{{ user?.last_login | amParse:'YYYY/MM/DD HH:mm' | amLocale:'es'
+            | amDateFormat:'YYYY/MM/DD HH:mm'}}</strong> </p>
       </div>
+    </div>
   </div>
 
 

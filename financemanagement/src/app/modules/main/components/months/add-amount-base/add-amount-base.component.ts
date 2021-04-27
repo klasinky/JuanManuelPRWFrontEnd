@@ -97,9 +97,7 @@ export class AddAmountBaseComponent implements OnInit {
    */
   onFileChange(event: any) {    
     const reader = new FileReader();
-    console.log("EN el serviceName "+this.serviceName);
-    
-    
+
     if (event.target.files && event.target.files.length) {
       
       const [file] = event.target.files;
@@ -115,9 +113,7 @@ export class AddAmountBaseComponent implements OnInit {
         this.cd.markForCheck();
       };
 
-      
     } else {
-      
       this.resetForms();
     }
   }

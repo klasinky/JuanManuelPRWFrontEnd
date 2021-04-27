@@ -46,6 +46,11 @@ export class HttpService {
     return this.http.post(url, data, { headers: this.getHeaders()})
   }
 
+  patchAuth(serviceName: string, data:any = {}, isUrl:boolean = false) {
+    const url = (isUrl)?serviceName : environment.apiUrl + "/" + serviceName ;
+    return this.http.patch(url, data, { headers: this.getHeaders()})
+  }
+
   postXml(serviceName: string, data:any = {}){
     const url = environment.apiUrl + "/" + serviceName;
     let token = this.storageService.getWithoutAsync(AuthConstants.AUTH);
