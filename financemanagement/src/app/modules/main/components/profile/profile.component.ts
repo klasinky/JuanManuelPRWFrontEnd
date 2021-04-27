@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthConstants } from 'src/app/config/auth=constant';
+import { ChangePassword } from 'src/app/interfaces/password';
 import { User } from 'src/app/interfaces/user';
 import { HttpService } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -18,6 +19,12 @@ export class ProfileComponent implements OnInit {
   formPassword: FormGroup;
   user?: User
 
+  oldPasswordError = false;
+  oldPasswordErrorMessage: string[] = [];
+  newPasswordError = false;
+  newPasswordErrorMessage: string[] = [];
+
+  showLoader = false;
 
   constructor(private router: Router,
     private httpService: HttpService,
@@ -30,25 +37,55 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo();
+    this.ifChangeInput('old_password','oldPasswordError','formPassword');
+    this.ifChangeInput('new_password','newPasswordError','formPassword');
+    
   }
 
   getUserInfo() {
     this.storageService.get(AuthConstants.DATAUSER).then((data) => {
       const url = "users/profile/"+data.username;
-      console.log(url);
       this.httpService.getAuth(url).subscribe(
         (data: User) => {
-          console.log(data)
           this.user = data;
-          // this.formProfile.get('name')?.setValue(this.user?.name);
         },
         (error) => {
           console.log(error);
-
         }
       )
-
     })
+  }
+
+  changeUserPasswordAction(){
+    const serviceName = 'users/me/changepassword';
+    if(this.formPassword?.valid){
+      this.clearFiles();
+      this.showLoader = true;
+      const dataPassword = {
+        old_password: this.formPassword.value.old_password,
+        new_password: this.formPassword.value.new_password
+      } as ChangePassword;
+
+      this.httpService.patchAuth(serviceName, dataPassword).subscribe(
+        (data: any) => {
+          this.showLoader = false;
+          this.toastr.success(data.message, 'Contraseña actualizada')
+          this.resetForms();
+        }, 
+        (error: any) => {
+          this.showLoader = false;
+
+          this.oldPasswordErrorMessage = error.error.old_password;
+          this.newPasswordErrorMessage = error.error.new_password;
+
+          const allNameError = ['oldPasswordError', 'newPasswordError'];
+          const allArrayMessage = [this.oldPasswordErrorMessage, this.newPasswordErrorMessage];
+
+          for (let i = 0; i < allArrayMessage.length; i++)
+            this.addMessageError(allNameError[i], allArrayMessage[i]);
+        }
+      )
+    }
   }
 
   getFormProfile(): FormGroup {
@@ -62,19 +99,31 @@ export class ProfileComponent implements OnInit {
 
   getFormPassword(): FormGroup {
     return this.fb.group({
-      'password': ['', [Validators.required, Validators.minLength(8)]],
-      'password_confirmation': ['', [Validators.required, Validators.minLength(8)]],
-    },
-      {
-        validator: this.passwordConfirming
-      }
-    );
+      'old_password': ['', [Validators.required, Validators.minLength(8)]],
+      'new_password': ['', [Validators.required, Validators.minLength(8)]],
+    });
   }
 
-  passwordConfirming(c: AbstractControl) {
-    if (c.get('password')?.value !== c.get('password_confirmation')?.value) {
-      return { invalid: true };
+  addMessageError(nameError: string, arrayMessage: String[]) {
+    if (arrayMessage) {
+      (this as any)[nameError] = true;
     }
-    return null;
+  }
+
+  ifChangeInput(name: any, nameError: any, form: string){
+    (this as any)[form].get(name)?.valueChanges.subscribe((val : any) => {
+      (this as any)[nameError] = false
+    });
+  }
+
+  clearFiles() {
+    this.oldPasswordError = false;
+    this.newPasswordError = false;
+    this.oldPasswordErrorMessage = [];
+    this.newPasswordErrorMessage = [];
+  }
+
+  resetForms() {
+    this.formPassword.reset();
   }
 }
