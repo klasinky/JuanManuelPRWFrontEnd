@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthConstants } from 'src/app/config/auth=constant';
+import { Currency } from 'src/app/interfaces/currency';
 import { ChangePassword } from 'src/app/interfaces/password';
 import { User } from 'src/app/interfaces/user';
 import { HttpService } from 'src/app/services/http.service';
@@ -18,6 +19,7 @@ export class ProfileComponent implements OnInit {
   formProfile: FormGroup;
   formPassword: FormGroup;
   user?: User
+  currenciesOptions?: Currency[]
 
   oldPasswordError = false;
   oldPasswordErrorMessage: string[] = [];
@@ -25,6 +27,12 @@ export class ProfileComponent implements OnInit {
   newPasswordErrorMessage: string[] = [];
 
   showLoader = false;
+
+  emailError = false;
+  usernameError = false;
+
+  showLoaderProfile = false;
+
 
   constructor(private router: Router,
     private httpService: HttpService,
@@ -37,28 +45,64 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo();
-    this.ifChangeInput('old_password','oldPasswordError','formPassword');
-    this.ifChangeInput('new_password','newPasswordError','formPassword');
-    
+    this.getCurrencyList();
+    this.ifChangeInput('old_password', 'oldPasswordError', 'formPassword');
+    this.ifChangeInput('new_password', 'newPasswordError', 'formPassword');
+
+  }
+
+  getCurrencyList() {
+    const url = "currencies";
+    this.httpService.getAuth(url).subscribe(
+      (data) => {
+        this.currenciesOptions = data as Currency[];
+      },
+      (error) => {
+      }
+    )
   }
 
   getUserInfo() {
-    this.storageService.get(AuthConstants.DATAUSER).then((data) => {
-      const url = "users/profile/"+data.username;
-      this.httpService.getAuth(url).subscribe(
-        (data: User) => {
-          this.user = data;
-        },
-        (error) => {
-          console.log(error);
-        }
-      )
-    })
+    const url = "users/me";
+    this.httpService.getAuth(url).subscribe(
+      (data: User) => {
+        this.user = data;
+        this.formProfile.get("name")?.setValue(this.user?.name);
+        this.formProfile.get("email")?.setValue(this.user?.email);
+        this.formProfile.get("username")?.setValue(this.user?.username);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
-  changeUserPasswordAction(){
+  profileAction() {
+    const serviceName = 'users/me';
+    if (this.formProfile?.valid) {
+      this.showLoaderProfile = true;
+      const userNewData = {
+        name: this.formProfile?.get("name")?.value,
+        username: this.formProfile?.get("username")?.value,
+        email: this.formProfile?.get("email")?.value,
+        currency: this.formProfile?.get("currency")?.value,
+      } as User;
+      this.httpService.patchAuth(serviceName, userNewData).subscribe(
+        (data: User) => {
+          this.storageService.setItem(AuthConstants.DATAUSER, data)
+          this.showLoaderProfile = false;
+        },
+        (error: any) =>{
+          console.log(error);
+          this.showLoaderProfile = false;
+        }
+      )
+    }
+  }
+
+  changeUserPasswordAction() {
     const serviceName = 'users/me/changepassword';
-    if(this.formPassword?.valid){
+    if (this.formPassword?.valid) {
       this.clearFiles();
       this.showLoader = true;
       const dataPassword = {
@@ -71,7 +115,7 @@ export class ProfileComponent implements OnInit {
           this.showLoader = false;
           this.toastr.success(data.message, 'Contraseña actualizada')
           this.resetForms();
-        }, 
+        },
         (error: any) => {
           this.showLoader = false;
 
@@ -92,7 +136,7 @@ export class ProfileComponent implements OnInit {
     return this.fb.group({
       'email': ['', [Validators.required, Validators.email]],
       'name': ['', [Validators.required, Validators.minLength(3)]],
-      'username': ['', [Validators.required]],
+      'username': ['', [Validators.required, Validators.minLength(3)]],
       'currency': ['', [Validators.required]]
     });
   }
@@ -110,8 +154,8 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  ifChangeInput(name: any, nameError: any, form: string){
-    (this as any)[form].get(name)?.valueChanges.subscribe((val : any) => {
+  ifChangeInput(name: any, nameError: any, form: string) {
+    (this as any)[form].get(name)?.valueChanges.subscribe((val: any) => {
       (this as any)[nameError] = false
     });
   }

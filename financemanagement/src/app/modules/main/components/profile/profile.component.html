@@ -8,29 +8,40 @@
         </div>
         <form [formGroup]="formProfile">
           <div class="row text-light">
-            <div class="col-md-12 input-field mx-auto">
-              <i class="fas fa-quote-right"></i>
-              <input type="text" [value]="user?.name" formControlName="name" placeholder="Nombre" autocomplete="off">
+            <div class="col-md-12 input-field mx-auto"
+            [class.is-invalid]="this.formProfile.get('name')?.invalid && this.formProfile.get('name')?.touched"
+            [class.is-valid]="this.formProfile.get('name')?.valid"
+            >
+              <i class="fas fa-user"></i>
+              <input type="text" formControlName="name" placeholder="Nombre" autocomplete="off">
             </div>
-            <div class="col-md-12 input-field mx-auto">
-              <i class="fas fa-quote-right"></i>
-              <input type="text" [value]="user?.email" formControlName="email" placeholder="Email" autocomplete="off">
+            <div class="col-md-12 input-field mx-auto"
+            [class.is-invalid]="this.formProfile.get('email')?.invalid && this.formProfile.get('email')?.touched || this.emailError" 
+            [class.is-valid]="this.formProfile.get('email')?.valid"
+            >
+              <i class="fas fa-envelope"></i>
+              <input type="text"  formControlName="email" placeholder="Email" autocomplete="off">
             </div>
 
           </div>
 
           <div class="row">
-            <div class="col-md-12 input-field mx-auto">
-              <i class="fas fa-quote-right"></i>
-              <input type="text" [value]="user?.username" formControlName="username" placeholder="Username"
+            <div class="col-md-12 input-field mx-auto"
+            [class.is-invalid]="this.formProfile.get('username')?.invalid && this.formProfile.get('username')?.touched || this.usernameError" 
+            [class.is-valid]="this.formProfile.get('username')?.valid"
+            >
+              <i class="fas fa-user"></i>
+              <input type="text"  formControlName="username" placeholder="Username"
                 autocomplete="off">
             </div>
-            <div class="col-md-12 input-field mx-auto">
-              <i class="fas fa-arrow-down"></i>
-              <select formControlName="currency" aria-label="Default select">
-                <option value="" disabled>Elige una divisa...</option>
-                <option>€</option>
-                <option>$</option>
+            <div class="col-md-12 input-field mx-auto"
+            [class.is-invalid]="this.formProfile.get('currency')?.invalid && this.formProfile.get('currency')?.touched" 
+            [class.is-valid]="this.formProfile.get('currency')?.valid"
+            >
+              <i class="fas fa-money-bill"></i>
+              <select *ngIf="currenciesOptions" formControlName="currency" aria-label="Default select">
+                <option value="" disabled>Selecciona una divisa...</option>
+                <option  *ngFor="let item of currenciesOptions" value="{{ item?.id }}">{{ item?.name }}</option>
               </select>
             </div>
 
@@ -38,7 +49,12 @@
 
           <div class="row">
             <div class="col-md-12 text-center">
-              <button class="btn btn-auth">Editar datos</button>
+              <button [disabled]='this.formProfile?.invalid || showLoaderProfile' (click)="profileAction()"  type="submit" class="btn btn-auth">
+                Editar datos
+                <div *ngIf="showLoaderProfile" class="spinner-border spinner-border-sm mb-1" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </button>
             </div>
           </div>
         </form>
@@ -55,7 +71,7 @@
           <div class="row text-light">
             <div class="col-md-12 input-field mx-auto" [class.is-valid]="this.formPassword.get('old_password')?.valid"
               [class.is-invalid]="this.formPassword.get('old_password')?.invalid && this.formPassword.get('old_password')?.touched || oldPasswordError == true">
-              <i class="fas fa-quote-right"></i>
+              <i class="fas fa-lock"></i>
               <input type="password" formControlName="old_password" placeholder="Contraseña actual" autocomplete="off">
             </div>
 
@@ -68,7 +84,7 @@
             <div class="col-md-12 input-field mx-auto"
               [class.is-valid]="this.formPassword.get('new_password')?.valid"
               [class.is-invalid]="this.formPassword.get('new_password')?.invalid && this.formPassword.get('new_password')?.touched || newPasswordError == true">
-              <i class="fas fa-quote-right"></i>
+              <i class="fas fa-lock"></i>
               <input type="password" formControlName="new_password" placeholder="Contraseña nueva"
                 autocomplete="off">
             </div>

@@ -102,3 +102,12 @@ body {
 .toast-info {
   background-color: $alternative-color !important;
 }
+
+.is-invalid i{
+  color: #C9190B;
+}
+
+
+.is-valid i{
+  color: #06F139;
+}

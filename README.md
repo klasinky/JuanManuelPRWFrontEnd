@@ -1,6 +1,6 @@
 # :money_with_wings: Control de Finanzas PRW Frontend :money_with_wings:
 
-![alt text](./financemanagement/src/assets/img/logo.svg)
+![alt text](./financemanagement/src/assets/img/logo.svg#center)
 
 ---
 ## Autores :man_technologist:
@@ -73,3 +73,7 @@ npm install
     - Cambios en los estilos y colores de la web
     - Creación del logo
     - Arreglos en la interfaz
+
+### :white_check_mark: Miércoles 28 de Abril (2 horas) :white_check_mark:
+    - Cambiar datos del perfil (Componente Profile)
+    - Cambios en el Storage Service
