@@ -1,0 +1,7 @@
+[build]
+  command = "cd financemanagement && npm run build:prod"
+  publish = "dist/financemanagement"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
