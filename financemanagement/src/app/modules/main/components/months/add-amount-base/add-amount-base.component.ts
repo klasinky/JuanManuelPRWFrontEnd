@@ -78,7 +78,7 @@ export class AddAmountBaseComponent implements OnInit {
       'name': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(255)]],
       'description': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(255)]],
       'amount': ['', [Validators.required, Validators.min(0)]],
-      'category': ['', Validators.required]
+      'category': [null, Validators.required]
     })
   }
 
@@ -123,7 +123,7 @@ export class AddAmountBaseComponent implements OnInit {
    * 
    * @param e target
    */
-  changeCity(e: any) {
+  changeCategory(e: any) {
     this.formAmountBase?.patchValue(e.target.value, {
       onlySelf: true
     })
