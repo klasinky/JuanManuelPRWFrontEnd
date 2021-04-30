@@ -111,3 +111,25 @@ body {
 .is-valid i{
   color: #06F139;
 }
+
+.central-loader {
+  position: fixed;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.2);
+  z-index: 1050;
+}
+
+.central-loader > div {
+  height: 42px;
+  line-height: 40px;
+  width: 200px;
+  text-align: center;
+  color: #f0f0f0;
+  margin: auto;
+}
+
+.central-loader > div i{
+  font-size: 400%;
+}
