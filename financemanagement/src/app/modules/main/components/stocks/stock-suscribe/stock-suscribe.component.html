@@ -1,0 +1,39 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#stockSuscribe">
+    <i class="fas fa-plus"></i>
+</button>
+
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="stockSuscribe" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Suscribirse</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+
+            <form [formGroup]="formSuscribeStock">
+
+                <div class="col-12 input-field mx-auto"
+                [class.is-valid]="this.formSuscribeStock?.get('stock')?.valid"
+                [class.is-invalid]="this.formSuscribeStock?.get('stock')?.invalid && this.formSuscribeStock?.get('stock')?.touched">
+                    <i class="fas fa-arrow-down"></i>
+                    <select formControlName="stock" (change)="changeStock($event)" aria-label="Default select">
+                        <option value="null" disabled>Elige una categoría...</option>
+                        <option *ngFor="let stock of stocks" [ngValue]="stock.id">
+                            {{stock.name + ' ' +stock.symbol}}
+                        </option>
+                    </select>
+
+                </div>
+
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" (click)="postSuscribeStockAction()" class="btn btn-primary">Suscribirse</button>
+            </div>
+
+        </div>
+    </div>
+</div>

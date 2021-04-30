@@ -1,0 +1,12 @@
+<div *ngIf="stocks" class="container">
+    <div class="row">
+        <div *ngFor="let stock of stocks" class="col-12 pt-5">
+            <div class="bgsecondary text-center">
+                <br>
+                <h3>{{stock.name}}</h3>
+                <app-stock-detail [stock]=stock (createStock)="addStock($event)"></app-stock-detail>
+            </div>
+        </div>
+    </div>
+    <app-stock-suscribe></app-stock-suscribe>
+</div>

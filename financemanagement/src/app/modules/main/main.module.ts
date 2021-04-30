@@ -18,6 +18,9 @@ import { CategoryDetailComponent } from './components/months/category-detail/cat
 import { DownloadAmountBaseComponent } from './components/months/download-amount-base/download-amount-base.component';
 import { ChartDifferenceComponent } from './components/months/chart-difference/chart-difference.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { StocksComponent } from './components/stocks/stocks.component';
+import { StockDetailComponent } from './components/stocks/stock-detail/stock-detail.component';
+import { StockSuscribeComponent } from './components/stocks/stock-suscribe/stock-suscribe.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     DownloadAmountBaseComponent,
     ChartDifferenceComponent,
     ProfileComponent,
+    StocksComponent,
+    StockDetailComponent,
+    StockSuscribeComponent,
   ],
   imports: [
     CommonModule,

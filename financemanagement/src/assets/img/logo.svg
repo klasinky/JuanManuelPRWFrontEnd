@@ -119,9 +119,6 @@
 </clipPath>
 </defs>
 <g id="surface1">
-<rect x="0" y="0" width="375" height="149.999998" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
-<rect x="0" y="0" width="375" height="149.999998" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
-<rect x="0" y="0" width="375" height="149.999998" style="fill:rgb(25.878906%,7.839966%,11.759949%);fill-opacity:1;stroke:none;"/>
 <g style="fill:rgb(85.099792%,85.099792%,85.099792%);fill-opacity:1;">
   <use xlink:href="#glyph0-1" x="61.617386" y="88.339555"/>
 </g>
