@@ -19,11 +19,11 @@ export class LoggedInGuard implements CanActivate {
       this.httpService.getAuth('currencies').subscribe(
         (res) => {
           resolve(false);
-          // this.loader = false;
+          this.loader = false;
           this.router.navigate(['dashboard']);
         },
         (error) => {
-          // this.loader = false;
+          this.loader = false;
           resolve(true);
         }
       )
