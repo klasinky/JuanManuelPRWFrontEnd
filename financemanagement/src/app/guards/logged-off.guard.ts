@@ -9,16 +9,21 @@ import { StorageService } from '../services/storage.service';
 })
 export class LoggedOffGuard implements CanActivate {
 
+  public loader = true;
+
   /**
    * Guard para saber si el usuario esta deslogeado
    */
   canActivate(): Promise<boolean> {
     return new Promise(resolve => {
       this.httpService.getAuth('currencies').subscribe(
+
         (res) => {
           resolve(true);
+          //this.loader = false;
         },
         (error) => {
+          //this.loader = false;
 
           this.router.navigate(['auth']);
           resolve(false);

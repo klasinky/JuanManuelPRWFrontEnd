@@ -7,7 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
-    { path: 'auth', component: AuthComponent, canActivate: [LoggedInGuard] },
+    { path: 'auth', component: AuthComponent, canActivate: [LoggedInGuard],  },
 ];
 
 

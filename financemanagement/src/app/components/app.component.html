@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<div class="central-loader" *ngIf="loggedOff.loader && loggedIn.loader">
+  <div>
+
+    <i class="fa fa-spin fa-spinner"></i>
+
+
+  </div>
+</div>
+
+<router-outlet *ngIf="!loggedOff.loader || !loggedIn.loader"></router-outlet>
