@@ -1,0 +1,23 @@
+<div #ChartStockDetailContainer id="ngx-charts-area-chart">
+    <ngx-charts-area-chart
+      [view]="[viewX, viewY]"
+      (window)="onResize($event)"
+      (window:resize)="onResize($event)"
+      [scheme]="colorScheme" 
+      [results]="multi" 
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      style="fill: white;">    
+      <ng-template #tooltipTemplate let-model="model">
+        <div class="text-center p-1">
+          <h6>{{ model.name }}</h6>  
+          <h6>€{{model.series.name}}</h6>
+        </div>
+        </ng-template>
+    </ngx-charts-area-chart>
+  </div>
+  

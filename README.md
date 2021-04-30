@@ -1,5 +1,9 @@
 # :money_with_wings: Control de Finanzas PRW Frontend :money_with_wings:
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/76567e80-8671-4b87-b25d-ef83c4662861/deploy-status)](https://app.netlify.com/sites/musing-lichterman-b59f22/deploys)
+
+![alt text](./financemanagement/src/assets/img/logo.svg#center)
+
 ---
 ## Autores :man_technologist:
 - Manuel Gonzalez Leal (https://github.com/klasinky)
@@ -63,5 +67,20 @@ npm install
         de auth
     ```
     - Notificación al registrar e iniciar sesión (Toastr)
+### :white_check_mark: Lunes 26 de Abril (1 hora) :white_check_mark:
+    - Creación del componente Profile
 
+### :white_check_mark: Martes 27 de Abril (4 horas) :white_check_mark:
+    - Cambiar contraseña (Componente Profile)
+    - Cambios en los estilos y colores de la web
+    - Creación del logo
+    - Arreglos en la interfaz
 
+### :white_check_mark: Miércoles 28 de Abril (2 horas) :white_check_mark:
+    - Cambiar datos del perfil (Componente Profile)
+    - Cambios en el Storage Service
+
+### :white_check_mark: Viernes 30 de Abril (3 horas y 30 minutos) :white_check_mark:
+    - Componente Stocks
+    - Mensajes de error en el componente Profile al editar los datos del usuario
+    - Loader

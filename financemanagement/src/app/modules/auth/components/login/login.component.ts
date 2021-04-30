@@ -58,19 +58,19 @@ export class LoginComponent implements OnInit {
       this.authService.login(dataLogin).subscribe(
         (data) => {
           const token = 'Token ' + data.access_token;
-          this.storageService.store(AuthConstants.DATAUSER, data.user)
-          this.storageService.store(AuthConstants.AUTH, token)
-            .then(() => {
-              return this.storageService.get(AuthConstants.AUTH);
-            })
-            .then((res: any) => {
+          this.storageService.setItem(AuthConstants.DATAUSER, data.user)
+          this.storageService.setItem(AuthConstants.AUTH, token)
+            // .then(() => {
+              // return this.storageService.get(AuthConstants.AUTH);
+            // })
+            // .then((res: any) => {
               this.showLoader = false;
               this.router.navigate(['dashboard']).then(() => {
                 // Notificación
                 this.toastr.info('Hola ' + data.user.name, 'Bievenido')
 
               })
-            });
+            // });
         },
         (error) => {
           this.showLoader = false;

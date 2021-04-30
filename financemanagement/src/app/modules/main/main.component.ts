@@ -17,8 +17,11 @@ export class MainComponent implements OnInit {
     this.getUserData();
   }
 
-  async getUserData(){
-    this.userData = await this.storageService.get(AuthConstants.DATAUSER) as User;    
+  getUserData() {
+    //this.userData = await this.storageService.get(AuthConstants.DATAUSER) as User;
+    this.storageService.getItem(AuthConstants.DATAUSER).subscribe((data : User) => {
+      this.userData = data;
+    })
   }
 
 }

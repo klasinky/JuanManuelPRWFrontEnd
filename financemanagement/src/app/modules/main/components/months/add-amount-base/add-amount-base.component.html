@@ -58,8 +58,8 @@
                             [class.is-valid]="this.formAmountBase.get('category')?.valid"
                             [class.is-invalid]="this.formAmountBase.get('category')?.invalid && this.formAmountBase.get('category')?.touched">
                                 <i class="fas fa-arrow-down"></i>
-                                <select formControlName="category" (change)="changeCity($event)" aria-label="Default select">
-                                    <option value="" disabled>Elige una categoría...</option>
+                                <select formControlName="category" (change)="changeCategory($event)" aria-label="Default select">
+                                    <option value="null" disabled>Elige una categoría...</option>
                                     <option *ngFor="let category of categories" [ngValue]="category.id">
                                         {{category.name}}
                                     </option>

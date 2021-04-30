@@ -25,9 +25,8 @@ export class AuthService {
     }
 
     logout(){
-      this.storageService.clear()
-      .then(res=>{
-        this.router.navigate(['auth']);
-      })
+      this.storageService.clear();
+      this.router.navigate(['auth']);
+
     }
 }
