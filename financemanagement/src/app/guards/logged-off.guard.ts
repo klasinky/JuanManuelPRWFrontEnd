@@ -15,6 +15,7 @@ export class LoggedOffGuard implements CanActivate {
    * Guard para saber si el usuario esta deslogeado
    */
   canActivate(): Promise<boolean> {
+    this.loader = true;
     return new Promise(resolve => {
       this.httpService.getAuth('currencies').subscribe(
 
