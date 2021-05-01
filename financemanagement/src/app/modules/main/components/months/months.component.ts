@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { AuthConstants } from 'src/app/config/auth=constant';
 import { Months } from 'src/app/interfaces/months';
 import { HttpService } from 'src/app/services/http.service';
-import { StorageService } from 'src/app/services/storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-months',
@@ -14,8 +13,7 @@ export class MonthsComponent implements OnInit {
 
   months!: Months[];
 
-  constructor(private httpService: HttpService, 
-    private storageService: StorageService,
+  constructor(private httpService: HttpService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -23,22 +21,24 @@ export class MonthsComponent implements OnInit {
   }
 
   async getMonths() {
-    this.httpService.getAuth('months/all').subscribe(
+    const url: string = environment.endpoints.months.all;
+
+    this.httpService.getAuth(url).subscribe(
       (data: any) => {
-        console.log(data);
-        
-        this.months = data.results as Months[]; 
+        this.months = data.results as Months[];
       },
       (error) => {
       }
     )
   }
 
-  async deleteMonth(month: Months){
-    this.httpService.deleteAuth(month.url + '').subscribe(
+  async deleteMonth(month: Months) {
+    const url: string = environment.endpoints.months.viewset + month.id;
+
+    this.httpService.deleteAuth(url).subscribe(
       (data: any) => {
         this.months.splice(this.months.indexOf(month), 1);
-        this.toastr.success('Has eliminado el mes correctamente','Mes eliminado');
+        this.toastr.success('Has eliminado el mes correctamente', 'Mes eliminado');
       },
       (error) => {
         this.toastr.error(error.detail, "Ha ocurrido un error");

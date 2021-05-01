@@ -6,6 +6,7 @@ import { AmountBase } from 'src/app/interfaces/amount-base';
 import { HttpService } from 'src/app/services/http.service';
 import { Category } from 'src/app/interfaces/category';
 import { HttpEventType } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-amount-base',
@@ -95,13 +96,13 @@ export class AddAmountBaseComponent implements OnInit {
   /**
    * onFileChange al cambiar el fichero, cambiar el filename
    */
-  onFileChange(event: any) {    
+  onFileChange(event: any) {
     const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
-      
+
       const [file] = event.target.files;
-      
+
       reader.readAsDataURL(file);
 
       reader.onload = () => {
@@ -109,7 +110,7 @@ export class AddAmountBaseComponent implements OnInit {
           file: reader.result
         });
         this.file = file;
-        this.filename = file.name;        
+        this.filename = file.name;
         this.cd.markForCheck();
       };
 
@@ -147,7 +148,9 @@ export class AddAmountBaseComponent implements OnInit {
    * Agregar un (gasto o ingreso) manualmente
    */
   postAmountBaseAction() {
-    const serviceName = 'months/' + this.idMonth + '/create/' + this.serviceName;
+    const url: string = environment.endpoints.amountBase.create.start +
+      this.idMonth + environment.endpoints.amountBase.create.end + this.serviceName;
+
     if (this.formAmountBase?.valid) {
       this.clearFiles();
       this.showUploadProgress = true;
@@ -158,7 +161,7 @@ export class AddAmountBaseComponent implements OnInit {
         category: this.formAmountBase.value.category
       } as AmountBase;
 
-      this.httpService.postAuth(serviceName, dataAmountBase).subscribe(
+      this.httpService.postAuth(url, dataAmountBase).subscribe(
         (data: any) => {
           this.showUploadProgress = false;
           this.toastr.success("Se ha creado el " + this.title?.toLowerCase(), 'Creado');
@@ -183,15 +186,16 @@ export class AddAmountBaseComponent implements OnInit {
    * Agregar uno o varios (gastos o ingresos) a partir de un fichero XLS
    */
   postAmountBaseXlsAction() {
-    const serviceName = 'months/' + this.idMonth + '/import/' + this.serviceName;
-    this.showUploadProgress = true;
+    const url: string = environment.endpoints.amountBase.import.start +
+      this.idMonth + environment.endpoints.amountBase.import.end + this.serviceName;
 
+    this.showUploadProgress = true;
     if (this.formXls?.valid) {
       this.clearFiles();
 
       const dataFile = this.file;
 
-      this.httpService.postXml(serviceName, dataFile).subscribe(
+      this.httpService.postXml(url, dataFile).subscribe(
         (data: any) => {
           //Barra de progreso
           if (data.type == HttpEventType.UploadProgress) {
@@ -199,12 +203,12 @@ export class AddAmountBaseComponent implements OnInit {
             this.uploadProgress = Math.round((data.loaded * 100) / data.total);
 
           }
-          
+
           if (data.body) {
             this.showUploadProgress = false;
             const haveInserts: boolean = (data.body.inserts.length > 0) ? true : false;
             if (haveInserts) {
-              this.toastr.success('Se han creado '+data.body.inserts.length+" registros", 'Creado');
+              this.toastr.success('Se han creado ' + data.body.inserts.length + " registros", 'Creado');
               this.refreshMonth.emit(true);
             } else {
               this.toastr.error("No se han agregado registros", 'Error');
@@ -235,7 +239,9 @@ export class AddAmountBaseComponent implements OnInit {
    * Obtener todas las categorias
    */
   getCategoriesAction() {
-    this.httpService.getAuth('categories/all').subscribe(
+    const url: string = environment.endpoints.category.all;
+
+    this.httpService.getAuth(url).subscribe(
       (data: any) => {
         this.categories = data;
       }, (error) => {
@@ -245,7 +251,6 @@ export class AddAmountBaseComponent implements OnInit {
   }
 
   resetForms() {
-    console.log("ResetForm");
     this.clearFiles();
     this.filename = 'Selecciona un archivo.';
     this.formXls = this.getFormXls();
