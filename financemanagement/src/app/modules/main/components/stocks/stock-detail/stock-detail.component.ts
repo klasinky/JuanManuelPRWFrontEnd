@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '
 import { SeriesHorizontal } from '@swimlane/ngx-charts';
 import { Stock, StockDetail } from 'src/app/interfaces/stock';
 import { HttpService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-stock-detail',
@@ -13,12 +14,12 @@ export class StockDetailComponent implements OnInit {
   @ViewChild('ChartStockDetailContainer') chartCointainer?: ElementRef;
   @Input() stock?: Stock;
   stockDetail?: StockDetail;
-  
+
   multi?: any[];
   view: any[] = [700, 300];
   viewX: number = 500;
   viewY: number = 300;
-    // options
+  // options
   colorScheme = {
     domain: ['#A8385E']
   };
@@ -48,9 +49,9 @@ export class StockDetailComponent implements OnInit {
         name: element.date,
         value: element.close
       };
-     series.push(serie);
+      series.push(serie);
     })
-  
+
     multi.push({
       name: this.stockDetail?.name,
       series: series
@@ -68,16 +69,18 @@ export class StockDetailComponent implements OnInit {
     this.viewX = x;
   }
 
-  getStockDetailAction(){
-    const url = this.stock?.url + '';
+  getStockDetailAction() {
+    const url: string = environment.endpoints.stocks.viewset +
+      this.stock?.id;
+
     this.httpService.getAuth(url, true).subscribe(
-      (data) => {      
+      (data) => {
         this.stockDetail = data as StockDetail;
         this.setCharts();
       },
       (error) => {
         console.log("error");
-    
+
       }
     )
   }

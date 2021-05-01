@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Stock } from 'src/app/interfaces/stock';
 import { HttpService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-stock-suscribe',
@@ -18,8 +19,8 @@ export class StockSuscribeComponent implements OnInit {
   constructor(private httpService: HttpService,
     private fb: FormBuilder,
     private toastr: ToastrService) {
-      this.formSuscribeStock = this.getFormSuscribeStock();
-    }
+    this.formSuscribeStock = this.getFormSuscribeStock();
+  }
 
   ngOnInit(): void {
     this.getStockListAction();
@@ -37,8 +38,8 @@ export class StockSuscribeComponent implements OnInit {
     })
   }
 
-  getStockListAction(){
-    const url = "stocks/all";
+  getStockListAction() {
+    const url: string = environment.endpoints.stocks.all;
     this.httpService.getAuth(url).subscribe(
       (data) => {
         this.stocks = data as Stock[];
@@ -49,11 +50,10 @@ export class StockSuscribeComponent implements OnInit {
     )
   }
 
-  postSuscribeStockAction(){
+  postSuscribeStockAction() {
     if (this.formSuscribeStock.valid) {
-
       const stockId = this.formSuscribeStock.value.stock;
-      const url = "stocks/" + stockId;
+      const url: string = environment.endpoints.stocks.viewset + stockId;
       this.resetForms();
 
       this.httpService.postAuth(url).subscribe(

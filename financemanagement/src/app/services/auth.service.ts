@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Login } from '../interfaces/login';
 import { HttpService } from './http.service';
 import { StorageService } from './storage.service';
@@ -17,16 +18,15 @@ export class AuthService {
     ) { }
 
     login(data:Login): Observable<any>{
-      return this.httpService.post('users/login', data);
+      return this.httpService.post(environment.endpoints.auth.login, data);
     }
 
     register(data:any):Observable<any>{
-      return this.httpService.post('users/register', data);
+      return this.httpService.post(environment.endpoints.auth.register, data);
     }
 
     logout(){
       this.storageService.clear();
       this.router.navigate(['auth']);
-
     }
 }

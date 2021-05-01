@@ -18,9 +18,9 @@ export class CategoryDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.serviceName = (this.isExpense) ? "expenses" : "entries";
-    this.category_data = (this.isExpense) ? 
-    this.category?.category_data.expenses : 
-    this.category?.category_data.entries;
+    this.category_data = (this.isExpense) ?
+      this.category?.category_data.expenses :
+      this.category?.category_data.entries;
   }
 
 }

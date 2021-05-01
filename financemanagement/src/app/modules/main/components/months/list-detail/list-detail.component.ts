@@ -7,7 +7,7 @@ import { Months } from '../../../../../interfaces/months';
   selector: 'app-list-detail',
   templateUrl: './list-detail.component.html',
   styleUrls: ['./list-detail.component.scss'],
-  
+
 })
 export class ListDetailComponent implements OnInit {
 
@@ -17,14 +17,14 @@ export class ListDetailComponent implements OnInit {
   constructor(private route: Router) { }
 
   ngOnInit(): void {
-    
+
   }
 
-  deleteAction(){
+  deleteAction() {
     this.deleteMonth.emit(this.month);
   }
 
-  getDetail(){
+  getDetail() {
     this.route.navigate(['dashboard/months/detail/' + btoa(escape(JSON.stringify(this.month.id)))]);
   }
 }

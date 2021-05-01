@@ -1,5 +1,4 @@
 import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CategoryDetail } from 'src/app/interfaces/category';
 @Component({
   selector: 'app-chart-month',
@@ -13,8 +12,10 @@ export class ChartMonthComponent implements OnInit {
   @Input() isExpense?: boolean;
   @Input() categories?: CategoryDetail[];
 
+  loading = true;
+
   single?: any[];
-  
+
   viewX: number = 500;
   viewY: number = 300;
 
@@ -61,6 +62,7 @@ export class ChartMonthComponent implements OnInit {
       //   x = 480;
       // }
       this.viewX = x;
+      this.loading = false;
     }, 500);
   }
 

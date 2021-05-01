@@ -1,25 +1,21 @@
 <div #ChartContainer id="pie-chart-parent">
-  <ngx-charts-bar-vertical
-    [view]="[viewX, viewY]"
-    (window)="onResize($event)"
-    (window:resize)="onResize($event)"
-    [scheme]="colorScheme" 
-    [results]="single" 
-    [gradient]="gradient" 
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis" 
-    [legend]="showLegend"
-    [noBarWhenZero]="false"
-    [showXAxisLabel]="showXAxisLabel" 
-    [showYAxisLabel]="showYAxisLabel"
-    [yAxisTickFormatting]="formatingY"
-    [yAxisLabel]="yAxisLabel"
-    style="fill: white;">    
+  <div class="text-center loading-chart" *ngIf="loading">
+    <div class="wrapper">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <ngx-charts-bar-vertical *ngIf="!loading" [view]="[viewX, viewY]" (window)="onResize($event)"
+    (window:resize)="onResize($event)" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+    [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [noBarWhenZero]="false"
+    [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [yAxisTickFormatting]="formatingY"
+    [yAxisLabel]="yAxisLabel" style="fill: white;">
     <ng-template #tooltipTemplate let-model="model">
       <div class="text-center p-1">
-        <h6>{{ model.name }}</h6>  
+        <h6>{{ model.name }}</h6>
         <h6>€{{model.value}}</h6>
       </div>
-      </ng-template>
+    </ng-template>
   </ngx-charts-bar-vertical>
 </div>

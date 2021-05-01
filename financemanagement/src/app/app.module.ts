@@ -19,7 +19,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxSkeletonLoaderModule,
+    NgxSkeletonLoaderModule.forRoot(),
 
     ToastrModule.forRoot(),
     BrowserAnimationsModule,

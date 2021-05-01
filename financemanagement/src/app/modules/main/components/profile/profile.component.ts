@@ -8,6 +8,7 @@ import { ChangePassword } from 'src/app/interfaces/password';
 import { User } from 'src/app/interfaces/user';
 import { HttpService } from 'src/app/services/http.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -39,7 +40,6 @@ export class ProfileComponent implements OnInit {
 
   showLoaderProfile = false;
 
-
   constructor(private router: Router,
     private httpService: HttpService,
     private storageService: StorageService,
@@ -58,7 +58,8 @@ export class ProfileComponent implements OnInit {
   }
 
   getCurrencyList() {
-    const url = "currencies";
+    const url: string = environment.endpoints.currency.all;
+
     this.httpService.getAuth(url).subscribe(
       (data) => {
         this.currenciesOptions = data as Currency[];
@@ -69,7 +70,8 @@ export class ProfileComponent implements OnInit {
   }
 
   getUserInfo() {
-    const url = "users/me";
+    const url: string = environment.endpoints.auth.profile;
+
     this.httpService.getAuth(url).subscribe(
       (data: User) => {
         this.user = data;
@@ -84,17 +86,20 @@ export class ProfileComponent implements OnInit {
   }
 
   profileAction() {
-    const serviceName = 'users/me';
+    const url: string = environment.endpoints.auth.profile;
+
     if (this.formProfile?.valid) {
       this.clearFiles();
       this.showLoaderProfile = true;
+
       const userNewData = {
         name: this.formProfile?.get("name")?.value,
         username: this.formProfile?.get("username")?.value,
         email: this.formProfile?.get("email")?.value,
         currency: this.formProfile?.get("currency")?.value,
       } as User;
-      this.httpService.patchAuth(serviceName, userNewData).subscribe(
+
+      this.httpService.patchAuth(url, userNewData).subscribe(
         (data: User) => {
           this.storageService.setItem(AuthConstants.DATAUSER, data)
           this.showLoaderProfile = false;
@@ -116,86 +121,88 @@ export class ProfileComponent implements OnInit {
 
         }
       )
+    }
   }
-}
 
-changeUserPasswordAction() {
-  const serviceName = 'users/me/changepassword';
-  if (this.formPassword?.valid) {
-    this.clearFiles();
-    this.showLoader = true;
-    const dataPassword = {
-      old_password: this.formPassword.value.old_password,
-      new_password: this.formPassword.value.new_password
-    } as ChangePassword;
+  changeUserPasswordAction() {
+    const url: string = environment.endpoints.auth.changePassword;
 
-    this.httpService.patchAuth(serviceName, dataPassword).subscribe(
-      (data: any) => {
-        this.showLoader = false;
-        this.toastr.success(data.message, 'Contraseña actualizada')
-        this.resetForms();
-      },
-      (error: any) => {
-        this.showLoader = false;
+    if (this.formPassword?.valid) {
+      this.clearFiles();
+      this.showLoader = true;
 
-        this.oldPasswordErrorMessage = error.error.old_password;
-        this.newPasswordErrorMessage = error.error.new_password;
+      const dataPassword = {
+        old_password: this.formPassword.value.old_password,
+        new_password: this.formPassword.value.new_password
+      } as ChangePassword;
 
-        const allNameError = ['oldPasswordError', 'newPasswordError'];
-        const allArrayMessage = [this.oldPasswordErrorMessage, this.newPasswordErrorMessage];
+      this.httpService.patchAuth(url, dataPassword).subscribe(
+        (data: any) => {
+          this.showLoader = false;
+          this.toastr.success(data.message, 'Contraseña actualizada')
+          this.resetForms();
+        },
+        (error: any) => {
+          this.showLoader = false;
 
-        for (let i = 0; i < allArrayMessage.length; i++)
-          this.addMessageError(allNameError[i], allArrayMessage[i]);
-      }
-    )
+          this.oldPasswordErrorMessage = error.error.old_password;
+          this.newPasswordErrorMessage = error.error.new_password;
+
+          const allNameError = ['oldPasswordError', 'newPasswordError'];
+          const allArrayMessage = [this.oldPasswordErrorMessage, this.newPasswordErrorMessage];
+
+          for (let i = 0; i < allArrayMessage.length; i++)
+            this.addMessageError(allNameError[i], allArrayMessage[i]);
+        }
+      )
+    }
   }
-}
 
-getFormProfile(): FormGroup {
-  return this.fb.group({
-    'email': ['', [Validators.required, Validators.email]],
-    'name': ['', [Validators.required, Validators.minLength(3)]],
-    'username': ['', [Validators.required, Validators.minLength(3)]],
-    'currency': ['', [Validators.required]]
-  });
-}
-
-getFormPassword(): FormGroup {
-  return this.fb.group({
-    'old_password': ['', [Validators.required, Validators.minLength(8)]],
-    'new_password': ['', [Validators.required, Validators.minLength(8)]],
-  });
-}
-
-addMessageError(nameError: string, arrayMessage: String[]) {
-  if (arrayMessage) {
-    (this as any)[nameError] = true;
+  getFormProfile(): FormGroup {
+    return this.fb.group({
+      'email': ['', [Validators.required, Validators.email]],
+      'name': ['', [Validators.required, Validators.minLength(3)]],
+      'username': ['', [Validators.required, Validators.minLength(3)]],
+      'currency': ['', [Validators.required]]
+    });
   }
-}
 
-ifChangeInput(name: any, nameError: any, form: string) {
-  (this as any)[form].get(name)?.valueChanges.subscribe((val: any) => {
-    (this as any)[nameError] = false
-  });
-}
+  getFormPassword(): FormGroup {
+    return this.fb.group({
+      'old_password': ['', [Validators.required, Validators.minLength(8)]],
+      'new_password': ['', [Validators.required, Validators.minLength(8)]],
+    });
+  }
 
-clearFiles() {
-  this.oldPasswordError = false;
-  this.newPasswordError = false;
-  this.oldPasswordErrorMessage = [];
-  this.newPasswordErrorMessage = [];
+  addMessageError(nameError: string, arrayMessage: String[]) {
+    if (arrayMessage) {
+      (this as any)[nameError] = true;
+    }
+  }
 
-  this.emailError = false;
-  this.usernameError = false;
-  this.nameError = false;
-  this.currencyError = false;
-  this.emailErrorMessage  = [];
-  this.usernameErrorMessage  = [];
-  this.nameErrorMessage  = [];
-  this.currencyErrorMessage = [];
-}
+  ifChangeInput(name: any, nameError: any, form: string) {
+    (this as any)[form].get(name)?.valueChanges.subscribe((val: any) => {
+      (this as any)[nameError] = false
+    });
+  }
 
-resetForms() {
-  this.formPassword.reset();
-}
+  clearFiles() {
+    this.oldPasswordError = false;
+    this.newPasswordError = false;
+    this.oldPasswordErrorMessage = [];
+    this.newPasswordErrorMessage = [];
+
+    this.emailError = false;
+    this.usernameError = false;
+    this.nameError = false;
+    this.currencyError = false;
+    this.emailErrorMessage = [];
+    this.usernameErrorMessage = [];
+    this.nameErrorMessage = [];
+    this.currencyErrorMessage = [];
+  }
+
+  resetForms() {
+    this.formPassword.reset();
+  }
 }

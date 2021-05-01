@@ -25,11 +25,11 @@ export class OverViewComponent implements OnInit {
     this.getDifferenceColor();
   }
 
-  getDifferenceColor() {    
+  getDifferenceColor() {
     this.differenceError = this.detail?.totalDifference <= 0;
   }
 
-  getTotal(){  
+  getTotal() {
     let totalExpenses = 0;
     let totalEntries = 0;
 

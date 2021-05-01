@@ -12,7 +12,7 @@ export class ChartDifferenceComponent implements OnInit {
   @Input() month?: Months;
 
   single?: any[];
-  
+
   viewX: number = 500;
   viewY: number = 300;
   // options
@@ -29,6 +29,7 @@ export class ChartDifferenceComponent implements OnInit {
   ngOnInit(): void {
     this.setCharts();
   }
+
 
   setCharts() {
     const single: any[] = [];

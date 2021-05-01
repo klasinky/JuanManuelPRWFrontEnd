@@ -1,5 +1,9 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#' + serviceName">
+<button type="button" [class.expense]="this.isExpense" [class.entry]="!this.isExpense" class="btn btn-web" data-bs-toggle="modal" [attr.data-bs-target]="'#' + serviceName">
     Crear {{title}}
+    <div class="d-none d-md-inline">
+        <i *ngIf="!this.isExpense" class="fas fa-piggy-bank"></i>
+        <i *ngIf="this.isExpense" class="fas fa-wallet"></i>
+    </div>
 </button>
 
 <!-- Modal -->

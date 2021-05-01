@@ -21,6 +21,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { StocksComponent } from './components/stocks/stocks.component';
 import { StockDetailComponent } from './components/stocks/stock-detail/stock-detail.component';
 import { StockSuscribeComponent } from './components/stocks/stock-suscribe/stock-suscribe.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { StockSuscribeComponent } from './components/stocks/stock-suscribe/stock
     FormsModule,
     ReactiveFormsModule,
     NgxChartsModule,
+    NgxSkeletonLoaderModule,
   ]
 })
 export class MainModule { }
