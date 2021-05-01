@@ -57,6 +57,8 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(dataLogin).subscribe(
         (data) => {
+          console.log("Login ok");
+          
           const token = 'Token ' + data.access_token;
           this.storageService.setItem(AuthConstants.DATAUSER, data.user)
           this.storageService.setItem(AuthConstants.AUTH, token)
@@ -64,11 +66,11 @@ export class LoginComponent implements OnInit {
               // return this.storageService.get(AuthConstants.AUTH);
             // })
             // .then((res: any) => {
-              this.showLoader = false;
+              
               this.router.navigate(['dashboard']).then(() => {
                 // Notificación
                 this.toastr.info('Hola ' + data.user.name, 'Bievenido')
-
+                this.showLoader = false;
               })
             // });
         },

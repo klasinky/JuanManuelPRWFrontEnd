@@ -15,11 +15,13 @@ export class LoggedInGuard implements CanActivate {
    * Guard para saber si el usuario está autenticado
    */
   canActivate(): Promise<boolean> {
+    this.loader = true;
     return new Promise(resolve => {
       this.httpService.getAuth('currencies').subscribe(
         (res) => {
           resolve(false);
           this.loader = false;
+          
           this.router.navigate(['dashboard']);
         },
         (error) => {
