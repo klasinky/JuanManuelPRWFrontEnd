@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { AuthConstants } from 'src/app/config/auth=constant';
 import { Months } from 'src/app/interfaces/months';
 import { HttpService } from 'src/app/services/http.service';
-import { StorageService } from 'src/app/services/storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-months',
@@ -20,33 +19,29 @@ export class MonthsComponent implements OnInit {
   numberPagination: number[];
 
   constructor(private httpService: HttpService,
-    private storageService: StorageService,
     private toastr: ToastrService) {
     this.numberPagination = Array(10).fill(0).map((x, i) => i);
   }
+
 
   ngOnInit(): void {
     this.getMonths()
   }
 
   async getMonths() {
+    const url: string = environment.endpoints.months.all;
     this.loading = true;
-    this.httpService.getAuth('months/all').subscribe(
+    
+    this.httpService.getAuth(url).subscribe(
       (data: any) => {
-        console.log(data);
         this.loading = false;
-
         this.totalMonths = data.count;
         this.nextUrl = data.next;
         this.previousUrl = data.previous;
         this.months = data.results as Months[];
-        console.log("N: " + this.nextUrl);
-        console.log("P: " + this.previousUrl);
-
       },
       (error) => {
         this.loading = false;
-
       }
     )
   }
@@ -57,9 +52,8 @@ export class MonthsComponent implements OnInit {
     'height': '85px', 
     'margin-bottom':'0',
     'box-shadow': '2px 20px 30px #42141E'
+    }
   }
-  }
-
 
   changeUrl(isNext: boolean) {
 
@@ -87,7 +81,8 @@ export class MonthsComponent implements OnInit {
   }
 
   async deleteMonth(month: Months) {
-    this.httpService.deleteAuth(month.url + '').subscribe(
+      const url: string = environment.endpoints.months.viewset + month.id;
+    this.httpService.deleteAuth(url).subscribe(
       (data: any) => {
         this.months.splice(this.months.indexOf(month), 1);
         this.toastr.success('Has eliminado el mes correctamente', 'Mes eliminado');

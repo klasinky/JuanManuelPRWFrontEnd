@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Stock } from 'src/app/interfaces/stock';
 import { HttpService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-stocks',
@@ -20,8 +21,8 @@ export class StocksComponent implements OnInit {
     this.getStocksAction();
   }
 
-  getStocksAction(){
-    const url = "stocks"
+  getStocksAction() {
+    const url: string = environment.endpoints.stocks.list;
     this.httpService.getAuth(url).subscribe(
       (data) => {
         this.stocks = data as Stock[];

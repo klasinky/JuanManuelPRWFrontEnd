@@ -1,8 +1,8 @@
-import { HttpEventType } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-download-amount-base',
@@ -17,6 +17,7 @@ export class DownloadAmountBaseComponent implements OnInit {
   idMonth?: number;
   uploadProgress: number = 0;
   showUploadProgress: boolean = false;
+  
   constructor(private httpService: HttpService,
     private toastr: ToastrService,
     private route: ActivatedRoute,) { }
@@ -31,18 +32,21 @@ export class DownloadAmountBaseComponent implements OnInit {
   }
 
   downloadXLS() {
-    const serviceName = 'months/' + this.idMonth + '/export/' + this.serviceName;
+    const url: string = environment.endpoints.amountBase.export.start +
+      this.idMonth + environment.endpoints.amountBase.export.end + this.serviceName;
+
     this.showUploadProgress = true;
     this.uploadProgress = 0;
-    this.httpService.getXmlDownload(serviceName).subscribe(
+
+    this.httpService.getXmlDownload(url).subscribe(
       (data: any) => {
-        
+
         if (data.type == 3) {
           console.log("From datatype ", data)
           this.uploadProgress = Math.round((data.loaded * 100) / data.total);
 
         }
-        if(data?.body){
+        if (data?.body) {
           console.log("DESDE EL BODY")
           console.log(data)
           const blob = new Blob([data.body], { type: 'application/vnd.ms-excel' });
@@ -59,19 +63,15 @@ export class DownloadAmountBaseComponent implements OnInit {
           this.showUploadProgress = false;
           this.toastr.success("Se ha descargado tu reporte", 'Descarga con éxito')
         }
-        
+
 
       }, (error) => {
         console.log("From error ", error)
 
         this.showUploadProgress = false;
         this.uploadProgress = 0;
-
       }
     )
   }
-
-
-
 
 }
