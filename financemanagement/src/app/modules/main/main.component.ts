@@ -10,7 +10,13 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private storageService: StorageService) { }
+  loading = false;
+
+  constructor(
+    private storageService: StorageService,
+  ) {
+
+  }
 
   userData!: User;
   ngOnInit(): void {
@@ -19,7 +25,7 @@ export class MainComponent implements OnInit {
 
   getUserData() {
     //this.userData = await this.storageService.get(AuthConstants.DATAUSER) as User;
-    this.storageService.getItem(AuthConstants.DATAUSER).subscribe((data : User) => {
+    this.storageService.getItem(AuthConstants.DATAUSER).subscribe((data: User) => {
       this.userData = data;
     })
   }

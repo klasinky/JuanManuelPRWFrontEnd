@@ -1,6 +1,7 @@
-<button type="button" class="btn btn-success" (click)="downloadXLS()" data-bs-toggle="modal"
+<button type="button" [class.expense]="this.isExpense" [class.entry]="!this.isExpense" class="btn-amount" (click)="downloadXLS()" data-bs-toggle="modal"
   [attr.data-bs-target]="'#Download' + serviceName">
   Descargar {{ title }}
+  <i class="fas fa-download    "></i>
 </button>
 
 <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" [attr.id]="'Download'+serviceName"

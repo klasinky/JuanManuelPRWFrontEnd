@@ -13,6 +13,8 @@ export class ChartMonthComponent implements OnInit {
   @Input() isExpense?: boolean;
   @Input() categories?: CategoryDetail[];
 
+  loading = true;
+
   single?: any[];
   
   viewX: number = 500;
@@ -61,6 +63,7 @@ export class ChartMonthComponent implements OnInit {
       //   x = 480;
       // }
       this.viewX = x;
+      this.loading = false;
     }, 500);
   }
 
