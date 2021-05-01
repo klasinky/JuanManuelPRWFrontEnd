@@ -13,36 +13,3 @@
     }    
 }
 
-.btn-amount {
-    padding: 10px;
-    background-color: $primary-color;
-    border: none;
-    width: 100%;
-    height: 49px;
-    color: #fff;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin: 10px 0;
-    cursor: pointer;
-    transition: 0.5s;
-  
-    &:hover{
-      background: $primary-color-hover;
-      color: #fff;
-    }
-
-    &.entry{
-        $color: #005e17;
-        background: $color ;
-        &:hover{
-            background: lighten($color, 5%);
-        }
-    }
-    &.expense{
-        $color: #a7290a;
-        background: $color ;
-        &:hover{
-            background: lighten($color, 5%);
-        }
-    }
-  }

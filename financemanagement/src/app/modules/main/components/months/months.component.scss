@@ -1,2 +1,13 @@
 @import '../../../../../assets/scss/variables';
 
+// ngx-skeleton-loader {
+//     background: yellow;
+//     // background: $alternative-color !important;
+// }
+
+:host>>>ngx-skeleton-loader .loader {
+  border-radius: 5px;
+  height: 83px;
+  background-color: #992929 !important;
+  border: 1px solid white;
+}
