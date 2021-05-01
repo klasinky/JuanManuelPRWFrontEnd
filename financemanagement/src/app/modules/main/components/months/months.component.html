@@ -2,15 +2,15 @@
 
 <div class="container-fluid">
 
-    <div class="container bgsecondary mt-2 p-2 d-flex justify-content-evenly">
-        <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
-          <i></i><i></i>
-        </button>
-        <h3 class="title">-</h3>
-        <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
-          <i></i><i></i>
-        </button>
-    </div>
+  <div class="container bgsecondary mt-2 p-2 d-flex justify-content-evenly">
+    <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+      <i></i><i></i>
+    </button>
+    <h3 class="title">-</h3>
+    <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+      <i></i><i></i>
+    </button>
+  </div>
 
   <div *ngIf="!loading" class="row">
     <div class="col-md-6" *ngFor="let month of months">
@@ -19,8 +19,7 @@
   </div>
   <div class="row mt-2" *ngIf="loading">
     <div class="col-md-6 mt-3" *ngFor="let item of numberPagination">
-      <ngx-skeleton-loader animation="pulse"
-        [theme]="getStyle()"></ngx-skeleton-loader>
+      <ngx-skeleton-loader animation="pulse" [theme]="getStyle()"></ngx-skeleton-loader>
     </div>
   </div>
 
@@ -32,7 +31,7 @@
     <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
       <i></i><i></i>
     </button>
-</div>
+  </div>
 
 
 </div>

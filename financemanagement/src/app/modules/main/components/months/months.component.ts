@@ -31,7 +31,7 @@ export class MonthsComponent implements OnInit {
   async getMonths() {
     const url: string = environment.endpoints.months.all;
     this.loading = true;
-    
+
     this.httpService.getAuth(url).subscribe(
       (data: any) => {
         this.loading = false;
@@ -46,12 +46,13 @@ export class MonthsComponent implements OnInit {
     )
   }
 
-  getStyle(){
-    return {'background':'#42141E', 
-    'border-radius': '0', 
-    'height': '85px', 
-    'margin-bottom':'0',
-    'box-shadow': '2px 20px 30px #42141E'
+  getStyle() {
+    return {
+      'background': '#42141E',
+      'border-radius': '0',
+      'height': '85px',
+      'margin-bottom': '0',
+      'box-shadow': '2px 20px 30px #42141E'
     }
   }
 
@@ -63,8 +64,6 @@ export class MonthsComponent implements OnInit {
       this.httpService.getAuth(url, true).subscribe(
         (data: any) => {
           this.loading = false;
-
-          console.log(data);
           this.totalMonths = data.count;
           this.nextUrl = data.next;
           this.previousUrl = data.previous;
@@ -81,13 +80,14 @@ export class MonthsComponent implements OnInit {
   }
 
   async deleteMonth(month: Months) {
-      const url: string = environment.endpoints.months.viewset + month.id;
-    this.httpService.deleteAuth(url).subscribe(
+    const url: string = environment.endpoints.months.viewset;
+    this.httpService.deleteAuth(url, month.id).subscribe(
       (data: any) => {
         this.months.splice(this.months.indexOf(month), 1);
         this.toastr.success('Has eliminado el mes correctamente', 'Mes eliminado');
       },
       (error) => {
+        console.log(error)
         this.toastr.error(error.detail, "Ha ocurrido un error");
 
       }
