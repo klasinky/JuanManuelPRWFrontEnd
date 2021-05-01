@@ -41,6 +41,7 @@
         <div class="col-12" *ngFor="let item of month?.categories">
           <app-category-detail [category]="item" [isExpense]="false"></app-category-detail>
         </div>
+        
       </div>
     </div>
 
@@ -52,8 +53,10 @@
       </div>
     </div>
 
-    <div class="col-12 col-md-2 offset-md-1">
-        <app-chart-difference  [month]="month?.month"></app-chart-difference>
+    <div class="col-12 col-md-4 bgsecondary">
+      <br>
+      <h3 class="title">Total Mes</h3>
+      <app-chart-difference  [month]="month?.month"></app-chart-difference>
     </div>
 
   </div>

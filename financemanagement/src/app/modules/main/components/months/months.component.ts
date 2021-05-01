@@ -25,6 +25,8 @@ export class MonthsComponent implements OnInit {
   async getMonths() {
     this.httpService.getAuth('months/all').subscribe(
       (data: any) => {
+        console.log(data);
+        
         this.months = data.results as Months[]; 
       },
       (error) => {

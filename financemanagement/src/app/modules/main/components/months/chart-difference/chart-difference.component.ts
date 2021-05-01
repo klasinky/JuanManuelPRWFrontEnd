@@ -30,6 +30,7 @@ export class ChartDifferenceComponent implements OnInit {
     this.setCharts();
   }
 
+
   setCharts() {
     const single: any[] = [];
     single.push({

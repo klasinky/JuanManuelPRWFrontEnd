@@ -37,8 +37,7 @@ export class MonthDetailComponent implements OnInit {
   getMonth(id:number) {
     this.httpService.getAuth('months/' + id).subscribe(
       (data: any) => {
-        this.month = data;
-        console.log(data.categories[0])
+        this.month = data;        
       },
       (error) => {
         this.router.navigate(['dashboard']).then(() => {

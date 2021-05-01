@@ -24,7 +24,7 @@
 }
 
 .modal-content{
-    background: $primary-color;
+    background: $alternative-color;
     color: $primary-font-color;
     .modal-header{
         background: $secondary-color;
@@ -67,6 +67,7 @@
     padding: 10px;
     background-color: $primary-color;
     border: none;
+    width: 100%;
     height: 49px;
     color: #fff;
     text-transform: uppercase;

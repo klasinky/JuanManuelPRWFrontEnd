@@ -1,7 +1,10 @@
 <button type="button" [class.expense]="this.isExpense" [class.entry]="!this.isExpense" class="btn-amount" (click)="downloadXLS()" data-bs-toggle="modal"
   [attr.data-bs-target]="'#Download' + serviceName">
-  Descargar {{ title }}
-  <i class="fas fa-download    "></i>
+  Descargar 
+  <div class="d-none d-md-inline">
+    {{ title }}
+    <i class="fas fa-download"></i>
+  </div>
 </button>
 
 <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" [attr.id]="'Download'+serviceName"
@@ -30,6 +33,9 @@
         </div>
 
         <div *ngIf="!showUploadProgress">
+          <div class="text-center">
+            <h4>Descarga completada</h4>
+          </div>
           <button type="button" class="btn btn-block btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
         
