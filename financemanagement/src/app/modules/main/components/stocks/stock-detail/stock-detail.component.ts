@@ -73,14 +73,13 @@ export class StockDetailComponent implements OnInit {
     const url: string = environment.endpoints.stocks.viewset +
       this.stock?.id;
 
-    this.httpService.getAuth(url, true).subscribe(
+    this.httpService.getAuth(url).subscribe(
       (data) => {
         this.stockDetail = data as StockDetail;
         this.setCharts();
       },
       (error) => {
         console.log("error");
-
       }
     )
   }
