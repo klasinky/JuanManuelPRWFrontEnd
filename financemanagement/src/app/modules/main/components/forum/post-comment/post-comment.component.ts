@@ -74,8 +74,8 @@ export class PostCommentComponent implements OnInit {
       this.httpService.postAuth(url, dataSend).subscribe(
         (data) => {
           this.getComments();
-          this.formMessage.reset();
-          this.countMessage = 0;
+          this.resetForm();
+          
         },
         (error) => {
           this.toastr.error(error.error.detail)
@@ -83,6 +83,12 @@ export class PostCommentComponent implements OnInit {
       )
     }
 
+  }
+
+  resetForm(){
+    this.formMessage = this.getFormMessage();
+    this.countMessage = 0;
+    this.ifChangeInput();
   }
 
   getComments(url?: string, pagination = false) {
@@ -102,7 +108,8 @@ export class PostCommentComponent implements OnInit {
           }, 100)
 
         } else {
-          data.results.forEach((comment: CommentPost) => {
+          const arr = data.results.reverse() as CommentPost [];
+          arr.forEach((comment: CommentPost) => {
             this.comments?.unshift(comment);
           });
         }
