@@ -15,7 +15,8 @@ export class StocksComponent implements OnInit {
   stocks?: Stock[];
 
   constructor(private router: Router,
-    private httpService: HttpService) { }
+    private httpService: HttpService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getStocksAction();
@@ -30,8 +31,22 @@ export class StocksComponent implements OnInit {
     )
   }
 
-  addStock(_stock: Stock): void {
-    this.stocks?.unshift(_stock);
+  unsubscribeStockAction(stock: Stock) {
+    const url: string = environment.endpoints.stocks.viewset;
+    this.httpService.deleteAuth(url, stock.id).subscribe(
+      (data) => {
+        this.stocks?.splice(this.stocks?.indexOf(stock), 1);
+        this.toastr.success('Te has desuscrito de la acción' + stock.name, 'Acción eliminada');
+      },
+      (error) => {
+        console.log(error)
+        this.toastr.error(error.detail, "Ha ocurrido un error");
+      }
+    )
+  }
+
+  addStock(): void {
+    this.getStocksAction();
   }
 
 }
