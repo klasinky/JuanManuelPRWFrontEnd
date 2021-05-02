@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row row-eq-height mt-5">
+    <div class="col-md-8 bgsecondary">
+      <div class="post p-3">
+        <div class="author-detail">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="post-author">{{ post?.author?.name }}</div>
+              <div class="like-count">{{ post?.likes }} likes</div>
+
+            </div>
+            <div class="col-md-4">
+              <div class="btn btn-dark"><i class="fas fa-paper-plane"></i> Compartir</div>
+              <button (click)="sendLike()" class="btn btn-danger"><i class="fas fa-heart"></i> Like</button>
+
+            </div>
+          </div>
+
+        </div>
+        <hr>
+        <div class="post-title">
+          <h3>{{ post?.title|titlecase }}</h3>
+        </div>
+        <div class="post-body">
+          <p>{{ post?.description }} </p>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-12 bgsecondary">
+
+            <app-post-comment [idPost]="id" ></app-post-comment>
+        </div>
+        <div class="col-12 bgsecondary">
+          <div class="chat-vid__container">
+            <div class="chat-vid__title anim" style="--delay: .3s">Post similares</div>
+            <div class="chat-vid anim" style="--delay: .4s">
+              <div class="chat-vid__wrapper">
+                <img class="chat-vid__img" src="https://cdn.nohat.cc/thumb/f/720/3b55eddcfffa4e87897d.jpg" />
+                <div class="chat-vid__content">
+                  <div class="chat-vid__name">Prepare for your first skateboard jump</div>
+                  <div class="chat-vid__by">Jordan Wise</div>
+                  <div class="chat-vid__info">125.908 views <span class="seperate"></span>2 days
+                    ago</div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-vid anim" style="--delay: .5s">
+              <div class="chat-vid__wrapper">
+                <img class="chat-vid__img"
+                  src="https://iamaround.it/wp-content/uploads/2015/02/pexels-photo-4663818.jpeg" />
+                <div class="chat-vid__content">
+                  <div class="chat-vid__name">Prepare for your first skateboard jump</div>
+                  <div class="chat-vid__by">Jordan Wise</div>
+                  <div class="chat-vid__info">125.908 views <span class="seperate"></span>2 days
+                    ago</div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-vid__button anim" style="--delay: .6s">See All related videos (32)</div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

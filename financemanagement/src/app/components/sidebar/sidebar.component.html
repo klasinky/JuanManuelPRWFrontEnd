@@ -33,7 +33,7 @@
         <ul>
           <li class="nav-item active"><a [routerLink]="['/dashboard']" class="nav-link scrollto active"><i class="fas fa-home"></i> <span>Home</span></a></li>
           <li class="nav-item"><a [routerLink]="['/dashboard/stocks']" class="nav-link scrollto"><i class="fas fa-university"></i> <span>Acciones</span></a></li>
-          <li class="nav-item"><a class="nav-link scrollto"><i class="fas fa-envelope"></i> <span>Foro</span></a></li>
+          <li class="nav-item"><a [routerLink]="['/dashboard/post']" class="nav-link scrollto"><i class="fas fa-envelope"></i> <span>Foro</span></a></li>
           <li class="nav-item"><a [routerLink]="['/dashboard/profile']" class="nav-link scrollto"><i class="fas fa-user"></i> <span>Perfil</span></a></li>
           <li class="nav-item"><a class="nav-link scrollto" (click)="logOutAction()"><i class="fas fa-sign-out-alt"></i><span>LogOut</span></a></li>
         </ul>
