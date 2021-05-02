@@ -45,8 +45,8 @@ export class StocksComponent implements OnInit {
     )
   }
 
-  addStock(_stock: Stock): void {
-    this.stocks?.unshift(_stock);
+  addStock(): void {
+    this.getStocksAction();
   }
 
 }
