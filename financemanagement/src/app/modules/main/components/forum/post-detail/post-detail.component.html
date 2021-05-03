@@ -5,13 +5,21 @@
         <div class="author-detail">
           <div class="row">
             <div class="col-md-8">
-              <div class="post-author">{{ post?.author?.name }}</div>
+              <div class="post-author">Autor: {{ post?.author?.username }}</div>
               <div class="like-count">{{ post?.likes }} likes</div>
 
             </div>
             <div class="col-md-4">
-              <div class="btn btn-dark"><i class="fas fa-paper-plane"></i> Compartir</div>
-              <button (click)="sendLike()" class="btn btn-danger"><i class="fas fa-heart"></i> Like</button>
+              <div class="row">
+                <div class="col-8">
+                  <div class="btn btn-dark"><i class="fas fa-paper-plane"></i> Compartir</div>
+
+                </div>
+                <div class="col-4 mt-2">
+                  <app-like-button (sendLike)="sendLike()" [showLoading]="showLikeLoader" [liked]="post?.is_like"></app-like-button>
+                </div>
+              </div>
+
 
             </div>
           </div>
@@ -32,7 +40,7 @@
       <div class="row">
         <div class="col-12 bgsecondary">
 
-            <app-post-comment [idPost]="id" ></app-post-comment>
+          <app-post-comment [idPost]="id"></app-post-comment>
         </div>
         <div class="col-12 bgsecondary">
           <div class="chat-vid__container">

@@ -6,4 +6,5 @@ export interface CommentPost{
     likes?:number,
     url_like?:string,
     created_at?:Date,
+    is_like?:boolean;
 }
