@@ -96,3 +96,9 @@ npm install
     - Refactor y agregando endpoints al fichero environment
     - Botones en el detalle del mes.
 ---
+
+### :white_check_mark: Lunes 3 de Mayo (4 horas) :white_check_mark:
+    - Componente para el mensaje
+    - Refactor del css Post Detail (No completado)
+    - Componente Like Button
+---
