@@ -25,6 +25,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ForumComponent } from './components/forum/forum.component';
 import { PostDetailComponent } from './components/forum/post-detail/post-detail.component';
 import { PostCommentComponent } from './components/forum/post-comment/post-comment.component';
+import { LikeButtonComponent } from './components/forum/like-button/like-button.component';
+import { PostCommentDetailComponent } from './components/forum/post-comment-detail/post-comment-detail.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { PostCommentComponent } from './components/forum/post-comment/post-comme
     ForumComponent,
     PostDetailComponent,
     PostCommentComponent,
+    LikeButtonComponent,
+    PostCommentDetailComponent,
   ],
   imports: [
     CommonModule,

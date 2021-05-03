@@ -1,1 +1,6 @@
 <p>forum works!</p>
+<ul >
+    <li *ngFor="let post of posts">
+        <a [routerLink]="['/dashboard/post/',post?.id]">{{ post?.title }}</a>
+    </li>
+</ul>

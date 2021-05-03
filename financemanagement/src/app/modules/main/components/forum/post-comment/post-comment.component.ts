@@ -18,10 +18,10 @@ export class PostCommentComponent implements OnInit {
   comments?: CommentPost[];
   nextUrl?: string;
   previousUrl?: string;
-  toBottom: boolean = false;
   formMessage: FormGroup;
   countMessage: number = 0;
   showLoading: boolean = false;
+  endMessages: boolean = false;
 
   constructor(private httpService: HttpService,
     private toastr: ToastrService,
@@ -35,28 +35,18 @@ export class PostCommentComponent implements OnInit {
   }
 
   onScroll(event: any) {
-    if (this.toBottom) {
-      if (event.target.scrollTop == 0) {
+
+      if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight) {
         if (this.nextUrl) {
+          this.endMessages = false;
           this.getComments(this.nextUrl, true);
+        }else{
+          this.endMessages = true;
+
         }
       }
-    }
   }
 
-
-
-  scrollToBottom(): void {
-    try {
-      if (this.messageContainerScroll != undefined) {
-        this.messageContainerScroll.nativeElement.scrollTop = this.messageContainerScroll.nativeElement.scrollHeight;
-        this.toBottom = true
-      }
-    } catch (err) {
-
-    }
-
-  }
 
   getFormMessage(): FormGroup {
     return this.fb.group({
@@ -103,14 +93,12 @@ export class PostCommentComponent implements OnInit {
         this.previousUrl = data.previous;
         if (!pagination) {
           this.comments = data.results as CommentPost[];
-          setTimeout(() => {
-            this.scrollToBottom();
-          }, 100)
+     
 
         } else {
-          const arr = data.results.reverse() as CommentPost [];
+          const arr = data.results as CommentPost [];
           arr.forEach((comment: CommentPost) => {
-            this.comments?.unshift(comment);
+            this.comments?.push(comment);
           });
         }
 

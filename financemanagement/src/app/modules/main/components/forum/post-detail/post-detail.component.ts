@@ -11,8 +11,9 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class PostDetailComponent implements OnInit {
 
-  post?: Post; 
+  post?: Post;
   id: number = 0;
+  showLikeLoader: boolean = false;
 
   constructor(private httpService: HttpService,
     private route: ActivatedRoute,
@@ -34,29 +35,36 @@ export class PostDetailComponent implements OnInit {
     });
   }
 
-  getPost(){
-    const url = 'posts/'+this.id;
+  getPost() {
+    const url = 'posts/' + this.id;
     this.httpService.getAuth(url).subscribe(
-      (data)=>{
+      (data) => {
         this.post = data as Post;
       },
-      (error)=>{
+      (error) => {
         this.toastr.error('Error')
       }
     )
 
   }
 
-  sendLike(){
-    const url = 'posts/'+this.id+"/like";
+  sendLike() {
+    this.showLikeLoader = true;
+    const url = 'posts/' + this.id + "/like";
     this.httpService.putAuth(url).subscribe(
-      (data: Post)=>{
-        if(this.post?.likes){
+      (data: any) => {
+        if (this.post) {
           this.post.likes = data.likes as number;
+          this.post.is_like = data.is_like as boolean;
+          console.log("Is Like " + this.post.is_like)
         }
+        this.showLikeLoader = false;
+
       },
-      (error)=>{        
+      (error) => {
         this.toastr.error(error.error.detail)
+        this.showLikeLoader = false;
+
       }
     )
   }
