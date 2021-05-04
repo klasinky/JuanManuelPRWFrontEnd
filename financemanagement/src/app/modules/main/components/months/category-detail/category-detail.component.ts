@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AmountBase } from 'src/app/interfaces/amount-base';
+import { AmountBase, AmountList } from 'src/app/interfaces/amount-base';
 import { Category, CategoryDetail } from 'src/app/interfaces/category';
+import { MonthDetail, Months } from 'src/app/interfaces/months';
+import { HttpService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category-detail',
@@ -9,18 +12,31 @@ import { Category, CategoryDetail } from 'src/app/interfaces/category';
 })
 export class CategoryDetailComponent implements OnInit {
 
-  @Input() category?: CategoryDetail;
+  @Input() month?: MonthDetail;
   @Input() isExpense?: boolean; // false = Entry , True = Expense
   serviceName?: string;
-  category_data?: AmountBase[];
+  amountData?: AmountList[];
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
-    this.serviceName = (this.isExpense) ? "expenses" : "entries";
-    this.category_data = (this.isExpense) ?
-      this.category?.category_data.expenses :
-      this.category?.category_data.entries;
+    this.getAmounts();
+  }
+
+  getAmounts(){
+    const url: string = environment.endpoints.months.amount.start +
+    this.month?.month.id + environment.endpoints.months.amount.end;
+
+    this.httpService.getAuth(url).subscribe(
+      (data) => {
+        this.amountData = data as AmountList[];
+        console.log(this.amountData);
+      }
+    )
+  }
+
+  getServiceName(isExpense: any){
+    return (isExpense) ? "Gasto" : "Ingreso";
   }
 
 }

@@ -36,22 +36,10 @@
 
   <div class="row m-2 p-2">
 
-    <div class="col-12 col-md-4">
-      <div class="row">
-        <div class="col-12" *ngFor="let item of month?.categories">
-          <app-category-detail [category]="item" [isExpense]="false"></app-category-detail>
-        </div>
-        
-      </div>
+    <div class="col-12 col-md-8">
+        <app-category-detail [month]="month"></app-category-detail>
     </div>
 
-    <div class="col-12 col-md-4">
-      <div class="row">
-        <div class="col-12" *ngFor="let item of month?.categories">
-          <app-category-detail [category]="item" [isExpense]="true"></app-category-detail>
-        </div>
-      </div>
-    </div>
 
     <div class="col-12 col-md-4 bgsecondary">
       <br>

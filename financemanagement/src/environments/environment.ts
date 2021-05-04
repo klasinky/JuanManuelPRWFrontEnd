@@ -24,7 +24,11 @@ export const environment = {
     months: {
       all: months + "/all",
       create: "/" + months,
-      viewset: months + "/"
+      viewset: months + "/",
+      amount: {
+        start: months + "/",
+        end: "/amounts"
+      }
     },
     category: {
       all: "categories" + "/all"
