@@ -1,23 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins&display=swap');
+
 @import '../../../../../../assets/scss/variables';
 
-.card {
-    background: $secondary-color;
-    box-shadow: 2px 20px 30px $secondary-color;
-
-    &:hover{
-        background: $secondary-color-hover;
-    }
-    .row > .col{
-        cursor: pointer;
-    }
-}
-
 .badge-soft-success {
-    color: #00d97e;
-    background-color: #0e4a4c;
+  color: #00d97e;
+  background-color: #0e4a4c;
 }
 
 .badge-soft-danger {
-    color: #E4AAAA;
-    background-color: #4c0e0e;
+  color: #E4AAAA;
+  background-color: #4c0e0e;
+}
+
+.customer-badge {
+  border-radius: 2px;
+  padding: .25em .5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
+}
+
+.status-danger {
+  background-color: #ffcdd2;
+  color: #c63737;
+}
+
+.status-success {
+  background-color: #c8e6c9;
+  color: #256029
+}
+
+
+:host ::ng-deep {
+
+  .p-button-outlined {
+    background-color: $primary-color;
+    color: $primary-font-color;
+    border: none;
+
+    &:enabled:hover {
+      background-color: $primary-color-hover;
+      border: none;
+      color: $primary-font-color;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .p-datatable-responsive-demo .p-datatable-tbody>tr>td .p-column-title {
+    display: none;
+  }
+
+  .p-datatable {
+    & .p-datatable-header {
+      background: $alternative-color;
+      border: none;
+      color: $primary-font-color;
+    }
+
+    &.p-datatable-responsive-demo {
+
+      .p-datatable-thead>tr>th,
+      .p-datatable-tfoot>tr>td {
+        background: $primary-color;
+        color: $primary-font-color;
+        border: none;
+
+      }
+
+      .p-datatable-tbody>tr {
+        background: $alternative-color;
+
+        &>td {
+          color: $primary-font-color;
+          border: none;
+        }
+
+        &:hover {
+          background: $alternative-color-hover;
+        }
+      }
+
+
+    }
+  }
+
+  .p-inputtext {
+    color: $primary-font-color;
+
+    &:enabled:focus {
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      color: $primary-font-color;
+      opacity: 1;
+    }
+  }
+
+  .p-input-icon-left {
+    &>i:first-of-type {
+      color: $primary-font-color;
+    }
+
+    &>.p-inputtext {
+      background-color: $secondary-color;
+      border: none;
+    }
+  }
+
+  .p-paginator {
+    background-color: $alternative-color;
+    border: none;
+
+    & .p-paginator-pages .p-paginator-page {
+      color: $primary-font-color;
+
+      &.p-highlight {
+        background: $alternative-color-hover;
+        color: $primary-font-color;
+      }
+
+      &:hover {
+        background: $alternative-color-hover;
+        color: $primary-font-color;
+
+      }
+
+    }
+
+    & .p-paginator-first,
+    .p-paginator-prev,
+    .p-paginator-next,
+    .p-paginator-last {
+      color: $primary-font-color;
+
+      &:hover {
+        color: $primary-font-color;
+        background: $alternative-color-hover;
+
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 40rem) {
+  :host ::ng-deep {
+    .p-datatable {
+      &.p-datatable-responsive-demo {
+
+        .p-datatable-thead>tr>th,
+        .p-datatable-tfoot>tr>td {
+          display: none !important;
+        }
+
+        .p-datatable-tbody>tr>td {
+          text-align: left;
+          display: block;
+          width: 100%;
+          float: left;
+          clear: left;
+          border: 0 none;
+
+          .p-column-title {
+            padding: .4rem;
+            min-width: 30%;
+            display: inline-block;
+            margin: -.4em 1em -.4em -.4rem;
+            font-weight: bold;
+          }
+
+          &:last-child {
+            border-bottom: 1px solid var(--surface-d);
+          }
+        }
+      }
+    }
+  }
 }

@@ -20,10 +20,10 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     HttpClientModule,
     ReactiveFormsModule,
     NgxSkeletonLoaderModule.forRoot(),
-
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    MomentModule
+    MomentModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
