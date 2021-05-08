@@ -1,60 +1,85 @@
-<div class="wrapper rounded">
-    <h2 class="pt-3">Transacciones</h2>
+<div *ngIf="amountData" class="bgsecondary">
+  <p-table #dt1 [globalFilterFields]="['vin','year']" [value]="amountData" dataKey="id"
+    styleClass="p-datatable-responsive-demo" [rows]="10" [paginator]="true"
+    [globalFilterFields]="['data.name','data.description','data.amount','data.category.name', 'data.created_at',]"
+    [loading]="loading">
+    <ng-template pTemplate="caption">
+      <div class="d-md-flex justify-content-between">
+        <button pButton label="Limpiar" class="p-button-outlined mt-2" icon="pi pi-filter-slash"
+          (click)="clear(dt1)"></button>
+        <span class="p-input-icon-left mt-2">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar" />
+        </span>
+      </div>
+    </ng-template>
 
-    <div class="d-flex justify-content-between align-items-center mt-3">
-        <button class="btn btn-primary">Crear Ingreso</button>
-        <button class="btn btn-primary">Crear Gasto</button>
-        <button class="btn btn-primary">Descargar Ingreso</button>
-        <button class="btn btn-primary">Descargar Gasto</button>
-    </div>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="data.name">Nombre <p-sortIcon field="data.name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="data.description">Descripción <p-sortIcon field="data.description"></p-sortIcon>
+        </th>
+        <th pSortableColumn="data.amount">Cuantía <p-sortIcon field="data.amount"></p-sortIcon>
+        </th>
+        <th pSortableColumn="data.category.name">Categoría <p-sortIcon field="data.category.name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="data.created_at">Fecha <p-sortIcon field="data.created_at"></p-sortIcon>
+        </th>
+        <th pSortableColumn="is_expense?'Gasto':'Ingreso'">Tipo <p-sortIcon field="is_expense"></p-sortIcon>
+        </th>
+        <th>Acción</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr [pSelectableRow]="item">
+        <td>
+          <span class="p-column-title">Nombre</span>
+          {{item.data.name}}
+        </td>
+        <td>
+          <span class="p-column-title">Descripción</span>
+          {{item.data.description}}
+        </td>
+        <td>
+          <span class="p-column-title">Cuantía</span>
+          {{item.data.amount}}
+        </td>
+        <td>
+          <span class="p-column-title">Categoría</span>
+          {{item?.data.category.name}}
+        </td>
+        <td>
+          <span class="p-column-title">Fecha</span>
+          {{item?.data.created_at | amLocale:'es' | amDateFormat:'YYYY-MM-DD HH:mm' }}
+        </td>
+        <td>
+          <span class="p-column-title">Tipo</span>
+          <div *ngIf="item?.is_expense; then expense else elseExpense"></div>
+          <ng-template #expense>
+            <span class="customer-badge status-danger">Gasto</span>
+          </ng-template>
+          <ng-template #elseExpense>
+            <span class="customer-badge status-success">Ingreso</span>
 
-    <div class="table-responsive mt-3">
-        <table class="table table-dark table-borderless">
-            <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col" class="text-right">Cuantía</th>
-                    <th scope="col">Tipo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of amountData">
-                    <td scope="row">{{item.data.name}}</td>
-                    <td>{{item.data.description}}</td>
-                    <td class="text-muted">{{item.data.created_at}}</td>
-                    <td class="">{{item.data.amount}}€</td>
-                    <td *ngIf="getServiceName(item.is_expense); then thenBlock else elseBlock"></td>
-                    <ng-template #thenBlock>
-                        <td>
-                            <span class="badge badge-pill badge-soft-danger mt-n1"
-                                ngbTooltip="Egresos">{{getServiceName(item.is_expense)}} <i
-                                    class="fas fa-chevron-down"></i></span>
-                        </td>
-                    </ng-template>
-                    <ng-template #elseBlock>
-                        <td>
-                            <span class="badge badge-pill badge-soft-success mt-n1"
-                                ngbTooltip="Ingreso">{{getServiceName(item.is_expense)}} <i
-                                    class="fas fa-chevron-down"></i></span>
-                        </td>
-                    </ng-template>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="d-flex justify-content-between align-items-center results"> <span class="pl-md-3">Showing<b
-                class="text-white"> 1-7 0f 200 </b> trasactions</span>
-        <div class="pt-3">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item disabled"> <a class="page-link" href="#" aria-label="Previous"> <span
-                                aria-hidden="true">&lt;</span> </a> </li>
-                    <li class="page-item"> <a class="page-link" href="#" aria-label="Next"> <span
-                                aria-hidden="true">&gt;</span> </a> </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+          </ng-template>
+        </td>
+        <td class="text-center">
+          <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteAmountAction( item?.data.id, item.is_expense)" class="p-button-rounded p-button-danger"></button>
+
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No hay registros.</td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
+<p-confirmDialog #cd [transitionOptions]="'0.25ms'" header="Confirmación" icon="pi pi-exclamation-triangle">
+    <ng-template pTemplate="footer">
+        <button type="button" pButton class="p-button-secondary" icon="pi pi-times" (click)="cd.reject()" label="Cancelar" ></button>
+        <button type="button" pButton icon="pi pi-check" class="p-button-danger" (click)="cd.accept()" label="Eliminar"></button>
+    </ng-template>
+</p-confirmDialog>

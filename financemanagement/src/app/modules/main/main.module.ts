@@ -27,6 +27,12 @@ import { PostDetailComponent } from './components/forum/post-detail/post-detail.
 import { PostCommentComponent } from './components/forum/post-comment/post-comment.component';
 import { LikeButtonComponent } from './components/forum/like-button/like-button.component';
 import { PostCommentDetailComponent } from './components/forum/post-comment-detail/post-comment-detail.component';
+// PrimeNG
+import { TableModule } from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {InputTextModule} from 'primeng/inputtext';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -51,6 +57,7 @@ import { PostCommentDetailComponent } from './components/forum/post-comment-deta
     PostCommentComponent,
     LikeButtonComponent,
     PostCommentDetailComponent,
+
   ],
   imports: [
     CommonModule,
@@ -60,6 +67,13 @@ import { PostCommentDetailComponent } from './components/forum/post-comment-deta
     ReactiveFormsModule,
     NgxChartsModule,
     NgxSkeletonLoaderModule,
+    TableModule,    
+    ButtonModule,
+    InputTextModule,
+    ConfirmDialogModule,
+  ],
+  providers: [
+    ConfirmationService
   ]
 })
 export class MainModule { }

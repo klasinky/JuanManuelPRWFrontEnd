@@ -7,7 +7,8 @@ const months: string = "months";
 const stocks: string = "stocks";
 const posts: string = "posts";
 const comment: string = "comment"
-
+const expense: string = "expenses";
+const entry: string = "entries";
 export const environment = {
   production: false,
   apiUrl: 'https://klasinky.pythonanywhere.com/api',
@@ -47,6 +48,12 @@ export const environment = {
         end: "/export/"
       }
     },
+    expense: {
+      viewset: expense + "/"
+    },
+    entry: {
+      viewset: entry + "/"
+    },
     stocks: {
       list: stocks,
       all: stocks + "/all",
@@ -66,23 +73,23 @@ export const environment = {
     },
     comments: {
       create: {
-        start: posts  + "/",
+        start: posts + "/",
         end: "/" + comment
       },
       delete: {
-        start: comment  + "/",
+        start: comment + "/",
         end: "/delete"
       },
       list: {
-        start: posts  + "/",
+        start: posts + "/",
         end: "/" + comment + "/all"
       },
       like: {
-        start: comment  + "/",
+        start: comment + "/",
         end: "/like"
       },
       answer: {
-        start: posts  + "/",
+        start: posts + "/",
         end: "/" + comment
       }
     }

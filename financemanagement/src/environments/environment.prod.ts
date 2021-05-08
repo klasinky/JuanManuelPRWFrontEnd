@@ -1,3 +1,9 @@
+const users: string = "users";
+const months: string = "months";
+const stocks: string = "stocks";
+const posts: string = "posts";
+const comment: string = "comment"
+
 export const environment = {
   production: true,
   apiUrl: 'https://klasinky.pythonanywhere.com/api',
