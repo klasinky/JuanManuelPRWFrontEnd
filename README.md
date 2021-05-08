@@ -102,3 +102,8 @@ npm install
     - Refactor del css Post Detail (No completado)
     - Componente Like Button
 ---
+
+### :white_check_mark: Sábado 8 de Mayo (2 horas) :white_check_mark:
+    - Lista de Amounts (Componente terminado)
+    - PrimeNG Agregado
+---
