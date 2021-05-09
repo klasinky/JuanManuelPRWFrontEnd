@@ -26,7 +26,7 @@
         </th>
         <th pSortableColumn="data.created_at">Fecha <p-sortIcon field="data.created_at"></p-sortIcon>
         </th>
-        <th pSortableColumn="is_expense?'Gasto':'Ingreso'">Tipo <p-sortIcon field="is_expense"></p-sortIcon>
+        <th pSortableColumn="is_expense">Tipo <p-sortIcon field="is_expense"></p-sortIcon>
         </th>
         <th>Acción</th>
       </tr>
@@ -71,8 +71,8 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="4">No hay registros.</td>
+      <tr >
+        <td class="text-center" colspan="7">No hay registros.</td>
       </tr>
     </ng-template>
   </p-table>
