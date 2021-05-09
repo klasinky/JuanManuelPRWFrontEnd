@@ -40,7 +40,6 @@ export class CategoryDetailComponent implements OnInit {
       (data) => {
         this.loading = false;
         this.amountData = data as AmountList[];
-        console.log(this.amountData);
       }, (error) => {
         console.log(error);
         this.loading = false;

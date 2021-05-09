@@ -33,6 +33,8 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import {SkeletonModule} from 'primeng/skeleton';
+import { AnalysisComponent } from './components/months/analysis/analysis.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { ConfirmationService } from 'primeng/api';
     PostCommentComponent,
     LikeButtonComponent,
     PostCommentDetailComponent,
+    AnalysisComponent,
 
   ],
   imports: [
@@ -71,6 +74,7 @@ import { ConfirmationService } from 'primeng/api';
     ButtonModule,
     InputTextModule,
     ConfirmDialogModule,
+    SkeletonModule
   ],
   providers: [
     ConfirmationService

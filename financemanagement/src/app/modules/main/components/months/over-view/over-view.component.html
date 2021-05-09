@@ -1,29 +1,58 @@
 <div class="container pt-5">
-    <div class="row align-items-stretch">
-      <div class="c-dashboardInfo color-gradient-success col-lg-4 col-md-6">
-        <div class="wrap">
-          <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Ingresos totales
-            <i class="fas fa-coins    "></i>
-          </h4>
-          
-          <span class="hind-font caption-12 c-dashboardInfo__count">{{ detail?.totalEntries|currency:'EUR' }}</span>
-        </div>
-      </div>
+  <div class="row align-items-stretch">
+    <div class="c-dashboardInfo color-gradient-success col-lg-4 col-md-6">
+      <div class="wrap">
+        <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Ingresos totales
+          <i class="fas fa-coins    "></i>
+        </h4>
 
-      <div class="c-dashboardInfo color-gradient-error col-lg-4 col-md-6">
-        <div class="wrap">
-          <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Gastos totales
-              <i class="fas fa-wallet"></i>
-          </h4><span  class="hind-font caption-12 c-dashboardInfo__count">{{ detail?.totalExpenses|currency:'EUR' }}</span>
-        </div>
+        <span class="hind-font caption-12 c-dashboardInfo__count">
+            {{ detail?.total_entries|currency:'EUR' }}
+        </span>
       </div>
-      <div class="c-dashboardInfo color-gradient-difference col-lg-4 col-md-12">
-        <div class="wrap">
-          <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Diferencia
-              <i class="fas fa-piggy-bank"></i>
-          </h4><span [class.text-danger]="differenceError" [class.text-success]="!differenceError" class="hind-font caption-12 c-dashboardInfo__count">{{ detail?.totalDifference|currency:'EUR' }}</span>
-        </div>
-      </div>
+    </div>
 
+    <div class="c-dashboardInfo color-gradient-error col-lg-4 col-md-6">
+      <div class="wrap">
+        <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Gastos totales
+          <i class="fas fa-wallet"></i>
+        </h4><span
+          class="hind-font caption-12 c-dashboardInfo__count">{{ detail?.total_expenses|currency:'EUR' }}</span>
+      </div>
+    </div>
+    <div class="c-dashboardInfo color-gradient-difference col-lg-4 col-md-12">
+      <div class="wrap">
+        <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Diferencia
+          <i class="fas fa-piggy-bank"></i>
+        </h4><span [class.text-danger]="differenceError" [class.text-success]="!differenceError"
+          class="hind-font caption-12 c-dashboardInfo__count">{{ detail?.total_difference|currency:'EUR' }}</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="container bgsecondary p-2">
+    <div class="text-center">
+      <button [class.disabled]="btnAll" (click)="getTotal('?q=all')" class="btn btn-dark m-1">
+        <div *ngIf="btnAllLoading" class="spinner-border spinner-border-sm text-light" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <i *ngIf="!btnAllLoading" class="fas fa-globe"></i>
+        Todos
+      </button>
+      <button [class.disabled]="btnMonth" (click)="getTotal('?q=month')" class="btn btn-dark m-1">
+          <div *ngIf="btnMonthLoading" class="spinner-border spinner-border-sm text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <i *ngIf="!btnMonthLoading" class="fas fa-calendar-check"></i> 
+          Mes
+      </button>
+      <button [class.disabled]="btnYear" (click)="getTotal('?q=year')" class="btn btn-dark m-1">
+        <div *ngIf="btnYearLoading" class="spinner-border spinner-border-sm text-light" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <i *ngIf="!btnYearLoading" class="fas fa-calendar"></i> 
+        Año
+      </button>
     </div>
   </div>
+</div>

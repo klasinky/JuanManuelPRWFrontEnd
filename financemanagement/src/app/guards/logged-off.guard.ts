@@ -17,7 +17,7 @@ export class LoggedOffGuard implements CanActivate {
   canActivate(): Promise<boolean> {
     this.loader = true;
     return new Promise(resolve => {
-      this.httpService.getAuth('currencies').subscribe(
+      this.httpService.getAuth('users/check').subscribe(
 
         (res) => {
           resolve(true);

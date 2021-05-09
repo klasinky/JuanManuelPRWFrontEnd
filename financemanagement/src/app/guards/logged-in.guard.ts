@@ -17,7 +17,7 @@ export class LoggedInGuard implements CanActivate {
   canActivate(): Promise<boolean> {
     this.loader = true;
     return new Promise(resolve => {
-      this.httpService.getAuth('currencies').subscribe(
+      this.httpService.getAuth('users/check').subscribe(
         (res) => {
           resolve(false);
           this.loader = false;
