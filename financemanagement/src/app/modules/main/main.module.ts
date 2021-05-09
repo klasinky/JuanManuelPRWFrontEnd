@@ -33,6 +33,7 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import {SkeletonModule} from 'primeng/skeleton';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { ConfirmationService } from 'primeng/api';
     ButtonModule,
     InputTextModule,
     ConfirmDialogModule,
+    SkeletonModule
   ],
   providers: [
     ConfirmationService
