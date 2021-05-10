@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { MonthDetail } from 'src/app/interfaces/months';
 import { HttpService } from 'src/app/services/http.service';
+import { MonthDetailService } from 'src/app/services/month-detail.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,12 +12,15 @@ import { environment } from 'src/environments/environment';
   templateUrl: './month-detail.component.html',
   styleUrls: ['./month-detail.component.scss']
 })
-export class MonthDetailComponent implements OnInit {
+export class MonthDetailComponent implements OnInit, OnDestroy {
 
   month?: MonthDetail;
   id: number = 0;
 
-  constructor(private httpService: HttpService,
+  refreshSubscription?: Subscription;
+
+
+  constructor(private monthService: MonthDetailService,
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService) {
@@ -33,12 +38,14 @@ export class MonthDetailComponent implements OnInit {
         })
       }
     });
-  };
+    this.refreshSubscription = this.monthService.refresh$.subscribe(() => {
+      this.refreshMonth();
+    })
+  }
 
   getMonth(id: number) {
-    const url: string = environment.endpoints.months.viewset + id;
 
-    this.httpService.getAuth(url).subscribe(
+    this.monthService.getMonth(id).subscribe(
       (data: any) => {
         this.month = data;
       },
@@ -51,8 +58,11 @@ export class MonthDetailComponent implements OnInit {
     )
   }
 
-  refreshMonth(_event: any) {
+  refreshMonth() {
     this.getMonth(this.id);
   }
 
+  ngOnDestroy(){
+    this.refreshSubscription?.unsubscribe();
+  }
 }
