@@ -1,13 +1,26 @@
 <div class="container">
   <div class="row row-eq-height mt-5">
-    <div class="col-md-8 bgsecondary">
+    <div class="col-md-7 bgsecondary mx-1">
       <div class="post p-3">
         <div class="author-detail">
           <div class="row">
             <div class="col-md-8">
-              <div class="post-author">Autor: {{ post?.author?.username }}</div>
-              <div class="like-count">{{ post?.likes }} likes</div>
+              <div *ngIf="loading" class="d-flex">
+                <p-skeleton shape="circle" size="48px" styleClass="p-mr-2"></p-skeleton>
+                    <div class="mr-1">
+                        <p-skeleton width="10rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton width="5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+              
+              </div>
+              
+              <div *ngIf="!loading" class="post-author">
+                <div class="like-count">{{ post?.created_at }}</div>
 
+                <p-avatar label="{{ post?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large" [style]="getStyle()" shape="circle"></p-avatar>
+                {{ post?.author?.username }}
+
+              </div>
             </div>
             <div class="col-md-4">
               <div class="row">
@@ -16,7 +29,7 @@
 
                 </div>
                 <div class="col-4 mt-2">
-                  <app-like-button (sendLike)="sendLike()" [showLoading]="showLikeLoader" [liked]="post?.is_like"></app-like-button>
+                  <app-like-button (sendLike)="sendLike()" [countLike]="post?.likes" [showLoading]="showLikeLoader" [liked]="post?.is_like"></app-like-button>
                 </div>
               </div>
 
@@ -29,20 +42,30 @@
         <div class="post-title">
           <h3>{{ post?.title|titlecase }}</h3>
         </div>
-        <div class="post-body">
-          <p>{{ post?.description }} </p>
+        <div class="post-body ">
+          <div *ngIf="loading" >
+            <p-skeleton styleClass="mb-4" width="100%"></p-skeleton>
+            <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
+            <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
+            <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
+            <p-skeleton styleClass="mb-4" width="5rem" ></p-skeleton>
+            <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
+            <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
+
+          </div>
+          <p *ngIf="!loading">{{ post?.description }} </p>
 
         </div>
 
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 ">
       <div class="row">
         <div class="col-12 bgsecondary">
 
           <app-post-comment [idPost]="id"></app-post-comment>
         </div>
-        <div class="col-12 bgsecondary">
+        <div class="col-12 bgsecondary mt-2">
           <div class="chat-vid__container">
             <div class="chat-vid__title anim" style="--delay: .3s">Post similares</div>
             <div class="chat-vid anim" style="--delay: .4s">
