@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MonthDetail } from 'src/app/interfaces/months';
-import { HttpService } from 'src/app/services/http.service';
+import { MonthDetailService } from 'src/app/services/month-detail.service';
 import { Analysis } from '../../../../../interfaces/analysis';
 
 @Component({
@@ -8,27 +9,35 @@ import { Analysis } from '../../../../../interfaces/analysis';
   templateUrl: './analysis.component.html',
   styleUrls: ['./analysis.component.scss']
 })
-export class AnalysisComponent implements OnInit {
+export class AnalysisComponent implements OnInit, OnDestroy {
 
   @Input() month?: MonthDetail;
-  analysis? : Analysis;
+  analysis?: Analysis;
+  refreshSubscription?: Subscription;
 
-  constructor(private httpService: HttpService) { }
+  constructor(private monthService: MonthDetailService) { }
 
   ngOnInit(): void {
     this.getAnalysis();
+    this.refreshSubscription = this.monthService.refresh$.subscribe(() => {
+      this.getAnalysis();
+    })
   }
 
   getAnalysis() {
-    const url = 'months/'+this.month?.month.id+"/analysis";
-    this.httpService.getAuth(url).subscribe(
-      (data)=>{
-        this.analysis = data as Analysis;
-        console.log(this.analysis);
-      },
-      (error)=>{
-
-      }
-    )
+    if (this.month?.month.id) {
+      this.monthService.getAnalysis(this.month.month.id).subscribe(
+        (data) => {
+          this.analysis = data as Analysis;
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
   }
+
+  ngOnDestroy(){
+    this.refreshSubscription?.unsubscribe();
+  }  
 }

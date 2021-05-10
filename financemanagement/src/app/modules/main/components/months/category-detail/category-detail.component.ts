@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { AmountBase, AmountList } from 'src/app/interfaces/amount-base';
-import { Category, CategoryDetail } from 'src/app/interfaces/category';
-import { MonthDetail, Months } from 'src/app/interfaces/months';
-import { HttpService } from 'src/app/services/http.service';
+import { Subscription } from 'rxjs';
+import { AmountList } from 'src/app/interfaces/amount-base';
+import { MonthDetail } from 'src/app/interfaces/months';
+import { MonthDetailService } from 'src/app/services/month-detail.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -14,37 +14,42 @@ import { environment } from 'src/environments/environment';
   templateUrl: './category-detail.component.html',
   styleUrls: ['./category-detail.component.scss']
 })
-export class CategoryDetailComponent implements OnInit {
+export class CategoryDetailComponent implements OnInit, OnDestroy {
 
   @Input() month?: MonthDetail;
 
   amountData?: AmountList[];
   loading: boolean = false;
 
+  refreshSubscription?: Subscription;
+
   @ViewChild('dt1') dt1?: Table;
 
-  constructor(private httpService: HttpService,
+  constructor(private monthService: MonthDetailService,
     private confirmationService: ConfirmationService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getAmounts();
+    this.refreshSubscription = this.monthService.refresh$.subscribe(() => {
+      this.getAmounts();
+    })
   }
 
   getAmounts() {
-    this.loading = true;
-    const url: string = environment.endpoints.months.amount.start +
-      this.month?.month.id + environment.endpoints.months.amount.end;
+    if (this.month?.month.id) {
+      this.loading = true;
 
-    this.httpService.getAuth(url).subscribe(
-      (data) => {
-        this.loading = false;
-        this.amountData = data as AmountList[];
-      }, (error) => {
-        console.log(error);
-        this.loading = false;
-      }
-    )
+      this.monthService.getAmounts(this.month.month.id).subscribe(
+        (data) => {
+          this.loading = false;
+          this.amountData = data as AmountList[];
+        }, (error) => {
+          console.log(error);
+          this.loading = false;
+        }
+      )
+    }
   }
 
   getServiceName(isExpense: any) {
@@ -59,19 +64,16 @@ export class CategoryDetailComponent implements OnInit {
     this.confirmationService.confirm({
       message: '¿Estás seguro de que quieres eliminar este registro?',
       accept: () => {
-        let env = environment.endpoints;
-        let url: string = isExpense ? env.expense.viewset : env.entry.viewset;
-        this.deleteAmount(url, id);
+  
+        this.deleteAmount(isExpense, id);
       }
     });
 
   }
 
-  deleteAmount(url: string, id: number) {
-    this.httpService.deleteAuth(url, id).subscribe(
+  deleteAmount(isExpense: boolean, id: number) {
+    this.monthService.deleteAmount(isExpense, id).subscribe(
       (data) => {
-        this.getAmounts();
-        console.log("Eliminao")
         this.toastr.success('Registro eliminado');
       },
       (error) => {
@@ -83,6 +85,11 @@ export class CategoryDetailComponent implements OnInit {
 
   applyFilterGlobal($event: any, stringVal: string) {
     this.dt1?.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
+  }
+
+
+  ngOnDestroy(){
+    this.refreshSubscription?.unsubscribe();
   }
 
 }

@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AmountBase } from 'src/app/interfaces/amount-base';
-import { HttpService } from 'src/app/services/http.service';
 import { Category } from 'src/app/interfaces/category';
 import { HttpEventType } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { MonthDetailService } from 'src/app/services/month-detail.service';
 
 @Component({
   selector: 'app-add-amount-base',
@@ -47,7 +47,8 @@ export class AddAmountBaseComponent implements OnInit {
    */
   showUploadProgress: boolean = false;
 
-  constructor(private httpService: HttpService,
+  constructor(
+    private monthService: MonthDetailService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -148,10 +149,8 @@ export class AddAmountBaseComponent implements OnInit {
    * Agregar un (gasto o ingreso) manualmente
    */
   postAmountBaseAction() {
-    const url: string = environment.endpoints.amountBase.create.start +
-      this.idMonth + environment.endpoints.amountBase.create.end + this.serviceName;
 
-    if (this.formAmountBase?.valid) {
+    if (this.formAmountBase?.valid && this.idMonth && this.serviceName) {
       this.clearFiles();
       this.showUploadProgress = true;
       const dataAmountBase = {
@@ -161,7 +160,7 @@ export class AddAmountBaseComponent implements OnInit {
         category: this.formAmountBase.value.category
       } as AmountBase;
 
-      this.httpService.postAuth(url, dataAmountBase).subscribe(
+      this.monthService.addAmountBase(this.idMonth , this.serviceName, dataAmountBase).subscribe(
         (data: any) => {
           this.showUploadProgress = false;
           this.toastr.success("Se ha creado el " + this.title?.toLowerCase(), 'Creado');
@@ -186,16 +185,13 @@ export class AddAmountBaseComponent implements OnInit {
    * Agregar uno o varios (gastos o ingresos) a partir de un fichero XLS
    */
   postAmountBaseXlsAction() {
-    const url: string = environment.endpoints.amountBase.import.start +
-      this.idMonth + environment.endpoints.amountBase.import.end + this.serviceName;
-
     this.showUploadProgress = true;
-    if (this.formXls?.valid) {
+    if (this.formXls?.valid  && this.idMonth && this.serviceName) {
       this.clearFiles();
 
       const dataFile = this.file;
 
-      this.httpService.postXml(url, dataFile).subscribe(
+      this.monthService.addAmountBaseXML(this.idMonth,this.serviceName, dataFile).subscribe(
         (data: any) => {
           //Barra de progreso
           if (data.type == HttpEventType.UploadProgress) {
@@ -239,9 +235,8 @@ export class AddAmountBaseComponent implements OnInit {
    * Obtener todas las categorias
    */
   getCategoriesAction() {
-    const url: string = environment.endpoints.category.all;
 
-    this.httpService.getAuth(url).subscribe(
+    this.monthService.getCategoriesAll().subscribe(
       (data: any) => {
         this.categories = data;
       }, (error) => {
