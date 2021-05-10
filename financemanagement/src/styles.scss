@@ -80,22 +80,23 @@ body {
   box-shadow: 0px 0px 0px 1px #06F139;
 }
 
-.is-invalid{
+.is-invalid {
   box-shadow: 0px 0px 0px 1px #C9190B;
 }
 
 .error {
   font-weight: 300;
   font-size: 1rem;
-  color:#C9190B;
+  color: #C9190B;
   margin-bottom: 10px;
 }
 
-.bgsecondary{
+.bgsecondary {
   background: $alternative-color;
   box-shadow: 2px 10px 20px $alternative-color;
   border-radius: 4%;
-  &.full-height{
+
+  &.full-height {
     height: 100%;
   }
 }
@@ -104,12 +105,12 @@ body {
   background-color: $alternative-color !important;
 }
 
-.is-invalid i{
+.is-invalid i {
   color: #C9190B;
 }
 
 
-.is-valid i{
+.is-valid i {
   color: #06F139;
 }
 
@@ -118,11 +119,11 @@ body {
   display: flex;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   z-index: 1050;
 }
 
-.central-loader > div {
+.central-loader>div {
   height: 42px;
   line-height: 40px;
   width: 200px;
@@ -131,7 +132,7 @@ body {
   margin: auto;
 }
 
-.central-loader > div i{
+.central-loader>div i {
   font-size: 200%;
 }
 
@@ -149,24 +150,27 @@ body {
   cursor: pointer;
   transition: 0.5s;
 
-  &:hover{
+  &:hover {
     background: $primary-color-hover;
     color: #fff;
   }
 
-  &.entry{
-      $color: #005e17;
-      background: $color ;
-      &:hover{
-          background: lighten($color, 5%);
-      }
+  &.entry {
+    $color: #005e17;
+    background: $color;
+
+    &:hover {
+      background: lighten($color, 5%);
+    }
   }
-  &.expense{
-      $color: #a7290a;
-      background: $color ;
-      &:hover{
-          background: lighten($color, 5%);
-      }
+
+  &.expense {
+    $color: #a7290a;
+    background: $color;
+
+    &:hover {
+      background: lighten($color, 5%);
+    }
   }
 }
 
@@ -177,18 +181,18 @@ $angle: 40deg;
 $angleHover: 30deg;
 $angleActive: 25deg;
 
-@mixin arrowTransform( $angle, $x: 0, $y: 0 ) {
+@mixin arrowTransform($angle, $x: 0, $y: 0) {
   i:first-child {
-    transform: translate( $x, $y ) rotate( $angle );
+    transform: translate($x, $y) rotate($angle);
   }
 
   i:last-child {
-    transform: translate( $x, -$y ) rotate( -$angle );
+    transform: translate($x, -$y) rotate(-$angle);
   }
 }
 
-.title{
-  margin-top: auto ;
+.title {
+  margin-top: auto;
   margin-bottom: auto;
 }
 
@@ -198,11 +202,11 @@ $angleActive: 25deg;
   width: $size;
   height: $size;
   cursor: pointer;
-  transform: translate3d(0,0,0); // fixes flicker in webkit
+  transform: translate3d(0, 0, 0); // fixes flicker in webkit
   background: none;
   border: none;
   padding: 10px;
-  margin-top: auto ;
+  margin-top: auto;
   margin-bottom: auto;
   // position: absolute;
   // top: 50%;
@@ -225,21 +229,21 @@ $angleActive: 25deg;
       transform-origin: 0% 50%
     }
 
-    @include arrowTransform( $angle, 0, -1px );
+    @include arrowTransform($angle, 0, -1px);
 
     &:hover {
-      @include arrowTransform( $angleHover, 0, -1px );
+      @include arrowTransform($angleHover, 0, -1px);
     }
 
     &:active {
-      @include arrowTransform( $angleActive, 1px, -1px );
+      @include arrowTransform($angleActive, 1px, -1px);
     }
 
     &:disabled {
-      @include arrowTransform( 0deg, -5px, 0 );
+      @include arrowTransform(0deg, -5px, 0);
 
       &:hover {
-        @include arrowTransform( 0deg, -5px, 0 );
+        @include arrowTransform(0deg, -5px, 0);
       }
     }
   }
@@ -250,21 +254,21 @@ $angleActive: 25deg;
       transform-origin: 100% 50%
     }
 
-    @include arrowTransform( $angle, 0, 1px );
+    @include arrowTransform($angle, 0, 1px);
 
     &:hover {
-      @include arrowTransform( $angleHover, 0, 1px );
+      @include arrowTransform($angleHover, 0, 1px);
     }
 
     &:active {
-      @include arrowTransform( $angleActive, 1px, 1px );
+      @include arrowTransform($angleActive, 1px, 1px);
     }
 
     &:disabled {
-      @include arrowTransform( 0deg, 5px, 0 );
+      @include arrowTransform(0deg, 5px, 0);
 
       &:hover {
-        @include arrowTransform( 0deg, 5px, 0 );
+        @include arrowTransform(0deg, 5px, 0);
       }
     }
   }
@@ -279,6 +283,7 @@ $angleActive: 25deg;
 .c-dashboardInfo {
   margin-bottom: 15px;
 }
+
 .c-dashboardInfo .wrap {
   background: $alternative-color;
   box-shadow: 2px 10px 20px $alternative-color;
@@ -289,23 +294,28 @@ $angleActive: 25deg;
   padding: 40px 25px 20px;
   height: 100%;
 }
+
 .c-dashboardInfo__title,
 .c-dashboardInfo__subInfo {
   color: $primary-font-color;
   font-size: 1.18em;
 }
+
 .c-dashboardInfo span {
   display: block;
 }
+
 .c-dashboardInfo__count {
   font-weight: 600;
   font-size: 30px;
   line-height: 64px;
   color: $secondary-font-color;
 }
-.text-danger{
-  color:#a83232 !important;
+
+.text-danger {
+  color: #a83232 !important;
 }
+
 .c-dashboardInfo .wrap:after {
   display: block;
   position: absolute;
@@ -315,12 +325,13 @@ $angleActive: 25deg;
   height: 10px;
   content: "";
 }
-.color-gradient-success .wrap:after{
+
+.color-gradient-success .wrap:after {
   background: linear-gradient(82.59deg, #00c48c 0%, #00a173 100%);
 
 }
 
-.color-gradient-info .wrap:after{
+.color-gradient-info .wrap:after {
   background: linear-gradient(82.59deg, #0a56e2 0%, #0045c4 100%);
 
 }
@@ -328,6 +339,13 @@ $angleActive: 25deg;
 .color-gradient-error .wrap:after {
   background: linear-gradient(81.67deg, #e24e13 0%, #9e3005 100%);
 }
+
 .color-gradient-difference .wrap:after {
   background: linear-gradient(81.67deg, #2269ec 0%, #074dce 100%);
+}
+
+:host ::ng-deep {
+  .p-skeleton {
+    background-color: $secondary-color;
+  }
 }

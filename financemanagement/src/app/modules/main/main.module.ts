@@ -35,6 +35,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import {SkeletonModule} from 'primeng/skeleton';
 import { AnalysisComponent } from './components/months/analysis/analysis.component';
+import {AvatarModule} from 'primeng/avatar';
+import {AvatarGroupModule} from 'primeng/avatargroup';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { AnalysisComponent } from './components/months/analysis/analysis.compone
     ButtonModule,
     InputTextModule,
     ConfirmDialogModule,
-    SkeletonModule
+    SkeletonModule,
+    AvatarModule,
+    AvatarGroupModule
   ],
   providers: [
     ConfirmationService

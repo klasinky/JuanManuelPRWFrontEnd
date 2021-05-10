@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/interfaces/post';
+import { ColorService } from 'src/app/services/color.service';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -14,11 +15,13 @@ export class PostDetailComponent implements OnInit {
   post?: Post;
   id: number = 0;
   showLikeLoader: boolean = false;
+  loading: boolean = true;
 
   constructor(private httpService: HttpService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private colorService: ColorService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -36,12 +39,16 @@ export class PostDetailComponent implements OnInit {
   }
 
   getPost() {
+    this.loading = true;
     const url = 'posts/' + this.id;
     this.httpService.getAuth(url).subscribe(
       (data) => {
         this.post = data as Post;
+        this.loading = false;
+
       },
       (error) => {
+        this.loading = false;
         this.toastr.error('Error')
       }
     )
@@ -67,5 +74,9 @@ export class PostDetailComponent implements OnInit {
 
       }
     )
+  }
+
+  getStyle(){
+    return this.colorService.getColor(this.post?.author?.username);
   }
 }

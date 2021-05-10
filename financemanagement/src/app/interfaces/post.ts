@@ -10,5 +10,6 @@ export interface Post {
     likes: number,
     url_like?: string,
     is_like: boolean;
+    created_at? : Date,
 
 }

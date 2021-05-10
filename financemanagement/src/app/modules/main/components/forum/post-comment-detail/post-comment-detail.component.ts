@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommentPost } from 'src/app/interfaces/comment';
+import { ColorService } from 'src/app/services/color.service';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -13,9 +14,14 @@ export class PostCommentDetailComponent implements OnInit {
   @Input() comment?: CommentPost;
   showLikeLoader: boolean = false;
   constructor(private httpService: HttpService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private colorService: ColorService) { }
 
   ngOnInit(): void {
+  }
+
+  getStyle() {
+    return this.colorService.getColor(this.comment?.author.username);
   }
 
   sendLike() {
