@@ -1,0 +1,28 @@
+<div class="card mt-4">
+    <div class="card-body">
+        <div class="row align-items-center">
+
+            <div class="col" [routerLink]="['/dashboard/post/',post?.id]">
+                <h6 class="text-uppercase text-light mb-2">
+                    {{ (post?.title!.length>50)? (post?.title | slice:0:50)+'...':(post?.title) }}
+                </h6>
+                <div class="row">
+                    <div class="col-12">
+                        <span class="badge badge-soft-success mt-n1" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Ingresos">
+                            {{post?.author?.username}} - {{ post?.created_at | amLocale:'es' | amTimeAgo }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-auto">
+                <div class="text-end mb-3 me-3">
+                    <app-like-button (sendLike)="sendLike()" [countLike]="post?.likes" [showLoading]="showLikeLoader"
+                        [liked]="post?.is_like"></app-like-button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

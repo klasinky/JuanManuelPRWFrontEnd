@@ -1,6 +1,65 @@
-<p>forum works!</p>
-<ul >
-    <li *ngFor="let post of posts">
-        <a [routerLink]="['/dashboard/post/',post?.id]">{{ post?.title }}</a>
-    </li>
-</ul>
+<div class="container bgsecondary mt-4 p-2">
+    <div class="text-center">
+        <button [class.disabled]="btnAll" (click)="getPosts()" class="btn btn-dark m-1">
+            <div *ngIf="btnAllLoading" class="spinner-border spinner-border-sm text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <i *ngIf="!btnAllLoading" class="fas fa-globe"></i>
+            Most recent
+        </button>
+        <button [class.disabled]="btnHot" (click)="getPosts('?sort=hot')" class="btn btn-dark m-1">
+            <div *ngIf="btnHotLoading" class="spinner-border spinner-border-sm text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <i *ngIf="!btnHotLoading" class="fas fa-calendar-check"></i>
+            Hot today
+        </button>
+        <button [class.disabled]="btnTop" (click)="getPosts('?sort=top')" class="btn btn-dark m-1">
+            <div *ngIf="btnTopLoading" class="spinner-border spinner-border-sm text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <i *ngIf="!btnTopLoading" class="fas fa-calendar"></i>
+            Most liked
+        </button>
+    </div>
+</div>
+
+
+<!-- ------------------------------- Paginate ------------------------------- -->
+<div class="container bgsecondary mt-2 p-2 d-flex justify-content-evenly">
+    <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+        <i></i><i></i>
+    </button>
+    <h3 class="title">-</h3>
+    <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+        <i></i><i></i>
+    </button>
+</div>
+
+<!-- ------------------------------- Posts ------------------------------- -->
+<div *ngIf="posts" class="container">
+    <div class="row">
+        <div class="col-md-12" *ngFor="let post of posts">
+            <app-post-list [post]="post"></app-post-list>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-2" *ngIf="loading">
+        <div class="col-md-12 mt-3" *ngFor="let item of numberPagination">
+            <ngx-skeleton-loader animation="pulse" [theme]="getStyle()"></ngx-skeleton-loader>
+        </div>
+    </div>
+</div>
+
+
+<!-- ------------------------------- Paginate ------------------------------- -->
+<div class="container bgsecondary mt-4 p-2 d-flex justify-content-evenly">
+    <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+        <i></i><i></i>
+    </button>
+    <h3 class="title">-</h3>
+    <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+        <i></i><i></i>
+    </button>
+</div>

@@ -76,7 +76,6 @@ export class MonthsComponent implements OnInit {
       );
     }
 
-
   }
 
   async deleteMonth(month: Months) {
