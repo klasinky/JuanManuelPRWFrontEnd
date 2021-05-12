@@ -23,7 +23,6 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     MomentModule,
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

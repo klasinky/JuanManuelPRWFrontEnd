@@ -15,7 +15,7 @@
               </div>
               
               <div *ngIf="!loading" class="post-author">
-                <div class="like-count">{{ post?.created_at }}</div>
+                <div class="like-count">{{ post?.created_at | amLocale:'es' | amTimeAgo }}</div>
 
                 <p-avatar label="{{ post?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large" [style]="getStyle()" shape="circle"></p-avatar>
                 {{ post?.author?.username }}
@@ -53,7 +53,7 @@
             <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
 
           </div>
-          <p *ngIf="!loading">{{ post?.description }} </p>
+          <div class="ql-editor" *ngIf="!loading" [innerHTML]="post?.description | safeHtml"></div>
 
         </div>
 

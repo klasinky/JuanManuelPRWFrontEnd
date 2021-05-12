@@ -45,7 +45,6 @@ export class PostDetailComponent implements OnInit {
       (data) => {
         this.post = data as Post;
         this.loading = false;
-
       },
       (error) => {
         this.loading = false;
@@ -60,6 +59,7 @@ export class PostDetailComponent implements OnInit {
     const url = 'posts/' + this.id + "/like";
     this.httpService.putAuth(url).subscribe(
       (data: any) => {
+        console.log(data)
         if (this.post) {
           this.post.likes = data.likes as number;
           this.post.is_like = data.is_like as boolean;

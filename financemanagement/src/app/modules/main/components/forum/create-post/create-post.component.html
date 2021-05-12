@@ -1,0 +1,5 @@
+<div class="container p-4">
+    <input [(ngModel)]="title" type="text" required placeholder="Título" class="form-control">
+    <p-editor [(ngModel)]="text" [style]="{'height':'350px', 'width':'95%'}"></p-editor>
+    <button (click)="createPost()" class="btn btn-success">Crear Post</button>
+</div>

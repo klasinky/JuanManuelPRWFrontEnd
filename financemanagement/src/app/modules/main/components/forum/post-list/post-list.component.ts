@@ -22,6 +22,7 @@ export class PostListComponent implements OnInit {
     private colorService: ColorService) { }
 
   ngOnInit(): void {
+ 
   }
 
   sendLike() {
@@ -32,7 +33,6 @@ export class PostListComponent implements OnInit {
         if (this.post) {
           this.post.likes = data.likes as number;
           this.post.is_like = data.is_like as boolean;
-          console.log("Is Like " + this.post?.is_like)
         }
         this.showLikeLoader = false;
       },
