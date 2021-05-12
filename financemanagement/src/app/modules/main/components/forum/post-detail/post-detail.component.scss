@@ -668,3 +668,12 @@ button.vjs-play-control.vjs-control.vjs-button {
     margin-left: 0;
   }
 }
+
+:host ::ng-deep {
+
+  .ql-editor img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+}
