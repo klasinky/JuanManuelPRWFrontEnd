@@ -37,6 +37,7 @@ import {SkeletonModule} from 'primeng/skeleton';
 import { AnalysisComponent } from './components/months/analysis/analysis.component';
 import {AvatarModule} from 'primeng/avatar';
 import {AvatarGroupModule} from 'primeng/avatargroup';
+import { PostListComponent } from './components/forum/post-list/post-list.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import {AvatarGroupModule} from 'primeng/avatargroup';
     LikeButtonComponent,
     PostCommentDetailComponent,
     AnalysisComponent,
+    PostListComponent,
 
   ],
   imports: [
