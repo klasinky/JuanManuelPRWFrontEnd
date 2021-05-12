@@ -45,8 +45,6 @@ export class PostDetailComponent implements OnInit {
       (data) => {
         this.post = data as Post;
         this.loading = false;
-        console.log("POST")
-        console.log(this.post)
       },
       (error) => {
         this.loading = false;

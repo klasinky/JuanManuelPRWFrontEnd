@@ -38,6 +38,9 @@ import { AnalysisComponent } from './components/months/analysis/analysis.compone
 import {AvatarModule} from 'primeng/avatar';
 import {AvatarGroupModule} from 'primeng/avatargroup';
 import { PostListComponent } from './components/forum/post-list/post-list.component';
+import { CreatePostComponent } from './components/forum/create-post/create-post.component';
+import {EditorModule} from 'primeng/editor';
+import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,8 @@ import { PostListComponent } from './components/forum/post-list/post-list.compon
     PostCommentDetailComponent,
     AnalysisComponent,
     PostListComponent,
-
+    CreatePostComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     CommonModule,
@@ -80,7 +84,8 @@ import { PostListComponent } from './components/forum/post-list/post-list.compon
     ConfirmDialogModule,
     SkeletonModule,
     AvatarModule,
-    AvatarGroupModule
+    AvatarGroupModule,
+    EditorModule
   ],
   providers: [
     ConfirmationService

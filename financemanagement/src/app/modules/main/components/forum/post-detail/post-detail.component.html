@@ -53,7 +53,7 @@
             <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
 
           </div>
-          <p *ngIf="!loading">{{ post?.description }} </p>
+          <div class="ql-editor" *ngIf="!loading" [innerHTML]="post?.description | safeHtml"></div>
 
         </div>
 

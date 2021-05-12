@@ -1,0 +1,38 @@
+@import '../../../../../../assets/scss/variables';
+
+:host ::ng-deep {
+
+  .p-editor-container {
+    & .p-editor-content .ql-editor {
+      background-color: $alternative-color;
+      border: none;
+      color: $primary-font-color;  
+    }
+
+    .p-editor-content.ql-snow {
+      border: $primary-color 2px solid;
+    }
+
+    & .p-editor-toolbar.ql-snow {
+      background-color: $primary-color;
+      width: 95%;
+      border: none;
+    }
+
+  }
+
+}
+
+.form-control{
+  color: $primary-font-color;
+  background-color: $alternative-color;
+  width: 95%;
+  border: none;
+  &:focus{
+    outline: none;
+  }
+  &::placeholder{
+    color: $primary-font-color;
+    opacity: 0.8;
+  }
+}

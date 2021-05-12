@@ -1,6 +1,6 @@
 <div class="container bgsecondary mt-4 p-2">
     <div class="text-center">
-        <button title="Post más recientes" [disabled]="btnAll" (click)="getPosts()" class="btn btn-dark m-1">
+        <button title="Post más recientes" [disabled]="btnAll" (click)="getPosts()" class="btn-filter m-1">
             <div *ngIf="btnAllLoading" class="spinner-border spinner-border-sm text-light" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
@@ -22,6 +22,12 @@
             Top
         </button>
 
+    </div>
+    <div class="text-center mt-2">
+        <a [routerLink]="['/dashboard/post/create/user']" class="btn-filter"> 
+            <i class="fas fa-pencil-alt"></i>
+            Crear Post
+        </a>
     </div>
 </div>
 
