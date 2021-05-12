@@ -27,7 +27,7 @@ export class ForumComponent implements OnInit {
   btnTopLoading: boolean = false;
 
   constructor(private httpService: HttpService) {
-    this.numberPagination = Array(10).fill(0).map((x, i) => i);
+    this.numberPagination = Array(5).fill(0).map((x, i) => i);
   }
 
   ngOnInit(): void {
@@ -106,7 +106,8 @@ export class ForumComponent implements OnInit {
       'border-radius': '0',
       'height': '85px',
       'margin-bottom': '0',
-      'box-shadow': '2px 20px 30px #42141E'
+      'box-shadow': '2px 20px 30px #42141E',
+
     }
   }
 }

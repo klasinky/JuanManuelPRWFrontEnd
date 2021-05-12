@@ -22,6 +22,9 @@ export class PostListComponent implements OnInit {
     private colorService: ColorService) { }
 
   ngOnInit(): void {
+    if(this.post){
+      console.log(this.post);
+    }
   }
 
   sendLike() {
