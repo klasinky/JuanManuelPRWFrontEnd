@@ -1,0 +1,10 @@
+<button [disabled]="showLoader" class="btn" (click)="sendDeleteEvent()">
+    <div *ngIf="!showLoader; else blockLoader">
+        <i class="fas fa-trash"></i>
+    </div>
+      <ng-template #blockLoader>
+        <div class="spinner-border spinner-border-sm text-light mb-1" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </ng-template>
+</button>

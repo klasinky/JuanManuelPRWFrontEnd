@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/interfaces/post';
 import { ColorService } from 'src/app/services/color.service';
 import { HttpService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-detail',
@@ -15,6 +16,7 @@ export class PostDetailComponent implements OnInit {
   post?: Post;
   id: number = 0;
   showLikeLoader: boolean = false;
+  showDeleteLoader: boolean = false;
   loading: boolean = true;
 
   constructor(private httpService: HttpService,
@@ -45,6 +47,7 @@ export class PostDetailComponent implements OnInit {
       (data) => {
         this.post = data as Post;
         this.loading = false;
+        console.log(this.post)
       },
       (error) => {
         this.loading = false;
@@ -72,6 +75,23 @@ export class PostDetailComponent implements OnInit {
         this.toastr.error(error.error.detail)
         this.showLikeLoader = false;
 
+      }
+    )
+  }
+
+  deletePostAction(){
+    this.showDeleteLoader = true;
+    const url: string = environment.endpoints.posts.viewset;
+    this.httpService.deleteAuth(url, this.post?.id).subscribe(
+      (data: any) => {
+        this.router.navigate(['dashboard/post']).then(() => {
+          // Notificación
+          this.toastr.success('El post ha sido eliminado.')
+          this.showDeleteLoader = false;
+        })
+      },
+      (error) => {
+        this.showDeleteLoader = false;
       }
     )
   }

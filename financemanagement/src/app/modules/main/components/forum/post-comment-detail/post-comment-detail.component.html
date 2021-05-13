@@ -1,19 +1,21 @@
-<div class="message">
-
-  <div class="author-img__wrapper video-author video-p">
-    <p-avatar label="{{ comment?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large" [style]="getStyle()" shape="circle"></p-avatar>
+<div class="d-flex bd-highlight">
+  <div class="my-auto bd-highlight fw-bold" [class.w-isNotOwner]="comment?.is_owner == false" [class.w-comment]="comment?.is_owner == true">
+    <p-avatar label="{{ comment?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large"
+      [style]="getStyle()" shape="circle"></p-avatar>
+    @{{ comment?.author?.username }}
   </div>
 
-  <div class="msg-wrapper">
-    <div class="d-flex flex-row-reverse bd-highlight">
-      <app-like-button (sendLike)="sendLike()" [showLoading]="showLikeLoader" [countLike]="comment?.likes"
+  <div *ngIf="comment?.is_owner" class="my-auto flex-shrink-1 bd-highlight">
+    <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deleteCommentAction()"></app-delete-button>
+  </div>
+
+  <div class="me-auto flex-shrink-1 bd-highlight">
+    <app-like-button (sendLike)="sendLike()" [showLoading]="showLikeLoader" [countLike]="comment?.likes"
       [liked]="comment?.is_like"></app-like-button>
-    </div>
-
-    <div class="msg__date">{{ comment?.created_at|amLocale:'es' | amTimeAgo  }}</div>
-
-    <div class="msg__name video-p-name">{{ comment?.author?.username }}
-    </div>
-    <p>{{ comment?.description }}</p>
   </div>
+
+</div>
+
+<div class="comment-border ms-5">
+  <p class="ps-2 my-auto description">{{ comment?.description | atUser | safeHtml}}</p>
 </div>

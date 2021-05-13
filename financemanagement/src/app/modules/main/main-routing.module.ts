@@ -4,6 +4,7 @@ import { LoggedOffGuard } from 'src/app/guards/logged-off.guard';
 import { CreatePostComponent } from './components/forum/create-post/create-post.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { PostDetailComponent } from './components/forum/post-detail/post-detail.component';
+import { UserProfileComponent } from './components/forum/user-profile/user-profile.component';
 import { MonthDetailComponent } from './components/months/month-detail/month-detail.component';
 import { MonthsComponent } from './components/months/months.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -23,6 +24,8 @@ const routes: Routes = [
         { path: 'post', component: ForumComponent},
         { path: 'post/:id', component: PostDetailComponent},
         { path: 'post/create/user', component: CreatePostComponent},
+        { path: 'user/:username', component: UserProfileComponent},
+
       ],
   },
 ];

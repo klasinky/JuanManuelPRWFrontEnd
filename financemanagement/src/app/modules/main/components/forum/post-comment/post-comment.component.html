@@ -11,7 +11,7 @@
       <!-- ------------------------------- Message ------------------------------- -->
       <ng-container *ngFor="let comment of comments">
 
-        <app-post-comment-detail [comment]="comment"></app-post-comment-detail>
+        <app-post-comment-detail [comment]="comment" (refreshComments)="getComments()"></app-post-comment-detail>
         <hr>
       </ng-container>
       <div *ngIf="showLoading" class="text-center">
