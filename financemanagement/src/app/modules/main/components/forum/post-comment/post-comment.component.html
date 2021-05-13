@@ -12,7 +12,7 @@
       <ng-container *ngFor="let comment of comments">
 
         <app-post-comment-detail [comment]="comment" (refreshComments)="getComments()"></app-post-comment-detail>
-        <hr>
+        <hr class="color">
       </ng-container>
       <div *ngIf="showLoading" class="text-center">
         <div class="spinner-border text-light" role="status">
