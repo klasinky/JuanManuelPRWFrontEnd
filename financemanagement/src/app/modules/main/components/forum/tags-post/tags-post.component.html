@@ -1,11 +1,22 @@
 <div class="tags">
-    <h1>Tags</h1>
-  
-    <ul>
-      <li *ngFor="let tag of tags">
-        <a href="#">
-          {{ tag.name }}
-        </a>
-      </li>
-    </ul>
-  </div>
+  <h1>Tags</h1>
+
+  <ul *ngIf="tags">
+    <li *ngFor="let tag of tags">
+      <a href="#">
+        {{ tag.name }}
+      </a>
+    </li>
+  </ul>
+  <ul *ngIf="!tags">
+    <li >
+      <p-skeleton width="6rem" height="44px"></p-skeleton>
+    </li>
+    <li >
+      <p-skeleton width="6rem" height="44px"></p-skeleton>
+    </li>
+    <li >
+      <p-skeleton width="6rem" height="44px"></p-skeleton>
+    </li>
+  </ul>
+</div>
