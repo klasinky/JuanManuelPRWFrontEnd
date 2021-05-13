@@ -41,6 +41,7 @@ import { PostListComponent } from './components/forum/post-list/post-list.compon
 import { CreatePostComponent } from './components/forum/create-post/create-post.component';
 import {EditorModule} from 'primeng/editor';
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
+import { DeleteButtonComponent } from './components/forum/delete-button/delete-button.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
     PostListComponent,
     CreatePostComponent,
     SafeHtmlPipe,
+    DeleteButtonComponent,
   ],
   imports: [
     CommonModule,

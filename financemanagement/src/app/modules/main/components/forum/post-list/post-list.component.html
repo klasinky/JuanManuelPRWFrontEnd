@@ -10,9 +10,15 @@
                     <div class="col-12">
                         <span class="badge badge-soft-success mt-n1" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Ingresos">
-                            {{post?.author?.username}} - {{ post?.created_at | amLocale:'es' | amTimeAgo }}
+                            @{{post?.author?.username}} - {{ post?.created_at | amLocale:'es' | amTimeAgo }}
                         </span>
                     </div>
+                </div>
+            </div>
+
+            <div *ngIf="post?.is_owner" class="col-auto">
+                <div class="text-center me-4">
+                    <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deletePostAction()"></app-delete-button>
                 </div>
             </div>
 

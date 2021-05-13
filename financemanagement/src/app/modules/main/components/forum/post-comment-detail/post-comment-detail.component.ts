@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommentPost } from 'src/app/interfaces/comment';
 import { ColorService } from 'src/app/services/color.service';
 import { HttpService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-comment-detail',
@@ -12,7 +13,11 @@ import { HttpService } from 'src/app/services/http.service';
 export class PostCommentDetailComponent implements OnInit {
 
   @Input() comment?: CommentPost;
+  @Output() refreshComments: EventEmitter<any> = new EventEmitter();
+
+  showDeleteLoader: boolean = false;
   showLikeLoader: boolean = false;
+
   constructor(private httpService: HttpService,
     private toastr: ToastrService,
     private colorService: ColorService) { }
@@ -41,10 +46,26 @@ export class PostCommentDetailComponent implements OnInit {
           (error) => {
             this.toastr.error(error.error.detail)
             this.showLikeLoader = false;
-
           }
         )
       }
     }
+  }
+
+  deleteCommentAction() {
+    const url: string = environment.apiUrl + "/" + environment.endpoints.comments.delete.start +
+      this.comment?.id + environment.endpoints.comments.delete.end;
+    this.showDeleteLoader = true;
+
+    this.httpService.deleteAuth(url).subscribe(
+      (data: any) => {
+        this.refreshComments.emit();
+        this.toastr.success("Se ha eliminado el comentario correctamente.")
+        this.showDeleteLoader = false;
+      },
+      (error: any) => {
+        this.showDeleteLoader = false;
+      }
+    )
   }
 }

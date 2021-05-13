@@ -44,16 +44,16 @@
 </div>
 
 <!-- ------------------------------- Posts ------------------------------- -->
-<div *ngIf="posts" class="container">
+<div *ngIf="posts && !loading" class="container">
     <div class="row">
-        <div class="col-md-12" *ngFor="let post of posts">
-            <app-post-list [post]="post"></app-post-list>
+        <div class="col-md-4" *ngFor="let post of posts">
+            <app-post-list (refreshPosts)="getPosts()" [post]="post"></app-post-list>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="row mt-2" *ngIf="loading">
-        <div class="col-md-12 mt-3" *ngFor="let item of numberPagination">
+        <div class="col-md-4 mt-3" *ngFor="let item of numberPagination">
             <ngx-skeleton-loader animation="pulse" [theme]="getStyle()"></ngx-skeleton-loader>
         </div>
     </div>

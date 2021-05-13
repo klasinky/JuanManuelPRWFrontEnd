@@ -1,6 +1,6 @@
 import { User } from './user';
 export interface Post {
-    id?: number;
+    id?: number,
     url?: string,
     title?: string,
     description?: string,
@@ -8,7 +8,7 @@ export interface Post {
     author?: User,
     likes: number,
     url_like?: string,
-    is_like: boolean;
+    is_like: boolean,
     created_at? : Date,
-
+    is_owner?: boolean
 }
