@@ -6,3 +6,37 @@ button{
         color: $primary-font-color;
     }
 }
+
+
+:host ::ng-deep {
+
+    .p-button-outlined {
+        background-color: transparent;
+        color: $primary-font-color;
+        border: none;
+
+        &:enabled:hover {
+            background-color: transparent;
+            border: none;
+            color: $primary-font-color;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    .p-button{
+        background: transparent;
+        border: none;
+
+        &:hover{
+            background: transparent;
+            border: none;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
