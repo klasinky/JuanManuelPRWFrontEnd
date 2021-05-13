@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/interfaces/post';
 import { ColorService } from 'src/app/services/color.service';
 import { HttpService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-list',
@@ -12,14 +13,13 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class PostListComponent implements OnInit {
   @Input() post!: Post;
+  @Output() refreshPosts: EventEmitter<any> = new EventEmitter();
   showLikeLoader: boolean = false;
+  showDeleteLoader: boolean = false;
   loading: boolean = true;
 
   constructor(private httpService: HttpService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toastr: ToastrService,
-    private colorService: ColorService) { }
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
  
@@ -39,6 +39,21 @@ export class PostListComponent implements OnInit {
       (error) => {
         this.toastr.error(error.error.detail)
         this.showLikeLoader = false;
+      }
+    )
+  }
+
+  deletePostAction(){
+    this.showDeleteLoader = true;
+    const url: string = environment.endpoints.posts.viewset;
+    this.httpService.deleteAuth(url, this.post?.id).subscribe(
+      (data: any) => {
+        this.toastr.success("El post ha sido eliminado.");
+        this.refreshPosts.emit();
+        this.showDeleteLoader = false;
+      },
+      (error) => {
+        this.showDeleteLoader = false;
       }
     )
   }

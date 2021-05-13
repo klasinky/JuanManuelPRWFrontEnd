@@ -27,6 +27,9 @@ import { PostDetailComponent } from './components/forum/post-detail/post-detail.
 import { PostCommentComponent } from './components/forum/post-comment/post-comment.component';
 import { LikeButtonComponent } from './components/forum/like-button/like-button.component';
 import { PostCommentDetailComponent } from './components/forum/post-comment-detail/post-comment-detail.component';
+import { DeleteButtonComponent } from './components/forum/delete-button/delete-button.component';
+import { TagsPostComponent } from './components/forum/tags-post/tags-post.component';
+import { UserProfileComponent } from './components/forum/user-profile/user-profile.component';
 // PrimeNG
 import { TableModule } from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
@@ -42,9 +45,8 @@ import { CreatePostComponent } from './components/forum/create-post/create-post.
 import {EditorModule} from 'primeng/editor';
 // Pipes
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
-import { TagsPostComponent } from './components/forum/tags-post/tags-post.component';
 import { AtUserPipe } from '../../pipe/at-user.pipe';
-import { UserProfileComponent } from './components/forum/user-profile/user-profile.component';
+
 
 @NgModule({
   declarations: [
@@ -73,6 +75,7 @@ import { UserProfileComponent } from './components/forum/user-profile/user-profi
     PostListComponent,
     CreatePostComponent,
     SafeHtmlPipe,
+    DeleteButtonComponent,
     TagsPostComponent,
     AtUserPipe,
     UserProfileComponent,

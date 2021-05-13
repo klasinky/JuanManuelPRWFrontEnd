@@ -1,56 +1,54 @@
 <div class="container">
   <div class="row row-eq-height mt-5">
-    <div class="col-md-7 bgsecondary mx-1">
+    <div class="col-md-8 bgsecondary">
       <div class="post p-3">
         <div class="author-detail">
-          <div class="row">
-            <div class="col-md-8">
+          <div class="d-flex bd-highlight">
+
+            <div class="me-auto bd-highlight">
               <div *ngIf="loading" class="d-flex">
                 <p-skeleton shape="circle" size="48px" styleClass="p-mr-2"></p-skeleton>
-                    <div class="mr-1">
-                        <p-skeleton width="10rem" styleClass="p-mb-2"></p-skeleton>
-                        <p-skeleton width="5rem" styleClass="p-mb-2"></p-skeleton>
-                    </div>
-              
-              </div>
-              
-              <div *ngIf="!loading" class="post-author">
-                <div class="like-count">{{ post?.created_at | amLocale:'es' | amTimeAgo }}</div>
-
-                <p-avatar label="{{ post?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large" [style]="getStyle()" shape="circle"></p-avatar>
-                {{ post?.author?.username }}
-
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="row">
-                <div class="col-8">
-                  <div class="btn btn-dark"><i class="fas fa-paper-plane"></i> Compartir</div>
-
-                </div>
-                <div class="col-4 mt-2">
-                  <app-like-button (sendLike)="sendLike()" [countLike]="post?.likes" [showLoading]="showLikeLoader" [liked]="post?.is_like"></app-like-button>
+                <div class="mr-1">
+                  <p-skeleton width="10rem" styleClass="p-mb-2"></p-skeleton>
+                  <p-skeleton width="5rem" styleClass="p-mb-2"></p-skeleton>
                 </div>
               </div>
 
-
+              <div *ngIf="!loading" class="post-author my-1 fw-bold">
+                <p-avatar label="{{ post?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large"
+                  [style]="getStyle()" shape="circle"></p-avatar>
+                @{{ post?.author?.username }}
+              </div>
             </div>
+
+            <div *ngIf="post?.is_owner" class="my-2 me-4 bd-highlight">
+              <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deletePostAction()"></app-delete-button>
+            </div>
+
+            <div class="my-2 bd-highlight">
+              <app-like-button (sendLike)="sendLike()" [countLike]="post?.likes" [showLoading]="showLikeLoader"
+                [liked]="post?.is_like"></app-like-button>
+            </div>
+
+
           </div>
-
         </div>
+
         <hr>
+
         <div class="post-title">
           <h3>{{ post?.title|titlecase }}</h3>
         </div>
+
         <div class="post-body ">
-          <div *ngIf="loading" >
+          <div *ngIf="loading">
             <p-skeleton styleClass="mb-4" width="100%"></p-skeleton>
-            <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
-            <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
-            <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
-            <p-skeleton styleClass="mb-4" width="5rem" ></p-skeleton>
-            <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
-            <p-skeleton styleClass="mb-2" width="100%" ></p-skeleton>
+            <p-skeleton styleClass="mb-2" width="100%"></p-skeleton>
+            <p-skeleton styleClass="mb-2" width="100%"></p-skeleton>
+            <p-skeleton styleClass="mb-2" width="100%"></p-skeleton>
+            <p-skeleton styleClass="mb-4" width="5rem"></p-skeleton>
+            <p-skeleton styleClass="mb-2" width="100%"></p-skeleton>
+            <p-skeleton styleClass="mb-2" width="100%"></p-skeleton>
 
           </div>
           <div class="ql-editor post-body" *ngIf="!loading" [innerHTML]="post?.description | atUser | safeHtml"></div>
@@ -59,44 +57,43 @@
 
       </div>
     </div>
-    <div class="col-md-4 ">
-      <div class="row">
-        <div class="col-12 bgsecondary">
 
-          <app-post-comment [idPost]="id"></app-post-comment>
-        </div>
-        <div class="col-12 bgsecondary mt-2">
-          <div class="chat-vid__container">
-            <div class="chat-vid__title anim" style="--delay: .3s">Post similares</div>
-            <div class="chat-vid anim" style="--delay: .4s">
-              <div class="chat-vid__wrapper">
-                <img class="chat-vid__img" src="https://cdn.nohat.cc/thumb/f/720/3b55eddcfffa4e87897d.jpg" />
-                <div class="chat-vid__content">
-                  <div class="chat-vid__name">Prepare for your first skateboard jump</div>
-                  <div class="chat-vid__by">Jordan Wise</div>
-                  <div class="chat-vid__info">125.908 views <span class="seperate"></span>2 days
-                    ago</div>
-                </div>
-              </div>
+    <div class="col-md-4 bgsecondary">
+      <div class="chat-vid__container">
+        <div class="chat-vid__title anim" style="--delay: .3s">Post similares</div>
+        <div class="chat-vid anim" style="--delay: .4s">
+          <div class="chat-vid__wrapper">
+            <img class="chat-vid__img" src="https://cdn.nohat.cc/thumb/f/720/3b55eddcfffa4e87897d.jpg" />
+            <div class="chat-vid__content">
+              <div class="chat-vid__name">Prepare for your first skateboard jump</div>
+              <div class="chat-vid__by">Jordan Wise</div>
+              <div class="chat-vid__info">125.908 views <span class="seperate"></span>2 days
+                ago</div>
             </div>
-            <div class="chat-vid anim" style="--delay: .5s">
-              <div class="chat-vid__wrapper">
-                <img class="chat-vid__img"
-                  src="https://iamaround.it/wp-content/uploads/2015/02/pexels-photo-4663818.jpeg" />
-                <div class="chat-vid__content">
-                  <div class="chat-vid__name">Prepare for your first skateboard jump</div>
-                  <div class="chat-vid__by">Jordan Wise</div>
-                  <div class="chat-vid__info">125.908 views <span class="seperate"></span>2 days
-                    ago</div>
-                </div>
-              </div>
-            </div>
-            <div class="chat-vid__button anim" style="--delay: .6s">See All related videos (32)</div>
           </div>
         </div>
+        <div class="chat-vid anim" style="--delay: .5s">
+          <div class="chat-vid__wrapper">
+            <img class="chat-vid__img"
+              src="https://iamaround.it/wp-content/uploads/2015/02/pexels-photo-4663818.jpeg" />
+            <div class="chat-vid__content">
+              <div class="chat-vid__name">Prepare for your first skateboard jump</div>
+              <div class="chat-vid__by">Jordan Wise</div>
+              <div class="chat-vid__info">125.908 views <span class="seperate"></span>2 days
+                ago</div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-vid__button anim" style="--delay: .6s">See All related videos (32)</div>
       </div>
+    </div>
 
-
+    <div class="col-md-12 ">
+      <div class="row">
+        <div class="col-12 bgsecondary">
+          <app-post-comment [idPost]="id"></app-post-comment>
+        </div>
+      </div>
     </div>
   </div>
 </div>
