@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-delete-button',
@@ -10,13 +11,19 @@ export class DeleteButtonComponent implements OnInit {
   @Output() sendDelete: EventEmitter<any> =  new EventEmitter();
   @Input() showLoader?: boolean;
 
-  constructor() { }
+  constructor(private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
   }
 
   sendDeleteEvent(){
-    this.sendDelete.emit();
+    this.confirmationService.confirm({
+      message: '¿Estás seguro de que lo quieres eliminar?',
+      accept: () => {
+        this.sendDelete.emit();
+      }
+    });
+
   }
 
 }
