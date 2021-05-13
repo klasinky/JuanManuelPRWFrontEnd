@@ -48,6 +48,7 @@ import { CardModule } from "primeng/card";
 // Pipes
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
 import { AtUserPipe } from '../../pipe/at-user.pipe';
+import { TagsDetailComponent } from './components/forum/tags-detail/tags-detail.component';
 import { StockTutorialComponent } from './components/stocks/stock-tutorial/stock-tutorial.component';
 
 
@@ -82,6 +83,7 @@ import { StockTutorialComponent } from './components/stocks/stock-tutorial/stock
     TagsPostComponent,
     AtUserPipe,
     UserProfileComponent,
+    TagsDetailComponent,
     StockTutorialComponent,
   ],
   imports: [

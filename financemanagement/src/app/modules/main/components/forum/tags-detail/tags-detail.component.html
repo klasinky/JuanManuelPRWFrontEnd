@@ -1,0 +1,26 @@
+<div class="container">
+  <article class="leaderboard">
+
+
+    <main class="leaderboard__tags bgsecondary">
+      <div class="text-center">
+        <h4>Tags</h4>
+      </div>
+      <article #articlesBlock *ngFor="let tag of tags" class="leaderboard__tag">
+        <div class="d-flex">
+          <div class="me-auto p-2 bd-highlight name">
+            <span class="leaderboard__name ">{{ tag.name }}</span>
+          </div>
+          <div class="p-2 bd-highlight">
+            <span class="leaderboard__count ">{{ tag.num_post }}</span>
+          </div>
+        </div>
+      </article>
+      <div class="text-center" *ngIf="!tags">
+        <div class="spinner-border text-light" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </main>
+  </article>
+</div>
