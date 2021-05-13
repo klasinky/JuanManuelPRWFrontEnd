@@ -7,8 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TagsPostComponent implements OnInit {
 
-  @Input()tags?: any[] ;
-
+  @Input() tags?: any[];
+  tagsLoader: boolean = true;
   constructor() { }
 
   ngOnInit(): void {

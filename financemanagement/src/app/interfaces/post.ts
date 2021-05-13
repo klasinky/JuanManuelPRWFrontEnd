@@ -5,6 +5,11 @@ export interface Tag {
     color: string;
 }
 
+export interface TagDetail{
+    name: string;
+    num_post: number;
+}
+
 export interface Post {
     id?: number,
     url?: string,

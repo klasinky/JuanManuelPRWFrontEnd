@@ -64,7 +64,6 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: '¿Estás seguro de que quieres eliminar este registro?',
       accept: () => {
-  
         this.deleteAmount(isExpense, id);
       }
     });
