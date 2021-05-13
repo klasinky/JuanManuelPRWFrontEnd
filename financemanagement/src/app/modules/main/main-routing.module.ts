@@ -24,6 +24,7 @@ const routes: Routes = [
         { path: 'post', component: ForumComponent},
         { path: 'post/:id', component: PostDetailComponent},
         { path: 'post/create/user', component: CreatePostComponent},
+        { path: 'post/edit/:id', component: CreatePostComponent},
         { path: 'user/:username', component: UserProfileComponent},
 
       ],
