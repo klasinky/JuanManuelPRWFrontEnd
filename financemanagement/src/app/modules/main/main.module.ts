@@ -42,6 +42,7 @@ import { CreatePostComponent } from './components/forum/create-post/create-post.
 import {EditorModule} from 'primeng/editor';
 // Pipes
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
+import { TagsPostComponent } from './components/forum/tags-post/tags-post.component';
 import { AtUserPipe } from '../../pipe/at-user.pipe';
 import { UserProfileComponent } from './components/forum/user-profile/user-profile.component';
 
@@ -72,6 +73,7 @@ import { UserProfileComponent } from './components/forum/user-profile/user-profi
     PostListComponent,
     CreatePostComponent,
     SafeHtmlPipe,
+    TagsPostComponent,
     AtUserPipe,
     UserProfileComponent,
   ],
