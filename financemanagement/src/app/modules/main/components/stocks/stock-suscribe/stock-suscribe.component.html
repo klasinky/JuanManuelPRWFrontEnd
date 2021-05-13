@@ -19,7 +19,7 @@
                 [class.is-invalid]="this.formSuscribeStock?.get('stock')?.invalid && this.formSuscribeStock?.get('stock')?.touched">
                     <i class="fas fa-arrow-down"></i>
                     <select formControlName="stock" (change)="changeStock($event)" aria-label="Default select">
-                        <option value="null" disabled>Elige una categoría...</option>
+                        <option value="null" disabled>Elige una acción...</option>
                         <option *ngFor="let stock of stocks" [ngValue]="stock.id">
                             {{stock.name + ' ' +stock.symbol}}
                         </option>

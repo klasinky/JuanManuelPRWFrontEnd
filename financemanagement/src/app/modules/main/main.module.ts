@@ -43,9 +43,12 @@ import {AvatarGroupModule} from 'primeng/avatargroup';
 import { PostListComponent } from './components/forum/post-list/post-list.component';
 import { CreatePostComponent } from './components/forum/create-post/create-post.component';
 import {EditorModule} from 'primeng/editor';
+import {TimelineModule} from 'primeng/timeline';
+import { CardModule } from "primeng/card";
 // Pipes
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
 import { AtUserPipe } from '../../pipe/at-user.pipe';
+import { StockTutorialComponent } from './components/stocks/stock-tutorial/stock-tutorial.component';
 
 
 @NgModule({
@@ -79,6 +82,7 @@ import { AtUserPipe } from '../../pipe/at-user.pipe';
     TagsPostComponent,
     AtUserPipe,
     UserProfileComponent,
+    StockTutorialComponent,
   ],
   imports: [
     CommonModule,
@@ -95,7 +99,9 @@ import { AtUserPipe } from '../../pipe/at-user.pipe';
     SkeletonModule,
     AvatarModule,
     AvatarGroupModule,
-    EditorModule
+    EditorModule,
+    TimelineModule,
+    CardModule
   ],
   providers: [
     ConfirmationService
