@@ -46,6 +46,7 @@ import {EditorModule} from 'primeng/editor';
 // Pipes
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
 import { AtUserPipe } from '../../pipe/at-user.pipe';
+import { TagsDetailComponent } from './components/forum/tags-detail/tags-detail.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { AtUserPipe } from '../../pipe/at-user.pipe';
     TagsPostComponent,
     AtUserPipe,
     UserProfileComponent,
+    TagsDetailComponent,
   ],
   imports: [
     CommonModule,
