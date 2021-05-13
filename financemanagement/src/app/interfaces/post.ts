@@ -1,4 +1,10 @@
 import { User } from './user';
+
+export interface Tag {
+    name: string;
+    color: string;
+}
+
 export interface Post {
     id?: number,
     url?: string,
@@ -11,4 +17,5 @@ export interface Post {
     is_like: boolean,
     created_at? : Date,
     is_owner?: boolean
+    tags: Tag[]
 }

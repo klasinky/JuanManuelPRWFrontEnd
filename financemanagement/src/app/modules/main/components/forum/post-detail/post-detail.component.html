@@ -51,7 +51,7 @@
             <p-skeleton styleClass="mb-2" width="100%"></p-skeleton>
 
           </div>
-          <div class="ql-editor" *ngIf="!loading" [innerHTML]="post?.description | safeHtml"></div>
+          <div class="ql-editor post-body" *ngIf="!loading" [innerHTML]="post?.description | atUser | safeHtml"></div>
 
         </div>
 

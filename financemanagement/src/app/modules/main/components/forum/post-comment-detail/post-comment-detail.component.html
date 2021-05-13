@@ -17,5 +17,5 @@
 </div>
 
 <div class="comment-border ms-5">
-  <p class="ps-2 my-auto description">{{ comment?.description }}</p>
+  <p class="ps-2 my-auto description">{{ comment?.description | atUser | safeHtml}}</p>
 </div>
