@@ -40,7 +40,10 @@ import {AvatarGroupModule} from 'primeng/avatargroup';
 import { PostListComponent } from './components/forum/post-list/post-list.component';
 import { CreatePostComponent } from './components/forum/create-post/create-post.component';
 import {EditorModule} from 'primeng/editor';
+// Pipes
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
+import { AtUserPipe } from '../../pipe/at-user.pipe';
+import { UserProfileComponent } from './components/forum/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,8 @@ import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
     PostListComponent,
     CreatePostComponent,
     SafeHtmlPipe,
+    AtUserPipe,
+    UserProfileComponent,
   ],
   imports: [
     CommonModule,
