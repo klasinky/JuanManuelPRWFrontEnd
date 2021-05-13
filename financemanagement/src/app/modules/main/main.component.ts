@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthConstants } from 'src/app/config/auth=constant';
 import { User } from 'src/app/interfaces/user';
 import { StorageService } from 'src/app/services/storage.service';
@@ -14,6 +15,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     private storageService: StorageService,
+    private router : Router,
   ) {
 
   }
@@ -28,6 +30,22 @@ export class MainComponent implements OnInit {
     this.storageService.getItem(AuthConstants.DATAUSER).subscribe((data: User) => {
       this.userData = data;
     })
+  }
+
+  @HostListener('document:click', ['$event'])
+  public handleClick(event: Event): void {
+    if (event.target instanceof HTMLAnchorElement) {
+      const element = event.target as HTMLAnchorElement;
+      if (element.className === 'tool-username') {
+        event.preventDefault();
+        const route = element?.getAttribute('href');
+        if (route) {
+          console.log("ES route")
+          console.log(route)
+          this.router.navigate([`/dashboard/user/${route}`]);
+        }
+      }
+    }
   }
 
 }

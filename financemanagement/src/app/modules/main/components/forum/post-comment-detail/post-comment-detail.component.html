@@ -14,6 +14,7 @@
 
     <div class="msg__name video-p-name">{{ comment?.author?.username }}
     </div>
-    <p>{{ comment?.description }}</p>
+    <div [innerHTML]="comment?.description | atUser | safeHtml"></div>
+
   </div>
 </div>
