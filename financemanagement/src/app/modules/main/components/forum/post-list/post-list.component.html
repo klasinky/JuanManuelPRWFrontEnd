@@ -1,34 +1,29 @@
 <div class="card mt-4">
-    <div class="card-body">
-        <div class="row align-items-center">
+  <div class="image-container">
+    <img
+      src="https://images.pexels.com/photos/1161542/pexels-photo-1161542.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      alt="">
+  </div>
+  <div class="card-content">
+      <div class="d-flex">
+        <span *ngFor="let item of post?.tags | slice:0:3; let i=index"  class="tag">{{ item.name }}</span>
 
-            <div class="col" [routerLink]="['/dashboard/post/',post?.id]">
-                <h6 class="text-uppercase text-light mb-2">
-                    {{ (post?.title!.length>50)? (post?.title | slice:0:50)+'...':(post?.title) }}
-                </h6>
-                <div class="row">
-                    <div class="col-12">
-                        <span class="badge badge-soft-success mt-n1" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Ingresos">
-                            @{{post?.author?.username}} - {{ post?.created_at | amLocale:'es' | amTimeAgo }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div *ngIf="post?.is_owner" class="col-auto">
-                <div class="text-center me-4">
-                    <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deletePostAction()"></app-delete-button>
-                </div>
-            </div>
-
-            <div class="col-auto">
-                <div class="text-end mb-3 me-3">
-                    <app-like-button (sendLike)="sendLike()" [countLike]="post?.likes" [showLoading]="showLikeLoader"
-                        [liked]="post?.is_like"></app-like-button>
-                </div>
-            </div>
-
+      </div>
+    <div [routerLink]="['/dashboard/post/',post?.id]" class="title">{{ (post?.title!.length>55)? (post?.title | slice:0:50)+'...':(post?.title) }}</div>
+    <div class="user">
+      <div class="user-like">
+        <app-like-button (sendLike)="sendLike()" [countLike]="post?.likes" [showLoading]="showLikeLoader"
+          [liked]="post?.is_like"></app-like-button>
+      </div>
+      <div class="user-info w-100">
+        <span>@{{post?.author?.username}}</span>
+        <small>{{ post?.created_at | amLocale:'es' | amTimeAgo }}</small>
+      </div>
+      <div *ngIf="post?.is_owner" class="user-delete">
+        <div class="text-center ">
+            <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deletePostAction()"></app-delete-button>
         </div>
+      </div>
     </div>
+  </div>
 </div>

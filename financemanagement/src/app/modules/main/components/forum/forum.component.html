@@ -53,9 +53,9 @@
       </div>
     </div>
     <div class="container">
-      <div class="row mt-2" *ngIf="loading">
-        <div class="col-md-6 mt-3" *ngFor="let item of numberPagination">
-          <ngx-skeleton-loader animation="pulse" [theme]="getStyle()"></ngx-skeleton-loader>
+      <div class="row" *ngIf="loading">
+        <div class="col-md-6" *ngFor="let item of numberPagination">
+          <app-post-list-skeleton></app-post-list-skeleton>
         </div>
       </div>
     </div>
