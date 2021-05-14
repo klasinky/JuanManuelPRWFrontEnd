@@ -21,6 +21,10 @@ export class DeleteButtonComponent implements OnInit {
       message: '¿Estás seguro de que lo quieres eliminar?',
       accept: () => {
         this.sendDelete.emit();
+        this.confirmationService.close();
+      },
+      reject: () => {
+        this.confirmationService.close();
       }
     });
 
