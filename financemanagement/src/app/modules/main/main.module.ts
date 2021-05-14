@@ -50,6 +50,7 @@ import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
 import { AtUserPipe } from '../../pipe/at-user.pipe';
 import { TagsDetailComponent } from './components/forum/tags-detail/tags-detail.component';
 import { StockTutorialComponent } from './components/stocks/stock-tutorial/stock-tutorial.component';
+import { PostListSkeletonComponent } from './components/forum/post-list/post-list-skeleton/post-list-skeleton.component';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import { StockTutorialComponent } from './components/stocks/stock-tutorial/stock
     UserProfileComponent,
     TagsDetailComponent,
     StockTutorialComponent,
+    PostListSkeletonComponent,
   ],
   imports: [
     CommonModule,
