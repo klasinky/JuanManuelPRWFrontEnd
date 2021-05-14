@@ -1,4 +1,4 @@
-<button [disabled]="showLoader" class="btn" (click)="sendDeleteEvent()">
+<button pButton pRipple [disabled]="showLoader" class="btn" (click)="sendDeleteEvent()">
     <div *ngIf="!showLoader; else blockLoader">
         <i class="fas fa-trash"></i>
     </div>
@@ -8,3 +8,12 @@
         </div>
       </ng-template>
 </button>
+
+<p-confirmDialog #cd [transitionOptions]="'0.25ms'" header="Confirmación" icon="pi pi-exclamation-triangle">
+  <ng-template pTemplate="footer">
+      <button type="button" pButton class="p-button-secondary" icon="pi pi-times" (click)="cd.reject()" label="Cancelar" ></button>
+      <button type="button" pButton icon="pi pi-check" class="p-button-danger" (click)="cd.accept()" label="Eliminar"></button>
+  </ng-template>
+</p-confirmDialog>
+
+

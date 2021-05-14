@@ -66,8 +66,8 @@
         </td>
         <td class="text-center">
           <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteAmountAction( item?.data.id, item.is_expense)" class="p-button-rounded p-button-danger"></button>
-
         </td>
+        
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
@@ -77,6 +77,7 @@
     </ng-template>
   </p-table>
 </div>
+
 <p-confirmDialog #cd [transitionOptions]="'0.25ms'" header="Confirmación" icon="pi pi-exclamation-triangle">
     <ng-template pTemplate="footer">
         <button type="button" pButton class="p-button-secondary" icon="pi pi-times" (click)="cd.reject()" label="Cancelar" ></button>

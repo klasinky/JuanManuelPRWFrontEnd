@@ -1,72 +1,79 @@
 <div class="container bgsecondary mt-4 p-2">
-    <div class="text-center">
-        <button title="Post más recientes" [disabled]="btnAll" (click)="getPosts()" class="btn-filter m-1">
-            <div *ngIf="btnAllLoading" class="spinner-border spinner-border-sm text-light" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <i *ngIf="!btnAllLoading" class="fas fa-sun"></i>
-            Nuevos
-        </button>
-        <button title="Post con más likes en la semana" [disabled]="btnHot" (click)="getPosts('?sort=hot')" class="btn-filter m-1">
-            <div *ngIf="btnHotLoading" class="spinner-border spinner-border-sm text-light" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <i *ngIf="!btnHotLoading" class="fas fa-fire"></i>
-            Hot
-        </button>
-        <button title="Post con más likes" [disabled]="btnTop" (click)="getPosts('?sort=top')" class="btn-filter m-1">
-            <div *ngIf="btnTopLoading" class="spinner-border spinner-border-sm text-light" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <i *ngIf="!btnTopLoading" class="fas fa-chart-line"></i>
-            Top
-        </button>
+  <div class="text-center">
+    <button title="Post más recientes" [disabled]="btnAll" (click)="getPosts()" class="btn-filter m-1">
+      <div *ngIf="btnAllLoading" class="spinner-border spinner-border-sm text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <i *ngIf="!btnAllLoading" class="fas fa-sun"></i>
+      Nuevos
+    </button>
+    <button title="Post con más likes en la semana" [disabled]="btnHot" (click)="getPosts('?sort=hot')"
+      class="btn-filter m-1">
+      <div *ngIf="btnHotLoading" class="spinner-border spinner-border-sm text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <i *ngIf="!btnHotLoading" class="fas fa-fire"></i>
+      Hot
+    </button>
+    <button title="Post con más likes" [disabled]="btnTop" (click)="getPosts('?sort=top')" class="btn-filter m-1">
+      <div *ngIf="btnTopLoading" class="spinner-border spinner-border-sm text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <i *ngIf="!btnTopLoading" class="fas fa-chart-line"></i>
+      Top
+    </button>
 
-    </div>
-    <div class="text-center mt-2">
-        <a [routerLink]="['/dashboard/post/create/user']" class="btn-filter"> 
-            <i class="fas fa-pencil-alt"></i>
-            Crear Post
-        </a>
-    </div>
+  </div>
+  <div class="text-center mt-2">
+    <a [routerLink]="['/dashboard/post/create/user']" class="btn-filter">
+      <i class="fas fa-pencil-alt"></i>
+      Crear Post
+    </a>
+  </div>
 </div>
-
 
 <!-- ------------------------------- Paginate ------------------------------- -->
 <div class="container bgsecondary mt-2 p-2 d-flex justify-content-evenly">
-    <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
-        <i></i><i></i>
-    </button>
-    <h3 class="title">-</h3>
-    <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
-        <i></i><i></i>
-    </button>
+  <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+    <i></i><i></i>
+  </button>
+  <h3 class="title">-</h3>
+  <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+    <i></i><i></i>
+  </button>
 </div>
-
-<!-- ------------------------------- Posts ------------------------------- -->
-<div *ngIf="posts && !loading" class="container">
-    <div class="row">
-        <div class="col-md-4" *ngFor="let post of posts">
-            <app-post-list (refreshPosts)="getPosts()" [post]="post"></app-post-list>
+<div class="row">
+  <div class="col-md-8">
+    <!-- ------------------------------- Posts ------------------------------- -->
+    <div *ngIf="posts && !loading" class="container">
+      <div class="row">
+        <div class="col-md-6" *ngFor="let post of posts">
+          <app-post-list (refreshPosts)="getPosts()" [post]="post"></app-post-list>
         </div>
+      </div>
     </div>
-</div>
-<div class="container">
-    <div class="row mt-2" *ngIf="loading">
-        <div class="col-md-4 mt-3" *ngFor="let item of numberPagination">
-            <ngx-skeleton-loader animation="pulse" [theme]="getStyle()"></ngx-skeleton-loader>
+    <div class="container">
+      <div class="row mt-2" *ngIf="loading">
+        <div class="col-md-6 mt-3" *ngFor="let item of numberPagination">
+          <ngx-skeleton-loader animation="pulse" [theme]="getStyle()"></ngx-skeleton-loader>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+  <div class="col-md-4 mt-4">
+    <app-tags-detail></app-tags-detail>
+  </div>
 
+
+</div>
 
 <!-- ------------------------------- Paginate ------------------------------- -->
 <div class="container bgsecondary mt-4 p-2 d-flex justify-content-evenly">
-    <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
-        <i></i><i></i>
-    </button>
-    <h3 class="title">-</h3>
-    <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
-        <i></i><i></i>
-    </button>
+  <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+    <i></i><i></i>
+  </button>
+  <h3 class="title">-</h3>
+  <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+    <i></i><i></i>
+  </button>
 </div>
