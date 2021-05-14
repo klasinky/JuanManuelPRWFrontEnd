@@ -24,6 +24,11 @@
           No hay más mensajes
         </div>
       </div>
+      <div *ngIf="comments?.length == 0">
+        <div class="text-center">
+          <h4>Este post no tiene mensajes, sé el primero!</h4>
+        </div>
+      </div>
       <!-- ----------------------------- End Message ----------------------------- -->
 
     </div>

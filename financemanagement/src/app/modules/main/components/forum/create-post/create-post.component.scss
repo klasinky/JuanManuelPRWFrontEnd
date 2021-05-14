@@ -6,7 +6,7 @@
     & .p-editor-content .ql-editor {
       background-color: $alternative-color;
       border: none;
-      color: $primary-font-color;  
+      color: $primary-font-color;
     }
 
     .p-editor-content.ql-snow {
@@ -15,7 +15,6 @@
 
     & .p-editor-toolbar.ql-snow {
       background-color: $primary-color;
-      width: 95%;
       border: none;
     }
 
@@ -23,16 +22,83 @@
 
 }
 
-.form-control{
+.form-control {
   color: $primary-font-color;
   background-color: $alternative-color;
-  width: 95%;
   border: none;
-  &:focus{
+
+  &:focus {
     outline: none;
   }
-  &::placeholder{
+
+  &::placeholder {
     color: $primary-font-color;
     opacity: 0.8;
   }
 }
+
+.title-top {
+  text-decoration: overline;
+}
+
+/* ----------------------------- Button Checkbox ---------------------------- */
+ 
+
+  .ck-button {
+    max-width: 100%;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 4px;
+    padding: 4px;
+    background-color: $secondary-color;
+    border-radius: 4px;
+    overflow: hidden;
+
+    &:hover {
+      background-color: $primary-font-color;
+      color: $primary-color;
+
+    }
+
+    & label {
+      width: 100%;
+      cursor: pointer;
+
+    }
+
+
+    & label span {
+      text-align: center;
+      padding: 3px 0px;
+      display: block;
+      border-radius: 4px;
+
+      & i.fa-check {
+        display: none;
+      }
+
+      & i.fa-times {
+        display: inline;
+      }
+    }
+
+    & label input {
+      position: absolute;
+      top: -20px;
+
+    }
+
+    & input:checked+span {
+
+      & i.fa-check {
+        display: inline;
+        color: rgb(5, 187, 5);
+      }
+
+      & i.fa-times {
+        display: none;
+      }
+    }
+
+
+  }

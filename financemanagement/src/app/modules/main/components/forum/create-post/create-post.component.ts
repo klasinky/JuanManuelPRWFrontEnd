@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Post } from 'src/app/interfaces/post';
+import { Post, Tag } from 'src/app/interfaces/post';
 import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,6 +14,8 @@ export class CreatePostComponent implements OnInit {
 
   text: string = "";
   title: string = "";
+  postTags?: Tag[];
+  tags?: Tag[];
   id?: number;
   isCreate: boolean = true;
 
@@ -21,7 +23,7 @@ export class CreatePostComponent implements OnInit {
     private httpService: HttpService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private router : Router) { }
+    private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -31,60 +33,53 @@ export class CreatePostComponent implements OnInit {
         if (this.id) {
           this.getPost();
           this.isCreate = false;
+        } else {
+          this.getAllTags();
         }
       } catch (error) {
-        
+        this.getAllTags();
       }
     });
+
+
   }
 
   createPost() {
     if (this.checkPost()) {
+      const tagsSelected = this.tags?.filter(tag => tag.checked == true).map(tag => tag.id);
+      console.log(tagsSelected)
       const data = {
         'title': this.title,
         'description': this.text,
-        'tags': []
+        'tags': tagsSelected
       }
-      this.httpService.postAuth('posts', data).subscribe(
+      const url = this.isCreate ? 'posts' : environment.endpoints.posts.viewset + this.id;
+      const functionName = this.isCreate ? 'postAuth' : 'patchAuth';
+      this.httpService[functionName](url, data).subscribe(
         (data) => {
-          this.router.navigate(['/dashboard/post']).then(() => {
-            // Notificación
-            this.toastr.success('Post creado')
-          })
+          if (this.isCreate) {
+            this.router.navigate(['/dashboard/post']).then(() => {
+              // Notificación
+              this.toastr.success('Post creado')
+            })
+          } else {
+            this.router.navigate(['/dashboard/post/', this.id]).then(() => {
+              // Notificación
+              this.toastr.success('El post ha sido editado correctamente.')
+            })
+          }
+
         }, (error) => {
           this.toastr.error(error.error.detail, 'Error')
         }
       )
-    }else{
+    } else {
       console.log("Es fake")
     }
   }
 
-  editPost(){
-    if (this.checkPost()) {
-      const data = {
-        'title': this.title,
-        'description': this.text,
-        'tags': []
-      };
-      const url: string = environment.endpoints.posts.viewset + this.id;
-      this.httpService.patchAuth(url, data).subscribe(
-        (data) => {
-          this.router.navigate(['/dashboard/post/',this.id]).then(() => {
-            // Notificación
-            this.toastr.success('El post ha sido editado correctamente.')
-          })
-        },
-        (error) => {
-          console.log(error);
-          
-          this.toastr.error('No se ha podido editar el post.', 'Error')
-        }
-      )
-    }
-  }
 
-  getPost(){
+  getPost() {
     const url = 'posts/' + this.id;
     this.httpService.getAuth(url).subscribe(
       (data) => {
@@ -92,6 +87,8 @@ export class CreatePostComponent implements OnInit {
         if (post.is_owner) {
           this.title = post.title + "";
           this.text = post.description + "";
+          this.postTags = post.tags;
+          this.getAllTags();
         } else {
           this.redirectToDashboard();
         }
@@ -102,7 +99,7 @@ export class CreatePostComponent implements OnInit {
     )
   }
 
-  redirectToDashboard(){
+  redirectToDashboard() {
     this.router.navigate(['dashboard/post']).then(() => {
       // Notificación
       this.toastr.error('Ha ocurrido un error', 'Error');
@@ -114,4 +111,28 @@ export class CreatePostComponent implements OnInit {
       && this.title.length > 3 && this.title.length < 255;
   }
 
+  getAllTags() {
+    this.httpService.getAuth('tags').subscribe(
+      (data) => {
+        let tags = data as Tag[];
+        this.tags = tags.map(x => ({ ...x, checked: false }));
+
+        if (!this.isCreate) {
+          this.getPostTags();
+        }
+
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
+  getPostTags() {
+    this.tags?.forEach(tag => {
+      if (this.postTags?.find(tagPost => tag.id == tagPost.id)) {
+        tag.checked = true;
+      }
+    })
+  }
 }

@@ -1,11 +1,14 @@
 import { User } from './user';
 
 export interface Tag {
+    id: number;
     name: string;
     color: string;
+    checked?: boolean;
 }
 
 export interface TagDetail{
+    id: number;
     name: string;
     num_post: number;
 }
@@ -21,6 +24,7 @@ export interface Post {
     url_like?: string,
     is_like: boolean,
     created_at? : Date,
+    updated_at? : Date,
     is_owner?: boolean
     tags: Tag[]
 }
