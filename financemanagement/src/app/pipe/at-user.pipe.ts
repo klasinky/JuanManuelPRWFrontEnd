@@ -22,7 +22,7 @@ export class AtUserPipe implements PipeTransform {
         if (t.startsWith("@") && t.length > 1 && !t.includes("<a>") && !t.includes("</a>") ) {
           console.log(t);
           let username = t.replace(/[,.]/g, "");
-          stylizedText += `<a class="tool-username" data-tooltip="${username.substring(1)}" href="${username.substring(1)}">${t}</a>`;
+          stylizedText += `<a class="tool-username" data-tooltip="${username.substring(1)}" href="${username.substring(1)}">${t}</a>`+" ";
         } else {
           stylizedText += t + " ";
         }

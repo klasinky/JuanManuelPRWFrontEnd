@@ -15,7 +15,6 @@
 
     & .p-editor-toolbar.ql-snow {
       background-color: $primary-color;
-      width: 95%;
       border: none;
     }
 
@@ -26,7 +25,6 @@
 .form-control {
   color: $primary-font-color;
   background-color: $alternative-color;
-  width: 95%;
   border: none;
 
   &:focus {
@@ -44,60 +42,63 @@
 }
 
 /* ----------------------------- Button Checkbox ---------------------------- */
+ 
 
-.ck-button {
-  margin: 4px;
-  background-color: $secondary-color;
-  border-radius: 4px;
-  overflow: auto;
-  float: left;
-
-  & label {
-    float: left;
-    width: 4.0em;
-    cursor: pointer;
-
-  }
-
-
-  & label span {
-    text-align: center;
-    padding: 3px 0px;
-    display: block;
+  .ck-button {
+    max-width: 100%;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 4px;
+    padding: 4px;
+    background-color: $secondary-color;
     border-radius: 4px;
-    
-    & i.fa-check{
-      display: none;
-    }
-    & i.fa-times{
-      display: inline;
-    }
-  }
+    overflow: hidden;
 
-  & label input {
-    position: absolute;
-    top: -20px;
-  
-  }
+    &:hover {
+      background-color: $primary-font-color;
+      color: $primary-color;
 
-  & input:hover+span {
-    background-color: $primary-font-color;
-    color: $primary-color;
-    
-  }
-
-  & input:checked+span {
-    background-color: $alternative-color;
-    & i.fa-check{
-      display: inline;
     }
-    & i.fa-times{
-      display: none;
-    }
-  }
 
-  & input:checked:hover+span {
-    background-color: darken($alternative-color-hover, 5%);
-    color: $primary-font-color;
+    & label {
+      width: 100%;
+      cursor: pointer;
+
+    }
+
+
+    & label span {
+      text-align: center;
+      padding: 3px 0px;
+      display: block;
+      border-radius: 4px;
+
+      & i.fa-check {
+        display: none;
+      }
+
+      & i.fa-times {
+        display: inline;
+      }
+    }
+
+    & label input {
+      position: absolute;
+      top: -20px;
+
+    }
+
+    & input:checked+span {
+
+      & i.fa-check {
+        display: inline;
+        color: rgb(5, 187, 5);
+      }
+
+      & i.fa-times {
+        display: none;
+      }
+    }
+
+
   }
-}

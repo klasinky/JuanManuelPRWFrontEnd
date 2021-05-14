@@ -1,11 +1,14 @@
 import { User } from './user';
 
 export interface Tag {
+    id: number;
     name: string;
     color: string;
+    checked?: boolean;
 }
 
 export interface TagDetail{
+    id: number;
     name: string;
     num_post: number;
 }
