@@ -1,14 +1,14 @@
-<div class="text-center mt-3" *ngIf="month?.categories">
+<div class="text-center" *ngIf="month?.categories">
 
-  <div class="row m-2 p-2">
-    <div class="col-12 col-md-6 p-2">
+  <div class="row">
+    <div class="col-12 col-md-6">
       <div class="bgsecondary full-height">
         <br>
         <h3>Ingresos</h3>
         <app-chart-month [isExpense]="false" [categories]="month?.categories"></app-chart-month>
       </div>
     </div>
-    <div class="col-12 col-md-6 p-2">
+    <div class="col-12 col-md-6">
       <div class="bgsecondary full-height">
         <br>
         <h3>Gastos</h3>
@@ -18,17 +18,15 @@
 
 
   </div>
-  <div class="row mx-2">
-    <div class="col-md-6">
+  <div class="row">
+    <div class="col-md-6 my-auto">
       <app-analysis [month]="month"></app-analysis>
     </div>
-    <div class="col-md-6 ">
-      <div class="row ">
-        <div class="col-12 bgsecondary mb-4">
+    <div class="col-md-6">
+        <div class="bgsecondary mb-4">
           <h3 class="mt-4">Total Mes</h3>
           <app-chart-difference [month]="month?.month"></app-chart-difference>
         </div>
-      </div>
     </div>
 
     <div class="col-12 bgsecondary">
@@ -47,7 +45,7 @@
     </div>
   </div>
 
-  <div class="row p-1 mt-2">
+  <div class="row ">
 
     <div class="col-12">
       <app-category-detail [month]="month"></app-category-detail>

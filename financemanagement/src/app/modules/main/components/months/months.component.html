@@ -1,39 +1,37 @@
-<app-over-view ></app-over-view>
-
-<div class="container">
-
-  <div class="container bgsecondary mt-2 p-2 d-flex justify-content-evenly">
-    <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
-      <i></i><i></i>
-    </button>
-    <h3 class="title">-</h3>
-    <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
-      <i></i><i></i>
-    </button>
-  </div>
-
-  <div *ngIf="!loading" class="row">
-    <div class="col-md-6" *ngFor="let month of months">
-      <app-list-detail [month]="month" (deleteMonth)="deleteMonth($event)"></app-list-detail>
-    </div>
-  </div>
-  <div class="row mt-2" *ngIf="loading">
-    <div class="col-md-6 mt-3" *ngFor="let item of numberPagination">
-      <ngx-skeleton-loader animation="pulse" [theme]="getStyle()"></ngx-skeleton-loader>
-    </div>
-  </div>
-
-  <div class="container bgsecondary mt-4 p-2 d-flex justify-content-evenly">
-    <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
-      <i></i><i></i>
-    </button>
-    <h3 class="title">-</h3>
-    <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
-      <i></i><i></i>
-    </button>
-  </div>
+<app-over-view></app-over-view>
 
 
+<div class="bgsecondary mt-2 p-2 d-flex justify-content-evenly">
+  <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+    <i></i><i></i>
+  </button>
+  <h3 class="title">-</h3>
+  <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+    <i></i><i></i>
+  </button>
 </div>
+
+<div *ngIf="!loading" class="row">
+  <div class="col-md-6 col-xl-4" *ngFor="let month of months">
+    <app-list-detail [month]="month" (deleteMonth)="deleteMonth($event)"></app-list-detail>
+  </div>
+</div>
+<div class="row mt-2" *ngIf="loading">
+  <div class="col-md-6 mt-3 col-xl-4" *ngFor="let item of numberPagination">
+    <ngx-skeleton-loader animation="pulse" [theme]="getStyle()"></ngx-skeleton-loader>
+  </div>
+</div>
+
+<div class="bgsecondary mt-4 p-2 d-flex justify-content-evenly">
+  <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+    <i></i><i></i>
+  </button>
+  <h3 class="title">-</h3>
+  <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+    <i></i><i></i>
+  </button>
+</div>
+
+
 
 <app-boton-crear (newMonth)="addMonth($event)"></app-boton-crear>

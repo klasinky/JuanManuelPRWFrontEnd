@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="row row-eq-height mt-5">
-    <div class="col-md-8 bgsecondary">
+<div class="bgsecondary">
+  <div class="row row-eq-height">
+    <div class="col-md-8 ">
       <div class="post p-3">
         <div class="author-detail">
           <div class="d-flex bd-highlight">
@@ -26,7 +26,8 @@
             <div *ngIf="post?.is_owner" class="my-2 me-4 bd-highlight">
               <div class="d-flex flex-column bd-highlight">
                 <div class="bg-highlight">
-                  <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deletePostAction()"></app-delete-button>
+                  <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deletePostAction()">
+                  </app-delete-button>
                 </div>
 
                 <div class="my-auto bg-highlight">
@@ -35,8 +36,8 @@
                   </a>
                 </div>
               </div>
-              
-             
+
+
             </div>
 
             <div class="my-4 bd-highlight">
@@ -73,7 +74,7 @@
       <app-tags-post [tags]="post?.tags"></app-tags-post>
     </div>
 
-    <div class="col-md-4 bgsecondary">
+    <div class="col-md-4">
       <div class="chat-vid__container">
         <div class="chat-vid__title anim" style="--delay: .3s">Post similares</div>
         <div class="chat-vid anim" style="--delay: .4s">
@@ -102,10 +103,11 @@
         <div class="chat-vid__button anim" style="--delay: .6s">See All related videos (32)</div>
       </div>
     </div>
-
+    
     <div class="col-md-12 ">
+      <hr>
       <div class="row">
-        <div class="col-12 bgsecondary mb-5">
+        <div class="col-12 mb-5">
           <app-post-comment [idPost]="id"></app-post-comment>
         </div>
       </div>

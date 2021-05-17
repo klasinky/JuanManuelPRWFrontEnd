@@ -1,4 +1,5 @@
-<div class="container bgsecondary mt-4 p-2">
+<div class="bgsecondary p-2">
+
   <div class="text-center">
     <button title="Post más recientes" [disabled]="btnAll" (click)="getPosts()" class="btn-filter m-1">
       <div *ngIf="btnAllLoading" class="spinner-border spinner-border-sm text-light" role="status">
@@ -22,8 +23,8 @@
       <i *ngIf="!btnTopLoading" class="fas fa-chart-line"></i>
       Top
     </button>
-
   </div>
+
   <div class="text-center mt-2">
     <a [routerLink]="['/dashboard/post/create/user']" class="btn-filter">
       <i class="fas fa-pencil-alt"></i>
@@ -33,7 +34,7 @@
 </div>
 
 <!-- ------------------------------- Paginate ------------------------------- -->
-<div class="container bgsecondary mt-2 p-2 d-flex justify-content-evenly">
+<div class=" bgsecondary mt-2 p-2 d-flex justify-content-evenly">
   <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
     <i></i><i></i>
   </button>
@@ -45,16 +46,16 @@
 <div class="row">
   <div class="col-md-8">
     <!-- ------------------------------- Posts ------------------------------- -->
-    <div *ngIf="posts && !loading" class="container">
+    <div *ngIf="posts && !loading" class="">
       <div class="row">
-        <div class="col-md-6" *ngFor="let post of posts">
+        <div class="col-sm-6 col-xl-4" *ngFor="let post of posts">
           <app-post-list (refreshPosts)="getPosts()" [post]="post"></app-post-list>
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="">
       <div class="row" *ngIf="loading">
-        <div class="col-md-6" *ngFor="let item of numberPagination">
+        <div class="col-sm-6 col-xl-4" *ngFor="let item of numberPagination">
           <app-post-list-skeleton></app-post-list-skeleton>
         </div>
       </div>
@@ -68,7 +69,7 @@
 </div>
 
 <!-- ------------------------------- Paginate ------------------------------- -->
-<div class="container bgsecondary mt-4 p-2 d-flex justify-content-evenly">
+<div class=" bgsecondary mt-4 p-2 d-flex justify-content-evenly">
   <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
     <i></i><i></i>
   </button>

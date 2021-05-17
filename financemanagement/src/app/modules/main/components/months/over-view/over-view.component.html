@@ -1,4 +1,3 @@
-<div class="container pt-5">
   <div class="row align-items-stretch">
     <div class="c-dashboardInfo color-gradient-success col-lg-4 col-md-6">
       <div class="wrap">
@@ -7,7 +6,7 @@
         </h4>
 
         <span class="hind-font caption-12 c-dashboardInfo__count">
-            {{ detail?.total_entries|currency:'EUR' }}
+          {{ detail?.total_entries|currency:'EUR' }}
         </span>
       </div>
     </div>
@@ -30,29 +29,28 @@
     </div>
 
   </div>
-  <div class="container bgsecondary p-2">
+  <div class="bgsecondary p-2">
     <div class="text-center">
-      <button [class.disabled]="btnAll" (click)="getTotal('?q=all')" class="btn btn-dark m-1">
+      <button [disabled]="btnAll" (click)="getTotal('?q=all')" class="btn-filter m-1">
         <div *ngIf="btnAllLoading" class="spinner-border spinner-border-sm text-light" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
         <i *ngIf="!btnAllLoading" class="fas fa-globe"></i>
         Todos
       </button>
-      <button [class.disabled]="btnMonth" (click)="getTotal('?q=month')" class="btn btn-dark m-1">
-          <div *ngIf="btnMonthLoading" class="spinner-border spinner-border-sm text-light" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-          <i *ngIf="!btnMonthLoading" class="fas fa-calendar-check"></i> 
-          Mes
+      <button [disabled]="btnMonth" (click)="getTotal('?q=month')" class="btn-filter m-1">
+        <div *ngIf="btnMonthLoading" class="spinner-border spinner-border-sm text-light" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <i *ngIf="!btnMonthLoading" class="fas fa-calendar-check"></i>
+        Mes
       </button>
-      <button [class.disabled]="btnYear" (click)="getTotal('?q=year')" class="btn btn-dark m-1">
+      <button [disabled]="btnYear" (click)="getTotal('?q=year')" class="btn-filter m-1">
         <div *ngIf="btnYearLoading" class="spinner-border spinner-border-sm text-light" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
-        <i *ngIf="!btnYearLoading" class="fas fa-calendar"></i> 
+        <i *ngIf="!btnYearLoading" class="fas fa-calendar"></i>
         Año
       </button>
     </div>
   </div>
-</div>
