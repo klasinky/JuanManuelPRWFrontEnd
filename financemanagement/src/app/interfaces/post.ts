@@ -24,7 +24,7 @@ export interface Post {
     url_like?: string,
     is_like: boolean,
     created_at? : Date,
-    updated_at? : Date,
+    update_at? : Date,
     is_owner?: boolean
     tags: Tag[]
 }

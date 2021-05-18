@@ -6,18 +6,16 @@
           <div class="d-flex bd-highlight">
 
             <div class="me-auto my-auto bd-highlight">
+              <h3 *ngIf="!loading">{{ post?.title|titlecase }}</h3>
               <div *ngIf="loading" class="d-flex">
-                <p-skeleton shape="circle" size="48px" styleClass="p-mr-2"></p-skeleton>
                 <div class="mr-1">
                   <p-skeleton width="10rem" styleClass="p-mb-2"></p-skeleton>
                   <p-skeleton width="5rem" styleClass="p-mb-2"></p-skeleton>
                 </div>
               </div>
-
-              <div *ngIf="!loading" class="post-author my-1 fw-bold">
-                <p-avatar label="{{ post?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large"
-                  [style]="getStyle()" shape="circle"></p-avatar>
-                @{{ post?.author?.username }}
+    
+              <div *ngIf="!loading" class=" my-1 ">
+                Autor: <span class="fw-bold">@{{ post?.author?.username }}</span> | Última vez modificado {{ post?.update_at| amLocale:'es' | amTimeAgo  }}
               </div>
             </div>
 
@@ -51,9 +49,6 @@
 
         <hr>
 
-        <div class="post-title">
-          <h3>{{ post?.title|titlecase }}</h3>
-        </div>
 
         <div class="post-body ">
           <div *ngIf="loading">
@@ -103,7 +98,7 @@
         <div class="chat-vid__button anim" style="--delay: .6s">See All related videos (32)</div>
       </div>
     </div>
-    
+
     <div class="col-md-12 ">
       <hr>
       <div class="row">

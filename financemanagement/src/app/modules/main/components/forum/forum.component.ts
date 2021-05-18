@@ -27,7 +27,7 @@ export class ForumComponent implements OnInit {
   btnTopLoading: boolean = false;
 
   constructor(private httpService: HttpService) {
-    this.numberPagination = Array(10).fill(0).map((x, i) => i);
+    this.numberPagination = Array(12).fill(0).map((x, i) => i);
   }
 
   ngOnInit(): void {
