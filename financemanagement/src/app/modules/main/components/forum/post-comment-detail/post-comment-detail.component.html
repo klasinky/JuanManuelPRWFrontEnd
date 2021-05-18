@@ -2,7 +2,7 @@
   <div class="my-auto bd-highlight fw-bold" [class.w-isNotOwner]="comment?.is_owner == false" [class.w-comment]="comment?.is_owner == true">
     <p-avatar label="{{ comment?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large"
       [style]="getStyle()" shape="circle"></p-avatar>
-    @{{ comment?.author?.username }}
+      <a class="text-light decoration" [routerLink]="['/dashboard/user/',comment?.author?.username]"><span class="fw-bold">@{{ comment?.author?.username }}</span></a>
   </div>
 
   <div *ngIf="comment?.is_owner" class="my-auto flex-shrink-1 bd-highlight">

@@ -15,7 +15,7 @@
               </div>
     
               <div *ngIf="!loading" class=" my-1 ">
-                Autor: <span class="fw-bold">@{{ post?.author?.username }}</span> | Última vez modificado {{ post?.update_at| amLocale:'es' | amTimeAgo  }}
+                Autor: <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span class="fw-bold">@{{ post?.author?.username }}</span></a> | Última vez modificado {{ post?.update_at| amLocale:'es' | amTimeAgo  }}
               </div>
             </div>
 

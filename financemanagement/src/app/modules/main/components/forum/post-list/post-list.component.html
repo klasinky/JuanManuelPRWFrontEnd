@@ -16,7 +16,7 @@
           [liked]="post?.is_like"></app-like-button>
       </div>
       <div class="user-info w-100">
-        <span>@{{post?.author?.username}}</span>
+        <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span>@{{post?.author?.username}}</span></a>
         <small>{{ post?.created_at | amLocale:'es' | amTimeAgo }}</small>
       </div>
       <div *ngIf="post?.is_owner" class="user-delete">
