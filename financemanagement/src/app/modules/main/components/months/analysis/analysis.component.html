@@ -1,28 +1,25 @@
-<div class="">
-    <div class="row align-items-stretch">
-        <div class="c-dashboardInfo color-gradient-info col-12 mb-2">
-          <div class="wrap">
-            <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Incremento de Ingresos
-              <i class="fas fa-coins    "></i>
-            </h4>
-    
-            <span class="hind-font caption-12 c-dashboardInfo__count">
-                {{ analysis?.increase_entries }}%
-            </span>
-          </div>
-        </div>
-    
-        <div class="c-dashboardInfo color-gradient-error col-12 mt-2">
-          <div class="wrap">
-            <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Incremento de Gastos
-              <i class="fas fa-wallet"></i>
-            </h4><span
-              class="hind-font caption-12 c-dashboardInfo__count">
-              {{ analysis?.increase_expenses }}%
-            </span>
-          </div>
-        </div>
-     
-    
-      </div>
+<div class="row align-items-stretch">
+
+  <div class="c-dashboardInfo color-gradient-info col-12 mb-2">
+    <div class="wrap">
+      <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Incremento de Ingresos
+        <i class="fas fa-coins    "></i>
+      </h4>
+
+      <span class="hind-font caption-12 c-dashboardInfo__count">
+        {{ analysis?.increase_entries }}%
+      </span>
+    </div>
+  </div>
+
+  <div class="c-dashboardInfo color-gradient-error col-12 mt-4">
+    <div class="wrap">
+      <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Incremento de Gastos
+        <i class="fas fa-wallet"></i>
+      </h4><span class="hind-font caption-12 c-dashboardInfo__count">
+        {{ analysis?.increase_expenses }}%
+      </span>
+    </div>
+  </div>
+
 </div>

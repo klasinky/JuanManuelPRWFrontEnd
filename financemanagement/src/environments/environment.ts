@@ -92,6 +92,9 @@ export const environment = {
         start: posts + "/",
         end: "/" + comment
       }
+    },
+    user: {
+      profile: users + "/endpoint/"
     }
   }
 

@@ -1,11 +1,12 @@
-$primary-color: #1A1A1C;
-$secondary-color: #69202f ;
-$alternative-color: darken($secondary-color,10%);
+$primary-color: #21343B;
+$secondary-color: #30444D ;
+$alternative-color: #21343B;
 
 $primary-color-hover: lighten($primary-color, 5%);
 $secondary-color-hover: darken($secondary-color, 5%);
 $alternative-color-hover: lighten($alternative-color, 5%);
 
+$light-primary-color: #65DB9C;
 
 $primary-font-color: #ffffff;
 $secondary-font-color: #dbd7d7;

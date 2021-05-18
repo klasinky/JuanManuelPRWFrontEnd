@@ -1,23 +1,21 @@
-<div class="container">
-  <div class="row row-eq-height mt-5">
-    <div class="col-md-8 bgsecondary">
+<div class="bgsecondary">
+  <div class="row row-eq-height">
+    <div class="col-md-8 ">
       <div class="post p-3">
         <div class="author-detail">
           <div class="d-flex bd-highlight">
 
             <div class="me-auto my-auto bd-highlight">
+              <h3 *ngIf="!loading">{{ post?.title|titlecase }}</h3>
               <div *ngIf="loading" class="d-flex">
-                <p-skeleton shape="circle" size="48px" styleClass="p-mr-2"></p-skeleton>
                 <div class="mr-1">
                   <p-skeleton width="10rem" styleClass="p-mb-2"></p-skeleton>
                   <p-skeleton width="5rem" styleClass="p-mb-2"></p-skeleton>
                 </div>
               </div>
-
-              <div *ngIf="!loading" class="post-author my-1 fw-bold">
-                <p-avatar label="{{ post?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large"
-                  [style]="getStyle()" shape="circle"></p-avatar>
-                @{{ post?.author?.username }}
+    
+              <div *ngIf="!loading" class=" my-1 ">
+                Autor: <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span class="fw-bold">@{{ post?.author?.username }}</span></a> | Última vez modificado {{ post?.update_at| amLocale:'es' | amTimeAgo  }}
               </div>
             </div>
 
@@ -26,7 +24,8 @@
             <div *ngIf="post?.is_owner" class="my-2 me-4 bd-highlight">
               <div class="d-flex flex-column bd-highlight">
                 <div class="bg-highlight">
-                  <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deletePostAction()"></app-delete-button>
+                  <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deletePostAction()">
+                  </app-delete-button>
                 </div>
 
                 <div class="my-auto bg-highlight">
@@ -35,8 +34,8 @@
                   </a>
                 </div>
               </div>
-              
-             
+
+
             </div>
 
             <div class="my-4 bd-highlight">
@@ -50,9 +49,6 @@
 
         <hr>
 
-        <div class="post-title">
-          <h3>{{ post?.title|titlecase }}</h3>
-        </div>
 
         <div class="post-body ">
           <div *ngIf="loading">
@@ -73,7 +69,7 @@
       <app-tags-post [tags]="post?.tags"></app-tags-post>
     </div>
 
-    <div class="col-md-4 bgsecondary">
+    <div class="col-md-4">
       <div class="chat-vid__container">
         <div class="chat-vid__title anim" style="--delay: .3s">Post similares</div>
         <div class="chat-vid anim" style="--delay: .4s">
@@ -104,8 +100,9 @@
     </div>
 
     <div class="col-md-12 ">
+      <hr>
       <div class="row">
-        <div class="col-12 bgsecondary mb-5">
+        <div class="col-12 mb-5">
           <app-post-comment [idPost]="id"></app-post-comment>
         </div>
       </div>
