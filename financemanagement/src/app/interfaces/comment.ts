@@ -1,8 +1,8 @@
-import { User } from './user';
+import { UserProfile } from './user';
 export interface CommentPost {
     id?: number,
     description: string,
-    author: User,
+    author: UserProfile,
     parent?: number | null,
     likes?: number,
     url_like?: string,

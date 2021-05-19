@@ -6,7 +6,23 @@
           <h2 class="title">Cambiar Datos</h2>
         </div>
         <form [formGroup]="formProfile">
+           <!-- Image Preview -->
+          <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
+            <img [src]="imageURL">
+          </div>
           <div class="row text-light">
+
+            
+            <div class="col-md-12 mx-auto">
+              <i class="fas fa-user"></i>
+              <input class="form-control" type="file" accept="image/*" (change)="showPreview($event)">
+            </div>
+            <!-- <div *ngIf="nameError">
+              <div class="text-center" *ngFor="let item of nameErrorMessage">
+                <label class="text-danger">{{item}}</label>
+              </div>
+            </div> -->
+
 
             <!-- -------------------------------- Name --------------------------------- -->
 

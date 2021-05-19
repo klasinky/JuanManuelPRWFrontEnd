@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
   formPassword: FormGroup;
   user?: User
   currenciesOptions?: Currency[]
+  imageURL?: string;
+
 
   oldPasswordError = false;
   oldPasswordErrorMessage: string[] = [];
@@ -97,8 +99,9 @@ export class ProfileComponent implements OnInit {
         username: this.formProfile?.get("username")?.value,
         email: this.formProfile?.get("email")?.value,
         currency: this.formProfile?.get("currency")?.value,
+        profile_pic: this.imageURL,
       } as User;
-
+   
       this.httpService.patchAuth(url, userNewData).subscribe(
         (data: User) => {
           this.storageService.setItem(AuthConstants.DATAUSER, data)
@@ -163,7 +166,8 @@ export class ProfileComponent implements OnInit {
       'email': ['', [Validators.required, Validators.email]],
       'name': ['', [Validators.required, Validators.minLength(3)]],
       'username': ['', [Validators.required, Validators.minLength(3)]],
-      'currency': ['', [Validators.required]]
+      'currency': ['', [Validators.required]],
+      'profile_pic':[null]
     });
   }
 
@@ -205,4 +209,21 @@ export class ProfileComponent implements OnInit {
   resetForms() {
     this.formPassword.reset();
   }
+
+  // Image Preview
+  showPreview(event: any) {
+    const file = event.target?.files[0];
+    this.formProfile.patchValue({
+      profile_pic: file
+    });
+    this.formProfile.get('profile_pic')?.updateValueAndValidity()
+
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageURL = reader.result as string;
+    }
+    reader.readAsDataURL(file)
+  }
+
 }
