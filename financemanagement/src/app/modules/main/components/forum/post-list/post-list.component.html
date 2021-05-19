@@ -6,10 +6,10 @@
   </div>
   <div class="card-content">
       <div class="d-flex">
-        <span *ngFor="let item of post?.tags | slice:0:3; let i=index"  class="tag">{{ item.name }}</span>
+        <span *ngFor="let item of post?.tags | slice:0:2; let i=index"  class="tag">{{ item.name }}</span>
 
       </div>
-    <div [routerLink]="['/dashboard/post/',post?.id]" class="title">{{ (post?.title!.length>55)? (post?.title | slice:0:50)+'...':(post?.title) }}</div>
+    <div [routerLink]="['/dashboard/post/',post?.id]" class="title">{{ (post?.title!.length>23)? (post?.title | slice:0:23)+'...':(post?.title) }}</div>
     <div class="user">
       <div class="user-like">
         <app-like-button (sendLike)="sendLike()" [countLike]="post?.likes" [showLoading]="showLikeLoader"

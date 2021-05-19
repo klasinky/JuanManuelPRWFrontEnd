@@ -1,7 +1,9 @@
 <div class="d-flex bd-highlight">
   <div class="my-auto bd-highlight fw-bold" [class.w-isNotOwner]="comment?.is_owner == false" [class.w-comment]="comment?.is_owner == true">
-    <p-avatar label="{{ comment?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large"
+    <p-avatar *ngIf="!comment?.author?.profile_pic" label="{{ comment?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large"
       [style]="getStyle()" shape="circle"></p-avatar>
+      <p-avatar *ngIf="comment?.author?.profile_pic" image="{{ comment?.author?.profile_pic }}" styleClass="p-mr-2" size="large" shape="circle"></p-avatar>
+
       <a class="text-light decoration" [routerLink]="['/dashboard/user/',comment?.author?.username]"><span class="fw-bold">@{{ comment?.author?.username }}</span></a>
   </div>
 
