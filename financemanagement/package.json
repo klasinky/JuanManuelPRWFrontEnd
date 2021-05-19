@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
     "@swimlane/ngx-charts": "^17.0.1",
+    "angular-svg-round-progressbar": "^6.0.1",
     "moment": "^2.29.1",
     "ngx-moment": "^5.0.0",
     "ngx-skeleton-loader": "^2.9.1",

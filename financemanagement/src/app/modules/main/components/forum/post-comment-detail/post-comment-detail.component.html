@@ -1,23 +1,38 @@
-<div class="d-flex bd-highlight">
-  <div class="my-auto bd-highlight fw-bold" [class.w-isNotOwner]="comment?.is_owner == false" [class.w-comment]="comment?.is_owner == true">
-    <p-avatar *ngIf="!comment?.author?.profile_pic" label="{{ comment?.author?.username|slice:0:1 | titlecase}}" styleClass="p-mr-2" size="large"
-      [style]="getStyle()" shape="circle"></p-avatar>
-      <p-avatar *ngIf="comment?.author?.profile_pic" image="{{ comment?.author?.profile_pic }}" styleClass="p-mr-2" size="large" shape="circle"></p-avatar>
+<!-- -------------------------------- TWEET -------------------------------- -->
+<div class="tweet">
+  <div class="box">
+    <article class="media">
+      <div class="media-left">
+        <img *ngIf="comment?.author?.profile_pic" class="image is-64x64" [src]="comment?.author?.profile_pic" alt="Image">
+        <p-avatar *ngIf="!comment?.author?.profile_pic" label="{{ comment?.author?.username|slice:0:1 | titlecase}}" styleClass="mr-2 image is-64x64" size="xlarge"
+        [style]="getStyle()" shape="circle"></p-avatar>
 
-      <a class="text-light decoration" [routerLink]="['/dashboard/user/',comment?.author?.username]"><span class="fw-bold">@{{ comment?.author?.username }}</span></a>
+      </div>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong>{{comment?.author?.name}}</strong>  <a class="text-light decoration"  [routerLink]="['/dashboard/user/',comment?.author?.username]">
+              <small class="ps-1">@{{comment?.author?.username}}</small></a>  
+            <br>
+            <p class="p-wrap" [innerHtml]="comment?.description | atUser | safeHtml">
+            </p>
+        </div>
+        <div class="level-left">
+          <a class="level-item text-decoration-none">
+            <span class="icon is-small">
+              <app-like-button (sendLike)="sendLike()" [showLoading]="showLikeLoader" [liked]="comment?.is_like">
+              </app-like-button>
+            </span>
+            <span class="likes ">{{ comment?.likes }}</span>
+            <div *ngIf="comment?.is_owner" class="delete-button">
+              <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deleteCommentAction()"></app-delete-button>
+            </div>
+            <div class="delete-button">
+            | {{ comment?.created_at| amLocale:'es' | amTimeAgo  }}
+            </div>
+          </a>
+        </div>
+      </div>
+    </article>
   </div>
-
-  <div *ngIf="comment?.is_owner" class="my-auto flex-shrink-1 bd-highlight">
-    <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deleteCommentAction()"></app-delete-button>
-  </div>
-
-  <div class="me-auto flex-shrink-1 bd-highlight">
-    <app-like-button (sendLike)="sendLike()" [showLoading]="showLikeLoader" [countLike]="comment?.likes"
-      [liked]="comment?.is_like"></app-like-button>
-  </div>
-
-</div>
-
-<div class="comment-border ms-5">
-  <p class="ps-2 my-auto description" [innerHtml]="comment?.description | atUser | safeHtml"></p>
 </div>

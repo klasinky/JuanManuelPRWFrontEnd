@@ -4,7 +4,8 @@
       <span
         [class.text-danger]="!formMessage.valid"
         [class.text-success]="formMessage.valid"
-      >{{ this.countMessage }}</span>
+      ><round-progress [stroke]="4" [radius]="10" [current]="formMessage.get('message')?.value.length" [max]="max">
+      </round-progress></span>
     </div>
     <div class="message-container">
   
@@ -34,9 +35,9 @@
     </div>
     <div class="chat-footer">
       <form (ngSubmit)="sendMessage()" [formGroup]="formMessage">
-        <input type="text" formControlName="message" placeholder="Escribe tu mensaje">
+        <input [attr.disabled]="loadingMessage? true: null" type="text" formControlName="message" placeholder="Escribe tu mensaje">
       </form>
     </div>
   </div>
-
+  
 </div>
