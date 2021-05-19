@@ -52,6 +52,8 @@ import { TagsDetailComponent } from './components/forum/tags-detail/tags-detail.
 import { StockTutorialComponent } from './components/stocks/stock-tutorial/stock-tutorial.component';
 import { PostListSkeletonComponent } from './components/forum/post-list/post-list-skeleton/post-list-skeleton.component';
 
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
+
 
 @NgModule({
   declarations: [
@@ -105,7 +107,8 @@ import { PostListSkeletonComponent } from './components/forum/post-list/post-lis
     AvatarGroupModule,
     EditorModule,
     TimelineModule,
-    CardModule
+    CardModule,
+    RoundProgressModule
   ],
   providers: [
     ConfirmationService
