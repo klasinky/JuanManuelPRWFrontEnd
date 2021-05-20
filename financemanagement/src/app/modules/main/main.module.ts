@@ -54,6 +54,7 @@ import { PostListSkeletonComponent } from './components/forum/post-list/post-lis
 
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { PostRecommendationSkeletonComponent } from './components/forum/post-detail/post-recommendation-skeleton/post-recommendation-skeleton.component';
+import { TopContributorsComponent } from './components/forum/top-contributors/top-contributors.component';
 
 
 @NgModule({
@@ -91,6 +92,7 @@ import { PostRecommendationSkeletonComponent } from './components/forum/post-det
     StockTutorialComponent,
     PostListSkeletonComponent,
     PostRecommendationSkeletonComponent,
+    TopContributorsComponent,
   ],
   imports: [
     CommonModule,
