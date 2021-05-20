@@ -2,7 +2,7 @@
 
 .btn-auth {
     width: 150px;
-    background-color: $primary-color;
+    background-color: $primary-color-hover;
     border: none;
     outline: none;
     height: 49px;
@@ -16,16 +16,41 @@
     transition: 0.5s;
   
     &:hover{
-      background: $primary-color-hover;
+      background: $primary-color;
       color: #fff;
     }
   }
 
   img {
-      width: 15rem;
-      height: 15rem;
+      width: 13rem;
+      height: 13rem;
       padding: 1rem;
+      margin-bottom: 1.1rem;
   }
 
+  .input-field{
+  max-width: 100% !important;
+}
   
-  
+.file-upload>input {
+  display: none;
+}
+
+.input-field label{
+  text-align: center;
+  line-height: 55px;
+  color: #acacac;
+  transition: 0.5s;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.input-field span {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: auto;
+  word-wrap: break-word;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthConstants } from 'src/app/config/auth=constant';
 import { Currency } from 'src/app/interfaces/currency';
@@ -17,20 +16,21 @@ import { environment } from 'src/environments/environment';
 })
 export class ProfileComponent implements OnInit {
 
-  formProfile: FormGroup;
-  formPassword: FormGroup;
   user?: User
   currenciesOptions?: Currency[]
   imageURL?: string;
+  profilePic?: string;
+  filename: string = "Selecciona un archivo.";
 
+  // Forms
+  formProfile: FormGroup;
+  formPassword: FormGroup;
 
+  // Errors
   oldPasswordError = false;
   oldPasswordErrorMessage: string[] = [];
   newPasswordError = false;
   newPasswordErrorMessage: string[] = [];
-
-  showLoader = false;
-
   emailError = false;
   usernameError = false;
   nameError = false;
@@ -40,10 +40,11 @@ export class ProfileComponent implements OnInit {
   nameErrorMessage: string[] = [];
   currencyErrorMessage: string[] = [];
 
+  // Loaders
   showLoaderProfile = false;
+  showLoader = false;
 
-  constructor(private router: Router,
-    private httpService: HttpService,
+  constructor(private httpService: HttpService,
     private storageService: StorageService,
     private fb: FormBuilder,
     private toastr: ToastrService) {
@@ -73,7 +74,6 @@ export class ProfileComponent implements OnInit {
 
   getUserInfo() {
     const url: string = environment.endpoints.auth.profile;
-
     this.httpService.getAuth(url).subscribe(
       (data: User) => {
         this.user = data;
@@ -99,8 +99,11 @@ export class ProfileComponent implements OnInit {
         username: this.formProfile?.get("username")?.value,
         email: this.formProfile?.get("email")?.value,
         currency: this.formProfile?.get("currency")?.value,
-        profile_pic: this.imageURL,
       } as User;
+
+      if (this.imageURL) {
+        userNewData.profile_pic = this.imageURL;
+      }
    
       this.httpService.patchAuth(url, userNewData).subscribe(
         (data: User) => {
