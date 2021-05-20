@@ -14,16 +14,23 @@ import { environment } from 'src/environments/environment';
 export class PostDetailComponent implements OnInit {
 
   post?: Post;
+  postRecommendation?: Post[];
+
   id: number = 0;
   showLikeLoader: boolean = false;
   showDeleteLoader: boolean = false;
   loading: boolean = true;
+  loadingRecommendation: boolean = true;
+
+  numberPagination: number[];
 
   constructor(private httpService: HttpService,
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,
-    private colorService: ColorService) { }
+    private colorService: ColorService) { 
+      this.numberPagination = Array(3).fill(0).map((x, i) => i);
+    }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -31,6 +38,7 @@ export class PostDetailComponent implements OnInit {
         // this.id = JSON.parse(unescape(atob(params.id)));
         this.id = params.id;
         this.getPost();
+        this.getPostRecommendation();
       } catch (error) {
         this.router.navigate(['dashboard']).then(() => {
           // Notificación
@@ -41,13 +49,13 @@ export class PostDetailComponent implements OnInit {
   }
 
   getPost() {
+    this.loadingRecommendation = true;
     this.loading = true;
     const url = 'posts/' + this.id;
     this.httpService.getAuth(url).subscribe(
       (data) => {
         this.post = data as Post;
         this.loading = false;
-        console.log(this.post)
       },
       (error) => {
         this.loading = false;
@@ -55,6 +63,22 @@ export class PostDetailComponent implements OnInit {
       }
     )
 
+  }
+
+  getPostRecommendation() {
+    this.loadingRecommendation = true;
+    const url = 'posts/' + this.id+"/recommendation";
+    this.httpService.getAuth(url).subscribe(
+      (data) => {
+        this.postRecommendation = data as Post [];
+        this.loadingRecommendation = false;
+
+      },
+      (error) => {
+        this.loadingRecommendation = false;
+        this.toastr.error('Error')
+      }
+    )
   }
 
   sendLike() {
@@ -79,7 +103,7 @@ export class PostDetailComponent implements OnInit {
     )
   }
 
-  deletePostAction(){
+  deletePostAction() {
     this.showDeleteLoader = true;
     const url: string = environment.endpoints.posts.viewset;
     this.httpService.deleteAuth(url, this.post?.id).subscribe(
@@ -96,7 +120,7 @@ export class PostDetailComponent implements OnInit {
     )
   }
 
-  getStyle(){
+  getStyle() {
     return this.colorService.getColor(this.post?.author?.username);
   }
 }

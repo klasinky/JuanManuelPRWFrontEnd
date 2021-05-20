@@ -53,6 +53,7 @@ import { StockTutorialComponent } from './components/stocks/stock-tutorial/stock
 import { PostListSkeletonComponent } from './components/forum/post-list/post-list-skeleton/post-list-skeleton.component';
 
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { PostRecommendationSkeletonComponent } from './components/forum/post-detail/post-recommendation-skeleton/post-recommendation-skeleton.component';
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import {RoundProgressModule} from 'angular-svg-round-progressbar';
     TagsDetailComponent,
     StockTutorialComponent,
     PostListSkeletonComponent,
+    PostRecommendationSkeletonComponent,
   ],
   imports: [
     CommonModule,

@@ -13,9 +13,11 @@
                   <p-skeleton width="5rem" styleClass="p-mb-2"></p-skeleton>
                 </div>
               </div>
-    
+
               <div *ngIf="!loading" class=" my-1 ">
-                Autor: <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span class="fw-bold">@{{ post?.author?.username }}</span></a> | Última vez modificado {{ post?.update_at| amLocale:'es' | amTimeAgo  }}
+                Autor: <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span
+                    class="fw-bold">@{{ post?.author?.username }}</span></a> | Última vez modificado
+                {{ post?.update_at| amLocale:'es' | amTimeAgo  }}
               </div>
             </div>
 
@@ -72,30 +74,25 @@
     <div class="col-md-4">
       <div class="chat-vid__container">
         <div class="chat-vid__title anim" style="--delay: .3s">Post similares</div>
-        <div class="chat-vid anim" style="--delay: .4s">
-          <div class="chat-vid__wrapper">
-            <img class="chat-vid__img" src="https://cdn.nohat.cc/thumb/f/720/3b55eddcfffa4e87897d.jpg" />
-            <div class="chat-vid__content">
-              <div class="chat-vid__name">Prepare for your first skateboard jump</div>
-              <div class="chat-vid__by">Jordan Wise</div>
-              <div class="chat-vid__info">125.908 views <span class="seperate"></span>2 days
-                ago</div>
+        <div *ngIf="!loadingRecommendation">
+          <div *ngFor="let postR of postRecommendation" class="chat-vid anim" style="--delay: .4s">
+            <div class="chat-vid__wrapper">
+              <img class="chat-vid__img" [routerLink]="['/dashboard/post/',postR?.id]" src="https://cdn.nohat.cc/thumb/f/720/3b55eddcfffa4e87897d.jpg" />
+              <div class="chat-vid__content">
+                <a class="chat-vid__name text-decoration-none" [routerLink]="['/dashboard/post/',postR?.id]">{{ postR?.title | titlecase }}</a>
+                <div class="chat-vid__by">
+                  <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span>@{{post?.author?.username}}</span></a>
+                </div>
+                <div class="chat-vid__info">{{ postR?.likes }} likes <span class="seperate"></span>{{ post?.created_at | amLocale:'es' | amTimeAgo }}</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="chat-vid anim" style="--delay: .5s">
-          <div class="chat-vid__wrapper">
-            <img class="chat-vid__img"
-              src="https://iamaround.it/wp-content/uploads/2015/02/pexels-photo-4663818.jpeg" />
-            <div class="chat-vid__content">
-              <div class="chat-vid__name">Prepare for your first skateboard jump</div>
-              <div class="chat-vid__by">Jordan Wise</div>
-              <div class="chat-vid__info">125.908 views <span class="seperate"></span>2 days
-                ago</div>
-            </div>
-          </div>
+        <div *ngIf="loadingRecommendation">
+          <app-post-recommendation-skeleton *ngFor="let item of numberPagination"></app-post-recommendation-skeleton>
         </div>
-        <div class="chat-vid__button anim" style="--delay: .6s">See All related videos (32)</div>
+
+        <!-- <div class="chat-vid__button anim" style="--delay: .6s">See All related videos (32)</div> -->
       </div>
     </div>
 
