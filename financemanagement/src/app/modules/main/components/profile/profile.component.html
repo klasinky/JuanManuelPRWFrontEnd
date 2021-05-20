@@ -85,11 +85,11 @@
               </div>
               <!-- Upload image -->
               <div class="col-12 file-upload input-field">
-                <label [attr.for]="'xls'">
+                <label [attr.for]="'image'">
                   <i class="fa fa-upload"></i>
                 </label>
                 <span>{{ (filename.length > 25)? (filename | slice:0:25)+'...':(filename) }}</span>
-                <input formControlName="profile_pic" (change)="showPreview($event)" accept="image/*" type="file">
+                <input [attr.id]="'image'"  (change)="showPreview($event)" accept="image/*" type="file">
               </div>
             </div>
           </div>
