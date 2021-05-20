@@ -1,163 +1,178 @@
-  <div class="row">
+<div class="row">
 
-    <div class="col-md-6">
-      <div class="bgsecondary p-3 p-md-5">
-        <div class="text-center">
-          <h2 class="title">Cambiar Datos</h2>
-        </div>
-        <form [formGroup]="formProfile">
-           <!-- Image Preview -->
-          <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
-            <img [src]="imageURL">
-          </div>
-          <div class="row text-light">
-
-            
-            <div class="col-md-12 mx-auto">
-              <i class="fas fa-user"></i>
-              <input class="form-control" type="file" accept="image/*" (change)="showPreview($event)">
-            </div>
-            <!-- <div *ngIf="nameError">
-              <div class="text-center" *ngFor="let item of nameErrorMessage">
-                <label class="text-danger">{{item}}</label>
-              </div>
-            </div> -->
-
-
-            <!-- -------------------------------- Name --------------------------------- -->
-
-            <div class="col-md-12 input-field mx-auto"
-              [class.is-invalid]="this.formProfile.get('name')?.invalid && this.formProfile.get('name')?.touched"
-              [class.is-valid]="this.formProfile.get('name')?.valid">
-              <i class="fas fa-user"></i>
-              <input type="text" formControlName="name" placeholder="Nombre" autocomplete="off">
-            </div>
-            <div *ngIf="nameError">
-              <div class="text-center" *ngFor="let item of nameErrorMessage">
-                <label class="text-danger">{{item}}</label>
-              </div>
-            </div>
-
-            <!-- ------------------------------- email ------------------------------- -->
-
-            <div class="col-md-12 input-field mx-auto"
-              [class.is-invalid]="this.formProfile.get('email')?.invalid && this.formProfile.get('email')?.touched || this.emailError"
-              [class.is-valid]="this.formProfile.get('email')?.valid">
-              <i class="fas fa-envelope"></i>
-              <input type="text" formControlName="email" placeholder="Email" autocomplete="off">
-            </div>
-            <div *ngIf="emailError">
-              <div class="text-center" *ngFor="let item of emailErrorMessage">
-                <label class="text-danger">{{item}}</label>
-              </div>
-            </div>
-          </div>
-
-          <!-- ------------------------------ username ------------------------------- -->
-
-          <div class="row">
-            <div class="col-md-12 input-field mx-auto"
-              [class.is-invalid]="this.formProfile.get('username')?.invalid && this.formProfile.get('username')?.touched || this.usernameError"
-              [class.is-valid]="this.formProfile.get('username')?.valid">
-              <i class="fas fa-user"></i>
-              <input type="text" formControlName="username" placeholder="Username" autocomplete="off">
-            </div>
-            <div *ngIf="usernameError">
-              <div class="text-center" *ngFor="let item of usernameErrorMessage">
-                <label class="text-danger">{{item}}</label>
-              </div>
-            </div>
-
-            <!-- ------------------------------ currency ------------------------------- -->
-
-            <div class="col-md-12 input-field mx-auto"
-              [class.is-invalid]="this.formProfile.get('currency')?.invalid && this.formProfile.get('currency')?.touched"
-              [class.is-valid]="this.formProfile.get('currency')?.valid">
-              <i class="fas fa-money-bill"></i>
-              <select *ngIf="currenciesOptions" formControlName="currency" aria-label="Default select">
-                <option value="" disabled>Selecciona una divisa...</option>
-                <option *ngFor="let item of currenciesOptions" value="{{ item?.id }}">{{ item?.name }}</option>
-              </select>
-            </div>
-            <div *ngIf="currencyError">
-              <div class="text-center" *ngFor="let item of currencyErrorMessage">
-                <label class="text-danger">{{item}}</label>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <button [disabled]='this.formProfile?.invalid || showLoaderProfile' (click)="profileAction()"
-                type="submit" class="btn btn-auth">
-                Guardar
-                <div *ngIf="showLoaderProfile" class="spinner-border spinner-border-sm mb-1" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
-              </button>
-            </div>
-          </div>
-        </form>
+  <!-- Change personal data -->
+  <div class="col-12">
+    <div class="bgsecondary p-3 p-md-5">
+      <div class="text-center">
+        <h2 class="title">Cambiar Datos</h2>
       </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="bgsecondary p-3 p-md-5">
-        <div class="text-center">
-          <h2 class="title">Cambiar Contraseña</h2>
+      <form [formGroup]="formProfile">
+
+        <div class="row">
+          <!-- Inputs for personal data -->
+          <div class="col-sm-6 col-12">
+            <div class="row px-4">
+              <!-- -------------------------------- Name --------------------------------- -->
+              <div class="col-12 input-field mx-auto"
+                [class.is-invalid]="this.formProfile.get('name')?.invalid && this.formProfile.get('name')?.touched"
+                [class.is-valid]="this.formProfile.get('name')?.valid">
+                <i class="fas fa-user"></i>
+                <input type="text" formControlName="name" placeholder="Nombre" autocomplete="off">
+              </div>
+
+              <div *ngIf="nameError">
+                <div class="text-center" *ngFor="let item of nameErrorMessage">
+                  <label class="fw-bold text-danger">{{item}}</label>
+                </div>
+              </div>
+
+              <!-- ------------------------------- email ------------------------------- -->
+              <div class="col-12 input-field mx-auto"
+                [class.is-invalid]="this.formProfile.get('email')?.invalid && this.formProfile.get('email')?.touched || this.emailError"
+                [class.is-valid]="this.formProfile.get('email')?.valid">
+                <i class="fas fa-envelope"></i>
+                <input type="text" formControlName="email" placeholder="Email" autocomplete="off">
+              </div>
+
+              <div *ngIf="emailError">
+                <div class="text-center" *ngFor="let item of emailErrorMessage">
+                  <label class="fw-bold text-danger">{{item}}</label>
+                </div>
+              </div>
+
+              <!-- ------------------------------ username ------------------------------- -->
+              <div class="col-12 input-field mx-auto"
+                [class.is-invalid]="this.formProfile.get('username')?.invalid && this.formProfile.get('username')?.touched || this.usernameError"
+                [class.is-valid]="this.formProfile.get('username')?.valid">
+                <i class="fas fa-user"></i>
+                <input type="text" formControlName="username" placeholder="Username" autocomplete="off">
+              </div>
+
+              <div *ngIf="usernameError">
+                <div class="text-center" *ngFor="let item of usernameErrorMessage">
+                  <label class="fw-bold text-danger">{{item}}</label>
+                </div>
+              </div>
+
+              <!-- ------------------------------ currency ------------------------------- -->
+              <div class="col-12 input-field mx-auto"
+                [class.is-invalid]="this.formProfile.get('currency')?.invalid && this.formProfile.get('currency')?.touched"
+                [class.is-valid]="this.formProfile.get('currency')?.valid">
+                <i class="fas fa-money-bill"></i>
+                <select *ngIf="currenciesOptions" formControlName="currency" aria-label="Default select">
+                  <option value="" disabled>Selecciona una divisa...</option>
+                  <option *ngFor="let item of currenciesOptions" value="{{ item?.id }}">{{ item?.name
+                    }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image preview and upload image -->
+          <div class="col-sm-6 col-12">
+            <div class="row px-4">
+              <!-- Image preview -->
+              <div class="col-12 text-center">
+
+                <div class="imagePreview" *ngIf="imageURL && imageURL !== ''; else elseBlock">
+                  <img [src]="imageURL">
+                </div>
+                <ng-template #elseBlock>
+                  <img [src]="user?.profile_pic">
+                </ng-template>
+
+              </div>
+              <!-- Upload image -->
+              <div class="col-12 file-upload input-field">
+                <label [attr.for]="'xls'">
+                  <i class="fa fa-upload"></i>
+                </label>
+                <span>{{ (filename.length > 25)? (filename | slice:0:25)+'...':(filename) }}</span>
+                <input formControlName="profile_pic" (change)="showPreview($event)" accept="image/*" type="file">
+              </div>
+            </div>
+          </div>
+
         </div>
-        <form [formGroup]="formPassword">
 
-          <div class="row text-light">
-            <div class="col-md-12 input-field mx-auto" [class.is-valid]="this.formPassword.get('old_password')?.valid"
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <button [disabled]='this.formProfile?.invalid || showLoaderProfile' (click)="profileAction()" type="submit"
+              class="btn btn-auth">
+              Guardar
+              <div *ngIf="showLoaderProfile" class="spinner-border spinner-border-sm mb-1" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Change password -->
+  <div class="col-12 mt-3">
+    <div class="bgsecondary p-3 p-md-5">
+      <div class="text-center">
+        <h2 class="title">Cambiar Contraseña</h2>
+      </div>
+
+      <form [formGroup]="formPassword">
+        <div class="row">
+          <div class="col-sm-6 col-12 px-4">
+            <div class="input-field mx-auto" [class.is-valid]="this.formPassword.get('old_password')?.valid"
               [class.is-invalid]="this.formPassword.get('old_password')?.invalid && this.formPassword.get('old_password')?.touched || oldPasswordError == true">
               <i class="fas fa-lock"></i>
               <input type="password" formControlName="old_password" placeholder="Contraseña actual" autocomplete="off">
             </div>
-
             <div *ngIf="oldPasswordError">
               <div class="text-center" *ngFor="let item of oldPasswordErrorMessage">
-                <label class="text-danger">{{item}}</label>
+                <label class="fw-bold text-danger">{{item}}</label>
               </div>
             </div>
+          </div>
 
-            <div class="col-md-12 input-field mx-auto" [class.is-valid]="this.formPassword.get('new_password')?.valid"
+          <div class="col-sm-6 col-12 px-4">
+            <div class="input-field mx-auto" [class.is-valid]="this.formPassword.get('new_password')?.valid"
               [class.is-invalid]="this.formPassword.get('new_password')?.invalid && this.formPassword.get('new_password')?.touched || newPasswordError == true">
               <i class="fas fa-lock"></i>
               <input type="password" formControlName="new_password" placeholder="Contraseña nueva" autocomplete="off">
             </div>
-
-            <div *ngIf="newPasswordError">
+            <div *ngIf=" newPasswordError">
               <div class="text-center" *ngFor="let item of newPasswordErrorMessage">
-                <label class="text-danger">{{item}}</label>
+                <label class="fw-bold text-danger">{{item}}</label>
               </div>
-            </div>
-
-            <div class="col-md-12 text-center">
-              <button [disabled]='this.formPassword.invalid || showLoader' (click)="changeUserPasswordAction()"
-                class="btn-auth solid">
-                <div *ngIf="!showLoader; else blockLoader">
-                  Guardar
-                </div>
-                <ng-template #blockLoader>
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
-                </ng-template>
-              </button>
             </div>
           </div>
 
-        </form>
-      </div>
+          <div class="col-md-12 text-center">
+            <button [disabled]='this.formPassword?.invalid || showLoader' (click)="changeUserPasswordAction()"
+              class="btn-auth solid">
+              <div *ngIf="!showLoader; else blockLoader">
+                Guardar
+              </div>
+              <ng-template #blockLoader>
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </ng-template>
+            </button>
+          </div>
+        </div>
+
+      </form>
     </div>
   </div>
-  <div class="row mt-3">
-    <div class="col-md-12">
-      <div class="bgsecondary p-2 text-center">
-        <p class="m-3">Último inicio de sesión: <strong>{{ user?.last_login | amParse:'YYYY/MM/DD HH:mm' | amLocale:'es'
-            | amDateFormat:'YYYY/MM/DD HH:mm'}}</strong> </p>
-      </div>
+
+  <div class="col-md-12 mt-3">
+    <div class="bgsecondary p-2 text-center">
+      <p class="m-3">Último inicio de sesión: <strong>{{ user?.last_login | amParse:'YYYY/MM/DD HH:mm' |
+          amLocale:'es'
+          | amDateFormat:'YYYY/MM/DD HH:mm'}}</strong> </p>
     </div>
   </div>
+
+</div>
