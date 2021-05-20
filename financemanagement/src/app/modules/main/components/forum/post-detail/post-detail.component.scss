@@ -479,6 +479,7 @@ video {
 
     &__container {
       margin-top: 40px;
+      padding: 10px;
     }
 
     &__wrapper {
@@ -512,7 +513,7 @@ video {
     }
 
     &__content {
-      max-width: 20ch;
+      max-width: 100%;
     }
 
     &__by,

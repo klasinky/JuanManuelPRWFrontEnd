@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/interfaces/post';
+import { UserProfile } from 'src/app/interfaces/user';
 import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
-  styleUrls: ['./forum.component.scss']
+  styleUrls: ['./forum.component.scss', './tags-detail/tags-detail.component.scss']
 })
 export class ForumComponent implements OnInit {
 
   posts?: Post[];
+  topUsers?: UserProfile[];
   totalPosts?: number;
   nextUrl?: string;
   previousUrl?: string;
   numberPagination: number[];
   loading: boolean = false;
-
+  loadingTopUser: boolean = true;
   //Filters
   btnAll: boolean = false;
   btnHot: boolean = false;
@@ -32,6 +34,7 @@ export class ForumComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPosts();
+    this.getTopUsers();
   }
 
   getPosts(filter = "") {
@@ -51,6 +54,22 @@ export class ForumComponent implements OnInit {
       (error) => {
         this.loading = false;
         console.log(error);
+      }
+    )
+  }
+
+  getTopUsers() {
+    const url = 'users/tops';
+    this.loadingTopUser = true;
+
+    this.httpService.getAuth(url).subscribe(
+      (data) => {
+        this.topUsers = data as UserProfile[];
+        this.loadingTopUser = false;
+      },
+      (error) => {
+        this.loadingTopUser = false;
+
       }
     )
   }
