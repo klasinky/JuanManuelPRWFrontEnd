@@ -2,10 +2,9 @@
 
 
 .leaderboard {
-  width: 100%;
+  max-width: 100%;
   border-radius: 12px;
   box-shadow: 0 0 40px -10px rgba(0, 0, 0, .4);
-  position: sticky;
   top: 110px;
 
   &__tags {
@@ -15,11 +14,14 @@
   }
 
   &__tag {
-    padding: 10px 30px 10px 10px;
+    max-width: 100%;
+    padding: 5px;
     // overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 5px 7px -1px rgba(51, 51, 51, 0.23);
-    cursor: pointer;
+    &:not(.not-cursor){
+      cursor: pointer;
+    }
     transition: transform .25s cubic-bezier(.7, .98, .86, .98), box-shadow .25s cubic-bezier(.7, .98, .86, .98);
     background-color: $secondary-color;
 
@@ -40,9 +42,15 @@
   &__name {
     color: $primary-font-color;
     font-weight: 600;
-    max-width: 80%;
+    max-width: 100%;
     letter-spacing: 0.64px;
     margin-left: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    cursor: pointer;
   }
 
   &__count {

@@ -33,49 +33,75 @@
   </div>
 </div>
 
-<!-- ------------------------------- Paginate ------------------------------- -->
-<div class=" bgsecondary mt-2 p-2 d-flex justify-content-evenly">
-  <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
-    <i></i><i></i>
-  </button>
-  <h3 class="title">-</h3>
-  <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
-    <i></i><i></i>
-  </button>
-</div>
+
 <div class="row">
-  <div class="col-md-9">
-    <!-- ------------------------------- Posts ------------------------------- -->
-    <div *ngIf="posts && !loading" class="">
-      <div class="row">
-        <div class="col-sm-6 col-xl-3" *ngFor="let post of posts">
-          <app-post-list (refreshPosts)="getPosts()" [post]="post"></app-post-list>
+  <div class="col-sm-12 col-md-4 col-lg-3  mt-4">
+
+    <!-- ---------------------------- Top Usuarios ----------------------------- -->
+    <article class="leaderboard">
+      <main class="leaderboard__tags bgsecondary">
+        <div class="text-center">
+          <h4><i class="fas fa-trophy"></i> Top Usuarios</h4>
         </div>
-      </div>
-    </div>
-    <div class="">
-      <div class="row" *ngIf="loading">
-        <div class="col-sm-6 col-xl-3" *ngFor="let item of numberPagination">
-          <app-post-list-skeleton></app-post-list-skeleton>
+        <div *ngFor="let item of topUsers">
+          <app-top-contributors [user]="item"></app-top-contributors>
         </div>
-      </div>
-    </div>
+        <div *ngIf="loadingTopUser" class="text-center">
+          <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </main>
+    </article>
   </div>
-  <!-- ----------------------------- sticky-top ------------------------------ -->
-  <div class="col-md-3 mt-4">
+  <div class="col-sm-6 col-md-8 col-lg-6">
+    <!-- ------------------------------- Posts ------------------------------- -->
+    <div class="mt-3">
+      <div class="row">
+        <div class="col-12">
+          <!-- ------------------------------- Paginate ------------------------------- -->
+          <div class=" bgsecondary mt-2 p-2 d-flex justify-content-evenly">
+            <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+              <i></i><i></i>
+            </button>
+            <h3 class="title">-</h3>
+            <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+              <i></i><i></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row" *ngIf="posts && !loading">
+            <div #postBlock class="col-sm-12 col-md-6 " *ngFor="let post of posts">
+              <app-post-list (refreshPosts)="getPosts()" [post]="post"></app-post-list>
+            </div>
+          </div>
+          <div class="row" *ngIf="loading">
+            <div class="col-sm-12 col-md-6  " *ngFor="let item of numberPagination">
+              <app-post-list-skeleton></app-post-list-skeleton>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <!-- ------------------------------- Paginate ------------------------------- -->
+          <div class=" bgsecondary mt-4 p-2 d-flex justify-content-evenly">
+            <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+              <i></i><i></i>
+            </button>
+            <h3 class="title">-</h3>
+            <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+              <i></i><i></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  <!-- ----------------------------- Side ------------------------------ -->
+  <div class="col-sm-12 col-md-12 col-lg-3 order-md-2 mt-4">
     <app-tags-detail></app-tags-detail>
   </div>
 
 
-</div>
-
-<!-- ------------------------------- Paginate ------------------------------- -->
-<div class=" bgsecondary mt-4 p-2 d-flex justify-content-evenly">
-  <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
-    <i></i><i></i>
-  </button>
-  <h3 class="title">-</h3>
-  <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
-    <i></i><i></i>
-  </button>
 </div>
