@@ -220,11 +220,12 @@ export class ProfileComponent implements OnInit {
       profile_pic: file
     });
     this.formProfile.get('profile_pic')?.updateValueAndValidity()
-
+    
     // File Preview
     const reader = new FileReader();
     reader.onload = () => {
       this.imageURL = reader.result as string;
+      this.filename = file.name;
     }
     reader.readAsDataURL(file)
   }
