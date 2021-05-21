@@ -40,7 +40,7 @@ export class UserProfileComponent implements OnInit {
     this.httpService.getAuth(url).subscribe(
       (data: any) => {
         this.loading = false;
-
+        console.log(data)
         this.user = data as UserProfile;
       },
       (error: any) => {
