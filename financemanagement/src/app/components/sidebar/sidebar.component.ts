@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Notification } from 'src/app/interfaces/notification';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpService } from 'src/app/services/http.service';
@@ -17,33 +18,53 @@ export class SidebarComponent implements OnInit {
 
 
   isMobile: boolean = false;
-  notifications: any [] = [];
+  notifications: any[] = [];
+  ring: boolean = true;
+  firstTime: boolean = true;
 
   ngOnInit(): void {
     this.getNotifications();
   }
 
-  getNotifications(){
+  getNotifications() {
     this.httpService.getAuth('notifications').subscribe(
-      (data)=>{
-        console.log(data);
-        this.notifications = data as any [];
+      (data) => {
+        this.notifications = data as any[];
       },
-      (error)=>{
+      (error) => {
         console.log(error);
 
       }
     )
   }
 
-  mobileSideBar(){
+  mobileSideBar() {
+
     this.isMobile = !this.isMobile;
     document.querySelector("body")?.classList.toggle("mobile-nav-active");
   }
 
 
 
-  logOutAction(){
+  logOutAction() {
     this.authService.logout();
+  }
+
+  removeNotification(notification: Notification) {
+    this.notifications.splice(this.notifications.indexOf(notification), 1);
+  }
+
+  activateRing() {
+    if (this.firstTime) {
+      this.firstTime = false;
+    } else {
+      this.getNotifications();
+    }
+    this.ring = false
+    this.ring = true;
+    setTimeout(() => {
+      this.ring = false;
+
+    }, 1500)
   }
 }

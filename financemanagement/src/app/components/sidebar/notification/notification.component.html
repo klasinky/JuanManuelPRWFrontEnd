@@ -1,5 +1,4 @@
-<span (click)="toLink()">@{{ notification?.from_user }} {{ notification?.content }}</span>
-
-<button (click)="readNotification()" class="ms-1 btn-sm btn btn-danger">
-  <i class="fas fa-times "></i>
-</button>
+<div class="notification-div" (click)="toLink()" >
+  <p class="notification-p"><span class="fw-bold">@{{ notification?.from_user }}</span> {{ notification?.content }}</p>
+  <span class="date-span">{{ notification?.created_at| amLocale:'es' | amTimeAgo  }}</span>
+</div>

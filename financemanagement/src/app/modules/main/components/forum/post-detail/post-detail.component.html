@@ -81,9 +81,9 @@
               <div class="chat-vid__content">
                 <a class="chat-vid__name text-decoration-none" [routerLink]="['/dashboard/post/',postR?.id]">{{ postR?.title | titlecase }}</a>
                 <div class="chat-vid__by">
-                  <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span>@{{post?.author?.username}}</span></a>
+                  <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span>@{{postR?.author?.username}}</span></a>
                 </div>
-                <div class="chat-vid__info">{{ postR?.likes }} likes <span class="seperate"></span>{{ post?.created_at | amLocale:'es' | amTimeAgo }}</div>
+                <div class="chat-vid__info">{{ postR?.likes }} likes <span class="seperate"></span>{{ postR?.created_at | amLocale:'es' | amTimeAgo }}</div>
               </div>
             </div>
           </div>

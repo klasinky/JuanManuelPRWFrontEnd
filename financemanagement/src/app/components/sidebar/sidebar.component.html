@@ -23,19 +23,16 @@
               class="fas fa-user"></i> <span>Perfil</span></a></li>
         <!-- ---------------------------- Notifiations ----------------------------- -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          <a (click)="activateRing()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            <div [class.show-count]="notifications.length > 0" [attr.data-count]="notifications.length"
-              class="notification"></div>
+            <div [class.notify]="ring"  [class.show-count]="notifications.length > 0" [attr.data-count]="notifications.length"
+              class="notification notify"></div>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li *ngFor="let notification of notifications">
-              <span class="dropdown-item d-flex">
-                <app-notification [notification]="notification"></app-notification>
-              </span>
-              <hr>
-            </li>
-          </ul>
+          <div aria-labelledby="navbarDropdown" class="dropdown-menu notification-menu">
+            <div *ngFor="let notification of notifications" class="dropdown-item notification-item" >
+              <app-notification (deleteNotification)="removeNotification($event)" [notification]="notification"></app-notification>
+            </div>
+          </div>
         </li>
         <!-- -------------------------- END Notifications -------------------------- -->
 

@@ -164,3 +164,76 @@ button{
       transform: rotate(0deg);
   }
 }
+
+/* ---------------------------- Notification Menu --------------------------- */
+
+.notification-menu {
+  max-width: 480px;
+  min-width: 480px;
+}
+
+@media (min-width: 300px) {
+  .notification-menu {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}
+
+@media (min-width: 576px) {
+  .notification-menu {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .notification-menu {
+    max-width: 350px;
+    min-width: 350px;
+  }
+}
+
+@media (min-width: 992px) {
+  .notification-menu {
+    max-width: 480px;
+    min-width: 480px;
+  }
+}
+
+.notification-item {
+  height: 100px;
+  padding: 16px;
+  display: flex;
+}
+
+
+.notification-div {
+  max-height: 100%;
+  min-width: 80%;
+  display: block;
+}
+
+.notification-p {
+  padding: 4px 0px 0px 8px;
+  margin: 0px;
+  font-size: 0.8em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 100%;
+  min-height: 30px;
+  display: block;
+  overflow: hidden;
+  line-height: 1.5em;
+}
+
+.date-span {
+  min-height: 100px;
+  padding: 0px 0px 0px 8px;
+  font-size: 0.7em;
+  color: #b3babd;
+  margin: 0px;
+}
+
+.dropdown-item{
+  color: $primary-font-color;
+}

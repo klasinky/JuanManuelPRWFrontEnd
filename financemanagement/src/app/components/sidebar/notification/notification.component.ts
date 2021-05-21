@@ -1,17 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Notification } from 'src/app/interfaces/notification';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.scss']
+  styleUrls: ['../sidebar.component.scss']
 })
 export class NotificationComponent implements OnInit {
 
   @Input() notification?: Notification;
+  @Output() deleteNotification: EventEmitter<Notification> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private httpService: HttpService) { }
 
   ngOnInit(): void {
   }
@@ -25,12 +28,23 @@ export class NotificationComponent implements OnInit {
     } else {
       url = '/dashboard/user/' + this.notification?.from_user;
     }
-    this.router.navigate([url]);
+    this.router.navigate([url]).then(() => {
+      this.readNotification();
+    })
 
   }
 
   readNotification() {
-    console.log("read");
+    this.deleteNotification.emit(this.notification);
+
+    const url = 'notifications/' + this.notification?.id;
+    this.httpService.putAuth(url).subscribe(
+      (data) => {
+      },
+      (error) => {
+
+      }
+    )
   }
 
 }
