@@ -21,9 +21,26 @@
               class="fas fa-envelope"></i> <span>Foro</span></a></li>
         <li class="nav-item"><a [routerLink]="['/dashboard/profile']" class="nav-link scrollto"><i
               class="fas fa-user"></i> <span>Perfil</span></a></li>
+        <!-- ---------------------------- Notifiations ----------------------------- -->
+        <li class="nav-item dropdown">
+          <a (click)="activateRing()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <div [class.notify]="ring"  [class.show-count]="notifications.length > 0" [attr.data-count]="notifications.length"
+              class="notification notify"></div>
+          </a>
+          <div aria-labelledby="navbarDropdown" class="dropdown-menu notification-menu">
+            <div *ngFor="let notification of notifications" class="dropdown-item notification-item" >
+              <app-notification (deleteNotification)="removeNotification($event)" [notification]="notification"></app-notification>
+            </div>
+          </div>
+        </li>
+        <!-- -------------------------- END Notifications -------------------------- -->
+
       </ul>
       <!-- Right navigation -->
       <div class="navbar-nav ms-lg-4">
+
+
         <li class="nav-item"><a class="nav-link scrollto" (click)="logOutAction()"><i
               class="fas fa-sign-out-alt"></i><span>LogOut</span></a></li>
       </div>
