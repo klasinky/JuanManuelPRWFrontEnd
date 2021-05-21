@@ -1,82 +1,45 @@
-<div class="main-content">
-  <div class="mt-5">
-    <!-- Table -->
-
-    <div class="row">
-      <div class="col-xl-8 m-auto order-xl-2 mb-5 mb-xl-0">
-        <div class="card card-profile shadow">
-          <div class="row justify-content-center">
-            <div class="col-lg-3 order-lg-2">
-              <div class="card-profile-image">
-                  <img *ngIf="!loading" [src]="user?.profile_pic"
-                    class="">
-                    <img *ngIf="loading || !user?.profile_pic" src="../../../../../../assets/img/default-profile.jpg"
-                    class="">
-                    
-              </div>
+<div class="row">
+  <div class="col-12">
+    <app-user-card [username]="username"></app-user-card>
+  </div>
+  <div class="col-12">
+    <!-- ------------------------------- Posts ------------------------------- -->
+    <div class="mt-3">
+      <div class="row">
+        <div class="col-12">
+          <!-- ------------------------------- Paginate ------------------------------- -->
+          <div class=" bgsecondary mt-2 p-2 d-flex justify-content-evenly">
+            <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+              <i></i><i></i>
+            </button>
+            <h3 class="title">-</h3>
+            <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+              <i></i><i></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row" *ngIf="posts && !loading">
+            <div class="col-sm-12 col-md-3" *ngFor="let post of posts">
+              <app-post-list (refreshPosts)="getPostUser()" [post]="post"></app-post-list>
             </div>
           </div>
-          <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-            <div *ngIf="!loading" class="d-flex justify-content-between">
-              <!-- <a href="#" class="btn btn-sm btn-info mr-4">Connect</a> -->
-
-              <ng-template *ngIf="user?.is_your_profile then btnEdit; else btnFollow"></ng-template>
-              <ng-template #btnFollow>
-                <button (click)="follow()" class="btn btn-sm btn-default float-right">
-                  <span *ngIf="!loadingFollow">
-                    <span *ngIf="user?.is_following">Siguiendo</span>
-                    <span *ngIf="!user?.is_following">Seguir</span>
-                  </span>
-                  <span *ngIf="loadingFollow">
-                    <div class="spinner-border spinner-border-sm text-light" role="status">
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                  </span>
-                </button>
-              </ng-template>
-              <ng-template #btnEdit>
-                <button [routerLink]="['/dashboard/profile']" class="btn btn-sm btn-warning float-right"> <i class="fas fa-pen"></i> Editar</button>
-              </ng-template>
-
-            </div>
-            <div *ngIf="loading" class="d-flex justify-content-between">
-                <p-skeleton width="4rem" height="2rem"></p-skeleton>
-
+          <div class="row" *ngIf="loading">
+            <div class="col-sm-12 col-md-3" *ngFor="let item of numberPagination">
+              <app-post-list-skeleton></app-post-list-skeleton>
             </div>
           </div>
-          <div class="card-body pt-0 pt-md-4">
-            <div class="row">
-              <div class="col-12">
-                <div class="card-profile-stats d-flex text-center justify-content-center mt-md-5">
-                  <div>
-                    <span *ngIf="!loading" class="heading">{{ user?.total_followers }}</span>
-                    <span *ngIf="loading" class="heading">0</span>
-                    <span class="description">Seguidores</span>
-                  </div>
-                  <div>
-                    <span *ngIf="!loading" class="heading">{{ user?.total_posts }}</span>
-                    <span *ngIf="loading" class="heading">0</span>
-                    <span class="description">Posts</span>
-                  </div>
-                  <div>
-                    <span *ngIf="!loading" class="heading">{{ user?.total_following }}</span>
-                    <span *ngIf="loading" class="heading">0</span>
-                    <span class="description">Siguiendo</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="text-center text-light">
-              <h2 *ngIf="!loading">
-                {{ user?.name | titlecase }}  <span *ngIf="user?.is_follower" class="badge badge-sm bg-secondary">Te sigue</span>
-              </h2>
-                <p-skeleton *ngIf="loading" styleClass="mb-2"></p-skeleton>
-                <p-skeleton *ngIf="loading" styleClass="mb-2"></p-skeleton>
-
-              <div *ngIf="!loading" class="h3 font-weight-800">
-                @{{ user?.username }}
-              </div>
-            </div>
+        </div>
+        <div class="col-12">
+          <!-- ------------------------------- Paginate ------------------------------- -->
+          <div class=" bgsecondary mt-4 p-2 d-flex justify-content-evenly">
+            <button [disabled]="!previousUrl" (click)="changeUrl(false)" class="paginate left">
+              <i></i><i></i>
+            </button>
+            <h3 class="title">-</h3>
+            <button [disabled]="!nextUrl" (click)="changeUrl(true)" class="paginate right">
+              <i></i><i></i>
+            </button>
           </div>
         </div>
       </div>
