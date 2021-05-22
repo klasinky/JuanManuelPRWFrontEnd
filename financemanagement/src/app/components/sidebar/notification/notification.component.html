@@ -1,0 +1,4 @@
+<div class="notification-div" (click)="toLink()" >
+  <p class="notification-p"><span class="fw-bold">@{{ notification?.from_user }}</span> {{ notification?.content }}</p>
+  <span class="date-span">{{ notification?.created_at| amLocale:'es' | amTimeAgo  }}</span>
+</div>

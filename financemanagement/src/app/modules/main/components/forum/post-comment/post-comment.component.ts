@@ -37,6 +37,10 @@ export class PostCommentComponent implements OnInit {
   ngOnInit(): void {
     this.getComments();
     this.ifChangeInput();
+    
+  }
+  ngOnChanges(){
+    this.getComments();
   }
 
   onScroll(event: any) {
@@ -66,6 +70,8 @@ export class PostCommentComponent implements OnInit {
       const dataSend = {
         description: message
       }
+      console.log("Mensaje: ")
+      console.log(dataSend);
       const url = 'posts/' + this.idPost + '/comment'
       this.httpService.postAuth(url, dataSend).subscribe(
         (data) => {
