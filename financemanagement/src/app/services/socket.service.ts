@@ -11,7 +11,7 @@ import { StorageService } from './storage.service';
 export class SocketService {
 
   socket?: WebSocketSubject<any>;
-  url = 'ws://ws-finaccess.herokuapp.com/client';
+  url = 'wss://ws-finaccess.herokuapp.com/client';
   userData?: User;
   token?: string;
   constructor(private storageService: StorageService) { }
