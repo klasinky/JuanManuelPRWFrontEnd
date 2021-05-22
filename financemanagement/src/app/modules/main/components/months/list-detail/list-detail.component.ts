@@ -17,13 +17,18 @@ export class ListDetailComponent implements OnInit {
   constructor(private route: Router) { }
 
   ngOnInit(): void {
-
   }
 
+  /**
+   * Eliminar el mes
+   */
   deleteAction() {
     this.deleteMonth.emit(this.month);
   }
 
+  /**
+   * Asigna la ruta para ir a la información del mes
+   */
   getDetail() {
     this.route.navigate(['dashboard/months/detail/' + btoa(escape(JSON.stringify(this.month.id)))]);
   }

@@ -19,7 +19,6 @@ export class MonthDetailComponent implements OnInit, OnDestroy {
 
   refreshSubscription?: Subscription;
 
-
   constructor(private monthService: MonthDetailService,
     private route: ActivatedRoute,
     private router: Router,
@@ -43,8 +42,11 @@ export class MonthDetailComponent implements OnInit, OnDestroy {
     })
   }
 
+  /**
+   * Obtiene la información del mes
+   * @param id id del mes
+   */
   getMonth(id: number) {
-
     this.monthService.getMonth(id).subscribe(
       (data: any) => {
         this.month = data;
@@ -58,6 +60,9 @@ export class MonthDetailComponent implements OnInit, OnDestroy {
     )
   }
 
+  /**
+   * Actualiza la información del mes
+   */
   refreshMonth() {
     this.getMonth(this.id);
   }

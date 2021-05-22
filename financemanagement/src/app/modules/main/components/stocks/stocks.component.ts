@@ -22,6 +22,9 @@ export class StocksComponent implements OnInit {
     this.getStocksAction();
   }
 
+  /**
+   * Obtiene una lista de las acciones que esta suscrita el usuario
+   */
   getStocksAction() {
     const url: string = environment.endpoints.stocks.list;
     this.httpService.getAuth(url).subscribe(
@@ -31,6 +34,10 @@ export class StocksComponent implements OnInit {
     )
   }
 
+  /**
+   * Desuscribirse de una acción a la que esta suscrita
+   * @param stock acción que se va a eliminar
+   */
   unsubscribeStockAction(stock: Stock) {
     const url: string = environment.endpoints.stocks.viewset;
     this.httpService.deleteAuth(url, stock.id).subscribe(
@@ -39,12 +46,14 @@ export class StocksComponent implements OnInit {
         this.toastr.success('Te has desuscrito de la acción' + stock.name, 'Acción eliminada');
       },
       (error) => {
-        console.log(error)
         this.toastr.error(error.detail, "Ha ocurrido un error");
       }
     )
   }
 
+  /**
+   * Refresca la lista de acciones
+   */
   addStock(): void {
     this.getStocksAction();
   }

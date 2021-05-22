@@ -15,6 +15,8 @@ export class DownloadAmountBaseComponent implements OnInit {
   title?: string;
   serviceName?: string;
   idMonth?: number;
+
+  //ProgressBar
   uploadProgress: number = 0;
   showUploadProgress: boolean = false;
   
@@ -28,9 +30,11 @@ export class DownloadAmountBaseComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.idMonth = JSON.parse(unescape(atob(params.id)));
     })
-
   }
 
+  /**
+   * Descarga el XLS con toda la información de gastos o ingresos (serviceName) del mes
+   */
   downloadXLS() {
     const url: string = environment.endpoints.amountBase.export.start +
       this.idMonth + environment.endpoints.amountBase.export.end + this.serviceName;
@@ -42,32 +46,18 @@ export class DownloadAmountBaseComponent implements OnInit {
       (data: any) => {
 
         if (data.type == 3) {
-          console.log("From datatype ", data)
           this.uploadProgress = Math.round((data.loaded * 100) / data.total);
-
         }
         if (data?.body) {
-          console.log("DESDE EL BODY")
-          console.log(data)
           const blob = new Blob([data.body], { type: 'application/vnd.ms-excel' });
           const file = new File([blob], 'report.xlsx', { type: 'application/vnd.ms-excel' });
           const url = window.URL.createObjectURL(file);
-          // const a = document.createElement("a");
-          // document.body.appendChild(a);
-          // a.download = file?.name;
           window.open(url);
-          // a.href = url;
-          // a.click();
-          // console.log(a)
           window.URL.revokeObjectURL(url);
           this.showUploadProgress = false;
           this.toastr.success("Se ha descargado tu reporte", 'Descarga con éxito')
         }
-
-
       }, (error) => {
-        console.log("From error ", error)
-
         this.showUploadProgress = false;
         this.uploadProgress = 0;
       }

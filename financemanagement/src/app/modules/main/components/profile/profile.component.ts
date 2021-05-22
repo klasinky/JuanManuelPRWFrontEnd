@@ -57,9 +57,11 @@ export class ProfileComponent implements OnInit {
     this.getCurrencyList();
     this.ifChangeInput('old_password', 'oldPasswordError', 'formPassword');
     this.ifChangeInput('new_password', 'newPasswordError', 'formPassword');
-
   }
 
+  /**
+   * Obtiene la lista de divisas
+   */
   getCurrencyList() {
     const url: string = environment.endpoints.currency.all;
 
@@ -72,6 +74,9 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  /**
+   * Obtiene la información privada del usuario y las coloca en el formulario
+   */
   getUserInfo() {
     const url: string = environment.endpoints.auth.profile;
     this.httpService.getAuth(url).subscribe(
@@ -82,11 +87,13 @@ export class ProfileComponent implements OnInit {
         this.formProfile.get("username")?.setValue(this.user?.username);
       },
       (error) => {
-        console.log(error);
       }
     )
   }
 
+  /**
+   * Cambiar los datos privados del usuario
+   */
   profileAction() {
     const url: string = environment.endpoints.auth.profile;
 
@@ -112,7 +119,6 @@ export class ProfileComponent implements OnInit {
           this.toastr.success('Datos actualizados', '')
         },
         (error: any) => {
-          console.log(error);
           this.showLoaderProfile = false;
           this.emailErrorMessage = error.error.email;
           this.usernameErrorMessage = error.error.username;
@@ -130,6 +136,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * Cambiar la contraseña del usuario
+   */
   changeUserPasswordAction() {
     const url: string = environment.endpoints.auth.changePassword;
 
@@ -164,6 +173,10 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   * @returns Retorna el formulario y las validaciones necesarias para el formulario formProfile
+   */
   getFormProfile(): FormGroup {
     return this.fb.group({
       'email': ['', [Validators.required, Validators.email]],
@@ -174,6 +187,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @returns Retorna el formulario y las validaciones necesarias para el formulario formPassword
+   */
   getFormPassword(): FormGroup {
     return this.fb.group({
       'old_password': ['', [Validators.required, Validators.minLength(8)]],
@@ -181,18 +198,32 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * Verifica si el arrayMessage tiene valores, si es asi asigna nameError a true
+   * @param nameError 
+   * @param arrayMessage 
+   */
   addMessageError(nameError: string, arrayMessage: String[]) {
     if (arrayMessage) {
       (this as any)[nameError] = true;
     }
   }
 
+  /**
+   * Al cambiar el value del input de asigna el nameError a false
+   * @param name 
+   * @param nameError 
+   * @param form 
+   */
   ifChangeInput(name: any, nameError: any, form: string) {
     (this as any)[form].get(name)?.valueChanges.subscribe((val: any) => {
       (this as any)[nameError] = false
     });
   }
 
+  /**
+   * Coloca los valores por defecto a las variables
+   */
   clearFiles() {
     this.oldPasswordError = false;
     this.newPasswordError = false;
@@ -209,11 +240,17 @@ export class ProfileComponent implements OnInit {
     this.currencyErrorMessage = [];
   }
 
+  /**
+   * Reinicia el formulario formPassword
+   */
   resetForms() {
     this.formPassword.reset();
   }
 
-  // Image Preview
+  /**
+   * Muestra una previsualización de la imagen subida en el input
+   * @param event input
+   */
   showPreview(event: any) {
     const file = event.target?.files[0];
     this.formProfile.patchValue({

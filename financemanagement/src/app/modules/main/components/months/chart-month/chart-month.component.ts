@@ -31,9 +31,7 @@ export class ChartMonthComponent implements OnInit {
     domain: ['#A8385E', '#7AA3E5', '#ABE3F5', '#A8385E', '#1B1E27']
   };
 
-  constructor() {
-
-  }
+  constructor() {}
 
 
   ngOnChanges(changes: SimpleChanges) {
@@ -42,9 +40,11 @@ export class ChartMonthComponent implements OnInit {
 
   ngOnInit() {
     this.setCharts();
-
   }
 
+  /**
+   * Asigna los valores para construir el gráfico 
+   */
   setCharts() {
     const single: any[] = [];
     this.categories?.forEach((category: CategoryDetail) => {
@@ -58,23 +58,26 @@ export class ChartMonthComponent implements OnInit {
     Object.assign(this, { single });
     setTimeout(() => {
       let x = this.chartCointainer?.nativeElement.offsetWidth;
-      // if (x > 480) {
-      //   x = 480;
-      // }
       this.viewX = x;
       this.loading = false;
     }, 500);
   }
 
+  /**
+   * 
+   * @param value Cantidad
+   * @returns Retorna el valor formateado con el signo de la divisa delante del value
+   */
   formatingY(value: any) {
     return "€" + value;
   }
 
+  /**
+   * Al cambiar el tamaño de la pantalla se modifica los valores de viewX
+   * @param event tamaño de la pantalla
+   */
   onResize(event: any) {
     let x = this.chartCointainer?.nativeElement.offsetWidth;
-    // if (x > 500) {
-    //   x = 500
-    // }
     this.viewX = x;
   }
 

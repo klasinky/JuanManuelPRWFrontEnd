@@ -26,18 +26,29 @@ export class StockSuscribeComponent implements OnInit {
     this.getStockListAction();
   }
 
+  /**
+   * 
+   * @returns Retorna el formulario y las validaciones necesarias para el formulario suscribeStock
+   */
   getFormSuscribeStock() {
     return this.fb.group({
       'stock': [null, Validators.required]
     })
   }
 
+  /**
+   * Funcion para cambiar el valor al select
+   * @param e opción del select
+   */
   changeStock(e: any) {
     this.formSuscribeStock?.patchValue(e.target.value, {
       onlySelf: true
     })
   }
 
+  /**
+   * Obtener lista de las acciones
+   */
   getStockListAction() {
     const url: string = environment.endpoints.stocks.all;
     this.httpService.getAuth(url).subscribe(
@@ -45,11 +56,13 @@ export class StockSuscribeComponent implements OnInit {
         this.stocks = data as Stock[];
       },
       (error) => {
-        console.log(error);
       }
     )
   }
 
+  /**
+   * Petición para suscribirse a una acción
+   */
   postSuscribeStockAction() {
     if (this.formSuscribeStock.valid) {
       const stockId = this.formSuscribeStock.value.stock;
@@ -69,6 +82,9 @@ export class StockSuscribeComponent implements OnInit {
     }
   }
 
+  /**
+   * Reinicia el formulario suscribeStock
+   */
   resetForms() {
     this.formSuscribeStock.reset();
   }

@@ -28,6 +28,9 @@ export class MonthsComponent implements OnInit {
     this.getMonths()
   }
 
+  /**
+   * Obtener una lista de todos los meses del usuario
+   */
   async getMonths() {
     const url: string = environment.endpoints.months.all;
     this.loading = true;
@@ -56,8 +59,11 @@ export class MonthsComponent implements OnInit {
     }
   }
 
+  /**
+   * Obtener la nueva pagina de meses
+   * @param isNext true = siguiente pagina, false = pagina actual
+   */
   changeUrl(isNext: boolean) {
-
     const url = isNext ? this.nextUrl : this.previousUrl;
     if (url) {
       this.loading = true;
@@ -71,13 +77,16 @@ export class MonthsComponent implements OnInit {
         },
         (error) => {
           this.loading = false;
-
         }
       );
     }
 
   }
 
+  /**
+   * Eliminar un mes
+   * @param month mes
+   */
   async deleteMonth(month: Months) {
     const url: string = environment.endpoints.months.viewset;
     this.httpService.deleteAuth(url, month.id).subscribe(
@@ -86,13 +95,15 @@ export class MonthsComponent implements OnInit {
         this.toastr.success('Has eliminado el mes correctamente', 'Mes eliminado');
       },
       (error) => {
-        console.log(error)
         this.toastr.error(error.detail, "Ha ocurrido un error");
-
       }
     )
   }
 
+  /**
+   * Añade un mes a la variable months
+   * @param _month mes
+   */
   addMonth(_month: Months): void {
     this.months.unshift(_month);
   }

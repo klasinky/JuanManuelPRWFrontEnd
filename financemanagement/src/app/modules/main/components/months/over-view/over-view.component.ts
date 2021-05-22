@@ -14,7 +14,6 @@ export class OverViewComponent implements OnInit {
 
   differenceError: boolean = false;
 
-
   //Filters
   btnAll: boolean = false;
   btnMonth: boolean = false;
@@ -30,11 +29,19 @@ export class OverViewComponent implements OnInit {
     this.getTotal();
   }
 
+  /**
+   * Verifica si la diferencia es menor o igual que 0
+   */
   getDifferenceColor() {
     if (this.detail?.total_difference)
       this.differenceError = this.detail.total_difference <= 0;
   }
 
+  /**
+   * Obtiene el total de ingresos y gastos, se puede utilizar un filtro para
+   * buscarlo por año, mes y global
+   * @param filter filtro
+   */
   getTotal(filter = "?q=all") {
     this.setActiveButton(filter)
 
@@ -46,11 +53,14 @@ export class OverViewComponent implements OnInit {
         this.clearLoadingButtons();
       },
       (error) => {
-        console.log(error);
       }
     )
   }
 
+  /**
+   * Cambia el estado del boton que se esta presionando
+   * @param filter filtro
+   */
   setActiveButton(filter: string) {
     this.btnAll = false;
     this.btnMonth = false;
@@ -62,18 +72,19 @@ export class OverViewComponent implements OnInit {
     } else if (filter == '?q=year') {
       this.btnYear = true;
       this.btnYearLoading = true;
-
     } else if (filter == '?q=month') {
       this.btnMonth = true;
       this.btnMonthLoading = true;
-
     }
   }
 
+  /**
+   * Coloca el valor por defecto a las variables
+   */
   clearLoadingButtons(){
     this.btnAllLoading = false;
     this.btnYearLoading = false;
     this.btnMonthLoading = false;
-
   }
+
 }
