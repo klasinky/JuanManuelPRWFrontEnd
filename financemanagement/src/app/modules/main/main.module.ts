@@ -52,9 +52,10 @@ import { TagsDetailComponent } from './components/forum/tags-detail/tags-detail.
 import { StockTutorialComponent } from './components/stocks/stock-tutorial/stock-tutorial.component';
 import { PostListSkeletonComponent } from './components/forum/post-list/post-list-skeleton/post-list-skeleton.component';
 
-import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { PostRecommendationSkeletonComponent } from './components/forum/post-detail/post-recommendation-skeleton/post-recommendation-skeleton.component';
 import { TopContributorsComponent } from './components/forum/top-contributors/top-contributors.component';
+import { UserCardComponent } from './components/forum/user-profile/user-card/user-card.component';
 import { NotificationComponent } from '../../components/sidebar/notification/notification.component';
 
 
@@ -94,6 +95,7 @@ import { NotificationComponent } from '../../components/sidebar/notification/not
     PostListSkeletonComponent,
     PostRecommendationSkeletonComponent,
     TopContributorsComponent,
+    UserCardComponent,
     NotificationComponent
   ],
   imports: [

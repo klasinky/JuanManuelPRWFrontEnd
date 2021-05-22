@@ -26,7 +26,7 @@
           <a (click)="activateRing()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             <div [class.notify]="ring"  [class.show-count]="notifications.length > 0" [attr.data-count]="notifications.length"
-              class="notification notify"></div>
+              class="notification"></div>
           </a>
           <div aria-labelledby="navbarDropdown" class="dropdown-menu notification-menu">
             <div *ngFor="let notification of notifications" class="dropdown-item notification-item" >

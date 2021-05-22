@@ -6,7 +6,7 @@ const comment: string = "comment"
 
 export const environment = {
   production: true,
-  apiUrl: 'https://klasinky.pythonanywhere.com/api',
+  apiUrl: 'https://api.finaccess.me/api',
   endpoints: {
     auth: {
       register: users + "/register",
@@ -19,7 +19,7 @@ export const environment = {
     },
     months: {
       all: months + "/all",
-      create: "/" + months,
+      create:  months,
       viewset: months + "/"
     },
     category: {
