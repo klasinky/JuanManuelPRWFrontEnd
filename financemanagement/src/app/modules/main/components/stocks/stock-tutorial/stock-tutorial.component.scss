@@ -24,6 +24,14 @@
         background: $alternative-color !important;
         color: $primary-font-color !important;
     }
+
+    .p-card-content{
+      text-align: center;
+    }
+
+    .bg-timeline img{
+      width: 300px;
+    }
   }
   
   @media screen and (max-width: 960px) {
@@ -42,7 +50,26 @@
         }
   
         .p-card {
-          margin-top: 1rem;
+          margin-top: 1rem; 
+        }
+
+        .p-card-title{
+          word-break: break-word;
+        }
+
+        .bg-timeline img{
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    ::ng-deep {
+      .customized-timeline {
+        .p-timeline-event-separator, 
+        .p-timeline-event-opposite{
+          display:none;
         }
       }
     }
