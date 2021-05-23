@@ -7,6 +7,8 @@ import { SocketService } from 'src/app/services/socket.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from "@angular/platform-browser";
+import { ColorService } from 'src/app/services/color.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,31 +17,39 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() userData!: User;  
+  isMobile: boolean = false;
+  notifications: Notification[] = [];
+  ring: boolean = true;
+  firstTime: boolean = true;
+  destroyed$ = new Subject();
+  audio = new Audio('../../assets/ringtones.mp3')
+  
   constructor(
     private authService: AuthService,
     private httpService: HttpService,
     private socketNotification: SocketService,
-    private toastr: ToastrService) { }
-  @Input() userData!: User;
-
-
-  isMobile: boolean = false;
-  notifications: any[] = [];
-  ring: boolean = true;
-  firstTime: boolean = true;
-  destroyed$ = new Subject();
-
+    private toastr: ToastrService,
+    private titleService: Title,
+    private colorService: ColorService) {
+  }
+  
   ngOnInit(): void {
+    this.audio.load();
     this.getNotifications();
     const notiSub$ = this.socketNotification.connect().pipe(
       takeUntil(this.destroyed$),
     );
-    console.log(notiSub$);
+
     notiSub$.subscribe(notification => {
       this.notifications.unshift(notification);
       this.activateRing();
-      this.toastr.success("Tienes una nueva notificación")
+      this.toastr.success("Tienes una nueva notificación");
+      this.titleService.setTitle(`Finaccess ${this.getTitle()}`);
+      this.audio.play();
+
     });
+    console.log(this.userData)
   }
 
   getNotifications() {
@@ -47,6 +57,7 @@ export class SidebarComponent implements OnInit {
       (data) => {
         this.notifications = data as any[];
         this.activateRing();
+        this.titleService.setTitle(`Finaccess ${this.getTitle()}`);
       },
       (error) => {
         console.log(error);
@@ -62,6 +73,9 @@ export class SidebarComponent implements OnInit {
   }
 
 
+  getStyle() {
+    return this.colorService.getColor(this.userData?.username);
+  }
 
   logOutAction() {
     this.authService.logout();
@@ -69,6 +83,8 @@ export class SidebarComponent implements OnInit {
 
   removeNotification(notification: Notification) {
     this.notifications.splice(this.notifications.indexOf(notification), 1);
+    this.titleService.setTitle(`Finaccess ${this.getTitle()}`);
+
   }
 
   activateRing() {
@@ -78,6 +94,11 @@ export class SidebarComponent implements OnInit {
       this.ring = false;
 
     }, 1500)
+  }
+
+  getTitle(){
+    const lengthArray = this.notifications.length;
+    return lengthArray > 0?`(${lengthArray})`:"";
   }
 
   ngOnDestroy(): void {

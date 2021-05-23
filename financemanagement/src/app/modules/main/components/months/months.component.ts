@@ -46,15 +46,6 @@ export class MonthsComponent implements OnInit {
     )
   }
 
-  getStyle() {
-    return {
-      'background': '#42141E',
-      'border-radius': '0',
-      'height': '85px',
-      'margin-bottom': '0',
-      'box-shadow': '2px 20px 30px #42141E'
-    }
-  }
 
   changeUrl(isNext: boolean) {
 

@@ -15,6 +15,7 @@ export class LoggedInGuard implements CanActivate {
    * Guard para saber si el usuario está autenticado
    */
   canActivate(): Promise<boolean> {
+    console.log("Entra en LoggedIN")
     this.loader = true;
     return new Promise(resolve => {
       this.httpService.getAuth('users/check').subscribe(

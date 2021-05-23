@@ -326,7 +326,8 @@ div.card{
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    border: 1px solid rgba(0, 0, 0, .05);
+    border: 4px solid $light-primary-color;
+    box-shadow: 0 0 2rem 0 $light-primary-color !important;
     border-radius: .375rem;
     background-color: #fff;
     background-clip: border-box;
@@ -611,6 +612,8 @@ div.card{
     transition: all .15s ease;
     transform: translate(-50%, -30%);
     border-radius: .375rem;
+    height: 150px;
+    width: 150px;
   }
   
   .card-profile-image img:hover {

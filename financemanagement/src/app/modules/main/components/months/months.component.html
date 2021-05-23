@@ -16,9 +16,16 @@
     <app-list-detail [month]="month" (deleteMonth)="deleteMonth($event)"></app-list-detail>
   </div>
 </div>
+<div *ngIf="!loading && months.length == 0">
+  <div class="text-center">
+    <img src="../../../../../assets/img/calendar.png" alt="calendar" class="img-fluid">
+    <h4>Agrega un mes para comenzar</h4>
+  </div>
+</div>
 <div class="row mt-2" *ngIf="loading">
   <div class="col-md-6 mt-3 col-xl-4" *ngFor="let item of numberPagination">
-    <ngx-skeleton-loader animation="pulse" [theme]="getStyle()"></ngx-skeleton-loader>
+    <p-skeleton width="100%" height="83px"></p-skeleton>
+
   </div>
 </div>
 
