@@ -80,9 +80,7 @@ export class ProfileComponent implements OnInit {
         this.user = data;
         this.formProfile.get("name")?.setValue(this.user?.name);
         this.formProfile.get("email")?.setValue(this.user?.email);
-        this.formProfile.get("username")?.setValue(this.user?.username);
-        console.log(this.user.currency);
-        
+        this.formProfile.get("username")?.setValue(this.user?.username);        
         this.formProfile.get("currency")?.setValue(this.user?.currency?.id);
       },
       (error) => {
