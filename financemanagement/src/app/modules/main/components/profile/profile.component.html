@@ -78,8 +78,13 @@
                 <div class="imagePreview" *ngIf="imageURL && imageURL !== ''; else elseBlock">
                   <img [src]="imageURL">
                 </div>
+
                 <ng-template #elseBlock>
-                  <img [src]="user?.profile_pic">
+                  <div class="box">
+                    <i *ngIf="user?.profile_pic" (click)="deleteProfileImage()" class="fas fa-times"></i>
+                    <img *ngIf="!user?.profile_pic" src="../../../../../../assets/img/default-profile.jpg">
+                    <img *ngIf="user?.profile_pic" [src]="user?.profile_pic">
+                  </div>
                 </ng-template>
 
               </div>

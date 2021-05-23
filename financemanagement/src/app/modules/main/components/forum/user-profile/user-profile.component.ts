@@ -62,7 +62,7 @@ export class UserProfileComponent implements OnInit {
         this.totalPosts = data.count;
         this.nextUrl = data.next;
         this.previousUrl = data.previous;
-        this.posts = data as Post[];
+        this.posts = data.results as Post[];
       },
       (error) => {
         this.loading = false;
@@ -84,7 +84,7 @@ export class UserProfileComponent implements OnInit {
           this.totalPosts = data.count;
           this.nextUrl = data.next;
           this.previousUrl = data.previous;
-          this.posts = data as Post[];
+          this.posts = data.results as Post[];
         },
         (error) => {
           this.loading = false;
