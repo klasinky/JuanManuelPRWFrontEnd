@@ -611,6 +611,8 @@ div.card{
     transition: all .15s ease;
     transform: translate(-50%, -30%);
     border-radius: .375rem;
+    height: 150px;
+    width: 150px;
   }
   
   .card-profile-image img:hover {

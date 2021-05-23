@@ -74,12 +74,14 @@ export class ProfileComponent implements OnInit {
 
   getUserInfo() {
     const url: string = environment.endpoints.auth.profile;
+    this.imageURL = "";
     this.httpService.getAuth(url).subscribe(
       (data: User) => {
         this.user = data;
         this.formProfile.get("name")?.setValue(this.user?.name);
         this.formProfile.get("email")?.setValue(this.user?.email);
         this.formProfile.get("username")?.setValue(this.user?.username);
+        this.formProfile.get("currency")?.setValue(this.user?.currency?.id);
       },
       (error) => {
         console.log(error);
@@ -102,17 +104,19 @@ export class ProfileComponent implements OnInit {
       } as User;
 
       if (this.imageURL) {
-        userNewData.profile_pic = this.imageURL;
+        userNewData.profile_pic = this.imageURL;     
       }
    
       this.httpService.patchAuth(url, userNewData).subscribe(
         (data: User) => {
-          this.storageService.setItem(AuthConstants.DATAUSER, data)
+          this.storageService.setItem(AuthConstants.DATAUSER, data);
           this.showLoaderProfile = false;
-          this.toastr.success('Datos actualizados', '')
+          this.toastr.success('Datos actualizados', '');
+          this.resetForms();
+          this.getUserInfo();  
+          this.clearFiles();
         },
         (error: any) => {
-          console.log(error);
           this.showLoaderProfile = false;
           this.emailErrorMessage = error.error.email;
           this.usernameErrorMessage = error.error.username;
@@ -164,12 +168,29 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  deleteProfileImage(){
+    const url: string = environment.endpoints.auth.profile;
+    const dataImage = {
+      profile_pic: null
+    };
+
+    this.httpService.patchAuth(url, dataImage).subscribe(
+      (data: User)=>{
+        this.getUserInfo();
+        this.toastr.success("Has eliminado la foto de perfil");
+      },
+      (error) =>{
+        this.toastr.error("No se ha podido eliminar la de perfil");
+      }
+    )
+  }
+
   getFormProfile(): FormGroup {
     return this.fb.group({
       'email': ['', [Validators.required, Validators.email]],
       'name': ['', [Validators.required, Validators.minLength(3)]],
       'username': ['', [Validators.required, Validators.minLength(3)]],
-      'currency': ['', [Validators.required]],
+      'currency': [this.user?.currency?.id, [Validators.required]],
       'profile_pic':[null]
     });
   }
@@ -199,6 +220,8 @@ export class ProfileComponent implements OnInit {
     this.oldPasswordErrorMessage = [];
     this.newPasswordErrorMessage = [];
 
+    this.filename = "Selecciona un archivo.";
+
     this.emailError = false;
     this.usernameError = false;
     this.nameError = false;
@@ -210,6 +233,7 @@ export class ProfileComponent implements OnInit {
   }
 
   resetForms() {
+    this.formProfile.reset();
     this.formPassword.reset();
   }
 
