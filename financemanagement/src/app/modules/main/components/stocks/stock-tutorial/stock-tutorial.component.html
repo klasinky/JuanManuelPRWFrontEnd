@@ -7,8 +7,8 @@
         </ng-template>
         <ng-template pTemplate="content" let-event>
             <p-card [header]="event.status" class="bg-timeline">
-                <img *ngIf="event.image" [src]="'assets/showcase/images/demo/product/' + event.image" [alt]="event.name" width="200" class="p-shadow-2" />
-                <p>{{event.description}}</p>
+                <img *ngIf="event.image" [src]="'assets/showcase/images/demo/product/' + event.image" [alt]="event.name" class="p-shadow-2" />
+                <p class="mt-3">{{event.description}}</p>
             </p-card>
         </ng-template>
     </p-timeline>

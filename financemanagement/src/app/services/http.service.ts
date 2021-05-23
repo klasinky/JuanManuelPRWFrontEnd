@@ -37,7 +37,7 @@ export class HttpService {
   }
 
   deleteAuth(serviceName: string, id?: number) {
-    const url = (id) ? environment.apiUrl + "/" + serviceName + "/" + id : serviceName;
+    const url = (id) ? environment.apiUrl + "/" + serviceName + id : serviceName;
     return this.http.delete(url, { headers: this.getHeaders() })
   }
 
