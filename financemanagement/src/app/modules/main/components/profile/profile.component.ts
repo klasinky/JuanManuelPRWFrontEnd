@@ -81,6 +81,8 @@ export class ProfileComponent implements OnInit {
         this.formProfile.get("name")?.setValue(this.user?.name);
         this.formProfile.get("email")?.setValue(this.user?.email);
         this.formProfile.get("username")?.setValue(this.user?.username);
+        console.log(this.user.currency);
+        
         this.formProfile.get("currency")?.setValue(this.user?.currency?.id);
       },
       (error) => {
@@ -109,11 +111,10 @@ export class ProfileComponent implements OnInit {
    
       this.httpService.patchAuth(url, userNewData).subscribe(
         (data: User) => {
+          this.getUserInfo();
           this.storageService.setItem(AuthConstants.DATAUSER, data);
           this.showLoaderProfile = false;
           this.toastr.success('Datos actualizados', '');
-          this.resetForms();
-          this.getUserInfo();  
           this.clearFiles();
         },
         (error: any) => {
@@ -190,7 +191,7 @@ export class ProfileComponent implements OnInit {
       'email': ['', [Validators.required, Validators.email]],
       'name': ['', [Validators.required, Validators.minLength(3)]],
       'username': ['', [Validators.required, Validators.minLength(3)]],
-      'currency': [this.user?.currency?.id, [Validators.required]],
+      'currency': ['', [Validators.required]],
       'profile_pic':[null]
     });
   }
@@ -233,7 +234,6 @@ export class ProfileComponent implements OnInit {
   }
 
   resetForms() {
-    this.formProfile.reset();
     this.formPassword.reset();
   }
 
