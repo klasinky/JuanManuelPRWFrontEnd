@@ -78,6 +78,7 @@ export class ProfileComponent implements OnInit {
     this.httpService.getAuth(url).subscribe(
       (data: User) => {
         this.user = data;
+        this.storageService.setItem(AuthConstants.DATAUSER, data);
         this.formProfile.get("name")?.setValue(this.user?.name);
         this.formProfile.get("email")?.setValue(this.user?.email);
         this.formProfile.get("username")?.setValue(this.user?.username);        
@@ -110,7 +111,6 @@ export class ProfileComponent implements OnInit {
       this.httpService.patchAuth(url, userNewData).subscribe(
         (data: User) => {
           this.getUserInfo();
-          this.storageService.setItem(AuthConstants.DATAUSER, data);
           this.showLoaderProfile = false;
           this.toastr.success('Datos actualizados', '');
           this.clearFiles();

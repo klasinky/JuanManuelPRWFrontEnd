@@ -81,11 +81,17 @@
               <div class="chat-vid__content">
                 <a class="chat-vid__name text-decoration-none" [routerLink]="['/dashboard/post/',postR?.id]">{{ postR?.title | titlecase }}</a>
                 <div class="chat-vid__by">
-                  <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span>@{{postR?.author?.username}}</span></a>
+                  <a class="text-light decoration" [routerLink]="['/dashboard/user/',postR?.author?.username]"><span>@{{postR?.author?.username}}</span></a>
                 </div>
                 <div class="chat-vid__info">{{ postR?.likes }} likes <span class="seperate"></span>{{ postR?.created_at | amLocale:'es' | amTimeAgo }}</div>
               </div>
             </div>
+          </div>
+        </div>
+        <div *ngIf="!loadingRecommendation && postRecommendation?.length == 0">
+          <div class="text-center">
+            <img src="../../../../../../assets/img/no-post.png" alt="No posts" class="img-fluid">
+            <h4 class="mt-2">No existen posts similares</h4>
           </div>
         </div>
         <div *ngIf="loadingRecommendation">

@@ -80,6 +80,12 @@
               <app-post-list-skeleton></app-post-list-skeleton>
             </div>
           </div>
+          <div *ngIf="!loading && posts?.length == 0">
+            <div class="text-center">
+              <img src="../../../../../assets/img/no-post.png" alt="No posts" class="img-fluid">
+              <h4 class="mt-2">No hay posts</h4>
+            </div>
+          </div>
         </div>
         <div class="col-12">
           <!-- ------------------------------- Paginate ------------------------------- -->

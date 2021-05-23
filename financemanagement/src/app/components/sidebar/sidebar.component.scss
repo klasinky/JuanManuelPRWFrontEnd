@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 @import '../../../styles.scss';
 
-.navbar{
+.navbar {
   background-color: $alternative-color;
 }
 
@@ -15,10 +15,12 @@
 
 .dropdown-menu {
   background: $alternative-color;
-  & .dropdown-item:hover{
+
+  & .dropdown-item:hover {
     background: $alternative-color-hover;
   }
 }
+
 #header {
   position: fixed;
   top: 0;
@@ -45,6 +47,7 @@
     margin-bottom: 2px;
     font-size: 15px;
     color: $primary-font-color;
+
     i {
       font-size: 24px;
       padding-right: 8px;
@@ -53,7 +56,7 @@
   }
 
   .nav-link {
-    
+
     span::after {
       content: '';
       display: block !important;
@@ -62,6 +65,7 @@
       background: $light-primary-color;
       transition: width .3s !important;
     }
+
     span:hover::after {
       width: 100%;
       transition: width .3s;
@@ -81,8 +85,8 @@ img {
   height: 7vh;
 }
 
-button{
-  span{
+button {
+  span {
     color: #fff;
   }
 }
@@ -94,7 +98,7 @@ button{
   font-size: 1.3em;
 }
 
-.notification::before, 
+.notification::before,
 .notification::after {
   color: #fff;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -140,36 +144,67 @@ button{
 
 @keyframes ring {
   0% {
-      transform: rotate(35deg);
+    transform: rotate(35deg);
   }
+
   12.5% {
-      transform: rotate(-30deg);
+    transform: rotate(-30deg);
   }
+
   25% {
-      transform: rotate(25deg);
+    transform: rotate(25deg);
   }
+
   37.5% {
-      transform: rotate(-20deg);
+    transform: rotate(-20deg);
   }
+
   50% {
-      transform: rotate(15deg);
+    transform: rotate(15deg);
   }
+
   62.5% {
-      transform: rotate(-10deg);
+    transform: rotate(-10deg);
   }
+
   75% {
-      transform: rotate(5deg);
+    transform: rotate(5deg);
   }
+
   100% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 }
 
 /* ---------------------------- Notification Menu --------------------------- */
 
 .notification-menu {
-  max-width: 480px;
+  max-width: 280px;
   min-width: 480px;
+  max-height: 218px;
+  overflow-y: scroll;
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px darken($alternative-color, 5%);
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $light-primary-color;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: darken($light-primary-color, 5%)
+  }
 }
 
 @media (min-width: 300px) {
@@ -234,6 +269,10 @@ button{
   margin: 0px;
 }
 
-.dropdown-item{
+.dropdown-item {
   color: $primary-font-color;
+}
+
+.dropdown-menu-end{
+  width: 12rem;
 }

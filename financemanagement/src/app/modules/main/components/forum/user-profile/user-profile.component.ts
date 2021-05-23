@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/interfaces/post';
@@ -29,7 +30,8 @@ export class UserProfileComponent implements OnInit {
   constructor(private httpService: HttpService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private titleService: Title) {
     this.numberPagination = Array(12).fill(0).map((x, i) => i);
   }
 
@@ -38,6 +40,8 @@ export class UserProfileComponent implements OnInit {
       try {
         const username = params.username;
         this.username = username;
+        let title = this.titleService.getTitle();
+        this.titleService.setTitle(title+" - "+this.username);
         this.getPostUser();
       } catch (error) {
         this.router.navigate(['dashboard']).then(() => {
@@ -63,6 +67,7 @@ export class UserProfileComponent implements OnInit {
         this.nextUrl = data.next;
         this.previousUrl = data.previous;
         this.posts = data.results as Post[];
+        
       },
       (error) => {
         this.loading = false;

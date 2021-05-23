@@ -21,7 +21,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { StocksComponent } from './components/stocks/stocks.component';
 import { StockDetailComponent } from './components/stocks/stock-detail/stock-detail.component';
 import { StockSuscribeComponent } from './components/stocks/stock-suscribe/stock-suscribe.component';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ForumComponent } from './components/forum/forum.component';
 import { PostDetailComponent } from './components/forum/post-detail/post-detail.component';
 import { PostCommentComponent } from './components/forum/post-comment/post-comment.component';
@@ -105,7 +104,6 @@ import { NotificationComponent } from '../../components/sidebar/notification/not
     FormsModule,
     ReactiveFormsModule,
     NgxChartsModule,
-    NgxSkeletonLoaderModule,
     TableModule,    
     ButtonModule,
     InputTextModule,
