@@ -1,4 +1,4 @@
-<div *ngIf="stocks!.length > 0; else elseBlock" class="container">
+<div *ngIf="stocks.length > 0; else elseBlock" class="container">
     <div class="row">
         <div *ngFor="let stock of stocks" class="col-12 pt-5">
             <div class="bgsecondary full-height text-center">
@@ -15,9 +15,10 @@
             </div>
         </div>
     </div>
-    
 </div>
+
 <ng-template #elseBlock>
-    <app-stock-tutorial></app-stock-tutorial>
-    <app-stock-suscribe (createStock)="addStock()"></app-stock-suscribe>
+    <app-stock-tutorial *ngIf="!loading"></app-stock-tutorial>
 </ng-template>
+
+<app-stock-suscribe (createStock)="addStock()"></app-stock-suscribe>

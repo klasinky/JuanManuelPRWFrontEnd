@@ -15,31 +15,33 @@ export class StockTutorialComponent implements OnInit {
   ngOnInit() {
     this.events1 = [
       {
-        status: 'Ordered',
+        status: '1º Paso',
         icon: PrimeIcons.SHOPPING_CART,
         color: '#9C27B0',
-        image: 'game-controller.jpg',
-        description: 'Dale click al botón que esta ubicado en la parte inferior derecha de la página el cual nos abrira un pequeña ventana.'
+        image: '../../../../../../assets/img/tutorial/1.png',
+        description: 'Presiona el botón "+" que esta ubicado en la parte inferior derecha de la página, dicho botón nos abrirá una ventana.'
       },
       {
-        status: 'Processing',
+        status: '2º Paso',
         icon: PrimeIcons.COG,
         color: '#673AB7',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipi sicing elit. Nemo, esse quis. Placeat iste similique exercitationem nobis itaque sit facilis! Alias tenetur natus, commodi corrupti earum animi nihil mollitia esse ad!'
+        image: '../../../../../../assets/img/tutorial/2.png',
+        description: 'En la ventana que se nos acaba de abrir vas a seleccionar la acción a la que te quieres suscribir para ver su registro semanal.'
       },
       {
-        status: 'Shipped',
+        status: '3º Paso',
         icon: PrimeIcons.ENVELOPE,
         color: '#FF9800',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, esse quis. Placeat iste similique exercitationem nobis itaque sit facilis! Alias tenetur natus, commodi corrupti earum animi nihil mollitia esse ad!'
+        image: '../../../../../../assets/img/tutorial/3.png',
+        description: 'Una vez seleccionada la acción, lo siguiente que vas a hacer es hacer click al botón Suscribirse el cual te agregará la acción a tus acciones suscritas.'
       },
       {
-        status: 'Delivered',
-        icon: PrimeIcons.CHECK,
-        color: '#607D8B',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, esse quis. Placeat iste similique exercitationem nobis itaque sit facilis! Alias tenetur natus, commodi corrupti earum animi nihil mollitia esse ad!'
+        status: '¿Cómo desuscribirse a una acción?',
+        icon: PrimeIcons.LINK,
+        color: '#AAF214',
+        image: '../../../../../../assets/img/tutorial/4.png',
+        description: 'Una vez tengas tus acciones, en la esquina superior derecha del gráfico de la acción saldra una "X" la cual al presionarla te desuscribiras de la acción.'
       }
     ];
   }
-
 }

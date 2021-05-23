@@ -21,7 +21,7 @@
                     <select formControlName="stock" (change)="changeStock($event)" aria-label="Default select">
                         <option value="null" disabled>Elige una acción...</option>
                         <option *ngFor="let stock of stocks" [ngValue]="stock.id">
-                            {{stock.name + ' ' +stock.symbol}}
+                            {{stock.name + ' ' + '[' + stock.symbol + ']'}}
                         </option>
                     </select>
 
