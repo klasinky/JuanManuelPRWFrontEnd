@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { UserProfile } from 'src/app/interfaces/user';
+import { ColorService } from 'src/app/services/color.service';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class TopContributorsComponent implements OnInit {
   loadingFollow = false;
 
   constructor(private httpService: HttpService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private colorService: ColorService) { }
 
   ngOnInit(): void {
   }
@@ -39,6 +41,10 @@ export class TopContributorsComponent implements OnInit {
         this.toastr.error(error.error.detail, 'Error');
       }
     )
+  }
+
+  getStyle() {
+    return this.colorService.getColor(this.user?.username);
   }
 
 }
