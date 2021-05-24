@@ -1,11 +1,11 @@
 <div>
-  <div class="row">
-    <div class="col-md-9">
+  <div class="row bgsecondary">
+    <div class="col-md-9 col-xxl-10 my-3 p-3">
       <input [(ngModel)]="title" type="text" required placeholder="Título" class="form-control">
       <p-editor [(ngModel)]="text" [style]="{'height':'350px', 'width':'100%'}"></p-editor>
     </div>
-    <div class="col-md-3 bgsecondary">
-      <div class="text-center mt-3">
+    <div class="col-md-3 col-xxl-2  my-3 p-3">
+      <div class="text-center my-3">
         <h3 class="title-top" title="Selecciona un tag">Tags</h3>
       </div>
 
@@ -15,11 +15,17 @@
               class="fas fa-times"></i> </span>
         </label>
       </div>
-
+      <div class="mt-4">
+        <button *ngIf="isCreate; else elseBlock" (click)="createPost()" class="btn-filter w-100">
+         <i class="fas fa-envelope    "></i> Crear Post
+        </button>
+        <ng-template #elseBlock>
+          <button (click)="createPost()" class="btn-filter w-100">
+            <i class="fas fa-pen    "></i>  Editar Post
+          </button>
+        </ng-template>
+      </div>
     </div>
   </div>
-  <button *ngIf="isCreate; else elseBlock" (click)="createPost()" class="btn btn-success">Crear Post</button>
-  <ng-template #elseBlock>
-    <button (click)="createPost()" class="btn btn-success">Editar Post</button>
-  </ng-template>
+
 </div>

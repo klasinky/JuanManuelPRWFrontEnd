@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/interfaces/post';
 import { UserProfile } from 'src/app/interfaces/user';
 import { HttpService } from 'src/app/services/http.service';
@@ -19,6 +20,9 @@ export class ForumComponent implements OnInit {
   numberPagination: number[];
   loading: boolean = false;
   loadingTopUser: boolean = true;
+
+  tagId: number; 
+
   //Filters
   btnAll: boolean = false;
   btnHot: boolean = false;
@@ -28,19 +32,40 @@ export class ForumComponent implements OnInit {
   btnHotLoading: boolean = false;
   btnTopLoading: boolean = false;
 
-  constructor(private httpService: HttpService) {
+  cbFollowing: boolean = false;
+  
+
+  constructor(private httpService: HttpService,
+    private route: ActivatedRoute) {
     this.numberPagination = Array(12).fill(0).map((x, i) => i);
+    this.tagId = 0;
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(queryParams => {
+      this.tagId = queryParams['tag'];
+      if (this.tagId !== undefined) {
+        this.getPosts();       
+      }
+    });
     this.getPosts();
     this.getTopUsers();
   }
 
   getPosts(filter = "") {
     this.setActiveButton(filter);
+    if (this.cbFollowing == true) {
+      const following = (filter !== "")?"&followers=true":"?followers=true";
+      filter += following;
+    }
+    if (this.tagId !== undefined) {
+      const tag = (filter !== "")?`&tag=${this.tagId}`:`?tag=${this.tagId}`
+      filter += tag;
+    }
     const url: string = environment.endpoints.posts.create + filter;
+    
     this.loading = true;
+
 
     this.httpService.getAuth(url).subscribe(
       (data: any) => {
@@ -93,6 +118,11 @@ export class ForumComponent implements OnInit {
         }
       );
     }
+  }
+
+  changeCbFollowing(){
+    this.cbFollowing = !this.cbFollowing;
+    this.getPosts();
   }
 
   setActiveButton(filter: string) {

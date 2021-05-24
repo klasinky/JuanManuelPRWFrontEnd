@@ -373,6 +373,15 @@ $angleActive: 25deg;
   .p-skeleton {
     background-color: $secondary-color;
   }
+
+  .p-dialog-header,
+  .p-dialog-footer,
+  .p-dialog-content{
+    background-color: $secondary-color;
+    color: $primary-font-color;
+    
+  }
+
 }
 
 
@@ -533,3 +542,4 @@ $angleActive: 25deg;
   position: -webkit-sticky;
   top: 10px;
 }
+
