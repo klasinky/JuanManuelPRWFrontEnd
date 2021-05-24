@@ -3,10 +3,55 @@
 body {
   color: white !important;
 }
-h3{
-    color: white !important;
+
+h3 {
+  color: white !important;
 }
 
-.btn-row{
+.btn-row {
   margin-right: 0 !important;
+}
+
+
+:host ::ng-deep {
+  .btn-f {
+    & [type=button]:not(:disabled){
+      width: 100%;
+    }
+    & .p-button {
+      border-radius: 0%;
+      border: 1px solid $secondary-color;
+      padding: 5px;
+      background-color: $secondary-color;
+      border: none;
+      height: 49px;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: 0.5s;
+
+      &:hover {
+        background: $secondary-color-hover;
+        color: #fff;
+      }
+    }
+  }
+
+
+  .p-sidebar-full {
+    background-color: $secondary-color;
+    color: $primary-font-color;
+
+    h5 {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+th,
+td {
+  color: $primary-font-color;
 }
