@@ -32,6 +32,7 @@ export class UserProfileComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private titleService: Title) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.numberPagination = Array(12).fill(0).map((x, i) => i);
   }
 
