@@ -44,6 +44,8 @@ import { CreatePostComponent } from './components/forum/create-post/create-post.
 import {EditorModule} from 'primeng/editor';
 import {TimelineModule} from 'primeng/timeline';
 import { CardModule } from "primeng/card";
+import {SidebarModule} from 'primeng/sidebar';
+
 // Pipes
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
 import { AtUserPipe } from '../../pipe/at-user.pipe';
@@ -114,7 +116,8 @@ import { NotificationComponent } from '../../components/sidebar/notification/not
     EditorModule,
     TimelineModule,
     CardModule,
-    RoundProgressModule
+    RoundProgressModule,
+    SidebarModule
   ],
   providers: [
     ConfirmationService

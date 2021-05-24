@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { Category } from 'src/app/interfaces/category';
 import { MonthDetail } from 'src/app/interfaces/months';
 import { HttpService } from 'src/app/services/http.service';
 import { MonthDetailService } from 'src/app/services/month-detail.service';
@@ -16,8 +17,9 @@ export class MonthDetailComponent implements OnInit, OnDestroy {
 
   month?: MonthDetail;
   id: number = 0;
-
+  categories?: Category [];
   refreshSubscription?: Subscription;
+  visibleSidebar5: any;
 
 
   constructor(private monthService: MonthDetailService,
@@ -31,6 +33,7 @@ export class MonthDetailComponent implements OnInit, OnDestroy {
       try {
         this.id = JSON.parse(unescape(atob(params.id)));
         this.getMonth(this.id);
+        this.getCategoriesAction();
       } catch (error) {
         this.router.navigate(['dashboard']).then(() => {
           // Notificación
@@ -54,6 +57,21 @@ export class MonthDetailComponent implements OnInit, OnDestroy {
           // Notificación
           this.toastr.error('Mes ' + error.error.detail.toLowerCase(), 'Error')
         })
+      }
+    )
+  }
+
+
+   /**
+   * Obtener todas las categorias
+   */
+  getCategoriesAction() {
+
+    this.monthService.getCategoriesAll().subscribe(
+      (data: any) => {
+        this.categories = data;
+      }, (error) => {
+        console.log(error.error.detail);
       }
     )
   }

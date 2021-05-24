@@ -23,23 +23,26 @@
       <app-analysis [month]="month"></app-analysis>
     </div>
     <div class="col-md-6">
-        <div class="bgsecondary mb-4">
-          <h3 class="mt-4">Total Mes</h3>
-          <app-chart-difference [month]="month?.month"></app-chart-difference>
-        </div>
+      <div class="bgsecondary mb-4">
+        <h3 class="mt-4">Total Mes</h3>
+        <app-chart-difference [month]="month?.month"></app-chart-difference>
+      </div>
     </div>
 
     <div class="col-12 bgsecondary">
+      <div class="btn-f">
+        <p-button type="button" label="Tutorial" (click)="visibleSidebar5 = true"></p-button>
+      </div>
       <div class="row ">
         <div class="col-md-6">
-          <app-add-amount-base  [isExpense]="false" >
+          <app-add-amount-base [isExpense]="false">
           </app-add-amount-base>
-          <app-download-amount-base  [isExpense]="false"></app-download-amount-base>
+          <app-download-amount-base [isExpense]="false"></app-download-amount-base>
         </div>
         <div class="col-md-6 ">
-          <app-add-amount-base  [isExpense]="true">
+          <app-add-amount-base [isExpense]="true">
           </app-add-amount-base>
-          <app-download-amount-base  [isExpense]="true"></app-download-amount-base>
+          <app-download-amount-base [isExpense]="true"></app-download-amount-base>
         </div>
       </div>
     </div>
@@ -55,3 +58,94 @@
 
   </div>
 </div>
+<p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [style]="{'overflow-y': 'auto'}" [baseZIndex]="10000">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h4>Empieza a controlar tus finanzas</h4>
+      <img class="img-fluid" src="../../../../../../assets/img/tutorialMonth/1.png" alt="Finanzas">
+    </div>
+    <div class="row my-4">
+      <div class="col-md-6">
+        <h5>Comienza agregando un ingreso o gasto, haz click en los botones correspondientes para abrir el modal y
+          comenzar a guarda tus datos</h5>
+        <img class="img-fluid" src="../../../../../../assets/img/tutorialMonth/2.png" alt="Finanzas">
+      </div>
+      <div class="col-md-6">
+        <h5>Rellena el formulario con la información correspondientes, puedes ingresar el nombre, descripción, la
+          cuantía y
+          la
+          categoría</h5>
+        <img class="img-fluid" src="../../../../../../assets/img/tutorialMonth/3.png" alt="Finanzas">
+      </div>
+    </div>
+    <div class="row my-3">
+
+      <div class="col-md-6">
+        <h5>Cuando hayas terminado de escribir los datos, dale click al botón de subir y se guardarán los datos</h5>
+        <img class="img-fluid" src="../../../../../../assets/img/tutorialMonth/4.png" alt="Finanzas">
+      </div>
+      <div class="col-md-6">
+        <h5>También puedes ingresar los datos desde una hoja de cálculo, para ello, tienes que seguir unos serie de
+          indicaciones para que nuestro sistema guardar correctamente los datos, te ponemos un ejemplo de cómo
+          quedaría la
+          hoja de cálculo </h5>
+        <div class="table-responsive">
+          <table class="table table-bordered mt-1">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Cuantía</th>
+                <th scope="col">Categoría</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Comida</th>
+                <td>En Mercadona</td>
+                <td>421</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <th scope="row">Cine</th>
+                <td>He visto una peli</td>
+                <td>23</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <th scope="row">Agua</th>
+                <td>Pago del agua del mes</td>
+                <td>123</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h6><strong>**El sistema ignora la primera fila del documento**</strong></h6>
+
+      </div>
+    </div>
+    <div class="row my-3">
+      <h5>Las categorías y sus ids son las siguientes</h5>
+      <div class="table-responsive">
+        <table class="table table-bordered mt-1">
+          <thead>
+            <tr class="bg-dark">
+              <th scope="col">Categoría</th>
+              <th scope="col">ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categories">
+              <th scope="row">{{ category?.name }}</th>
+              <td>{{ category?.id }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+  </div>
+</p-sidebar>
