@@ -1,5 +1,11 @@
 <article #articlesBlock class="leaderboard__tag not-cursor">
   <div class="d-flex">
+    <p-avatar *ngIf="user?.profile_pic" class="d-md-none d-xl-block" image="{{ user?.profile_pic}}"
+    styleClass="mr-2 image is-64x64" size="large" shape="circle"></p-avatar>
+
+    <p-avatar *ngIf="!user?.profile_pic" [style]="getStyle()" class="d-md-none d-xl-block" label="{{ user?.username | slice:0:1 | titlecase }}" 
+    styleClass="mr-2 image is-64x64" size="large" shape="circle"></p-avatar>
+
     <div class="me-auto p-2 bd-highlight name">
       <span [routerLink]="['/dashboard/user/',user?.username]" class="leaderboard__name ">@{{ user?.username }}</span>
     </div>
