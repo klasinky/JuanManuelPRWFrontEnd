@@ -28,6 +28,9 @@ export class ForumComponent implements OnInit {
   btnHotLoading: boolean = false;
   btnTopLoading: boolean = false;
 
+  cbFollowing: boolean = false;
+  
+
   constructor(private httpService: HttpService) {
     this.numberPagination = Array(12).fill(0).map((x, i) => i);
   }
@@ -39,8 +42,15 @@ export class ForumComponent implements OnInit {
 
   getPosts(filter = "") {
     this.setActiveButton(filter);
+    if (this.cbFollowing == true) {
+      const following = (filter !== "")?"&followers=true":"?followers=true";
+      filter += following;
+    }
     const url: string = environment.endpoints.posts.create + filter;
+    console.log(url);
+    
     this.loading = true;
+
 
     this.httpService.getAuth(url).subscribe(
       (data: any) => {
@@ -93,6 +103,11 @@ export class ForumComponent implements OnInit {
         }
       );
     }
+  }
+
+  changeCbFollowing(){
+    this.cbFollowing = !this.cbFollowing;
+    this.getPosts();
   }
 
   setActiveButton(filter: string) {

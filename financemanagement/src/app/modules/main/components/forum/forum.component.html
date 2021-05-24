@@ -1,6 +1,7 @@
 <div class="bgsecondary p-2">
 
   <div class="text-center">
+
     <button title="Post más recientes" [disabled]="btnAll" (click)="getPosts()" class="btn-filter m-1">
       <div *ngIf="btnAllLoading" class="spinner-border spinner-border-sm text-light" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -8,6 +9,7 @@
       <i *ngIf="!btnAllLoading" class="fas fa-sun"></i>
       Nuevos
     </button>
+
     <button title="Post con más likes en la semana" [disabled]="btnHot" (click)="getPosts('?sort=hot')"
       class="btn-filter m-1">
       <div *ngIf="btnHotLoading" class="spinner-border spinner-border-sm text-light" role="status">
@@ -16,6 +18,7 @@
       <i *ngIf="!btnHotLoading" class="fas fa-fire"></i>
       Hot
     </button>
+
     <button title="Post con más likes" [disabled]="btnTop" (click)="getPosts('?sort=top')" class="btn-filter m-1">
       <div *ngIf="btnTopLoading" class="spinner-border spinner-border-sm text-light" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -23,6 +26,15 @@
       <i *ngIf="!btnTopLoading" class="fas fa-chart-line"></i>
       Top
     </button>
+
+    <button title="Post de los usuarios que sigues" class="btn-filter m-1" (click)="changeCbFollowing()">
+      Following
+      <i *ngIf="cbFollowing == true" class="fas fa-check text-success"></i>
+      <i *ngIf="cbFollowing == false" class="fas fa-times text-danger"></i>
+    </button>
+
+
+
   </div>
 
   <div class="text-center mt-2">
@@ -47,7 +59,7 @@
         </div>
         <div *ngIf="loadingTopUser" class="text-center">
           <div class="spinner-border text-light" role="status">
-            <span class="visually-hidden">Loading...</span> 
+            <span class="visually-hidden">Loading...</span>
           </div>
         </div>
       </main>
@@ -101,7 +113,7 @@
         </div>
       </div>
     </div>
-  
+
   </div>
   <!-- ----------------------------- Side ------------------------------ -->
   <div class="col-sm-12 col-md-12 col-lg-3 order-md-2 mt-4">

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Notification } from 'src/app/interfaces/notification';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,15 +16,16 @@ import { ColorService } from 'src/app/services/color.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
+  
+  @ViewChild('navbar', {static: false}) navbar?: HTMLElement; //Get the NavbarComponent
   @Input() userData!: User;  
-  isMobile: boolean = false;
   notifications: Notification[] = [];
   ring: boolean = true;
   firstTime: boolean = true;
   destroyed$ = new Subject();
   audio = new Audio('../../assets/ringtones.mp3')
-  
+  isNavbarCollapsed: boolean = true;
+
   constructor(
     private authService: AuthService,
     private httpService: HttpService,
@@ -65,13 +66,6 @@ export class SidebarComponent implements OnInit {
       }
     )
   }
-
-  mobileSideBar() {
-
-    this.isMobile = !this.isMobile;
-    document.querySelector("body")?.classList.toggle("mobile-nav-active");
-  }
-
 
   getStyle() {
     return this.colorService.getColor(this.userData?.username);
