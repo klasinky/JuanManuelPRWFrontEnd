@@ -46,22 +46,23 @@
       <!-- Right navigation -->
       <div class="navbar-nav ms-lg-4">
         <li class="nav-item dropdown">
-          <p-avatar *ngIf="userData?.profile_pic" class="nav-link dropdown-toggle" href="#" id="dropProfile" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false" image="{{ userData?.profile_pic}}" styleClass="mr-2 image is-64x64" size="large"
+          <p-avatar *ngIf="userData?.profile_pic" class="nav-link dropdown-toggle" href="#" id="dropProfile"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false" image="{{ userData?.profile_pic}}"
+            styleClass="mr-2 image is-64x64" size="large" shape="circle"></p-avatar>
+
+          <p-avatar *ngIf="!userData?.profile_pic" class="nav-link dropdown-toggle" href="#" id="dropProfile"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false" [style]="getStyle()"
+            label="{{ userData?.username | slice:0:1 | titlecase }}" styleClass="mr-2 image is-64x64" size="large"
             shape="circle"></p-avatar>
-            <p-avatar *ngIf="!userData?.profile_pic" class="nav-link dropdown-toggle" href="#" id="dropProfile" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false" [style]="getStyle()" label="{{ userData?.username|slice:0:1  }}" styleClass="mr-2 image is-64x64" size="large"
-            shape="circle"></p-avatar>
+
           <div aria-labelledby="dropProfile" class="dropdown-menu dropdown-menu-end ">
-        <li class="nav-item"><a [routerLink]="['/dashboard/profile/']" class="nav-link scrollto"><i
-              class="fas fa-cogs"></i> <span>Configuración</span></a></li>
-        <li class="nav-item"><a class="nav-link scrollto" (click)="logOutAction()"><i
-              class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a></li>
+            <li class="nav-item"><a [routerLink]="['/dashboard/profile/']" class="nav-link scrollto"><i
+                  class="fas fa-cogs"></i> <span>Configuración</span></a></li>
+            <li class="nav-item"><a class="nav-link scrollto" (click)="logOutAction()"><i
+                  class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a></li>
+          </div>
+       </li>
       </div>
-      </li>
-
     </div>
-
-  </div>
   </div>
 </nav>
