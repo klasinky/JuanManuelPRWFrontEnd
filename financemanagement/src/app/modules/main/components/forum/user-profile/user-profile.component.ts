@@ -33,7 +33,7 @@ export class UserProfileComponent implements OnInit {
     private toastr: ToastrService,
     private titleService: Title) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.numberPagination = Array(12).fill(0).map((x, i) => i);
+    this.numberPagination = Array(9).fill(0).map((x, i) => i);
   }
 
   ngOnInit() {

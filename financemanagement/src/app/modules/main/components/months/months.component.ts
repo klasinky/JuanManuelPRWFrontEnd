@@ -20,7 +20,7 @@ export class MonthsComponent implements OnInit {
 
   constructor(private httpService: HttpService,
     private toastr: ToastrService) {
-    this.numberPagination = Array(10).fill(0).map((x, i) => i);
+    this.numberPagination = Array(12).fill(0).map((x, i) => i);
   }
 
 

@@ -7,6 +7,12 @@
       ><round-progress [stroke]="4" [radius]="10" [current]="formMessage.get('message')?.value.length" [max]="max">
       </round-progress></span>
     </div>
+    <div class="chat-footer">
+      <form (ngSubmit)="sendMessage()" [formGroup]="formMessage">
+        <input [attr.disabled]="loadingMessage? true: null" type="text" formControlName="message" placeholder="Escribe tu mensaje">
+      </form>
+    </div>
+ 
     <div class="message-container">
   
       <!-- ------------------------------- Message ------------------------------- -->
@@ -34,11 +40,7 @@
       <!-- ----------------------------- End Message ----------------------------- -->
 
     </div>
-    <div class="chat-footer">
-      <form (ngSubmit)="sendMessage()" [formGroup]="formMessage">
-        <input [attr.disabled]="loadingMessage? true: null" type="text" formControlName="message" placeholder="Escribe tu mensaje">
-      </form>
-    </div>
+
   </div>
   
 </div>

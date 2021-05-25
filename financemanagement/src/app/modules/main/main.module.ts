@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
@@ -60,6 +60,7 @@ import { PostRecommendationSkeletonComponent } from './components/forum/post-det
 import { TopContributorsComponent } from './components/forum/top-contributors/top-contributors.component';
 import { UserCardComponent } from './components/forum/user-profile/user-card/user-card.component';
 import { NotificationComponent } from '../../components/sidebar/notification/notification.component';
+import { CurrencyGeneratorPipe } from 'src/app/pipe/currency-generator.pipe';
 
 
 @NgModule({
@@ -100,7 +101,9 @@ import { NotificationComponent } from '../../components/sidebar/notification/not
     TopContributorsComponent,
     UserCardComponent,
     NotificationComponent,
-    FooterComponent
+    FooterComponent, 
+    CurrencyGeneratorPipe,
+    
   ],
   imports: [
     CommonModule,
@@ -123,7 +126,9 @@ import { NotificationComponent } from '../../components/sidebar/notification/not
     SidebarModule
   ],
   providers: [
-    ConfirmationService
+    ConfirmationService,
+    CurrencyPipe,
+    CurrencyGeneratorPipe
   ]
 })
 export class MainModule { }

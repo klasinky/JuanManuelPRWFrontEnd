@@ -14,7 +14,7 @@
     <ng-template #tooltipTemplate let-model="model">
       <div class="text-center">
         <h6>{{ model.name }}</h6>
-        <h6>€{{model.value}}</h6>
+        <h6>{{model.value | currencyGenerator}}</h6>
       </div>
     </ng-template>
   </ngx-charts-bar-vertical>

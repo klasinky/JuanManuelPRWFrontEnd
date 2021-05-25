@@ -19,7 +19,7 @@
           [liked]="post?.is_like"></app-like-button>
       </div>
       <div class="user-info w-100">
-        <a class="text-light decoration"
+        <a class="text-light decoration fw-bold"
           [routerLink]="['/dashboard/user/',post?.author?.username]"><span>@{{post?.author?.username}}</span></a>
         <small>{{ post?.created_at | amLocale:'es' | amTimeAgo }}</small>
       </div>
