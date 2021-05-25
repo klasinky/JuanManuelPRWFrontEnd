@@ -15,8 +15,6 @@ export class LoggedOffGuard implements CanActivate {
    * Guard para saber si el usuario esta deslogeado
    */
   canActivate(): Promise<boolean> {
-    console.log("Entra en LoggedOFF")
-
     this.loader = true;
     return new Promise(resolve => {
       this.httpService.getAuth('users/check').subscribe(
@@ -26,9 +24,11 @@ export class LoggedOffGuard implements CanActivate {
           this.loader = false;
         },
         (error) => {
-          this.loader = false;
 
-          this.router.navigate(['auth']);
+
+          this.router.navigate(['auth']).then(() => {
+            this.loader = false;
+          })
           resolve(false);
         }
       )

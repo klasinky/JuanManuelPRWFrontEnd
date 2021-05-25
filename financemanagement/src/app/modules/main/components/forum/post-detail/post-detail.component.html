@@ -77,7 +77,8 @@
         <div *ngIf="!loadingRecommendation">
           <div *ngFor="let postR of postRecommendation" class="chat-vid anim" style="--delay: .4s">
             <div class="chat-vid__wrapper">
-              <img class="chat-vid__img" [routerLink]="['/dashboard/post/',postR?.id]" src="https://cdn.nohat.cc/thumb/f/720/3b55eddcfffa4e87897d.jpg" />
+              <img class="chat-vid__img img-fluid" [routerLink]="['/dashboard/post/',postR?.id]" *ngIf="postR.tags.length > 0" [src]="postR.tags[0].image" alt="" />
+              <img class="chat-vid__img img-fluid" [routerLink]="['/dashboard/post/',postR?.id]" *ngIf="postR.tags.length == 0" src="../../../../../../assets/img/defaultpost.png" alt="" />
               <div class="chat-vid__content">
                 <a class="chat-vid__name text-decoration-none" [routerLink]="['/dashboard/post/',postR?.id]">{{ postR?.title | titlecase }}</a>
                 <div class="chat-vid__by">

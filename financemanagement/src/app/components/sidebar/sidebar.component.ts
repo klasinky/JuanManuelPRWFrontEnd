@@ -50,7 +50,6 @@ export class SidebarComponent implements OnInit {
       this.audio.play();
 
     });
-    console.log(this.userData)
   }
 
   getNotifications() {

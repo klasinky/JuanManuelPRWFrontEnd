@@ -18,6 +18,7 @@ export class CreatePostComponent implements OnInit {
   tags?: Tag[];
   id?: number;
   isCreate: boolean = true;
+  loading: boolean = false;
 
   constructor(
     private httpService: HttpService,
@@ -46,6 +47,7 @@ export class CreatePostComponent implements OnInit {
 
   createPost() {
     if (this.checkPost()) {
+      this.loading = true;
       const tagsSelected = this.tags?.filter(tag => tag.checked == true).map(tag => tag.id);
       console.log(tagsSelected)
       const data = {
@@ -68,8 +70,11 @@ export class CreatePostComponent implements OnInit {
               this.toastr.success('El post ha sido editado correctamente.')
             })
           }
+          this.loading = false;
 
         }, (error) => {
+          this.loading = false;
+
           this.toastr.error(error.error.detail, 'Error')
         }
       )

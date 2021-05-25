@@ -1,8 +1,16 @@
 @import '../../../styles.scss';
 
-// #main {
-//     overflow-x: hidden;
-//   }
-  
 
+  #main {
+    padding-bottom: 3.5rem !important;
+    /* Footer height */
+  }
+  
+  #footer {
+    margin-top: 30px;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    /* Footer height */
+  }
   
