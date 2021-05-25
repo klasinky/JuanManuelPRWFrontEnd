@@ -24,7 +24,6 @@ export class SidebarComponent implements OnInit {
   firstTime: boolean = true;
   destroyed$ = new Subject();
   audio = new Audio('../../assets/ringtones.mp3')
-  isNavbarCollapsed: boolean = true;
 
   constructor(
     private authService: AuthService,

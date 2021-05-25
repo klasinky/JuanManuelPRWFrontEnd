@@ -16,7 +16,7 @@
 
               <div *ngIf="!loading" class=" my-1 ">
                 Autor: <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span
-                    class="fw-bold">@{{ post?.author?.username }}</span></a> | Última vez modificado
+                    class="fw-bold">@{{ post?.author?.username }}</span></a> | 
                 {{ post?.update_at| amLocale:'es' | amTimeAgo  }}
               </div>
             </div>
@@ -102,7 +102,7 @@
         <!-- <div class="chat-vid__button anim" style="--delay: .6s">See All related videos (32)</div> -->
       </div>
     </div>
-
+    
     <div class="col-md-12 ">
       <hr>
       <div class="row">

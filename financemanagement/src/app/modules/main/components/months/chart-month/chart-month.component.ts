@@ -67,7 +67,7 @@ export class ChartMonthComponent implements OnInit {
   }
 
   formatingY(value: any) {
-    return "€" + value;
+    return value;
   }
 
   onResize(event: any) {

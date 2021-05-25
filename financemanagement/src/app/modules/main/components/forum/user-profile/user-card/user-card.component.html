@@ -4,14 +4,17 @@
 
     <div class="row">
       <div class="col-xl-8 col-xxl-10 m-auto  mb-5 mb-xl-0">
-        <div class="card card-profile shadow">
+        <div class="card card-profile ">
+        
           <div class="row justify-content-center">
             <div class="col-lg-3 order-lg-2">
+              
               <div class="card-profile-image">
                 <img *ngIf="!loading" [src]="user?.profile_pic" class="">
                 <img *ngIf="loading || !user?.profile_pic" src="../../../../../../assets/img/default-profile.jpg"
                   class="">
               </div>
+
             </div>
           </div>
           <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
@@ -33,7 +36,7 @@
                 </button>
               </ng-template>
               <ng-template #btnEdit>
-                <button [routerLink]="['/dashboard/profile']" class="btn btn-sm btn-warning float-right"> <i
+                <button [routerLink]="['/dashboard/profile']" class="btn btn-sm bg-edit float-right"> <i
                     class="fas fa-pen"></i> Editar</button>
               </ng-template>
 
@@ -78,6 +81,8 @@
               </div>
             </div>
           </div>
+     
+
         </div>
       </div>
     </div>

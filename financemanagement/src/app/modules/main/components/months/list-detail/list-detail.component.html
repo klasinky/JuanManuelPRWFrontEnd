@@ -10,13 +10,13 @@
                     <div class="col-6 text-end">
                         <span class="badge badge-soft-success mt-n1" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Ingresos">
-                            {{month.total_entries}}€ <i class="fas fa-chevron-up"></i>
+                            {{month.total_entries | currencyGenerator}} <i class="fas fa-chevron-up"></i>
                         </span>
                     </div>
                     <div class="col-6 text-start">
                         <span class="badge badge-pill badge-soft-danger mt-n1" ngbTooltip="Egresos"
                             tooltipClass="badge-soft-success">
-                            {{month.total_expenses}}€ <i class="fas fa-chevron-down"></i>
+                            {{month.total_expenses | currencyGenerator}} <i class="fas fa-chevron-down"></i>
                         </span>
                     </div>
                 </div>
