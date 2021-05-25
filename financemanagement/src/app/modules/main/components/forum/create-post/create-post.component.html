@@ -1,31 +1,37 @@
-<div>
-  <div class="row bgsecondary">
-    <div class="col-md-9 col-xxl-10 my-3 p-3">
-      <input [(ngModel)]="title" type="text" required placeholder="Título" class="form-control">
-      <p-editor [(ngModel)]="text" [style]="{'height':'350px', 'width':'100%'}"></p-editor>
-    </div>
-    <div class="col-md-3 col-xxl-2  my-3 p-3">
-      <div class="text-center my-3">
-        <h3 class="title-top" title="Selecciona un tag">Tags</h3>
+<div class="row">
+  <div class="col-xxl-11 mx-auto">
+    <div class="row bgsecondary">
+      <div class="col-md-9 col-xxl-10 my-3 p-3">
+        <input [(ngModel)]="title" type="text" required placeholder="Título" class="form-control">
+        <p-editor [(ngModel)]="text" [style]="{'height':'350px', 'width':'100%'}"></p-editor>
       </div>
+      <div class="col-md-3 col-xxl-2  my-3 p-3">
+        <div class="text-center my-3">
+          <h3 class="title-top" title="Selecciona un tag">Tags</h3>
+        </div>
 
-      <div class="ck-button" *ngFor="let tag of tags">
-        <label>
-          <input [checked]="tag.checked" (change)="tag.checked = !tag.checked" name="tags" type="checkbox" value="{{ tag.id }}"><span>{{ tag.name }} <i class="fas fa-check"></i> <i
-              class="fas fa-times"></i> </span>
-        </label>
-      </div>
-      <div class="mt-4">
-        <button *ngIf="isCreate; else elseBlock" (click)="createPost()" class="btn-filter w-100">
-         <i class="fas fa-envelope    "></i> Crear Post
-        </button>
-        <ng-template #elseBlock>
-          <button (click)="createPost()" class="btn-filter w-100">
-            <i class="fas fa-pen    "></i>  Editar Post
+        <div class="ck-button" *ngFor="let tag of tags">
+          <label>
+            <input [checked]="tag.checked" (change)="tag.checked = !tag.checked" name="tags" type="checkbox"
+              value="{{ tag.id }}"><span>{{ tag.name }} <i class="fas fa-check"></i> <i class="fas fa-times"></i>
+            </span>
+          </label>
+        </div>
+        <div class="mt-4">
+          <button [disabled]="loading" (click)="createPost()" class="btn-filter w-100">
+            <div *ngIf="loading" class="spinner-border spinner-border-sm text-light ms-2" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <span class="ml-2" *ngIf="isCreate">
+
+              <i *ngIf="!loading" class="fas fa-envelope    "></i>
+              Crear Post
+            </span>
+            <span *ngIf="!isCreate"> <i *ngIf="!loading" class="fas fa-pen    "></i> Editar Post</span>
           </button>
-        </ng-template>
+
+        </div>
       </div>
     </div>
   </div>
-
 </div>

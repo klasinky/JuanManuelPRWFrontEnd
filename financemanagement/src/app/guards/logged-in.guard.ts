@@ -8,22 +8,23 @@ import { StorageService } from '../services/storage.service';
   providedIn: 'root'
 })
 export class LoggedInGuard implements CanActivate {
-  
+
   public loader = true;
-  
+
   /**
    * Guard para saber si el usuario está autenticado
    */
   canActivate(): Promise<boolean> {
-    console.log("Entra en LoggedIN")
+
     this.loader = true;
     return new Promise(resolve => {
       this.httpService.getAuth('users/check').subscribe(
         (res) => {
           resolve(false);
-          this.loader = false;
-          
-          this.router.navigate(['dashboard']);
+
+          this.router.navigate(['dashboard']).then(() => {
+            this.loader = false;
+          })
         },
         (error) => {
           this.loader = false;

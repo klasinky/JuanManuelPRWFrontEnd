@@ -29,6 +29,8 @@ import { PostCommentDetailComponent } from './components/forum/post-comment-deta
 import { DeleteButtonComponent } from './components/forum/delete-button/delete-button.component';
 import { TagsPostComponent } from './components/forum/tags-post/tags-post.component';
 import { UserProfileComponent } from './components/forum/user-profile/user-profile.component';
+import { FooterComponent } from '../../components/footer/footer.component';
+
 // PrimeNG
 import { TableModule } from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
@@ -97,7 +99,8 @@ import { NotificationComponent } from '../../components/sidebar/notification/not
     PostRecommendationSkeletonComponent,
     TopContributorsComponent,
     UserCardComponent,
-    NotificationComponent
+    NotificationComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

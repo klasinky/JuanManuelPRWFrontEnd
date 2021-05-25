@@ -37,7 +37,7 @@ export class ForumComponent implements OnInit {
 
   constructor(private httpService: HttpService,
     private route: ActivatedRoute) {
-    this.numberPagination = Array(12).fill(0).map((x, i) => i);
+    this.numberPagination = Array(10).fill(0).map((x, i) => i);
     this.tagId = 0;
   }
 

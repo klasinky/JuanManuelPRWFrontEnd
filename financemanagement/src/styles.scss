@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 @import './assets/scss/variables';
 
-$cubic: cubic-bezier(.64,.09,.08,1);
+$cubic: cubic-bezier(.64, .09, .08, 1);
 
 .mobile-nav-active {
   overflow: hidden;
@@ -16,8 +16,10 @@ body {
   background: $secondary-color;
   overflow-x: hidden;
   color: white;
-  overflow-y: scroll; /* Show vertical scrollbar */
-    /* --------------------------------- scroll --------------------------------- */
+  overflow-y: scroll;
+
+  /* Show vertical scrollbar */
+  /* --------------------------------- scroll --------------------------------- */
   /* width */
   &::-webkit-scrollbar {
     width: 10px;
@@ -41,7 +43,6 @@ body {
   }
 
 }
-
 
 .input-field {
   max-width: 380px;
@@ -376,10 +377,10 @@ $angleActive: 25deg;
 
   .p-dialog-header,
   .p-dialog-footer,
-  .p-dialog-content{
+  .p-dialog-content {
     background-color: $secondary-color;
     color: $primary-font-color;
-    
+
   }
 
 }
@@ -388,12 +389,13 @@ $angleActive: 25deg;
 
 
 
-.tool-username{
+.tool-username {
   position: relative;
 
   color: $primary-font-color;
   font-weight: bold;
   text-decoration: none;
+
   &:before {
     content: '';
     width: 0;
@@ -410,6 +412,7 @@ $angleActive: 25deg;
     transition: opacity 0.2s $cubic, transform 0.2s $cubic;
     z-index: 3;
   }
+
   &:after {
     opacity: 0;
     visibility: hidden;
@@ -426,14 +429,17 @@ $angleActive: 25deg;
     border-radius: 2px;
     transition: opacity 0.2s $cubic, transform 0.2s $cubic;
   }
+
   &:hover {
     color: darken($primary-font-color, 10%);
+
     &:before {
       display: block;
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
     }
+
     &:after {
       display: block;
       opacity: 1;
@@ -443,9 +449,9 @@ $angleActive: 25deg;
   }
 }
 
-.btn-filter{
+.btn-filter {
   text-decoration: none;
-  font-family: Noto Sans,Arial,sans-serif;
+  font-family: Noto Sans, Arial, sans-serif;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: unset;
@@ -459,40 +465,45 @@ $angleActive: 25deg;
   position: relative;
   border: 1px solid transparent;
   border-radius: 9999px;
-  & span{
-      overflow: hidden;
-      text-overflow: ellipsis;
-      line-height: 18px;
-      max-height: 54px;
-      display: -webkit-inline-box;
-      -webkit-line-clamp: 3;
-      white-space: normal;
-      -webkit-box-orient: vertical;
+
+  & span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 18px;
+    max-height: 54px;
+    display: -webkit-inline-box;
+    -webkit-line-clamp: 3;
+    white-space: normal;
+    -webkit-box-orient: vertical;
   }
-  &:hover:not(:disabled){
-      background-color: $primary-color-hover;
-      color: $primary-font-color;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-color-hover;
+    color: $primary-font-color;
 
   }
-  &:disabled{
-      opacity: 0.7;
+
+  &:disabled {
+    opacity: 0.7;
   }
-  &::before{
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 9999px;
-      background: $primary-color-hover;
-      opacity: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    background: $primary-color-hover;
+    opacity: 0;
   }
 }
 
-.decoration{
-    text-decoration: none;
-  &:hover{
+.decoration {
+  text-decoration: none;
+
+  &:hover {
     text-decoration: underline;
   }
 }
@@ -507,7 +518,8 @@ $angleActive: 25deg;
 .btn-default:hover {
   color: #fff;
   border-color: lighten(#172b4d, 10%);
-  background-color: lighten(#172b4d, 10%);;
+  background-color: lighten(#172b4d, 10%);
+  ;
 }
 
 .btn-default:focus {
@@ -537,9 +549,12 @@ $angleActive: 25deg;
   border-radius: .375rem;
 }
 
-.sticky{
+.sticky {
   position: sticky;
   position: -webkit-sticky;
   top: 10px;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
