@@ -1,140 +1,135 @@
-<button type="button" [class.expense]="this.isExpense" [class.entry]="!this.isExpense" class="btn btn-web" data-bs-toggle="modal" [attr.data-bs-target]="'#' + serviceName">
-    Crear {{title}}
-    <div class="d-none d-lg-inline">
-        <i *ngIf="!this.isExpense" class="fas fa-piggy-bank"></i>
-        <i *ngIf="this.isExpense" class="fas fa-wallet"></i>
-    </div>
+<button type="button" [class.expense]="this.isExpense" [class.entry]="!this.isExpense" class="btn btn-web"
+  data-bs-toggle="modal" [attr.data-bs-target]="'#' + serviceName">
+  Crear {{title}}
+  <div class="d-none d-lg-inline">
+    <i *ngIf="!this.isExpense" class="fas fa-piggy-bank"></i>
+    <i *ngIf="this.isExpense" class="fas fa-wallet"></i>
+  </div>
 </button>
 
 <!-- Modal -->
-<div *ngIf="formAmountBase && formXls" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" [attr.id]="serviceName" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" (click)="manualMode()">Manual</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" (click)="xlsMode()">Subir XLS</a>
-                    </li>
-                </ul>
-                <button type="button" class="btn-close btn-close-white" (click)="resetForms()" data-bs-dismiss="modal" aria-label="Close"></button>
+<div *ngIf="formAmountBase && formXls" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+  [attr.id]="serviceName" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" (click)="manualMode()">Manual</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="xlsMode()">Subir XLS</a>
+          </li>
+        </ul>
+        <button type="button" class="btn-close btn-close-white" (click)="resetForms()" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+
+      <div #manual *ngIf="xlsFormActive == false">
+        <form [formGroup]="formAmountBase">
+
+          <div class="container">
+            <div class="row">
+              <div class="col-12 input-field mx-auto" [class.is-valid]="this.formAmountBase.get('name')?.valid"
+                [class.is-invalid]="this.formAmountBase.get('name')?.invalid && this.formAmountBase.get('name')?.touched || nameError == true">
+                <i class="fas fa-quote-right"></i>
+                <input formControlName="name" type="text" placeholder="Nombre" autocomplete="off">
+              </div>
+
+              <div *ngIf="nameError" class="text-center col-12 mx-auto">
+                <div *ngFor="let item of nameErrorMessage">
+                  <label class="error">{{item}}</label>
+                </div>
+              </div>
+
+              <div class="col-12 input-field mx-auto" [class.is-valid]="this.formAmountBase.get('description')?.valid"
+                [class.is-invalid]="this.formAmountBase.get('description')?.invalid && this.formAmountBase.get('description')?.touched">
+                <i class="fas fa-info"></i>
+                <input formControlName="description" type="text" placeholder="Descripción" autocomplete="off">
+              </div>
+
+              <div class="col-12 input-field mx-auto" [class.is-valid]="this.formAmountBase.get('amount')?.valid"
+                [class.is-invalid]="this.formAmountBase.get('amount')?.invalid && this.formAmountBase.get('amount')?.touched">
+                <i class="fa fa-usd"></i>
+                <input formControlName="amount" type="number" placeholder="Cuantía" min=0 autocomplete="off">
+              </div>
+
+              <div class="col-12 input-field mx-auto" [class.is-valid]="this.formAmountBase.get('category')?.valid"
+                [class.is-invalid]="this.formAmountBase.get('category')?.invalid && this.formAmountBase.get('category')?.touched">
+                <i class="fas fa-arrow-down"></i>
+                <select formControlName="category" (change)="changeCategory($event)" aria-label="Default select">
+                  <option value="null" disabled>Elige una categoría...</option>
+                  <option *ngFor="let category of categories" [ngValue]="category.id">
+                    {{category.name}}
+                  </option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button [disabled]="showUploadProgress" (click)="resetForms()" type="button" class="btn btn-secondary"
+              data-bs-dismiss="modal">Cerrar</button>
+            <button [disabled]="showUploadProgress" type="button" class="btn btn-ligth-fin"
+              [disabled]='formAmountBase.invalid' (click)="postAmountBaseAction()">
+              <div *ngIf="!showUploadProgress; else blockLoader">
+                Subir {{ title | lowercase }}
+                <i class="fas fa-plus"></i>
+              </div>
+              <ng-template #blockLoader>
+                <div class="spinner-border spinner-border-sm mb-1" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </ng-template>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <div #xls *ngIf="xlsFormActive == true">
+        <form [formGroup]="formXls">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 file-upload input-field mx-auto" [class.is-valid]="this.formXls.get('xls')?.valid "
+                [class.is-invalid]="this.formXls.get('xls')?.invalid && this.formXls.get('xls')?.touched || fileError == true">
+                <label [attr.for]="'xls'+serviceName">
+                  <i class="fa fa-upload"></i>
+                </label>
+                <span>{{ (filename.length > 25)? (filename | slice:0:25)+'...':(filename) }}</span>
+                <input [attr.id]="'xls'+serviceName" formControlName="xls" (change)="onFileChange($event)" type="file">
+              </div>
+
+              <div *ngIf="fileError" class="text-center col-12 mx-auto">
+                <div *ngFor="let item of fileErrorMessage">
+                  <label class="error">{{item}}</label>
+                </div>
+              </div>
+
+            </div>
+            <div *ngIf="showUploadProgress" class="progress mb-3">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                [ngStyle]="{width: uploadProgress + '%'}" style="width: 0%" [attr.aria-valuenow]="uploadProgress"
+                aria-valuemin="0" aria-valuemax="100">
+                {{ uploadProgress }}%
+              </div>
             </div>
 
-            <div #manual *ngIf="xlsFormActive == false">
-                <form [formGroup]="formAmountBase">
+          </div>
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 input-field mx-auto"
-                            [class.is-valid]="this.formAmountBase.get('name')?.valid"
-                            [class.is-invalid]="this.formAmountBase.get('name')?.invalid && this.formAmountBase.get('name')?.touched || nameError == true">
-                                <i class="fas fa-quote-right"></i>
-                                <input formControlName="name" type="text" placeholder="Nombre"
-                                     autocomplete="off">
-                            </div>
+          <div class="modal-footer">
 
-                            <div *ngIf="nameError" class="text-center col-12 mx-auto">
-                                <div *ngFor="let item of nameErrorMessage">
-                                  <label class="error">{{item}}</label>
-                                </div>
-                            </div>
+            <button [disabled]="showUploadProgress" type="button" class="btn btn-secondary" (click)="resetForms()"
+              data-bs-dismiss="modal">Cerrar</button>
+            <button [disabled]="showUploadProgress" type="button" class="btn btn-ligth-fin" [disabled]='formXls.invalid'
+              (click)="postAmountBaseXlsAction()">Subir archivo</button>
+          </div>
 
-                            <div class="col-12 input-field mx-auto"
-                            [class.is-valid]="this.formAmountBase.get('description')?.valid"
-                            [class.is-invalid]="this.formAmountBase.get('description')?.invalid && this.formAmountBase.get('description')?.touched">
-                                <i class="fas fa-info"></i>
-                                <input formControlName="description" type="text" placeholder="Descripción" 
-                                 autocomplete="off">
-                            </div>
+        </form>
+      </div>
 
-                            <div class="col-12 input-field mx-auto"
-                            [class.is-valid]="this.formAmountBase.get('amount')?.valid"
-                            [class.is-invalid]="this.formAmountBase.get('amount')?.invalid && this.formAmountBase.get('amount')?.touched">
-                                <i class="fa fa-usd"></i>
-                                <input formControlName="amount" type="number" placeholder="Cuantía"
-                                     min=0 autocomplete="off">
-                            </div>
-
-                            <div class="col-12 input-field mx-auto"
-                            [class.is-valid]="this.formAmountBase.get('category')?.valid"
-                            [class.is-invalid]="this.formAmountBase.get('category')?.invalid && this.formAmountBase.get('category')?.touched">
-                                <i class="fas fa-arrow-down"></i>
-                                <select formControlName="category" (change)="changeCategory($event)" aria-label="Default select">
-                                    <option value="null" disabled>Elige una categoría...</option>
-                                    <option *ngFor="let category of categories" [ngValue]="category.id">
-                                        {{category.name}}
-                                    </option>
-                                </select>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button 
-                            [disabled]="showUploadProgress"
-                            (click)="resetForms()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button 
-                            [disabled]="showUploadProgress"
-                            type="button" class="btn btn-ligth-fin" [disabled]='formAmountBase.invalid'
-                            (click)="postAmountBaseAction()">
-                         <div *ngIf="!showUploadProgress; else blockLoader">
-                         Subir {{ title | lowercase }}
-                         <i class="fas fa-plus"></i>
-                        </div>
-                          <ng-template #blockLoader>
-                            <div class="spinner-border spinner-border-sm mb-1" role="status">
-                              <span class="sr-only">Loading...</span>
-                            </div>
-                          </ng-template>
-                        </button>
-                    </div>
-
-                </form>
-            </div>
-
-            <div #xls *ngIf="xlsFormActive == true">
-                <form [formGroup]="formXls">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 file-upload input-field mx-auto"
-                            [class.is-valid]="this.formXls.get('xls')?.valid "
-                            [class.is-invalid]="this.formXls.get('xls')?.invalid && this.formXls.get('xls')?.touched || fileError == true">
-                                <label [attr.for]="'xls'+serviceName">
-                                    <i class="fa fa-upload"></i>
-                                </label>
-                                <span>{{ (filename.length > 25)? (filename | slice:0:25)+'...':(filename) }}</span>
-                                <input [attr.id]="'xls'+serviceName" formControlName="xls"  (change)="onFileChange($event)" type="file">
-                            </div>
-
-                            <div *ngIf="fileError" class="text-center col-12 mx-auto">
-                                <div *ngFor="let item of fileErrorMessage">
-                                  <label class="error">{{item}}</label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div *ngIf="showUploadProgress" class="progress mb-3">
-                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{width: uploadProgress + '%'}"   style="width: 0%" [attr.aria-valuenow]="uploadProgress" aria-valuemin="0" aria-valuemax="100">
-                                {{ uploadProgress }}%
-                            </div>
-                          </div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        
-                        <button [disabled]="showUploadProgress" type="button" class="btn btn-secondary" (click)="resetForms()" data-bs-dismiss="modal">Cerrar</button>
-                        <button [disabled]="showUploadProgress" type="button" class="btn btn-ligth-fin" [disabled]='formXls.invalid'
-                        (click)="postAmountBaseXlsAction()">Subir archivo</button>
-                    </div>
-
-                </form>
-            </div>
-
-        </div>
     </div>
+  </div>
 </div>

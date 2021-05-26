@@ -65,13 +65,15 @@
           </ng-template>
         </td>
         <td class="text-center">
-          <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteAmountAction( item?.data.id, item.is_expense)" class="p-button-rounded p-button-danger"></button>
+          <button pButton pRipple type="button" icon="pi pi-trash"
+            (click)="deleteAmountAction( item?.data.id, item.is_expense)"
+            class="p-button-rounded p-button-danger"></button>
         </td>
-        
+
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
-      <tr >
+      <tr>
         <td class="text-center" colspan="7">
           <img class="img-fluid" src="../../../../../../assets/img/no-amountbase.png" alt="No hay registros">
           <h6>No hay registros</h6>
@@ -82,8 +84,10 @@
 </div>
 
 <p-confirmDialog #cd [transitionOptions]="'0.25ms'" header="Confirmación" icon="pi pi-exclamation-triangle">
-    <ng-template pTemplate="footer">
-        <button type="button" pButton class="p-button-secondary" icon="pi pi-times" (click)="cd.reject()" label="Cancelar" ></button>
-        <button type="button" pButton icon="pi pi-check" class="p-button-danger" (click)="cd.accept()" label="Eliminar"></button>
-    </ng-template>
+  <ng-template pTemplate="footer">
+    <button type="button" pButton class="p-button-secondary" icon="pi pi-times" (click)="cd.reject()"
+      label="Cancelar"></button>
+    <button type="button" pButton icon="pi pi-check" class="p-button-danger" (click)="cd.accept()"
+      label="Eliminar"></button>
+  </ng-template>
 </p-confirmDialog>

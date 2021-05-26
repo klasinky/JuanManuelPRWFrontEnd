@@ -3,16 +3,18 @@
   <div class="box">
     <article class="media">
       <div class="media-left">
-        <img *ngIf="comment?.author?.profile_pic" class="image is-64x64" [src]="comment?.author?.profile_pic" alt="Image">
-        <p-avatar *ngIf="!comment?.author?.profile_pic" label="{{ comment?.author?.username|slice:0:1 | titlecase}}" styleClass="mr-2 image is-64x64" size="xlarge"
-        [style]="getStyle()" shape="circle"></p-avatar>
+        <img *ngIf="comment?.author?.profile_pic" class="image is-64x64" [src]="comment?.author?.profile_pic"
+          alt="Image">
+        <p-avatar *ngIf="!comment?.author?.profile_pic" label="{{ comment?.author?.username|slice:0:1 | titlecase}}"
+          styleClass="mr-2 image is-64x64" size="xlarge" [style]="getStyle()" shape="circle"></p-avatar>
 
       </div>
       <div class="media-content">
         <div class="content">
           <p>
-            <strong>{{comment?.author?.name}}</strong>  <a class="text-light decoration"  [routerLink]="['/dashboard/user/',comment?.author?.username]">
-              <small class="ps-1">@{{comment?.author?.username}}</small></a>  
+            <strong>{{comment?.author?.name}}</strong> <a class="text-light decoration"
+              [routerLink]="['/dashboard/user/',comment?.author?.username]">
+              <small class="ps-1">@{{comment?.author?.username}}</small></a>
             <br>
             <p class="p-wrap" [innerHtml]="comment?.description | atUser | safeHtml">
             </p>
@@ -25,10 +27,11 @@
             </span>
             <span class="likes ">{{ comment?.likes }}</span>
             <div *ngIf="comment?.is_owner" class="delete-button">
-              <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deleteCommentAction()"></app-delete-button>
+              <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deleteCommentAction()">
+              </app-delete-button>
             </div>
             <div class="delete-button">
-            | {{ comment?.created_at| amLocale:'es' | amTimeAgo  }}
+              | {{ comment?.created_at| amLocale:'es' | amTimeAgo  }}
             </div>
           </a>
         </div>

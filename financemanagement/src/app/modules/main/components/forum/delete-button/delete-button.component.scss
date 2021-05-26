@@ -1,41 +1,42 @@
 @import "../../../../../../assets/scss/variables";
 
-button{
-    background-color:transparent;
-    i{
-        color: $primary-font-color;
-    }
+button {
+  background-color: transparent;
+
+  i {
+    color: $primary-font-color;
+  }
 }
 
 
 :host ::ng-deep {
 
-    .p-button-outlined {
-        background-color: transparent;
-        color: $primary-font-color;
-        border: none;
+  .p-button-outlined {
+    background-color: transparent;
+    color: $primary-font-color;
+    border: none;
 
-        &:enabled:hover {
-            background-color: transparent;
-            border: none;
-            color: $primary-font-color;
-        }
-
-        &:focus {
-            box-shadow: none;
-        }
+    &:enabled:hover {
+      background-color: transparent;
+      border: none;
+      color: $primary-font-color;
     }
 
-    .p-button{
-        border: none;
-
-        &:hover{
-            background: transparent;
-            border: none;
-        }
-
-        &:focus {
-            box-shadow: none;
-        }
+    &:focus {
+      box-shadow: none;
     }
+  }
+
+  .p-button {
+    border: none;
+
+    &:hover {
+      background: transparent;
+      border: none;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
 }

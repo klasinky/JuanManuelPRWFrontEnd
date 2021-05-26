@@ -1,46 +1,45 @@
 <div class="wrapper">
 
-    <div (click)="sendLikeEvent()" [class.heart-liked]="liked" [class.heart-beating]="liked"
-      class="heart">
-      <div *ngIf="showLoading; else notLoading">
-        <div class="spinner-border spinner-border-sm text-light" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
+  <div (click)="sendLikeEvent()" [class.heart-liked]="liked" [class.heart-beating]="liked" class="heart">
+    <div *ngIf="showLoading; else notLoading">
+      <div class="spinner-border spinner-border-sm text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
-      <ng-template #notLoading>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
-          <path
-            d="M150 57.3C100.2-17.4.7 26.3.7 107.6c0 55 49.7 94.2 87.1 123.8 38.8 30.7 49.8 37.3 62.2 49.8 12.4-12.4 22.8-19.7 62.2-49.8 37.9-29 87.1-69.4 87.1-124.4 0-80.7-99.5-124.4-149.3-49.7z"
-            fill-rule="evenodd" clip-rule="evenodd" />
-        </svg>
-        <div class="text-center">
-          {{ countLike }}
-        </div>
-      </ng-template>
-
-      <span class="i1"></span>
-      <span class="i2"></span>
-      <span class="i3"></span>
-      <span class="i4"></span>
-      <span class="i5"></span>
-      <span class="i6"></span>
-      <span class="i7"></span>
-      <span class="i8"></span>
-      <span class="i1"></span>
-      <span class="i2"></span>
-      <span class="i3"></span>
-      <span class="i4"></span>
-      <span class="i5"></span>
-      <span class="i6"></span>
-      <span class="i7"></span>
-      <span class="i8"></span>
-      <span class="i1"></span>
-      <span class="i2"></span>
-      <span class="i3"></span>
-      <span class="i4"></span>
-      <span class="i5"></span>
-      <span class="i6"></span>
-      <span class="i7"></span>
-      <span class="i8"></span>
     </div>
+    <ng-template #notLoading>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+        <path
+          d="M150 57.3C100.2-17.4.7 26.3.7 107.6c0 55 49.7 94.2 87.1 123.8 38.8 30.7 49.8 37.3 62.2 49.8 12.4-12.4 22.8-19.7 62.2-49.8 37.9-29 87.1-69.4 87.1-124.4 0-80.7-99.5-124.4-149.3-49.7z"
+          fill-rule="evenodd" clip-rule="evenodd" />
+      </svg>
+      <div class="text-center">
+        {{ countLike }}
+      </div>
+    </ng-template>
+
+    <span class="i1"></span>
+    <span class="i2"></span>
+    <span class="i3"></span>
+    <span class="i4"></span>
+    <span class="i5"></span>
+    <span class="i6"></span>
+    <span class="i7"></span>
+    <span class="i8"></span>
+    <span class="i1"></span>
+    <span class="i2"></span>
+    <span class="i3"></span>
+    <span class="i4"></span>
+    <span class="i5"></span>
+    <span class="i6"></span>
+    <span class="i7"></span>
+    <span class="i8"></span>
+    <span class="i1"></span>
+    <span class="i2"></span>
+    <span class="i3"></span>
+    <span class="i4"></span>
+    <span class="i5"></span>
+    <span class="i6"></span>
+    <span class="i7"></span>
+    <span class="i8"></span>
   </div>
+</div>

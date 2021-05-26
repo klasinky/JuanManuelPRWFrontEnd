@@ -15,7 +15,11 @@ export class HttpService {
 
 
   }
-
+  /**
+   * Envía una petición POST sin token
+   * @param serviceName {string}
+   * @param data {any}
+   */
   post(serviceName: string, data: any = {}) {
 
     const headers = new HttpHeaders({
@@ -30,32 +34,59 @@ export class HttpService {
 
     return this.http.post(url, data, options);
   }
-
+  /**
+   * Envía una petición GET con autenticación
+   * @param serviceName {string}
+   * @param isUrl {boolean}
+   */
   getAuth(serviceName: string, isUrl: boolean = false) {
     const url = (isUrl) ? serviceName : environment.apiUrl + "/" + serviceName;
     return this.http.get(url, { headers: this.getHeaders() })
   }
-
+  /**
+   * Envía una petición DELETE con autenticación
+   * @param serviceName {string}
+   * @param id {number} id del objeto
+   */
   deleteAuth(serviceName: string, id?: number) {
     const url = (id) ? environment.apiUrl + "/" + serviceName + id : serviceName;
     return this.http.delete(url, { headers: this.getHeaders() })
   }
-
+  /**
+   * Envía una petición POST con autenticación
+   * @param serviceName {string}
+   * @param data {any}
+   * @param isUrl {boolean}
+   */
   postAuth(serviceName: string, data: any = {}, isUrl: boolean = false) {
     const url = (isUrl) ? serviceName : environment.apiUrl + "/" + serviceName;
     return this.http.post(url, data, { headers: this.getHeaders() })
   }
-
+  /**
+   * Envía una petición PATCH con autenticación
+   * @param serviceName {string}
+   * @param data {any}
+   * @param isUrl {boolean}
+   */
   patchAuth(serviceName: string, data: any = {}, isUrl: boolean = false) {
     const url = (isUrl) ? serviceName : environment.apiUrl + "/" + serviceName;
     return this.http.patch(url, data, { headers: this.getHeaders() })
   }
-
+  /**
+   * Envía una petición PUT con autenticación
+   * @param serviceName {string}
+   * @param data {any}
+   * @param isUrl {boolean}
+   */
   putAuth(serviceName: string, data: any = {}, isUrl: boolean = false) {
     const url = (isUrl) ? serviceName : environment.apiUrl + "/" + serviceName;
     return this.http.put(url, data, { headers: this.getHeaders() })
   }
-
+  /**
+   * Sube un XML
+   * @param serviceName {string}
+   * @param data {any}
+   */
   postXml(serviceName: string, data: any = {}) {
     const url = environment.apiUrl + "/" + serviceName;
     let token = this.storageService.getWithoutAsync(AuthConstants.AUTH);
@@ -70,7 +101,10 @@ export class HttpService {
       observe: 'events'
     })
   }
-
+  /**
+   * Descarga un XML
+   * @param serviceName {string}
+   */
   getXmlDownload(serviceName: string) {
     const url = environment.apiUrl + "/" + serviceName;
     let token = this.storageService.getWithoutAsync(AuthConstants.AUTH);

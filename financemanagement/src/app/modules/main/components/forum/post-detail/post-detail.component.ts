@@ -11,17 +11,41 @@ import { environment } from 'src/environments/environment';
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.scss']
 })
+/**
+ * Componente para el Detalle del post
+ */
 export class PostDetailComponent implements OnInit {
-
+  /**
+   * Objeto del post
+   */
   post?: Post;
+  /**
+   * Lista de los post recomendados
+   */
   postRecommendation?: Post[];
-
+  /**
+   * ID del post
+   */
   id: number = 0;
+  /**
+   * Indica si se muestra el spinner del like
+   */
   showLikeLoader: boolean = false;
+  /**
+   * Indica si se muesra el spinner de eliminar
+   */
   showDeleteLoader: boolean = false;
+  /**
+   * Indica si se muesra el skeleton
+   */
   loading: boolean = true;
+  /**
+   * Indica si se muestra el skeleton de la lista de recomendaciones
+   */
   loadingRecommendation: boolean = true;
-
+  /**
+   * Cantidad de número Post recomendados (Para el skeleton)
+   */
   numberPagination: number[];
 
   constructor(private httpService: HttpService,
@@ -47,7 +71,9 @@ export class PostDetailComponent implements OnInit {
       }
     });
   }
-
+  /**
+   * Obtiene el post
+   */
   getPost() {
     this.loadingRecommendation = true;
     this.loading = true;
@@ -65,6 +91,9 @@ export class PostDetailComponent implements OnInit {
 
   }
 
+  /**
+   * Obtiene la lista de post recomendados
+   */
   getPostRecommendation() {
     this.loadingRecommendation = true;
     const url = 'posts/' + this.id+"/recommendation";
@@ -80,20 +109,19 @@ export class PostDetailComponent implements OnInit {
       }
     )
   }
-
+  /**
+   * Envia un like al post
+   */
   sendLike() {
     this.showLikeLoader = true;
     const url = 'posts/' + this.id + "/like";
     this.httpService.putAuth(url).subscribe(
       (data: any) => {
-        console.log(data)
         if (this.post) {
           this.post.likes = data.likes as number;
           this.post.is_like = data.is_like as boolean;
-          console.log("Is Like " + this.post.is_like)
         }
         this.showLikeLoader = false;
-
       },
       (error) => {
         this.toastr.error(error.error.detail)
@@ -102,7 +130,9 @@ export class PostDetailComponent implements OnInit {
       }
     )
   }
-
+  /**
+   * Elimina el post
+   */
   deletePostAction() {
     this.showDeleteLoader = true;
     const url: string = environment.endpoints.posts.viewset;
@@ -119,7 +149,9 @@ export class PostDetailComponent implements OnInit {
       }
     )
   }
-
+  /**
+   * Obtiene el estilo 
+   */
   getStyle() {
     return this.colorService.getColor(this.post?.author?.username);
   }

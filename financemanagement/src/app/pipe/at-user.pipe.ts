@@ -3,6 +3,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'atUser'
 })
+/**
+ * Pipe para poner enlaces cuando una palabra comienza por @
+ */
 export class AtUserPipe implements PipeTransform {
 
   transform(value: any) {

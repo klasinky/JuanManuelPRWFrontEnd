@@ -12,16 +12,36 @@ import { environment } from 'src/environments/environment';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
+/**
+ * Componente para el perfil del usuario
+ */
 export class UserProfileComponent implements OnInit {
 
-  // Posts
+  /**
+   * Lista de posts del usuario
+   */
   posts?: Post[];
+  /**
+   * Username 
+   */
   username?: string;
 
   // Pagination
+  /**
+   * Número de post en Total
+   */
   totalPosts?: number;
+  /**
+   * URL para la paginación
+   */
   nextUrl?: string;
+  /**
+   * URL para la paginación
+   */
   previousUrl?: string;
+  /**
+   * Número de skeletons que se van a mostrar
+   */
   numberPagination: number[];
 
   // Loading Skeleton
@@ -42,7 +62,7 @@ export class UserProfileComponent implements OnInit {
         const username = params.username;
         this.username = username;
         let title = this.titleService.getTitle();
-        this.titleService.setTitle(title+" - "+this.username);
+        this.titleService.setTitle(title + " - " + this.username);
         this.getPostUser();
       } catch (error) {
         this.router.navigate(['dashboard']).then(() => {
@@ -68,7 +88,7 @@ export class UserProfileComponent implements OnInit {
         this.nextUrl = data.next;
         this.previousUrl = data.previous;
         this.posts = data.results as Post[];
-        
+
       },
       (error) => {
         this.loading = false;

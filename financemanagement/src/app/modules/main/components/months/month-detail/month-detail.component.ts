@@ -13,14 +13,30 @@ import { environment } from 'src/environments/environment';
   templateUrl: './month-detail.component.html',
   styleUrls: ['./month-detail.component.scss']
 })
+/**
+ * Componente para el detalle del mes
+ */
 export class MonthDetailComponent implements OnInit, OnDestroy {
-
+  /**
+   * Objeto del mes
+   */
   month?: MonthDetail;
+  /**
+   * ID del mes
+   */
   id: number = 0;
+  /**
+   * Lista de categorías
+   */
   categories?: Category [];
+  /**
+   * Suscripción para refrescar el componente
+   */
   refreshSubscription?: Subscription;
+  /**
+   * Sidebar del Tutorial
+   */
   visibleSidebar5: any;
-
 
   constructor(private monthService: MonthDetailService,
     private route: ActivatedRoute,
@@ -46,8 +62,11 @@ export class MonthDetailComponent implements OnInit, OnDestroy {
     })
   }
 
+  /**
+   * Obtiene la información del mes
+   * @param id id del mes
+   */
   getMonth(id: number) {
-
     this.monthService.getMonth(id).subscribe(
       (data: any) => {
         this.month = data;
@@ -71,15 +90,16 @@ export class MonthDetailComponent implements OnInit, OnDestroy {
       (data: any) => {
         this.categories = data;
       }, (error) => {
-        console.log(error.error.detail);
       }
     )
   }
-
+  /**
+   * Reinicia el componente
+   */
   refreshMonth() {
     this.getMonth(this.id);
   }
-
+  
   ngOnDestroy(){
     this.refreshSubscription?.unsubscribe();
   }

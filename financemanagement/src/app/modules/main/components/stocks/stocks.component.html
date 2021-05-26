@@ -1,24 +1,24 @@
 <div *ngIf="stocks.length > 0; else elseBlock" class="container">
-    <div class="row">
-        <div *ngFor="let stock of stocks" class="col-12 pt-5">
-            <div class="bgsecondary full-height text-center">
-                <br>
-                <div class="row">
-                    <div class="col-10">
-                        <h3>{{stock.name}}</h3>
-                    </div>
-                    <div class="col-2">
-                        <button class="btn btn-close btn-close-white" (click)="unsubscribeStockAction(stock)"></button>
-                    </div>
-                </div>
-                <app-stock-detail [stock]=stock></app-stock-detail>
-            </div>
+  <div class="row">
+    <div *ngFor="let stock of stocks" class="col-12 pt-5">
+      <div class="bgsecondary full-height text-center">
+        <br>
+        <div class="row">
+          <div class="col-10">
+            <h3>{{stock.name}}</h3>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-close btn-close-white" (click)="unsubscribeStockAction(stock)"></button>
+          </div>
         </div>
+        <app-stock-detail [stock]=stock></app-stock-detail>
+      </div>
     </div>
+  </div>
 </div>
 
 <ng-template #elseBlock>
-    <app-stock-tutorial *ngIf="!loading"></app-stock-tutorial>
+  <app-stock-tutorial *ngIf="!loading"></app-stock-tutorial>
 </ng-template>
 
 <app-stock-suscribe (createStock)="addStock()"></app-stock-suscribe>

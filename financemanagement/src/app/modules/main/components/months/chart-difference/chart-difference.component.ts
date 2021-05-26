@@ -6,11 +6,19 @@ import { Months } from 'src/app/interfaces/months';
   templateUrl: './chart-difference.component.html',
   styleUrls: ['./chart-difference.component.scss']
 })
+/**
+ * Componente para mostrar la diferencia entre Gastos e Ingresos
+ */
 export class ChartDifferenceComponent implements OnInit {
-
+  /**
+   * Componente del gráfico
+   */
   @ViewChild('ChartDifferenceContainer') chartCointainer?: ElementRef;
+  /**
+   * Objeto del mes
+   */
   @Input() month?: Months;
-
+  /** Configuración del Gráfico */
   single?: any[];
 
   viewX: number = 500;
@@ -19,9 +27,14 @@ export class ChartDifferenceComponent implements OnInit {
   colorScheme = {
     domain: ['#409145', '#c43131']
   };
+  /** */
+
 
   constructor() { }
-
+  /**
+   * Refresca el gráfico 
+   * @param changes 
+   */
   ngOnChanges(changes: SimpleChanges) {
     this.setCharts();
   }
@@ -30,7 +43,9 @@ export class ChartDifferenceComponent implements OnInit {
     this.setCharts();
   }
 
-
+  /**
+   * Construye el gráfico 
+   */
   setCharts() {
     const single: any[] = [];
     single.push({
@@ -48,7 +63,10 @@ export class ChartDifferenceComponent implements OnInit {
       this.viewX = x;
     }, 500);
   }
-
+  /**
+   * Calcula el tamaño indicado del gráfico para que sea responsive 
+   * @param event {any}
+   */
   onResize(event: any) {
     let x = this.chartCointainer?.nativeElement.offsetWidth;
     this.viewX = x;

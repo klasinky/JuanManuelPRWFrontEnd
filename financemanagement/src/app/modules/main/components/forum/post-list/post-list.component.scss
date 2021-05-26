@@ -51,10 +51,12 @@
     background: $secondary-color;
 
   }
-  &:hover:not(.d-flex){
+
+  &:hover:not(.d-flex) {
     background-color: $primary-font-color;
     color: $primary-color;
   }
+
   padding:1px 7px;
   font-size:12px;
   color:$primary-font-color;
@@ -66,7 +68,8 @@
   font-weight: bold;
   margin-top: 5px;
   cursor: pointer;
-  &:focus{
+
+  &:focus {
     outline: none;
   }
 }

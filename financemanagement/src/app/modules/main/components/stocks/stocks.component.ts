@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Stock } from 'src/app/interfaces/stock';
 import { HttpService } from 'src/app/services/http.service';
@@ -10,12 +9,20 @@ import { environment } from 'src/environments/environment';
   templateUrl: './stocks.component.html',
   styleUrls: ['./stocks.component.scss']
 })
+/**
+ * Componente de los stocks
+ */
 export class StocksComponent implements OnInit {
-
+  /**
+   * Lista de stocks
+   */
   stocks: Stock[] = [];
+  /**
+   * Indica si muestra el spinner de carga
+   */
   loading?: boolean = false;
 
-  constructor(private router: Router,
+  constructor(
     private httpService: HttpService,
     private toastr: ToastrService) { }
 
@@ -23,6 +30,9 @@ export class StocksComponent implements OnInit {
     this.getStocksAction();
   }
 
+  /**
+   * Obtiene una lista de las acciones que esta suscrita el usuario
+   */
   getStocksAction() {
     const url: string = environment.endpoints.stocks.list;
     this.loading = true;
@@ -37,6 +47,10 @@ export class StocksComponent implements OnInit {
     )
   }
 
+  /**
+   * Desuscribirse de una acción a la que esta suscrita
+   * @param stock acción que se va a eliminar
+   */
   unsubscribeStockAction(stock: Stock) {
     const url: string = environment.endpoints.stocks.viewset;
     this.httpService.deleteAuth(url, stock.id).subscribe(
@@ -45,12 +59,14 @@ export class StocksComponent implements OnInit {
         this.toastr.success('Te has desuscrito de la acción ' + stock.name, 'Acción eliminada');
       },
       (error) => {
-        console.log(error)
         this.toastr.error(error.detail, "Ha ocurrido un error");
       }
     )
   }
 
+  /**
+   * Refresca la lista de acciones
+   */
   addStock(): void {
     this.getStocksAction();
   }
