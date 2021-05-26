@@ -8,7 +8,6 @@ import { ListDetailComponent } from './components/months/list-detail/list-detail
 import { OverViewComponent } from './components/months/over-view/over-view.component';
 import { MomentModule } from 'ngx-moment';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
-import { BotonCrearComponent } from './components/months/boton-crear/boton-crear.component';
 import { MonthDetailComponent } from './components/months/month-detail/month-detail.component';
 import { AddAmountBaseComponent } from './components/months/add-amount-base/add-amount-base.component';
 import { ChartMonthComponent } from './components/months/chart-month/chart-month.component';
@@ -61,6 +60,7 @@ import { TopContributorsComponent } from './components/forum/top-contributors/to
 import { UserCardComponent } from './components/forum/user-profile/user-card/user-card.component';
 import { NotificationComponent } from '../../components/sidebar/notification/notification.component';
 import { CurrencyGeneratorPipe } from 'src/app/pipe/currency-generator.pipe';
+import { CreateMonthComponent } from './components/months/create-month/create-month.component';
 
 
 @NgModule({
@@ -70,7 +70,6 @@ import { CurrencyGeneratorPipe } from 'src/app/pipe/currency-generator.pipe';
     ListDetailComponent,
     OverViewComponent,
     SidebarComponent,
-    BotonCrearComponent,
     MonthDetailComponent,
     AddAmountBaseComponent,
     ChartMonthComponent,
@@ -103,7 +102,7 @@ import { CurrencyGeneratorPipe } from 'src/app/pipe/currency-generator.pipe';
     NotificationComponent,
     FooterComponent, 
     CurrencyGeneratorPipe,
-    
+    CreateMonthComponent,
   ],
   imports: [
     CommonModule,

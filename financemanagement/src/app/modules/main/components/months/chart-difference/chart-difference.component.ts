@@ -17,7 +17,7 @@ export class ChartDifferenceComponent implements OnInit {
   viewY: number = 300;
   // options
   colorScheme = {
-    domain: ['#A8385E', '#7AA3E5']
+    domain: ['#409145', '#c43131']
   };
 
   constructor() { }
