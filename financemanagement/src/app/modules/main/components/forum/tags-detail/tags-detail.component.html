@@ -2,9 +2,18 @@
 
 
     <main class="leaderboard__tags bgsecondary">
-      <div class="text-center">
-        <h4><i class="fas fa-tags"></i> Tags</h4>
+      <div class="d-flex justify-content-between">
+        <div class="bd-highlight my-auto">
+          <button pButton title="Limpiar el filtro de tags" class="p-button-outlined mt-2" icon="pi pi-filter-slash"
+          [routerLink]="['/dashboard/post']" [queryParams]="{}"></button>
+        </div>
+        <div class="bd-highlight my-auto me-4">
+          <h4><i class="fas fa-tags"></i> Tags</h4>
+        </div>
+        <div class="bd-highlight">
+        </div>
       </div>
+
       <article #articlesBlock *ngFor="let tag of tags" class="leaderboard__tag">
         <div [routerLink]="['/dashboard/post']" [queryParams]="{tag: tag.id}" class="d-flex">
           <div class="me-auto p-2 bd-highlight name">

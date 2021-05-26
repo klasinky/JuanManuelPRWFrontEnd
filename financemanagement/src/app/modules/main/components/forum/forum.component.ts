@@ -44,9 +44,7 @@ export class ForumComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(queryParams => {
       this.tagId = queryParams['tag'];
-      if (this.tagId !== undefined) {
-        this.getPosts();       
-      }
+      this.getPosts();       
     });
     this.getPosts();
     this.getTopUsers();
