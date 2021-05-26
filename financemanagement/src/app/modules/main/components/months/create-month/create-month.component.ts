@@ -1,15 +1,15 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Months } from 'src/app/interfaces/months';
 import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-boton-crear',
-  templateUrl: './boton-crear.component.html',
-  styleUrls: ['./boton-crear.component.scss']
+  selector: 'app-create-month',
+  templateUrl: './create-month.component.html',
+  styleUrls: ['./create-month.component.scss']
 })
-export class BotonCrearComponent implements OnInit {
+export class CreateMonthComponent implements OnInit {
 
   @Output() newMonth: EventEmitter<Months> = new EventEmitter();
 
@@ -41,4 +41,5 @@ export class BotonCrearComponent implements OnInit {
       }
     )
   }
+
 }
