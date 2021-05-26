@@ -1,179 +1,195 @@
-
 /* ------------------------------- Like Button ------------------------------ */
 
 .wrapper {
-    position: relative;
+  position: relative;
+}
+
+.heart {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.heart svg {
+  fill: gray;
+  width: 20px;
+}
+
+.heart span {
+  pointer-events: none;
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #E12A50;
+  opacity: 0;
+  border-radius: 6px;
+  position: absolute;
+}
+
+.heart:hover span {
+  animation-name: hover;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+}
+
+.heart-liked span {
+  animation-name: click;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1;
+}
+
+.heart-beating {
+  animation-name: beat;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
+}
+
+.heart-liked svg {
+  fill: #dd3052;
+}
+
+
+.heart .i1 {
+  top: -20px;
+  left: 7px;
+  background: #D0CFB6;
+  -webkit-animation-delay: 1.2s;
+  animation-delay: 1.2s;
+}
+
+.heart .i2 {
+  top: -14px;
+  left: 28px;
+  background: #96E0DC;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+.heart .i3 {
+  top: 6px;
+  left: 35px;
+  background: #9997CA;
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+.heart .i4 {
+  top: 27px;
+  left: 31px;
+  background: #D4D3BD;
+  -webkit-animation-delay: 0.9s;
+  animation-delay: 0.9s;
+}
+
+.heart .i5 {
+  top: 37px;
+  left: 8px;
+  background: #B993E5;
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+.heart .i6 {
+  top: 30px;
+  left: -15px;
+  background: #9d6cd5;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+.heart .i7 {
+  top: 7px;
+  left: -18px;
+  background: #D7A4BE;
+  -webkit-animation-delay: 0.7s;
+  animation-delay: 0.7s;
+}
+
+.heart .i8 {
+  top: -16px;
+  left: -13px;
+  background: #e7d9a7;
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+@keyframes hover {
+  0% {
+    opacity: 1;
+    transform: scale(0)
   }
-  
-  .heart {
-      height: 20px;
-      width: 20px;
-      cursor: pointer;
+
+  15% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
   }
-  .heart svg {
-    fill: gray;
-    width: 20px;
+
+  100% {
+    top: 4px;
+    left: 7px;
+    opacity: 1;
   }
-  
-  .heart span {
-      pointer-events: none;
-      display: block;
-      width: 6px;
-      height: 6px;
-      background: #E12A50;
-      opacity: 0;
-      border-radius: 6px;
-      position: absolute;
+}
+
+@keyframes hover {
+  0% {
+    opacity: 1;
+    transform: scale(0)
   }
-  
-  .heart:hover span{
-    animation-name: hover;
-    animation-duration: 0.6s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in;
+
+  15% {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  .heart-liked span {
-      animation-name: click;
-      animation-duration: 0.5s;
-      animation-timing-function: ease-out;
-      animation-delay: 0s !important;
-      animation-iteration-count: 1;
+
+  100% {
+    top: 4px;
+    left: 7px;
+    opacity: 1
   }
-  
-  .heart-beating {
-      animation-name: beat;
-      animation-duration: 0.3s;
-      animation-iteration-count: 1;
+}
+
+
+
+@keyframes click {
+  0% {
+    top: 4px;
+    left: 7px
   }
-  
-  .heart-liked svg {
-    fill: #dd3052;
+
+  15% {
+    opacity: 1;
+    transform: scale(1.2) translateY(-50%);
   }
-  
-  
-  .heart .i1 {
-      top: -20px;
-      left: 7px;
-      background: #D0CFB6;
-      -webkit-animation-delay: 1.2s;
-      animation-delay: 1.2s;
+
+  70% {
+    opacity: 1;
+    transform: scale(1) translateY(-50%);
   }
-  .heart .i2 {
-      top: -14px;
-      left: 28px;
-      background: #96E0DC;
-      -webkit-animation-delay: 0s;
-      animation-delay: 0s;
+
+  100% {
+    opacity: 1;
+    transform: scale(0) translateY(-50%);
   }
-  .heart .i3 {
-      top: 6px;
-      left: 35px;
-      background: #9997CA;
-      -webkit-animation-delay: 0.4s;
-      animation-delay: 0.4s;
+}
+
+
+@keyframes beat {
+  0% {
+    transform: scale(1) translateY(-50%);
+    ;
+    color: #C7C7C7
   }
-  .heart .i4 {
-      top: 27px;
-      left: 31px;
-      background: #D4D3BD;
-      -webkit-animation-delay: 0.9s;
-      animation-delay: 0.9s;
+
+  50% {
+    transform: scale(1.35) translateY(-40%);
   }
-  .heart .i5 {
-      top: 37px;
-      left: 8px;
-      background: #B993E5;
-      -webkit-animation-delay: 0.3s;
-      animation-delay: 0.3s;
+
+  100% {
+    transform: scale(1) translateY(-50%);
   }
-  .heart .i6 {
-      top: 30px;
-      left: -15px;
-      background: #9d6cd5;
-      -webkit-animation-delay: 1s;
-      animation-delay: 1s;
-  }
-  .heart .i7 {
-      top: 7px;
-      left: -18px;
-      background: #D7A4BE;
-      -webkit-animation-delay: 0.7s;
-      animation-delay: 0.7s;
-  }
-  .heart .i8 {
-      top: -16px;
-      left: -13px;
-      background: #e7d9a7;
-      -webkit-animation-delay: 0.2s;
-      animation-delay: 0.2s;
-  }
-  
-  @keyframes hover{
-    0%{
-      opacity:1;
-      transform:scale(0)}15%{
-        opacity:1;-webkit-transform:scale(1);
-        transform:scale(1)
-    }
-    100%{
-      top:4px;
-      left:7px;
-      opacity:1;
-    }
-  }
-  
-  @keyframes hover{
-    0%{
-      opacity:1;
-      transform:scale(0)
-    }
-    15%{
-      opacity:1;
-      transform:scale(1);
-    }
-    100%
-    {
-      top:4px;
-      left:7px;
-      opacity:1
-    }
-  }
-  
-  
-  
-  @keyframes click
-  {
-    0%{
-      top:4px;
-      left:7px
-    }
-    15%{
-      opacity:1;
-      transform:scale(1.2) translateY(-50%);
-    }
-    70%{
-      opacity:1;
-      transform:scale(1) translateY(-50%);
-    }
-    100%{
-      opacity:1;
-        transform:scale(0) translateY(-50%);
-    }
-  }
-  
-  
-  @keyframes beat{
-    0%{
-      transform:scale(1) translateY(-50%);;
-      color:#C7C7C7
-    }
-    50%{
-      transform:scale(1.35) translateY(-40%);
-    }
-    100%{
-      transform:scale(1) translateY(-50%);
-    }
-  }
-  
-  
+}

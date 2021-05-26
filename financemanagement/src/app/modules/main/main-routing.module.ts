@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoggedOffGuard } from 'src/app/guards/logged-off.guard';
 import { CreatePostComponent } from './components/forum/create-post/create-post.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { PostDetailComponent } from './components/forum/post-detail/post-detail.component';

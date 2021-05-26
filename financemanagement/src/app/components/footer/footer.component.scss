@@ -1,40 +1,40 @@
 @import '../../../assets/scss/variables';
 
-div{
-    background-color: $primary-color;
-    color: $primary-font-color;
-    padding: 20px;
+div {
+  background-color: $primary-color;
+  color: $primary-font-color;
+  padding: 20px;
 
 }
 
-.img-footer{
-    height: auto;
-    max-width: 210px;
+.img-footer {
+  height: auto;
+  max-width: 210px;
 }
 
 
 
 .contact-social a {
-    border: 1px solid #8b9199;
-    color: $primary-font-color;
-    display: inline-block;
-    height: 40px;
-    margin: 0 10px;
-    padding-top: 7px;
-    transition: all 0.4s ease 0s;
-    width: 40px;
+  border: 1px solid #8b9199;
+  color: $primary-font-color;
+  display: inline-block;
+  height: 40px;
+  margin: 0 10px;
+  padding-top: 7px;
+  transition: all 0.4s ease 0s;
+  width: 40px;
 }
 
 .contact-social a:hover {
-    border: 1px solid $light-primary-color;
-    color: $light-primary-color;
+  border: 1px solid $light-primary-color;
+  color: $light-primary-color;
 }
 
 footer p {
 
-    text-align: center;
+  text-align: center;
 }
 
 footer img {
-    width: 44px;
+  width: 44px;
 }

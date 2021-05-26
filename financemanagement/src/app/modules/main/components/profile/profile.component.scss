@@ -1,45 +1,45 @@
 @import '../../../../../assets/scss/variables';
 
 .btn-auth {
-    width: 150px;
-    background-color: $primary-color-hover;
-    border: none;
-    outline: none;
-    height: 49px;
-    border-radius: 49px;
-    border: 2px solid #fff;
+  width: 150px;
+  background-color: $primary-color-hover;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  border: 2px solid #fff;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    background: $primary-color;
     color: #fff;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin: 10px 0;
-    cursor: pointer;
-    transition: 0.5s;
-  
-    &:hover{
-      background: $primary-color;
-      color: #fff;
-    }
   }
+}
 
 img {
-    width: 13rem;
-    height: 13rem;
-    padding: 1rem;
-    align-items: center;
-    margin-bottom: 1.1rem;
-    box-shadow: 1px 1px 1px 7px $secondary-color;
-    border-radius: 5%;
+  width: 13rem;
+  height: 13rem;
+  padding: 1rem;
+  align-items: center;
+  margin-bottom: 1.1rem;
+  box-shadow: 1px 1px 1px 7px $secondary-color;
+  border-radius: 5%;
 }
 
-.input-field{
+.input-field {
   max-width: 100% !important;
 }
-  
+
 .file-upload>input {
   display: none;
 }
 
-.input-field label{
+.input-field label {
   text-align: center;
   line-height: 55px;
   color: #acacac;
@@ -47,6 +47,7 @@ img {
   font-size: 1.1rem;
   cursor: pointer;
 }
+
 .input-field span {
   margin-top: auto;
   margin-bottom: auto;
@@ -59,7 +60,7 @@ img {
 }
 
 
-.box i{
+.box i {
   position: absolute;
   right: 0;
   color: $primary-font-color;
@@ -70,15 +71,15 @@ img {
   cursor: pointer;
 }
 
-.box i:hover{
+.box i:hover {
   color: gray;
 }
 
-.box img{
+.box img {
   object-fit: cover;
 }
 
-.box{
+.box {
   align-items: center;
   height: 200px;
   width: 200px;

@@ -6,37 +6,35 @@
     </div>
   </div>
 
-    <h2 class="title">Login</h2>
-    
-    <div class="input-field" 
-    [class.is-valid]="this.formLogin.get('email')?.valid"
+  <h2 class="title">Iniciar Sesión</h2>
+
+  <div class="input-field" [class.is-valid]="this.formLogin.get('email')?.valid"
     [class.is-invalid]="this.formLogin.get('email')?.invalid && this.formLogin.get('email')?.touched || nonFieldError == true">
-      <i class="fas fa-envelope    "></i>
-      <input formControlName="email" type="text" placeholder="Email"/>
-    </div>
+    <i class="fas fa-envelope    "></i>
+    <input formControlName="email" type="text" placeholder="Correo electrónico" />
+  </div>
 
-    <div class="input-field" 
-    [class.is-valid]="this.formLogin.get('password')?.valid "
+  <div class="input-field" [class.is-valid]="this.formLogin.get('password')?.valid "
     [class.is-invalid]="this.formLogin.get('password')?.invalid && this.formLogin.get('password')?.touched || nonFieldError == true">
-      <i class="fas fa-lock"></i>
-      <input formControlName="password" type="password" placeholder="Password"/>
-    </div>
+    <i class="fas fa-lock"></i>
+    <input formControlName="password" type="password" placeholder="Contraseña" />
+  </div>
 
-    <div *ngIf="nonFieldError" class="text-center">
-      <div *ngFor="let item of nonFieldErrorMessage">
-        <label class="error">{{item}}</label>
-      </div>
+  <div *ngIf="nonFieldError" class="text-center">
+    <div *ngFor="let item of nonFieldErrorMessage">
+      <label class="error">{{item}}</label>
     </div>
+  </div>
 
-    <button [disabled]='formLogin.invalid' (click)="loginAction()" class="btn-auth">
-      <div *ngIf="!showLoader; else blockLoader">
-        Login
+  <button [disabled]='formLogin.invalid' (click)="loginAction()" class="btn-auth">
+    <div *ngIf="!showLoader; else blockLoader">
+      Ingresar
+    </div>
+    <ng-template #blockLoader>
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
       </div>
-      <ng-template #blockLoader>
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </ng-template>
-    </button>
- 
-  </form>
+    </ng-template>
+  </button>
+
+</form>

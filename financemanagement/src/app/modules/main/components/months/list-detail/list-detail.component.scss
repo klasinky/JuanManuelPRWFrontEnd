@@ -1,34 +1,36 @@
 @import '../../../../../../assets/scss/variables';
 
 .card {
-    background: $alternative-color;
-    box-shadow: 2px 20px 30px $alternative-color;
+  background: $alternative-color;
+  box-shadow: 2px 20px 30px $alternative-color;
 
-    &:hover{
-        background: $alternative-color-hover;
-    }
-    .row > .col{
-        cursor: pointer;
-    }
+  &:hover {
+    background: $alternative-color-hover;
+  }
+
+  .row>.col {
+    cursor: pointer;
+  }
 }
 
 .badge-soft-success {
-    color: #00d97e;
-    background-color: #0e4a4c;
+  color: #00d97e;
+  background-color: #0e4a4c;
 }
 
 .badge-soft-danger {
-    color: #E4AAAA;
-    background-color: #4c0e0e;
+  color: #E4AAAA;
+  background-color: #4c0e0e;
 }
 
-.dropdown-menu:hover , .dropdown-item:hover {
-    color: #E4AAAA;
-    background-color: #4c0e0e;
-    cursor: pointer;
+.dropdown-menu:hover,
+.dropdown-item:hover {
+  color: #E4AAAA;
+  background-color: #4c0e0e;
+  cursor: pointer;
 }
 
 .dropdown-menu {
-    min-width: 3rem;
-    background: $secondary-color;
+  min-width: 3rem;
+  background: $secondary-color;
 }

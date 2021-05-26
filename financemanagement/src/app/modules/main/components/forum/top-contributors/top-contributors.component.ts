@@ -10,9 +10,17 @@ import { HttpService } from 'src/app/services/http.service';
   styleUrls: ['./top-contributors.component.scss',
    '../tags-detail/tags-detail.component.scss']
 })
+/**
+ * Componente para mostrar el Top de Usuarios
+ */
 export class TopContributorsComponent implements OnInit {
-
+  /**
+   * Objeto del usuario
+   */
   @Input()user?: UserProfile;
+  /**
+   * Indicia si se muestra el spinner
+   */
   loadingFollow = false;
 
   constructor(private httpService: HttpService,
@@ -21,7 +29,9 @@ export class TopContributorsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  /**
+   * Envía una petición para comenzar / dejar de seguir al usuario
+   */
   follow() {
     const url: string = "users/profile/" + this.user?.username;
     this.loadingFollow = true;
@@ -42,7 +52,9 @@ export class TopContributorsComponent implements OnInit {
       }
     )
   }
-
+  /**
+   * Obtiene los estilos del usuario que no tiene foto de perfil
+   */
   getStyle() {
     return this.colorService.getColor(this.user?.username);
   }

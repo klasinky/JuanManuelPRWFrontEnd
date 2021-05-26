@@ -1,6 +1,6 @@
-<button type="button" [class.expense]="this.isExpense" [class.entry]="!this.isExpense" class="btn-web" (click)="downloadXLS()" data-bs-toggle="modal"
-  [attr.data-bs-target]="'#Download' + serviceName">
-  Descargar 
+<button type="button" [class.expense]="this.isExpense" [class.entry]="!this.isExpense" class="btn-web"
+  (click)="downloadXLS()" data-bs-toggle="modal" [attr.data-bs-target]="'#Download' + serviceName">
+  Descargar
   <div class="d-none d-lg-inline">
     {{ title }}
     <i class="fas fa-download"></i>
@@ -38,7 +38,7 @@
           </div>
           <button type="button" class="btn btn-block btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
-        
+
       </div>
     </div>
   </div>

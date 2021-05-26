@@ -9,10 +9,14 @@ import { StorageService } from '../services/storage.service';
 })
 export class LoggedInGuard implements CanActivate {
 
+  /**
+   * Boolean para mostrar el spinner de carga
+   */
   public loader = true;
 
   /**
-   * Guard para saber si el usuario está autenticado
+   * Guard (Se activa en el module AUTH), evita que el usuario
+   * ingrese al módulo AUTH si está autenticado
    */
   canActivate(): Promise<boolean> {
 

@@ -16,15 +16,23 @@ export class AuthService {
     private storageService: StorageService,
     private router: Router
     ) { }
-
+    /**
+     * Loguea al usuario
+     * @param data {Login}
+     */
     login(data:Login): Observable<any>{
       return this.httpService.post(environment.endpoints.auth.login, data);
     }
-
+    /**
+     * Registra a un usuario
+     * @param data {any}
+     */
     register(data:any):Observable<any>{
       return this.httpService.post(environment.endpoints.auth.register, data);
     }
-
+    /**
+     * Cierra sesión 
+     */
     logout(){
       this.storageService.clear();
       this.router.navigate(['auth']);
