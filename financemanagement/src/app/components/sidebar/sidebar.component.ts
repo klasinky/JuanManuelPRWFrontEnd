@@ -60,7 +60,7 @@ export class SidebarComponent implements OnInit {
     notiSub$.subscribe(notification => {
       this.notifications.unshift(notification);
       this.activateRing();
-      this.toastr.success("Tienes una nueva notificación");
+      this.toastr.info("Tienes una nueva notificación");
       this.titleService.setTitle(`Finaccess ${this.getTitle()}`);
       this.audio.play();
 

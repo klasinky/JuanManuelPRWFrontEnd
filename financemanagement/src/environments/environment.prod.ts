@@ -3,6 +3,8 @@ const months: string = "months";
 const stocks: string = "stocks";
 const posts: string = "posts";
 const comment: string = "comment"
+const expense: string = "expenses";
+const entry: string = "entries";
 
 export const environment = {
   production: true,
@@ -20,7 +22,11 @@ export const environment = {
     months: {
       all: months + "/all",
       create:  months,
-      viewset: months + "/"
+      viewset: months + "/",
+      amount: {
+        start: months + "/",
+        end: "/amounts"
+      }
     },
     category: {
       all: "categories" + "/all"
@@ -38,6 +44,12 @@ export const environment = {
         start: months + "/",
         end: "/export/"
       }
+    },
+    expense: {
+      viewset: expense + "/"
+    },
+    entry: {
+      viewset: entry + "/"
     },
     stocks: {
       list: stocks,
@@ -58,26 +70,28 @@ export const environment = {
     },
     comments: {
       create: {
-        start: posts  + "/",
+        start: posts + "/",
         end: "/" + comment
       },
       delete: {
-        start: comment  + "/",
+        start: comment + "/",
         end: "/delete"
       },
       list: {
-        start: posts  + "/",
+        start: posts + "/",
         end: "/" + comment + "/all"
       },
       like: {
-        start: comment  + "/",
+        start: comment + "/",
         end: "/like"
       },
       answer: {
-        start: posts  + "/",
+        start: posts + "/",
         end: "/" + comment
       }
+    },
+    user: {
+      profile: users + "/endpoint/"
     }
   }
-
 };

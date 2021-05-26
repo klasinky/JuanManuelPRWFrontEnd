@@ -1,23 +1,23 @@
 <form [formGroup]="formLogin" id="form" class="sign-in-form">
   <div class="row">
     <div class="col-12">
-      <img src="../../assets/img/logotransparente.svg" class="img-fluid" />
+      <img src="../../assets/img/logotransparente.svg" class="img-fluid" alt="logo"/>
 
     </div>
   </div>
 
-  <h2 class="title">Login</h2>
+  <h2 class="title">Iniciar Sesión</h2>
 
   <div class="input-field" [class.is-valid]="this.formLogin.get('email')?.valid"
     [class.is-invalid]="this.formLogin.get('email')?.invalid && this.formLogin.get('email')?.touched || nonFieldError == true">
     <i class="fas fa-envelope    "></i>
-    <input formControlName="email" type="text" placeholder="Email" />
+    <input formControlName="email" type="text" placeholder="Correo electrónico" />
   </div>
 
   <div class="input-field" [class.is-valid]="this.formLogin.get('password')?.valid "
     [class.is-invalid]="this.formLogin.get('password')?.invalid && this.formLogin.get('password')?.touched || nonFieldError == true">
     <i class="fas fa-lock"></i>
-    <input formControlName="password" type="password" placeholder="Password" />
+    <input formControlName="password" type="password" placeholder="Contraseña" />
   </div>
 
   <div *ngIf="nonFieldError" class="text-center">
@@ -28,37 +28,13 @@
 
   <button [disabled]='formLogin.invalid' (click)="loginAction()" class="btn-auth">
     <div *ngIf="!showLoader; else blockLoader">
-      Login
+      Ingresar
     </div>
     <ng-template #blockLoader>
       <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     </ng-template>
-
-
-
   </button>
-  <!--
-    <p class="social-text">Or Sign in with social platforms</p>
-
-    <div class="social-media">
-      <a href="#" class="social-icon">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-
-      <a href="#" class="social-icon">
-        <i class="fab fa-twitter"></i>
-      </a>
-
-      <a href="#" class="social-icon">
-        <i class="fab fa-google"></i>
-      </a>
-
-      <a href="#" class="social-icon">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-    </div>
-    -->
 
 </form>
