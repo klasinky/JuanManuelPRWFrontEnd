@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { AmountList } from 'src/app/interfaces/amount-base';
 import { MonthDetail } from 'src/app/interfaces/months';
 import { MonthDetailService } from 'src/app/services/month-detail.service';
-import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -14,15 +13,29 @@ import { environment } from 'src/environments/environment';
   templateUrl: './category-detail.component.html',
   styleUrls: ['./category-detail.component.scss']
 })
+/**
+ * Componente para mostrar la lista de los ingresos y gastos 
+ */
 export class CategoryDetailComponent implements OnInit, OnDestroy {
-
+  /**
+   * Objeto del mes
+   */
   @Input() month?: MonthDetail;
-
+  /**
+   * Lista de los ingresos y gastos
+   */
   amountData?: AmountList[];
+  /**
+   * Indica si se muestra el spinner de carga
+   */
   loading: boolean = false;
-
+  /**
+   * Suscripción para refrescar el componete
+   */
   refreshSubscription?: Subscription;
-
+  /**
+   * Tabla de Ingresos y gastos
+   */
   @ViewChild('dt1') dt1?: Table;
 
   constructor(private monthService: MonthDetailService,
@@ -35,7 +48,9 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
       this.getAmounts();
     })
   }
-
+  /**
+   * Obtiene la lista de ingresos y gastos
+   */
   getAmounts() {
     if (this.month?.month.id) {
       this.loading = true;
@@ -45,21 +60,30 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.amountData = data as AmountList[];
         }, (error) => {
-          console.log(error);
           this.loading = false;
         }
       )
     }
   }
-
+  /**
+   * Regresa el nombre del servicio
+   * @param isExpense {boolean}
+   */
   getServiceName(isExpense: any) {
     return (isExpense) ? "Gasto" : "Ingreso";
   }
-
+  /**
+   *  Limpia la tabla
+   * @param table {Table}
+   */
   clear(table: Table) {
     table.clear();
   }
-
+  /**
+   * Elimina un registro
+   * @param id {number} ID del item
+   * @param isExpense {boolean} Indicia si es ingreso o gasto
+   */
   deleteAmountAction(id: number, isExpense: boolean) {
     this.confirmationService.confirm({
       message: '¿Estás seguro de que quieres eliminar este registro?',
@@ -69,7 +93,11 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
     });
 
   }
-
+  /**
+   * Elimina un registro
+   * @param isExpense {boolean} Indicia si es ingreso o gasto
+   * @param id {number} ID del item
+   */
   deleteAmount(isExpense: boolean, id: number) {
     this.monthService.deleteAmount(isExpense, id).subscribe(
       (data) => {
@@ -81,13 +109,17 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
       }
     )
   }
-
+  /**
+   * Aplica los filtros a la tabla
+   */
   applyFilterGlobal($event: any, stringVal: string) {
     this.dt1?.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-
-  ngOnDestroy(){
+  /**
+   * Elimina la suscripción
+   */
+  ngOnDestroy() {
     this.refreshSubscription?.unsubscribe();
   }
 

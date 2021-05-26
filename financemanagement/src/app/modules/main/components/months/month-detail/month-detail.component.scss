@@ -15,9 +15,10 @@ h3 {
 
 :host ::ng-deep {
   .btn-f {
-    & [type=button]:not(:disabled){
+    & [type=button]:not(:disabled) {
       width: 100%;
     }
+
     & .p-button {
       border-radius: 0%;
       border: 1px solid $secondary-color;

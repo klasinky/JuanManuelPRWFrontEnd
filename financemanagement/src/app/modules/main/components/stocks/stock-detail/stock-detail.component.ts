@@ -33,14 +33,13 @@ export class StockDetailComponent implements OnInit {
 
   constructor(private httpService: HttpService) { }
 
-  /*ngOnChanges(changes: SimpleChanges) {
-    this.setCharts();
-  }*/
-
   ngOnInit(): void {
     this.getStockDetailAction();
   }
 
+  /**
+   * Asigna los valores para construir el gráfico 
+   */
   setCharts() {
     const multi: any[] = [];
     const series: any[] = [];
@@ -69,6 +68,9 @@ export class StockDetailComponent implements OnInit {
     this.viewX = x;
   }
 
+  /**
+   * Obtener la información de la acción
+   */
   getStockDetailAction() {
     const url: string = environment.endpoints.stocks.viewset +
       this.stock?.id;
@@ -76,7 +78,7 @@ export class StockDetailComponent implements OnInit {
     this.httpService.getAuth(url).subscribe(
       (data) => {
         this.stockDetail = data as StockDetail;
-        this.stockDetail.prices.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());        
+        this.stockDetail.prices.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
         this.setCharts();
       },
       (error) => {

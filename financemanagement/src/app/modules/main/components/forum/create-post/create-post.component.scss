@@ -42,63 +42,63 @@
 }
 
 /* ----------------------------- Button Checkbox ---------------------------- */
- 
-
-  .ck-button {
-    max-width: 100%;
-    border-radius: 10px;
-    display: inline-block;
-    margin: 4px;
-    padding: 4px;
-    background-color: $secondary-color;
-    border-radius: 4px;
-    overflow: hidden;
-
-    &:hover {
-      background-color: $primary-font-color;
-      color: $primary-color;
-
-    }
-
-    & label {
-      width: 100%;
-      cursor: pointer;
-
-    }
 
 
-    & label span {
-      text-align: center;
-      padding: 3px 0px;
-      display: block;
-      border-radius: 4px;
+.ck-button {
+  max-width: 100%;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 4px;
+  padding: 4px;
+  background-color: $secondary-color;
+  border-radius: 4px;
+  overflow: hidden;
 
-      & i.fa-check {
-        display: none;
-      }
-
-      & i.fa-times {
-        display: inline;
-      }
-    }
-
-    & label input {
-      position: absolute;
-      top: -20px;
-
-    }
-
-    & input:checked+span {
-
-      & i.fa-check {
-        display: inline;
-        color: rgb(5, 187, 5);
-      }
-
-      & i.fa-times {
-        display: none;
-      }
-    }
-
+  &:hover {
+    background-color: $primary-font-color;
+    color: $primary-color;
 
   }
+
+  & label {
+    width: 100%;
+    cursor: pointer;
+
+  }
+
+
+  & label span {
+    text-align: center;
+    padding: 3px 0px;
+    display: block;
+    border-radius: 4px;
+
+    & i.fa-check {
+      display: none;
+    }
+
+    & i.fa-times {
+      display: inline;
+    }
+  }
+
+  & label input {
+    position: absolute;
+    top: -20px;
+
+  }
+
+  & input:checked+span {
+
+    & i.fa-check {
+      display: inline;
+      color: rgb(5, 187, 5);
+    }
+
+    & i.fa-times {
+      display: none;
+    }
+  }
+
+
+}

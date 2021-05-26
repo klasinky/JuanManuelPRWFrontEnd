@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/interfaces/post';
-import { ColorService } from 'src/app/services/color.service';
 import { HttpService } from 'src/app/services/http.service';
 import { environment } from 'src/environments/environment';
 
@@ -11,11 +9,29 @@ import { environment } from 'src/environments/environment';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss']
 })
+/**
+ * Componente para la lista de post
+ */
 export class PostListComponent implements OnInit {
+  /**
+   * Objeto del post
+   */
   @Input() post!: Post;
+  /**
+   * Emitter para refrescar el componente padre
+   */
   @Output() refreshPosts: EventEmitter<any> = new EventEmitter();
+  /**
+   * Indica si se muestra el spinner del like
+   */
   showLikeLoader: boolean = false;
+  /**
+   * Indica si se muestra el spinner del delete
+   */
   showDeleteLoader: boolean = false;
+  /**
+   * Indica si se muestra el skeleton
+   */
   loading: boolean = true;
 
   constructor(private httpService: HttpService,
@@ -25,6 +41,9 @@ export class PostListComponent implements OnInit {
 
   }
 
+  /**
+   * Envía un like al post 
+   */
   sendLike() {
     this.showLikeLoader = true;
     const url = 'posts/' + this.post?.id + "/like";
@@ -42,7 +61,9 @@ export class PostListComponent implements OnInit {
       }
     )
   }
-
+  /**
+   * Elimina un post
+   */
   deletePostAction(){
     this.showDeleteLoader = true;
     const url: string = environment.endpoints.posts.viewset;

@@ -6,7 +6,10 @@ import { Injectable } from '@angular/core';
 export class ColorService {
 
   constructor() { }
-
+  /**
+   * Genera estilos dependiendo del nombre del usuario
+   * @param username {string}
+   */
   getColor(username: string = "") {
     const colors = [
       { 'background-color': '#EFD600', 'color': '#000000' },

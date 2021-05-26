@@ -9,10 +9,17 @@ import { environment } from 'src/environments/environment';
   templateUrl: './create-month.component.html',
   styleUrls: ['./create-month.component.scss']
 })
+/**
+ * Componente para crear un nuevo mes
+ */
 export class CreateMonthComponent implements OnInit {
-
+  /**
+   * Emitter para indicar que se ha creado un mes
+   */
   @Output() newMonth: EventEmitter<Months> = new EventEmitter();
-
+  /**
+   * Indica si se muestra el spinner de carga
+   */
   showLoader = false;
 
 
@@ -21,11 +28,13 @@ export class CreateMonthComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  /**
+   * Agrega un mes
+   */
   addMonth() {
     const url: string = environment.endpoints.months.create;
     this.showLoader = true;
-    
+
     this.httpService.postAuth(url).subscribe(
       (data: any) => {
         const month = data as Months;
@@ -34,7 +43,6 @@ export class CreateMonthComponent implements OnInit {
         this.showLoader = false;
 
       }, (error) => {
-        console.log(error.error.detail);
         this.toastr.error(error.error.detail, 'Error al crear mes');
         this.showLoader = false;
 

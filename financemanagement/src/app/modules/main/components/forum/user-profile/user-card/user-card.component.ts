@@ -9,12 +9,27 @@ import { HttpService } from 'src/app/services/http.service';
   templateUrl: './user-card.component.html',
   styleUrls: ['./user-card.component.scss']
 })
+/**
+ * Componente para el CARD del usuario en el perfil
+ */
 export class UserCardComponent implements OnInit {
-
+  /**
+   * Username del usuario
+   */
   @Input() username?: string;
+  /**
+   * Datos del usuario
+   */
   user?: UserProfile;
+  /**
+   * Indica si se muestra el spinner
+   */
   loadingFollow = false;
+  /**
+   * Indica si se muestra el skeleton
+   */
   loading = true;
+
   constructor(private httpService: HttpService,
     private route: ActivatedRoute,
     private router: Router,
@@ -27,6 +42,9 @@ export class UserCardComponent implements OnInit {
     this.getInfoProfile(this.username + "");
   }
 
+  /**
+   * Obtiene la información del usuario
+   */
   getInfoProfile(username: string) {
     const url: string = "users/profile/" + username;
     this.loading = true;
@@ -37,8 +55,6 @@ export class UserCardComponent implements OnInit {
       },
       (error: any) => {
         this.loading = true;
-        console.log("ERROR")
-        console.log(error)
         this.router.navigate(['dashboard/post']).then(() => {
           // Notificación
           this.toastr.error('El usuario no existe 😢', 'Error');
@@ -46,7 +62,9 @@ export class UserCardComponent implements OnInit {
       }
     )
   }
-
+  /**
+   * Sigue al usuario
+   */
   follow() {
     const url: string = "users/profile/" + this.user?.username;
     this.loadingFollow = true;

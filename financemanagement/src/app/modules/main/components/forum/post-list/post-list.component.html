@@ -1,13 +1,14 @@
 <div class="card mt-4">
   <div class="image-container">
 
-    <img *ngIf="post.tags.length > 0" [src]="post.tags[0].image" alt="" />
-    <img *ngIf="post.tags.length == 0" src="../../../../../../assets/img/defaultpost.png" alt="" />
+    <img *ngIf="post.tags.length > 0" [src]="post.tags[0].image" alt="Poster del post" />
+    <img *ngIf="post.tags.length == 0" src="../../../../../../assets/img/defaultpost.png" alt="Poster del post" />
   </div>
   <div class="card-content">
     <div class="d-flex">
       <span *ngFor="let item of post?.tags | slice:0:2; let i=index" class="tag">
-      <span  class="cursor-pointer" [routerLink]="['/dashboard/post']" [queryParams]="{tag: item.id}">{{ item.name }}</span> 
+        <span class="cursor-pointer" [routerLink]="['/dashboard/post']"
+          [queryParams]="{tag: item.id}">{{ item.name }}</span>
       </span>
 
     </div>

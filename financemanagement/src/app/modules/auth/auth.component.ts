@@ -9,13 +9,28 @@ import { RegisterComponent } from './components/register/register.component';
   styleUrls: ['./auth.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
+/**
+ * Componente para la autenticación
+ */
 export class AuthComponent implements OnInit {
 
+  /**
+   * Componente hijo del Login
+   */
   @ViewChild(LoginComponent) childLogin!: LoginComponent;
+  /**
+   * Componente hijo del Register
+   */
   @ViewChild(RegisterComponent) childRegister!: RegisterComponent;
 
-  signUpActive:boolean = false;
-  signUpFormActive:boolean = false;
+  /**
+   * Boolean para mostrar el registro
+   */
+  signUpActive: boolean = false;
+  /**
+   * Boolean para mostrar el formulario de registro
+   */
+  signUpFormActive: boolean = false;
   constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -25,28 +40,32 @@ export class AuthComponent implements OnInit {
   /**
    * Cambiar al login
    */
-  signInMode(){
+  signInMode() {
     this.signUpActive = false;
     this.childRegister.resetForm();
-    setTimeout(()=>{
+    setTimeout(() => {
       this.signUpFormActive = false;
-    },1000)
+    }, 1000)
   }
 
   /**
    * Cambiar al register
    */
-  signUpMode(){
+  signUpMode() {
     this.signUpActive = true;
     this.childLogin.resetForm();
-    setTimeout(()=>{
+    setTimeout(() => {
       this.signUpFormActive = true;
-    },1000)
+    }, 1000)
   }
 
-  showAlertRegister(_event:boolean):void{
+  /**
+   * Muestra una notificación y cambia al modo SignIn
+   * @param _event {boolean} Evento para cambiar al modo de iniciar sesión
+   */
+  showAlertRegister(_event: boolean): void {
     this.signInMode();
-    this.toastr.success('Ahora inicia sesión','Registrado correctamente')
+    this.toastr.success('Ahora inicia sesión', 'Registrado correctamente')
   }
 
 

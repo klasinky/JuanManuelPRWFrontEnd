@@ -10,12 +10,25 @@ import { environment } from 'src/environments/environment';
   templateUrl: './post-comment-detail.component.html',
   styleUrls: ['./post-comment-detail.component.scss']
 })
+/**
+ * Componente para el detalle del comentario
+ */
 export class PostCommentDetailComponent implements OnInit {
-
+  /**
+   * Objeto del comentario
+   */
   @Input() comment?: CommentPost;
+  /**
+   * Emitter para refrescar el componente padre
+   */
   @Output() refreshComments: EventEmitter<any> = new EventEmitter();
-
+  /**
+   * Indica si muestra el spinner del delete
+   */
   showDeleteLoader: boolean = false;
+  /**
+   * Indica si muestra el spinner del like
+   */
   showLikeLoader: boolean = false;
 
   constructor(private httpService: HttpService,
@@ -25,10 +38,15 @@ export class PostCommentDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Retorna los estilos para los usuarios sin foto de perfil
+   */
   getStyle() {
     return this.colorService.getColor(this.comment?.author.username);
   }
-
+  /**
+   * Envía un like
+   */
   sendLike() {
     if (this.comment) {
       this.showLikeLoader = true;
@@ -51,7 +69,9 @@ export class PostCommentDetailComponent implements OnInit {
       }
     }
   }
-
+  /**
+   * Elimina el comentario
+   */
   deleteCommentAction() {
     const url: string = environment.apiUrl + "/" + environment.endpoints.comments.delete.start +
       this.comment?.id + environment.endpoints.comments.delete.end;

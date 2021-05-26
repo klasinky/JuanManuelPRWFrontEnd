@@ -7,7 +7,7 @@ div.card-header,
   background-color: $alternative-color;
 }
 
-.card{
+.card {
   border: none;
 }
 
@@ -19,7 +19,7 @@ div.card-header,
 .bg-edit {
   background-color: $light-primary-color;
 
-  &:hover{
+  &:hover {
     background-color: darken($light-primary-color, 10%);
   }
 }
@@ -142,7 +142,7 @@ div.card-header,
   padding: 1rem 0;
 }
 
-.card-profile::after{
+.card-profile::after {
   display: block;
   position: absolute;
   top: 0;
@@ -194,8 +194,7 @@ div.card-header,
   }
 }
 
-.shape{
+.shape {
   fill: $secondary-color;
 
 }
-

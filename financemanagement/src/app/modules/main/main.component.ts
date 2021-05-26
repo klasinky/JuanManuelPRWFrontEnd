@@ -9,8 +9,13 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
+/**
+ * Componente MAIN
+ */
 export class MainComponent implements OnInit {
-
+  /**
+   * Indica si se muestra el spinner de carga
+   */
   loading = false;
 
   constructor(
@@ -24,14 +29,18 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.getUserData();
   }
-
+  /**
+   * Obtiene los datos del usuario
+   */
   getUserData() {
-    //this.userData = await this.storageService.get(AuthConstants.DATAUSER) as User;
     this.storageService.getItem(AuthConstants.DATAUSER).subscribe((data: User) => {
       this.userData = data;
     })
   }
-
+  /**
+   * Listener para cambiar al componente del usuario cuando se haga click
+   * @param event {Event}
+   */
   @HostListener('document:click', ['$event'])
   public handleClick(event: Event): void {
     if (event.target instanceof HTMLAnchorElement) {
@@ -40,8 +49,6 @@ export class MainComponent implements OnInit {
         event.preventDefault();
         const route = element?.getAttribute('href');
         if (route) {
-          console.log("ES route")
-          console.log(route)
           this.router.navigate([`/dashboard/user/${route}`]);
         }
       }
