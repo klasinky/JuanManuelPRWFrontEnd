@@ -8,13 +8,20 @@ import { HttpService } from 'src/app/services/http.service';
   templateUrl: './over-view.component.html',
   styleUrls: ['./over-view.component.scss']
 })
+/**
+ * Componente para la información general de los gastos del usuario
+ */
 export class OverViewComponent implements OnInit {
-
+  /**
+   * Objeto del Overview
+   */
   detail?: Overview;
-
+  /**
+   * Indica si la diferencia es positiva o negativa (Ingresos - Gastos)
+   */
   differenceError: boolean = false;
 
-  //Filters
+  // Filtros
   btnAll: boolean = false;
   btnMonth: boolean = false;
   btnYear: boolean = false;

@@ -9,17 +9,31 @@ import { environment } from 'src/environments/environment';
   templateUrl: './download-amount-base.component.html',
   styleUrls: ['./download-amount-base.component.scss']
 })
+/**
+ * Componente para descargar un AmountBase
+ */
 export class DownloadAmountBaseComponent implements OnInit {
-
+  /**
+   * Indica si es gasto o ingreso
+   */
   @Input() isExpense?: boolean;
+  /**
+   * Título del header
+   */
   title?: string;
+  /**
+   * Nombre del servicio
+   */
   serviceName?: string;
+  /**
+   * ID del mes
+   */
   idMonth?: number;
 
   //ProgressBar
   uploadProgress: number = 0;
   showUploadProgress: boolean = false;
-  
+
   constructor(private httpService: HttpService,
     private toastr: ToastrService,
     private route: ActivatedRoute,) { }

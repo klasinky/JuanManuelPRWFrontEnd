@@ -78,7 +78,7 @@ export class StockDetailComponent implements OnInit {
     this.httpService.getAuth(url).subscribe(
       (data) => {
         this.stockDetail = data as StockDetail;
-        this.stockDetail.prices.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());        
+        this.stockDetail.prices.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
         this.setCharts();
       },
       (error) => {

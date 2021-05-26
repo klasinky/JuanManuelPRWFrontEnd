@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Stock } from 'src/app/interfaces/stock';
 import { HttpService } from 'src/app/services/http.service';
@@ -10,12 +9,20 @@ import { environment } from 'src/environments/environment';
   templateUrl: './stocks.component.html',
   styleUrls: ['./stocks.component.scss']
 })
+/**
+ * Componente de los stocks
+ */
 export class StocksComponent implements OnInit {
-
+  /**
+   * Lista de stocks
+   */
   stocks: Stock[] = [];
+  /**
+   * Indica si muestra el spinner de carga
+   */
   loading?: boolean = false;
 
-  constructor(private router: Router,
+  constructor(
     private httpService: HttpService,
     private toastr: ToastrService) { }
 

@@ -10,14 +10,38 @@ import { environment } from 'src/environments/environment';
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss']
 })
+/**
+ * Componente para crear / editar post
+ */
 export class CreatePostComponent implements OnInit {
 
+  /**
+   * Texto del post
+   */
   text: string = "";
+  /**
+   * Título del post
+   */
   title: string = "";
+  /**
+   * Tags del post (Si se está editando)
+   */
   postTags?: Tag[];
+  /**
+   * Lista de todos los tags
+   */
   tags?: Tag[];
+  /**
+   * ID del post
+   */
   id?: number;
+  /**
+   * Boolean para indicar si se edita o crea el post
+   */
   isCreate: boolean = true;
+  /**
+   * Boolean para mostrar el spinner de carga
+   */
   loading: boolean = false;
 
   constructor(
@@ -29,7 +53,6 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       try {
-        // this.id = JSON.parse(unescape(atob(params.id)));
         this.id = params.id;
         if (this.id) {
           this.getPost();
@@ -41,10 +64,10 @@ export class CreatePostComponent implements OnInit {
         this.getAllTags();
       }
     });
-
-
   }
-
+  /**
+   * Crea / Edita un post
+   */
   createPost() {
     if (this.checkPost()) {
       this.loading = true;
@@ -78,12 +101,12 @@ export class CreatePostComponent implements OnInit {
           this.toastr.error(error.error.detail, 'Error')
         }
       )
-    } else {
-      console.log("Es fake")
     }
   }
 
-
+  /**
+   * Obtiene el post (Si se va a editar)
+   */
   getPost() {
     const url = 'posts/' + this.id;
     this.httpService.getAuth(url).subscribe(
@@ -104,6 +127,9 @@ export class CreatePostComponent implements OnInit {
     )
   }
 
+  /**
+   * Redirecciona a la lista de posts 
+   */
   redirectToDashboard() {
     this.router.navigate(['dashboard/post']).then(() => {
       // Notificación
@@ -111,11 +137,17 @@ export class CreatePostComponent implements OnInit {
     })
   }
 
+  /**
+   * Valida el post
+   */
   checkPost(): boolean {
     return this.text.length > 10 && this.text.length < 5000000
       && this.title.length > 3 && this.title.length < 255;
   }
 
+  /**
+   * Obtiene todos los tags
+   */
   getAllTags() {
     this.httpService.getAuth('tags').subscribe(
       (data) => {
@@ -133,6 +165,9 @@ export class CreatePostComponent implements OnInit {
     )
   }
 
+  /**
+   * Obtiene los tags del post
+   */
   getPostTags() {
     this.tags?.forEach(tag => {
       if (this.postTags?.find(tagPost => tag.id == tagPost.id)) {

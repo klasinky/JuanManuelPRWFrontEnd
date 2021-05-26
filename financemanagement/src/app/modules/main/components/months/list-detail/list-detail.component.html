@@ -1,39 +1,39 @@
 <div class="card mt-4">
-    <div class="card-body">
-        <div class="row align-items-center">
+  <div class="card-body">
+    <div class="row align-items-center">
 
-            <div class="col" (click)="getDetail()">
-                <h6 class="text-uppercase text-light mb-2">
-                    {{month.date | amParse:'YYYY/MM' | amLocale:'es' | amDateFormat:'MMMM - YYYY'}}
-                </h6>
-                <div class="row">
-                    <div class="col-6 text-end">
-                        <span class="badge badge-soft-success mt-n1" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Ingresos">
-                            {{month.total_entries | currencyGenerator}} <i class="fas fa-chevron-up"></i>
-                        </span>
-                    </div>
-                    <div class="col-6 text-start">
-                        <span class="badge badge-pill badge-soft-danger mt-n1" ngbTooltip="Egresos"
-                            tooltipClass="badge-soft-success">
-                            {{month.total_expenses | currencyGenerator}} <i class="fas fa-chevron-down"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-auto">
-                <div class="text-end">
-                    <button class="btn btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="fas fa-cog text-light"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" (click)="deleteAction()">Eliminar <i class="far fa-trash-alt"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-
+      <div class="col" (click)="getDetail()">
+        <h6 class="text-uppercase text-light mb-2">
+          {{month.date | amParse:'YYYY/MM' | amLocale:'es' | amDateFormat:'MMMM - YYYY'}}
+        </h6>
+        <div class="row">
+          <div class="col-6 text-end">
+            <span class="badge badge-soft-success mt-n1" data-bs-toggle="tooltip" data-bs-placement="top"
+              title="Ingresos">
+              {{month.total_entries | currencyGenerator}} <i class="fas fa-chevron-up"></i>
+            </span>
+          </div>
+          <div class="col-6 text-start">
+            <span class="badge badge-pill badge-soft-danger mt-n1" ngbTooltip="Egresos"
+              tooltipClass="badge-soft-success">
+              {{month.total_expenses | currencyGenerator}} <i class="fas fa-chevron-down"></i>
+            </span>
+          </div>
         </div>
+      </div>
+
+      <div class="col-auto">
+        <div class="text-end">
+          <button class="btn btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="fas fa-cog text-light"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" (click)="deleteAction()">Eliminar <i class="far fa-trash-alt"></i></a></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
+  </div>
 </div>

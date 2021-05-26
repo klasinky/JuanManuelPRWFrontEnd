@@ -14,12 +14,29 @@ import { environment } from 'src/environments/environment';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
+/**
+ * Componente del perfil
+ */
 export class ProfileComponent implements OnInit {
-
+  /**
+   * Objeto del usuario
+   */
   user?: User
+  /**
+   * Lista de currency
+   */
   currenciesOptions?: Currency[]
+  /**
+   * URL de la imagen (Cuando se cambia)
+   */
   imageURL?: string;
+  /**
+   * URL de la imagen (Del perfil)
+   */
   profilePic?: string;
+  /**
+   * Nombre del archivo
+   */
   filename: string = "Selecciona un archivo.";
 
   // Forms
@@ -177,12 +194,10 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
   /**
    * 
    * @returns Retorna el formulario y las validaciones necesarias para el formulario formProfile
    */
-=======
   deleteProfileImage(){
     const url: string = environment.endpoints.auth.profile;
     const dataImage = {
@@ -200,7 +215,6 @@ export class ProfileComponent implements OnInit {
     )
   }
 
->>>>>>> 641afee9086b215a682a3867a79737d14d8484fc
   getFormProfile(): FormGroup {
     return this.fb.group({
       'email': ['', [Validators.required, Validators.email]],

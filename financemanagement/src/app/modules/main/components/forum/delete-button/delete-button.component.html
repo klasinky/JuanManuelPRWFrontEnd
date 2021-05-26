@@ -1,19 +1,19 @@
 <button pButton pRipple [disabled]="showLoader" class="btn" (click)="sendDeleteEvent()">
-    <div *ngIf="!showLoader; else blockLoader">
-        <i class="fas fa-trash"></i>
+  <div *ngIf="!showLoader; else blockLoader">
+    <i class="fas fa-trash"></i>
+  </div>
+  <ng-template #blockLoader>
+    <div class="spinner-border spinner-border-sm text-light mb-1" role="status">
+      <span class="sr-only">Loading...</span>
     </div>
-      <ng-template #blockLoader>
-        <div class="spinner-border spinner-border-sm text-light mb-1" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </ng-template>
+  </ng-template>
 </button>
 
 <p-confirmDialog #cd [transitionOptions]="'0.25ms'" header="Confirmación" icon="pi pi-exclamation-triangle">
   <ng-template pTemplate="footer">
-      <button type="button" pButton class="p-button-secondary" icon="pi pi-times" (click)="cd.reject()" label="Cancelar" ></button>
-      <button type="button" pButton icon="pi pi-check" class="p-button-danger" (click)="cd.accept()" label="Eliminar"></button>
+    <button type="button" pButton class="p-button-secondary" icon="pi pi-times" (click)="cd.reject()"
+      label="Cancelar"></button>
+    <button type="button" pButton icon="pi pi-check" class="p-button-danger" (click)="cd.accept()"
+      label="Eliminar"></button>
   </ng-template>
 </p-confirmDialog>
-
-

@@ -6,9 +6,18 @@ import { ConfirmationService } from 'primeng/api';
   templateUrl: './delete-button.component.html',
   styleUrls: ['./delete-button.component.scss']
 })
+/**
+ * Compoente para eliminar un post
+ */
 export class DeleteButtonComponent implements OnInit {
 
-  @Output() sendDelete: EventEmitter<any> =  new EventEmitter();
+  /**
+   * Se ejecuta para avisar que se elimina un post
+   */
+  @Output() sendDelete: EventEmitter<any> = new EventEmitter();
+  /**
+   * Boolean para mostrar el spinner de carga
+   */
   @Input() showLoader?: boolean;
 
   constructor(private confirmationService: ConfirmationService) { }
@@ -16,7 +25,10 @@ export class DeleteButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  sendDeleteEvent(){
+  /**
+   * Envía un emitter para avisar que se elimina el post
+   */
+  sendDeleteEvent() {
     this.confirmationService.confirm({
       message: '¿Estás seguro de que lo quieres eliminar?',
       accept: () => {

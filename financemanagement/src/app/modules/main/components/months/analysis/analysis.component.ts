@@ -9,10 +9,21 @@ import { Analysis } from '../../../../../interfaces/analysis';
   templateUrl: './analysis.component.html',
   styleUrls: ['./analysis.component.scss']
 })
+/**
+ * Componente para el análisis del mes
+ */
 export class AnalysisComponent implements OnInit, OnDestroy {
-
+  /***
+   * Objeto del mes
+   */
   @Input() month?: MonthDetail;
+  /**
+   * Objeto del Analisis
+   */
   analysis?: Analysis;
+  /**
+   * Suscripción para refrescar el componente
+   */
   refreshSubscription?: Subscription;
 
   constructor(private monthService: MonthDetailService) { }
@@ -23,7 +34,9 @@ export class AnalysisComponent implements OnInit, OnDestroy {
       this.getAnalysis();
     })
   }
-
+  /**
+   * Obtiene el análisis del mes
+   */
   getAnalysis() {
     if (this.month?.month.id) {
       this.monthService.getAnalysis(this.month.month.id).subscribe(
@@ -31,7 +44,6 @@ export class AnalysisComponent implements OnInit, OnDestroy {
           this.analysis = data as Analysis;
         },
         (error) => {
-          console.log(error);
         }
       )
     }

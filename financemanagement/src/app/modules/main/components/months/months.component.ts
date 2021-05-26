@@ -9,13 +9,33 @@ import { environment } from 'src/environments/environment';
   templateUrl: './months.component.html',
   styleUrls: ['./months.component.scss']
 })
+/**
+ * Componente del mes
+ */
 export class MonthsComponent implements OnInit {
-
+  /**
+   * Total de meses
+   */
   totalMonths?: number;
+  /**
+   * URL de la paginación
+   */
   nextUrl?: string;
+  /**
+   * URL de la paginación
+   */
   previousUrl?: string;
+  /**
+   * Lista de meses
+   */
   months!: Months[];
+  /**
+   * Indicia si se muestra el skeleton
+   */
   loading: boolean = false;
+  /**
+   * Número de skeleton que se van a mostrar
+   */
   numberPagination: number[];
 
   constructor(private httpService: HttpService,

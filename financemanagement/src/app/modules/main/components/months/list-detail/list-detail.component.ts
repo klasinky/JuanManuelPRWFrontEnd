@@ -9,9 +9,17 @@ import { Months } from '../../../../../interfaces/months';
   styleUrls: ['./list-detail.component.scss'],
 
 })
+/**
+ * Componente para la lista de meses
+ */
 export class ListDetailComponent implements OnInit {
-
+  /**
+   * Objeto del mes
+   */
   @Input() month!: Months;
+  /**
+   * Emitter para indicar que se ha eliminado un mes
+   */
   @Output() deleteMonth: EventEmitter<Months> = new EventEmitter();
 
   constructor(private route: Router) { }

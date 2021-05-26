@@ -23,9 +23,6 @@ export class StorageService {
     });
   }
 
-
-
-
   getWithoutAsync(storageKey: string) {
     const res = localStorage.getItem(storageKey);
 
@@ -39,8 +36,6 @@ export class StorageService {
   async removeKey(storageKey: string) {
     await localStorage.removeItem(storageKey);
   }
-
-
 
 /* ----------------------------------- new ---------------------------------- */
 
@@ -61,8 +56,9 @@ export class StorageService {
 
 
   /**
-    * Gets an item from localStorage
-    * @param identifier Identifier of the storage object. Can be anything but for common used objects have a look at TYPE-Identifiers
+    * Obtiene un item del localStorage 
+    * @param identifier I
+    * @param identifier Identificador del objeto de almacenamiento. Puede ser cualquier cosa,
     */
   public getItem(identifier: string): BehaviorSubject<any> {
     const behaviorSubject = this.getBehaviorSubject(identifier);
@@ -76,22 +72,25 @@ export class StorageService {
 
 
 /**
-	* Stores an item and emits the new value to all its subscribers
+	* Almacena un artículo y emite el nuevo valor a todos sus suscriptores
 	* @param identifier LocalStorage identifier
-	* @param object the object that should be stored
+	* @param object objeto que se va a almacenar
 	*/
 	public setItem(identifier: string, object: any): void {
 		localStorage.setItem(identifier, btoa(escape(JSON.stringify(object))));
 		this.getBehaviorSubject(identifier).next(object);
 	}
-
+  /**
+   * Elimina un item del localStorage y avisa a todos sus suscriptores
+   * @param identifier objeto que se va a eliminar
+   */
 	public removeItem(identifier: string): void {
 		localStorage.removeItem(identifier);
 		this.getBehaviorSubject(identifier).next(null);
 	}
 
 	/**
-	* Clears the localStorage and tells all subscribers of all items that the value is now null.
+	* Borra el LocalStorage y le dice a todos los suscriptores de todos los artículos que el valor ahora es nulo
 	*/
 	public clear() {
 		localStorage.clear();

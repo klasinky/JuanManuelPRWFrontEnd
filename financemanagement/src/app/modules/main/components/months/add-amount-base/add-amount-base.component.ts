@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AmountBase } from 'src/app/interfaces/amount-base';
 import { Category } from 'src/app/interfaces/category';
 import { HttpEventType } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { MonthDetailService } from 'src/app/services/month-detail.service';
 
 @Component({
@@ -13,25 +12,65 @@ import { MonthDetailService } from 'src/app/services/month-detail.service';
   templateUrl: './add-amount-base.component.html',
   styleUrls: ['./add-amount-base.component.scss']
 })
+/**
+ * Componente para agregar Amount Base
+ */
 export class AddAmountBaseComponent implements OnInit {
-
+  /**
+   * Formulario 
+   */
   formAmountBase?: FormGroup;
+  /**
+   * Formulario para cargar el xls
+   */
   formXls?: FormGroup;
-
+  /**
+   * Componente del formulario XLS
+   */
   @ViewChild('#xls') xlsForm: any;
+  /**
+   * Componente del formulario
+   */
   @ViewChild('#manual') manualForm: any;
+  /**
+   * Emitter para refrescar el componente padre
+   */
   @Output() refreshMonth: EventEmitter<boolean> = new EventEmitter();
-
+  /**
+   * Indica si se muestra el formulario XLS
+   */
   xlsFormActive: boolean = false;
+  /**
+   * Nombre del archivo XLS
+   */
   filename: string = "Selecciona un archivo.";
+  /**
+   * Archivo xls
+   */
   file?: File;
-
+  /**
+   * Indica si es un gasto o un ingreso
+   */
   @Input() isExpense?: boolean; // false = Entry , True = Expense
+  /**
+   * Título del header
+   */
   title?: string;
+  /**
+   * Nombre del servicio
+   */
   serviceName?: string;
+  /**
+   * ID del mes
+   */
   idMonth?: number;
+  /**
+   * Lista de categorias
+   */
   categories?: Category[];
-
+  /**
+   * 
+   */
   nameError: boolean = false;
   nameErrorMessage: String[] = [];
   fileError: boolean = false;
@@ -160,7 +199,7 @@ export class AddAmountBaseComponent implements OnInit {
         category: this.formAmountBase.value.category
       } as AmountBase;
 
-      this.monthService.addAmountBase(this.idMonth , this.serviceName, dataAmountBase).subscribe(
+      this.monthService.addAmountBase(this.idMonth, this.serviceName, dataAmountBase).subscribe(
         (data: any) => {
           this.showUploadProgress = false;
           this.toastr.success("Se ha creado el " + this.title?.toLowerCase(), 'Creado');
@@ -186,12 +225,12 @@ export class AddAmountBaseComponent implements OnInit {
    */
   postAmountBaseXlsAction() {
     this.showUploadProgress = true;
-    if (this.formXls?.valid  && this.idMonth && this.serviceName) {
+    if (this.formXls?.valid && this.idMonth && this.serviceName) {
       this.clearFiles();
 
       const dataFile = this.file;
 
-      this.monthService.addAmountBaseXML(this.idMonth,this.serviceName, dataFile).subscribe(
+      this.monthService.addAmountBaseXML(this.idMonth, this.serviceName, dataFile).subscribe(
         (data: any) => {
           //Barra de progreso
           if (data.type == HttpEventType.UploadProgress) {
@@ -244,20 +283,29 @@ export class AddAmountBaseComponent implements OnInit {
       }
     )
   }
-
+  /**
+   * Reinicia el formulario
+   */
   resetForms() {
     this.clearFiles();
     this.filename = 'Selecciona un archivo.';
     this.formXls = this.getFormXls();
     this.formAmountBase = this.getFormAmountBase();
   }
-
+  /**
+   * Realiza un suscripción al campo del formulario que se indique
+   * para cambiar el boolean del error a false
+   * @param name {any} Nombre del campo del formulario
+   * @param nameError Nombre del campo del error
+   */
   ifChangeInput(name: any, nameError: any) {
     this.formAmountBase?.get(name)?.valueChanges.subscribe(val => {
       (this as any)[nameError] = false
     });
   }
-
+  /**
+   * Eliminar los campos de errores
+   */
   clearFiles() {
     this.nameError = false;
     this.fileError = false;

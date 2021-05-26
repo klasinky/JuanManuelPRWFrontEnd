@@ -9,10 +9,14 @@ import { StorageService } from '../services/storage.service';
 })
 export class LoggedOffGuard implements CanActivate {
 
+  /**
+   * Boolean para mostrar el spinner de carga
+   */
   public loader = true;
 
-  /**
-   * Guard para saber si el usuario esta deslogeado
+    /**
+   * Guard (Se activa en el module MAIN), evita que el usuario
+   * ingrese al módulo MAIN si no está autenticado
    */
   canActivate(): Promise<boolean> {
     this.loader = true;

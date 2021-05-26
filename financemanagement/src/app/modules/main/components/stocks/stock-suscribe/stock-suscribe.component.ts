@@ -10,10 +10,21 @@ import { environment } from 'src/environments/environment';
   templateUrl: './stock-suscribe.component.html',
   styleUrls: ['./stock-suscribe.component.scss']
 })
+/**
+ * Componente para suscribirse a un acción en la bolsa
+ */
 export class StockSuscribeComponent implements OnInit {
-
+  /**
+   * Lista de acciones
+   */
   stocks?: Stock[];
+  /**
+   * Formulario para las acciones
+   */
   formSuscribeStock: FormGroup;
+  /**
+   * Emitter para indicar que se ha creado una nueva suscripción
+   */
   @Output() createStock: EventEmitter<Stock> = new EventEmitter();
 
   constructor(private httpService: HttpService,

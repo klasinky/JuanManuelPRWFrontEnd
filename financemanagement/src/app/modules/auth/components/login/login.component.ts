@@ -13,13 +13,26 @@ import { StorageService } from '../../../../services/storage.service';
   styleUrls: ['../../auth.component.scss', './login.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
+/**
+ * Componente para el login
+ */
 export class LoginComponent implements OnInit {
 
+  /**
+   * Formulario reactivo para el login
+   */
   formLogin: FormGroup
-
+  /**
+   * Boolean para mostrar los errores del nonField
+   */
   nonFieldError = false;
+  /**
+   * Array de los errores del nonField
+   */
   nonFieldErrorMessage: String[] = [];
-
+  /**
+   * Boolean para mostrar el spinner de carga
+   */
   showLoader = false;
 
   constructor(
@@ -36,6 +49,10 @@ export class LoginComponent implements OnInit {
     this.ifChangeInput('password', 'nonFieldError');
   }
 
+  /**
+   * Retorna el formulario con sus validaciones
+   * necesarias para el login
+   */
   getForm(): FormGroup {
     return this.fb.group({
       'email': ['', [Validators.required, Validators.email, Validators.minLength(2)]],
@@ -57,22 +74,15 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(dataLogin).subscribe(
         (data) => {
-          console.log("Login ok");
-          
           const token = 'Token ' + data.access_token;
           this.storageService.setItem(AuthConstants.DATAUSER, data.user)
           this.storageService.setItem(AuthConstants.AUTH, token)
-            // .then(() => {
-              // return this.storageService.get(AuthConstants.AUTH);
-            // })
-            // .then((res: any) => {
-              
-              this.router.navigate(['dashboard']).then(() => {
-                // Notificación
-                this.toastr.info('Hola ' + data.user.name, 'Bievenido')
-                this.showLoader = false;
-              })
-            // });
+          this.router.navigate(['dashboard']).then(() => {
+            // Notificación
+            this.toastr.info('Hola ' + data.user.name, 'Bievenido')
+            this.showLoader = false;
+          })
+
         },
         (error) => {
           this.showLoader = false;
@@ -86,17 +96,29 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * Limpia los campos de errores
+   */
   clearFiles() {
     this.nonFieldError = false;
     this.nonFieldErrorMessage = [];
   }
 
+  /**
+   * Realiza un suscripción al campo del formulario que se indique
+   * para cambiar el boolean del error a false
+   * @param name {any} Nombre del campo del formulario
+   * @param nameError Nombre del campo del error
+   */
   ifChangeInput(name: any, nameError: any) {
     this.formLogin.get(name)?.valueChanges.subscribe(val => {
       (this as any)[nameError] = false
     });
   }
 
+  /**
+   * Reinicia el formulario
+   */
   resetForm() {
     this.formLogin.reset();
   }

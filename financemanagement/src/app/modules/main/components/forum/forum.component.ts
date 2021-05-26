@@ -10,30 +10,64 @@ import { environment } from 'src/environments/environment';
   templateUrl: './forum.component.html',
   styleUrls: ['./forum.component.scss', './tags-detail/tags-detail.component.scss']
 })
+/**
+ * Componente del foro
+ */
 export class ForumComponent implements OnInit {
-
+  /**
+   * Lista de post
+   */
   posts?: Post[];
+  /**
+   * Lista del TOP de usuarios
+   */
   topUsers?: UserProfile[];
+  /**
+   * Número del total de posts
+   */
   totalPosts?: number;
+  /**
+   * URL de la paginación
+   */
   nextUrl?: string;
+  /**
+   * URL de la paginación
+   */
   previousUrl?: string;
+  /**
+   * Número de skeletons que se van a mostrar
+   */
   numberPagination: number[];
+  /**
+   * Indica si se muestra el skeleton
+   */
   loading: boolean = false;
+  /**
+   * Indica si se muestra el spinner en el componente del TOP de usuarios
+   */
   loadingTopUser: boolean = true;
+  /**
+   * ID del tag para los filtros
+   */
+  tagId: number;
 
-  tagId: number; 
+  //Filters para los posts, si están en TRUE, hacen la petición
+  // a la API con los parámetros correspondientes.
 
-  //Filters
   btnAll: boolean = false;
   btnHot: boolean = false;
   btnTop: boolean = false;
 
+  // Spinners para los botones de los fitros
   btnAllLoading: boolean = false;
   btnHotLoading: boolean = false;
   btnTopLoading: boolean = false;
 
+  /**
+   * Checkbox para ver los post de tus seguidos
+   */
   cbFollowing: boolean = false;
-  
+
 
   constructor(private httpService: HttpService,
     private route: ActivatedRoute) {
@@ -44,24 +78,26 @@ export class ForumComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(queryParams => {
       this.tagId = queryParams['tag'];
-      this.getPosts();       
+      this.getPosts();
     });
     this.getPosts();
     this.getTopUsers();
   }
-
+  /**
+   * Obtiene la lista de posts 
+   */
   getPosts(filter = "") {
     this.setActiveButton(filter);
     if (this.cbFollowing == true) {
-      const following = (filter !== "")?"&followers=true":"?followers=true";
+      const following = (filter !== "") ? "&followers=true" : "?followers=true";
       filter += following;
     }
     if (this.tagId !== undefined) {
-      const tag = (filter !== "")?`&tag=${this.tagId}`:`?tag=${this.tagId}`
+      const tag = (filter !== "") ? `&tag=${this.tagId}` : `?tag=${this.tagId}`
       filter += tag;
     }
     const url: string = environment.endpoints.posts.create + filter;
-    
+
     this.loading = true;
 
 
@@ -76,11 +112,12 @@ export class ForumComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-        console.log(error);
       }
     )
   }
-
+  /**
+   * Obtiene el TOP de usuarios
+   */
   getTopUsers() {
     const url = 'users/tops';
     this.loadingTopUser = true;
@@ -96,7 +133,10 @@ export class ForumComponent implements OnInit {
       }
     )
   }
-
+  /**
+   * Te lleva a la siguiente página de la paginación
+   * @param isNext {boolean} cambia la URL 
+   */
   changeUrl(isNext: boolean) {
     const url = isNext ? this.nextUrl : this.previousUrl;
     if (url) {
@@ -112,17 +152,21 @@ export class ForumComponent implements OnInit {
         },
         (error) => {
           this.loading = false;
-          console.log(error);
         }
       );
     }
   }
-
-  changeCbFollowing(){
+  /**
+   * Activa el filtro para listar los posts de los seguidos
+   */
+  changeCbFollowing() {
     this.cbFollowing = !this.cbFollowing;
     this.getPosts();
   }
-
+  /**
+   * Activa el botón según el filtro
+   * @param filter 
+   */
   setActiveButton(filter: string) {
     this.btnAll = false;
     this.btnHot = false;
@@ -140,13 +184,17 @@ export class ForumComponent implements OnInit {
       this.btnTopLoading = true;
     }
   }
-
+  /**
+   * Limpia los spinners de los botones
+   */
   clearLoadingButtons() {
     this.btnAllLoading = false;
     this.btnHotLoading = false;
     this.btnTopLoading = false;
   }
-
+  /**
+   * Obtiene los estilos del skeleton
+   */
   getStyle() {
     return {
       'background': '#42141E',
