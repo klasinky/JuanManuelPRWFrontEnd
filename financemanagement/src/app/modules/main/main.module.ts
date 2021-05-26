@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
@@ -8,7 +8,6 @@ import { ListDetailComponent } from './components/months/list-detail/list-detail
 import { OverViewComponent } from './components/months/over-view/over-view.component';
 import { MomentModule } from 'ngx-moment';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
-import { BotonCrearComponent } from './components/months/boton-crear/boton-crear.component';
 import { MonthDetailComponent } from './components/months/month-detail/month-detail.component';
 import { AddAmountBaseComponent } from './components/months/add-amount-base/add-amount-base.component';
 import { ChartMonthComponent } from './components/months/chart-month/chart-month.component';
@@ -21,7 +20,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { StocksComponent } from './components/stocks/stocks.component';
 import { StockDetailComponent } from './components/stocks/stock-detail/stock-detail.component';
 import { StockSuscribeComponent } from './components/stocks/stock-suscribe/stock-suscribe.component';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ForumComponent } from './components/forum/forum.component';
 import { PostDetailComponent } from './components/forum/post-detail/post-detail.component';
 import { PostCommentComponent } from './components/forum/post-comment/post-comment.component';
@@ -30,6 +28,8 @@ import { PostCommentDetailComponent } from './components/forum/post-comment-deta
 import { DeleteButtonComponent } from './components/forum/delete-button/delete-button.component';
 import { TagsPostComponent } from './components/forum/tags-post/tags-post.component';
 import { UserProfileComponent } from './components/forum/user-profile/user-profile.component';
+import { FooterComponent } from '../../components/footer/footer.component';
+
 // PrimeNG
 import { TableModule } from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
@@ -45,6 +45,8 @@ import { CreatePostComponent } from './components/forum/create-post/create-post.
 import {EditorModule} from 'primeng/editor';
 import {TimelineModule} from 'primeng/timeline';
 import { CardModule } from "primeng/card";
+import {SidebarModule} from 'primeng/sidebar';
+
 // Pipes
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
 import { AtUserPipe } from '../../pipe/at-user.pipe';
@@ -52,10 +54,13 @@ import { TagsDetailComponent } from './components/forum/tags-detail/tags-detail.
 import { StockTutorialComponent } from './components/stocks/stock-tutorial/stock-tutorial.component';
 import { PostListSkeletonComponent } from './components/forum/post-list/post-list-skeleton/post-list-skeleton.component';
 
-import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { PostRecommendationSkeletonComponent } from './components/forum/post-detail/post-recommendation-skeleton/post-recommendation-skeleton.component';
 import { TopContributorsComponent } from './components/forum/top-contributors/top-contributors.component';
 import { UserCardComponent } from './components/forum/user-profile/user-card/user-card.component';
+import { NotificationComponent } from '../../components/sidebar/notification/notification.component';
+import { CurrencyGeneratorPipe } from 'src/app/pipe/currency-generator.pipe';
+import { CreateMonthComponent } from './components/months/create-month/create-month.component';
 
 
 @NgModule({
@@ -65,7 +70,6 @@ import { UserCardComponent } from './components/forum/user-profile/user-card/use
     ListDetailComponent,
     OverViewComponent,
     SidebarComponent,
-    BotonCrearComponent,
     MonthDetailComponent,
     AddAmountBaseComponent,
     ChartMonthComponent,
@@ -95,6 +99,10 @@ import { UserCardComponent } from './components/forum/user-profile/user-card/use
     PostRecommendationSkeletonComponent,
     TopContributorsComponent,
     UserCardComponent,
+    NotificationComponent,
+    FooterComponent, 
+    CurrencyGeneratorPipe,
+    CreateMonthComponent,
   ],
   imports: [
     CommonModule,
@@ -103,7 +111,6 @@ import { UserCardComponent } from './components/forum/user-profile/user-card/use
     FormsModule,
     ReactiveFormsModule,
     NgxChartsModule,
-    NgxSkeletonLoaderModule,
     TableModule,    
     ButtonModule,
     InputTextModule,
@@ -114,10 +121,13 @@ import { UserCardComponent } from './components/forum/user-profile/user-card/use
     EditorModule,
     TimelineModule,
     CardModule,
-    RoundProgressModule
+    RoundProgressModule,
+    SidebarModule
   ],
   providers: [
-    ConfirmationService
+    ConfirmationService,
+    CurrencyPipe,
+    CurrencyGeneratorPipe
   ]
 })
 export class MainModule { }

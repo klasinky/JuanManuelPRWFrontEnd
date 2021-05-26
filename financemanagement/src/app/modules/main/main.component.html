@@ -1,4 +1,10 @@
 <app-sidebar [userData]="userData"></app-sidebar>
-<main id="main" class="p-3">
+<div id="page-container">
+  <main id="main" class="p-3">
     <router-outlet></router-outlet>
-</main>
+  </main>
+  <div id="footer">
+    <app-footer></app-footer>
+  </div>
+</div>
+

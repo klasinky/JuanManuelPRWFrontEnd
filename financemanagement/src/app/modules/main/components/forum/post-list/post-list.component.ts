@@ -22,7 +22,7 @@ export class PostListComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
- 
+
   }
 
   sendLike() {

@@ -5,7 +5,7 @@
 
   <ul *ngIf="tags">
     <li *ngFor="let tag of tags">
-      <a href="#">
+      <a [routerLink]="['/dashboard/post']" [queryParams]="{tag: tag.id}">
         {{ tag.name }}
       </a>
     </li>

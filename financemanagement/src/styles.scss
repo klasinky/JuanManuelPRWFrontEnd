@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 @import './assets/scss/variables';
 
-$cubic: cubic-bezier(.64,.09,.08,1);
+$cubic: cubic-bezier(.64, .09, .08, 1);
 
 .mobile-nav-active {
   overflow: hidden;
@@ -13,13 +13,16 @@ $cubic: cubic-bezier(.64,.09,.08,1);
 }
 
 body {
-  background: $secondary-color;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1056%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(48%2c 68%2c 77%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c494.135C93.153%2c474.749%2c182.188%2c457.188%2c269.469%2c419.302C372.47%2c374.593%2c509.605%2c356.157%2c554.741%2c253.342C599.951%2c150.358%2c499.55%2c41.802%2c484.1%2c-69.603C468.539%2c-181.808%2c524.213%2c-306.075%2c463.864%2c-401.94C402.009%2c-500.197%2c281.931%2c-549.935%2c167.915%2c-571.864C59.385%2c-592.738%2c-45.662%2c-547.489%2c-152.848%2c-520.553C-264.809%2c-492.418%2c-390.624%2c-490.596%2c-473.848%2c-410.592C-559.432%2c-328.319%2c-580.081%2c-203.122%2c-604.01%2c-86.843C-629.28%2c35.951%2c-662.36%2c164.853%2c-616.261%2c281.437C-569.293%2c400.218%2c-473.416%2c507.099%2c-352.675%2c548.772C-237.899%2c588.386%2c-118.873%2c518.873%2c0%2c494.135' fill='%232c3e46'%3e%3c/path%3e%3cpath d='M1440 930.1179999999999C1517.077 933.765 1603.586 957.044 1666.054 911.7470000000001 1728.351 866.5740000000001 1715.5529999999999 770.149 1753.179 703.024 1795.728 627.117 1896.886 580.767 1900.321 493.81600000000003 1903.753 406.947 1840.776 324.608 1770.1309999999999 273.94 1704.436 226.822 1615.02 250.28199999999998 1536.13 232.611 1464.034 216.462 1398.338 155.99099999999999 1326.851 174.64999999999998 1255.156 193.363 1214.354 266.96 1171.891 327.683 1133.104 383.148 1113.578 445.752 1092.3319999999999 510.013 1066.412 588.4110000000001 1006.168 667.7 1033.74 745.533 1061.245 823.177 1152.295 856.912 1227.289 890.986 1294.282 921.425 1366.498 926.64 1440 930.1179999999999' fill='%23344a54'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1056'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
   overflow-x: hidden;
   color: white;
-  overflow-y: scroll; /* Show vertical scrollbar */
-    /* --------------------------------- scroll --------------------------------- */
+  overflow-y: scroll;
+
+  /* Show vertical scrollbar */
+  /* --------------------------------- scroll --------------------------------- */
   /* width */
   &::-webkit-scrollbar {
+    background: $secondary-color;
     width: 10px;
   }
 
@@ -41,7 +44,6 @@ body {
   }
 
 }
-
 
 .input-field {
   max-width: 380px;
@@ -120,7 +122,6 @@ body {
   background: $alternative-color;
   box-shadow: 2px 10px 20px $alternative-color;
   border-radius: 4%;
-
   &.full-height {
     height: 100%;
   }
@@ -373,18 +374,28 @@ $angleActive: 25deg;
   .p-skeleton {
     background-color: $secondary-color;
   }
+
+  .p-dialog-header,
+  .p-dialog-footer,
+  .p-dialog-content {
+    background-color: $secondary-color;
+    color: $primary-font-color;
+
+  }
+
 }
 
 
 
 
 
-.tool-username{
+.tool-username {
   position: relative;
 
   color: $primary-font-color;
   font-weight: bold;
   text-decoration: none;
+
   &:before {
     content: '';
     width: 0;
@@ -401,6 +412,7 @@ $angleActive: 25deg;
     transition: opacity 0.2s $cubic, transform 0.2s $cubic;
     z-index: 3;
   }
+
   &:after {
     opacity: 0;
     visibility: hidden;
@@ -417,14 +429,17 @@ $angleActive: 25deg;
     border-radius: 2px;
     transition: opacity 0.2s $cubic, transform 0.2s $cubic;
   }
+
   &:hover {
     color: darken($primary-font-color, 10%);
+
     &:before {
       display: block;
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
     }
+
     &:after {
       display: block;
       opacity: 1;
@@ -434,9 +449,9 @@ $angleActive: 25deg;
   }
 }
 
-.btn-filter{
+.btn-filter {
   text-decoration: none;
-  font-family: Noto Sans,Arial,sans-serif;
+  font-family: Noto Sans, Arial, sans-serif;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: unset;
@@ -450,40 +465,45 @@ $angleActive: 25deg;
   position: relative;
   border: 1px solid transparent;
   border-radius: 9999px;
-  & span{
-      overflow: hidden;
-      text-overflow: ellipsis;
-      line-height: 18px;
-      max-height: 54px;
-      display: -webkit-inline-box;
-      -webkit-line-clamp: 3;
-      white-space: normal;
-      -webkit-box-orient: vertical;
+
+  & span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 18px;
+    max-height: 54px;
+    display: -webkit-inline-box;
+    -webkit-line-clamp: 3;
+    white-space: normal;
+    -webkit-box-orient: vertical;
   }
-  &:hover:not(:disabled){
-      background-color: $primary-color-hover;
-      color: $primary-font-color;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-color-hover;
+    color: $primary-font-color;
 
   }
-  &:disabled{
-      opacity: 0.7;
+
+  &:disabled {
+    opacity: 0.7;
   }
-  &::before{
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 9999px;
-      background: $primary-color-hover;
-      opacity: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    background: $primary-color-hover;
+    opacity: 0;
   }
 }
 
-.decoration{
-    text-decoration: none;
-  &:hover{
+.decoration {
+  text-decoration: none;
+
+  &:hover {
     text-decoration: underline;
   }
 }
@@ -498,7 +518,8 @@ $angleActive: 25deg;
 .btn-default:hover {
   color: #fff;
   border-color: lighten(#172b4d, 10%);
-  background-color: lighten(#172b4d, 10%);;
+  background-color: lighten(#172b4d, 10%);
+  ;
 }
 
 .btn-default:focus {
@@ -528,8 +549,21 @@ $angleActive: 25deg;
   border-radius: .375rem;
 }
 
-.sticky{
+.sticky {
   position: sticky;
   position: -webkit-sticky;
   top: 10px;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.btn-ligth-fin{
+  background-color: $light-primary-color;
+  color: $primary-font-color;
+
+  &:hover{
+    background-color: darken( $light-primary-color, 25%); /* Color de fondo al pasar el cursor */
+  }
 }

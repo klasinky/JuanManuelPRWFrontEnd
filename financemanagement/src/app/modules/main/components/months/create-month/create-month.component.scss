@@ -6,7 +6,7 @@
     font-size: 24px;
     transition: all 0.4s;
     outline: none !important;
-    background-color: $alternative-color;
+    background-color: $light-primary-color;
     color: #fff;
     width: 40px;
     height: 40px;
@@ -26,6 +26,6 @@
 }
 
 .btn-flotante:hover {
-    background-color: $alternative-color-hover; /* Color de fondo al pasar el cursor */
+    background-color: darken( $light-primary-color, 25%); /* Color de fondo al pasar el cursor */
 }
 

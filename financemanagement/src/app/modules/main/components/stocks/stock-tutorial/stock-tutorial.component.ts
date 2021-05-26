@@ -15,31 +15,33 @@ export class StockTutorialComponent implements OnInit {
   ngOnInit() {
     this.events1 = [
       {
-        status: 'Ordered',
-        icon: PrimeIcons.SHOPPING_CART,
-        color: '#9C27B0',
-        image: 'game-controller.jpg',
-        description: 'Dale click al botón que esta ubicado en la parte inferior derecha de la página el cual nos abrira un pequeña ventana.'
+        status: '1º Paso',
+        icon: PrimeIcons.ARROW_CIRCLE_DOWN,
+        color: '#46b097',
+        image: '../../../../../../assets/img/tutorial/1.png',
+        description: 'Presiona el botón "+" que está ubicado en la parte inferior derecha de la página, dicho botón nos abrirá una ventana.'
       },
       {
-        status: 'Processing',
-        icon: PrimeIcons.COG,
-        color: '#673AB7',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipi sicing elit. Nemo, esse quis. Placeat iste similique exercitationem nobis itaque sit facilis! Alias tenetur natus, commodi corrupti earum animi nihil mollitia esse ad!'
+        status: '2º Paso',
+        icon: PrimeIcons.ARROW_CIRCLE_DOWN,
+        color: '#3eb07c',
+        image: '../../../../../../assets/img/tutorial/2.png',
+        description: 'A continuación, se te presenta una lista de acciones de empresas a las que te puedes suscribir para ver su registro semanal en la bolsa de valores.'
       },
       {
-        status: 'Shipped',
-        icon: PrimeIcons.ENVELOPE,
-        color: '#FF9800',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, esse quis. Placeat iste similique exercitationem nobis itaque sit facilis! Alias tenetur natus, commodi corrupti earum animi nihil mollitia esse ad!'
+        status: '3º Paso',
+        icon: PrimeIcons.CHECK_CIRCLE,
+        color: '#3eb0a6',
+        image: '../../../../../../assets/img/tutorial/3.png',
+        description: 'Una vez seleccionada la empresa, presiona el botón "Suscribirse" para agregar un seguimiento.'
       },
       {
-        status: 'Delivered',
-        icon: PrimeIcons.CHECK,
-        color: '#607D8B',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, esse quis. Placeat iste similique exercitationem nobis itaque sit facilis! Alias tenetur natus, commodi corrupti earum animi nihil mollitia esse ad!'
+        status: '¿Cómo eliminar a una acción?',
+        icon: PrimeIcons.INFO_CIRCLE,
+        color: '#3e9bb0',
+        image: '../../../../../../assets/img/tutorial/4.png',
+        description: 'Una vez tengas tus acciones agregadas a tu cuenta, en la esquina superior derecha del gráfico de la acción saldrá una "X", la cual al presionarla eliminarás el seguimiento.'
       }
     ];
   }
-
 }

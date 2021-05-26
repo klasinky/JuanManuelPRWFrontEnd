@@ -1,50 +1,77 @@
 @import "../../../../../../assets/scss/variables";
 .card {
-    background-color: $secondary-color;
+  background: transparent;
+  border: none;
 }
 
 .custom-marker {
-    display: flex;
-    width: 2rem;
-    height: 2rem;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    border-radius: 50%;
-    z-index: 1;
-  }
-  
-  ::ng-deep {
-    .p-timeline-event-content,
-    .p-timeline-event-opposite {
-      line-height: 1;
-    }
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  border-radius: 50%;
+  z-index: 1;
+}
 
-    .p-card{
-        background: $alternative-color !important;
-        color: $primary-font-color !important;
-    }
+::ng-deep {
+  .p-timeline-event-content,
+  .p-timeline-event-opposite {
+    line-height: 1;
   }
-  
-  @media screen and (max-width: 960px) {
-    ::ng-deep {
-      .customized-timeline {
-        .p-timeline-event:nth-child(even) {
-          flex-direction: row !important;
-  
-          .p-timeline-event-content {
-            text-align: left !important;
-          }
+
+  .p-card {
+    background: $alternative-color !important;
+    color: $primary-font-color !important;
+  }
+
+  .p-card-content {
+    text-align: center;
+  }
+
+  .bg-timeline img {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  ::ng-deep {
+    .customized-timeline {
+      .p-timeline-event:nth-child(even) {
+        flex-direction: row !important;
+
+        .p-timeline-event-content {
+          text-align: left !important;
         }
-  
-        .p-timeline-event-opposite {
-          flex: 0;
-        }
-  
-        .p-card {
-          margin-top: 1rem;
-        }
+      }
+
+      .p-timeline-event-opposite {
+        flex: 0;
+      }
+
+      .p-card {
+        margin-top: 1rem;
+      }
+
+      .p-card-title {
+        word-break: break-word;
+      }
+
+      .bg-timeline img {
+        width: 100%;
       }
     }
   }
-  
+}
+
+@media screen and (max-width: 520px) {
+  ::ng-deep {
+    .customized-timeline {
+      .p-timeline-event-separator,
+      .p-timeline-event-opposite {
+        display: none;
+      }
+    }
+  }
+}

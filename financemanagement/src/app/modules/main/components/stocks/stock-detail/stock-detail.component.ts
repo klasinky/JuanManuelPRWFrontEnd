@@ -21,7 +21,7 @@ export class StockDetailComponent implements OnInit {
   viewY: number = 300;
   // options
   colorScheme = {
-    domain: ['#A8385E']
+    domain: ['#65DB9C']
   };
   showLabels: boolean = true;
   xAxis: boolean = true;
@@ -78,6 +78,7 @@ export class StockDetailComponent implements OnInit {
     this.httpService.getAuth(url).subscribe(
       (data) => {
         this.stockDetail = data as StockDetail;
+        this.stockDetail.prices.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());        
         this.setCharts();
       },
       (error) => {

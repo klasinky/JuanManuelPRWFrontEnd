@@ -20,7 +20,7 @@ export class MonthsComponent implements OnInit {
 
   constructor(private httpService: HttpService,
     private toastr: ToastrService) {
-    this.numberPagination = Array(10).fill(0).map((x, i) => i);
+    this.numberPagination = Array(12).fill(0).map((x, i) => i);
   }
 
 
@@ -49,15 +49,6 @@ export class MonthsComponent implements OnInit {
     )
   }
 
-  getStyle() {
-    return {
-      'background': '#42141E',
-      'border-radius': '0',
-      'height': '85px',
-      'margin-bottom': '0',
-      'box-shadow': '2px 20px 30px #42141E'
-    }
-  }
 
   /**
    * Obtener la nueva pagina de meses

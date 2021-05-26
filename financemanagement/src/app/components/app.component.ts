@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoggedInGuard } from '../guards/logged-in.guard';
 import { LoggedOffGuard } from '../guards/logged-off.guard';
 
@@ -12,6 +13,7 @@ export class AppComponent implements OnInit {
 
   constructor(public loggedOff: LoggedOffGuard,
     public loggedIn: LoggedInGuard,
+    public router: Router
   ) { }
 
   ngOnInit() { 

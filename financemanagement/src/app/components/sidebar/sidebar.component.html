@@ -1,33 +1,68 @@
 <nav class="navbar navbar-expand-lg px-0">
   <div class="container-fluid">
     <!-- Logo -->
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" [routerLink]="['/dashboard']">
       <img src="../../../assets/img/logotransparente.svg" alt="...">
     </a>
     <!-- Navbar toggle -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+    <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars fa-2x text-light"></i>
     </button>
     <!-- Collapse -->
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div  class="collapse navbar-collapse" id="navbarCollapse">
       <!-- Nav -->
-      <ul class="navbar-nav mx-lg-auto">
+      <ul  class="navbar-nav mx-lg-auto">
         <li class="nav-item active"><a [routerLink]="['/dashboard']" class="nav-link scrollto active"><i
               class="fas fa-home"></i> <span>Home</span></a></li>
         <li class="nav-item"><a [routerLink]="['/dashboard/stocks']" class="nav-link scrollto"><i
               class="fas fa-university"></i> <span>Acciones</span></a></li>
         <li class="nav-item"><a [routerLink]="['/dashboard/post']" class="nav-link scrollto"><i
               class="fas fa-envelope"></i> <span>Foro</span></a></li>
-        <li class="nav-item"><a [routerLink]="['/dashboard/profile']" class="nav-link scrollto"><i
+        <li class="nav-item"><a [routerLink]="['/dashboard/user/',userData?.username]" class="nav-link scrollto"><i
               class="fas fa-user"></i> <span>Perfil</span></a></li>
+        <!-- ---------------------------- Notifiations ----------------------------- -->
+        <li class="nav-item dropdown">
+          <a (click)="activateRing()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <div [class.notify]="ring" [class.show-count]="notifications.length > 0"
+              [attr.data-count]="notifications.length" class="notification"></div>
+          </a>
+          <div aria-labelledby="navbarDropdown" class="dropdown-menu notification-menu">
+            <div *ngFor="let notification of notifications" class="dropdown-item notification-item">
+              <app-notification (deleteNotification)="removeNotification($event)" [notification]="notification">
+              </app-notification>
+            </div>
+            <div *ngIf="notifications.length == 0" class="dropdown-item notification-item">
+              <div class="mx-auto">
+                <h5>No tienes notificaciones</h5>
+              </div>
+            </div>
+          </div>
+        </li>
+        <!-- -------------------------- END Notifications -------------------------- -->
+
       </ul>
       <!-- Right navigation -->
       <div class="navbar-nav ms-lg-4">
-        <li class="nav-item"><a class="nav-link scrollto" (click)="logOutAction()"><i
-              class="fas fa-sign-out-alt"></i><span>LogOut</span></a></li>
-      </div>
+        <li class="nav-item dropdown">
+          <p-avatar *ngIf="userData?.profile_pic" class="nav-link dropdown-toggle" href="#" id="dropProfile"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false" image="{{ userData?.profile_pic}}"
+            styleClass="mr-2 image is-64x64" size="large" shape="circle"></p-avatar>
 
+          <p-avatar *ngIf="!userData?.profile_pic" class="nav-link dropdown-toggle" href="#" id="dropProfile"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false" [style]="getStyle()"
+            label="{{ userData?.username | slice:0:1 | titlecase }}" styleClass="mr-2 image is-64x64" size="large"
+            shape="circle"></p-avatar>
+
+          <div aria-labelledby="dropProfile" class="dropdown-menu dropdown-menu-end ">
+            <li class="nav-item"><a [routerLink]="['/dashboard/profile/']" class="nav-link scrollto"><i
+                  class="fas fa-cogs"></i> <span>Configuración</span></a></li>
+            <li class="nav-item"><a class="nav-link scrollto" (click)="logOutAction()"><i
+                  class="fas fa-sign-out-alt"></i><span>Cerrar Sesión</span></a></li>
+          </div>
+       </li>
+      </div>
     </div>
   </div>
 </nav>

@@ -14,8 +14,7 @@ export class TagsDetailComponent implements OnInit {
 
   constructor(private httpService: HttpService) {
     this.numberSkeleton = Array(5).fill(0).map((x, i) => i);
-
-   }
+  }
 
   ngOnInit(): void {
     this.getTags();

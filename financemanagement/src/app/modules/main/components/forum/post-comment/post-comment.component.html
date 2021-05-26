@@ -7,6 +7,12 @@
       ><round-progress [stroke]="4" [radius]="10" [current]="formMessage.get('message')?.value.length" [max]="max">
       </round-progress></span>
     </div>
+    <div class="chat-footer">
+      <form (ngSubmit)="sendMessage()" [formGroup]="formMessage">
+        <input [attr.disabled]="loadingMessage? true: null" type="text" formControlName="message" placeholder="Escribe tu mensaje">
+      </form>
+    </div>
+ 
     <div class="message-container">
   
       <!-- ------------------------------- Message ------------------------------- -->
@@ -27,17 +33,14 @@
       </div>
       <div *ngIf="comments?.length == 0">
         <div class="text-center">
+          <img src="../../../../../../assets/img/nocomments.png" alt="No comments" class="img-fluid">
           <h4>Este post no tiene mensajes, sé el primero!</h4>
         </div>
       </div>
       <!-- ----------------------------- End Message ----------------------------- -->
 
     </div>
-    <div class="chat-footer">
-      <form (ngSubmit)="sendMessage()" [formGroup]="formMessage">
-        <input [attr.disabled]="loadingMessage? true: null" type="text" formControlName="message" placeholder="Escribe tu mensaje">
-      </form>
-    </div>
+
   </div>
   
 </div>

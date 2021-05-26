@@ -28,7 +28,7 @@ export class ChartMonthComponent implements OnInit {
   showYAxisLabel = true;
   yAxisLabel = 'Total';
   colorScheme = {
-    domain: ['#A8385E', '#7AA3E5', '#ABE3F5', '#A8385E', '#1B1E27']
+    domain: ['#46b097', '#3eb0a6', '#3e9bb0', '#3eb07c']
   };
 
   constructor() {}
@@ -69,7 +69,7 @@ export class ChartMonthComponent implements OnInit {
    * @returns Retorna el valor formateado con el signo de la divisa delante del value
    */
   formatingY(value: any) {
-    return "€" + value;
+    return value;
   }
 
   /**

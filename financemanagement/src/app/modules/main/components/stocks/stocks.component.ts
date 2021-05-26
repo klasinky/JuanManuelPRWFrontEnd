@@ -12,7 +12,8 @@ import { environment } from 'src/environments/environment';
 })
 export class StocksComponent implements OnInit {
 
-  stocks?: Stock[];
+  stocks: Stock[] = [];
+  loading?: boolean = false;
 
   constructor(private router: Router,
     private httpService: HttpService,
@@ -27,9 +28,14 @@ export class StocksComponent implements OnInit {
    */
   getStocksAction() {
     const url: string = environment.endpoints.stocks.list;
+    this.loading = true;
     this.httpService.getAuth(url).subscribe(
       (data) => {
+        this.loading = false;
         this.stocks = data as Stock[];
+      },
+      (error) => {
+        this.loading = false;
       }
     )
   }
@@ -43,7 +49,7 @@ export class StocksComponent implements OnInit {
     this.httpService.deleteAuth(url, stock.id).subscribe(
       (data) => {
         this.stocks?.splice(this.stocks?.indexOf(stock), 1);
-        this.toastr.success('Te has desuscrito de la acción' + stock.name, 'Acción eliminada');
+        this.toastr.success('Te has desuscrito de la acción ' + stock.name, 'Acción eliminada');
       },
       (error) => {
         this.toastr.error(error.detail, "Ha ocurrido un error");

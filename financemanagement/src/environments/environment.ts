@@ -11,7 +11,7 @@ const expense: string = "expenses";
 const entry: string = "entries";
 export const environment = {
   production: false,
-  apiUrl: 'https://klasinky.pythonanywhere.com/api',
+  apiUrl: 'https://api.finaccess.me/api',
   endpoints: {
     auth: {
       register: users + "/register",
@@ -24,7 +24,7 @@ export const environment = {
     },
     months: {
       all: months + "/all",
-      create: "/" + months,
+      create:  months,
       viewset: months + "/",
       amount: {
         start: months + "/",

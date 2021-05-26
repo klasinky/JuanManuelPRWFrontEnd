@@ -43,7 +43,7 @@
         </td>
         <td>
           <span class="p-column-title">Cuantía</span>
-          {{item.data.amount}}
+          {{item.data.amount | currencyGenerator}}
         </td>
         <td>
           <span class="p-column-title">Categoría</span>
@@ -72,7 +72,10 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr >
-        <td class="text-center" colspan="7">No hay registros.</td>
+        <td class="text-center" colspan="7">
+          <img class="img-fluid" src="../../../../../../assets/img/no-amountbase.png" alt="No hay registros">
+          <h6>No hay registros</h6>
+        </td>
       </tr>
     </ng-template>
   </p-table>

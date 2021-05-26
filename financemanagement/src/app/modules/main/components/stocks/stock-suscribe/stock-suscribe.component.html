@@ -21,7 +21,7 @@
                     <select formControlName="stock" (change)="changeStock($event)" aria-label="Default select">
                         <option value="null" disabled>Elige una acción...</option>
                         <option *ngFor="let stock of stocks" [ngValue]="stock.id">
-                            {{stock.name + ' ' +stock.symbol}}
+                            {{stock.name + ' ' + '[' + stock.symbol + ']'}}
                         </option>
                     </select>
 
@@ -31,7 +31,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" (click)="postSuscribeStockAction()" class="btn btn-primary">Suscribirse</button>
+                <button type="button" (click)="postSuscribeStockAction()" class="btn btn-ligth-fin">Suscribirse</button>
             </div>
 
         </div>

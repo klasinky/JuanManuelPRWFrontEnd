@@ -21,14 +21,17 @@
     }
   }
 
-  img {
-      width: 13rem;
-      height: 13rem;
-      padding: 1rem;
-      margin-bottom: 1.1rem;
-  }
+img {
+    width: 13rem;
+    height: 13rem;
+    padding: 1rem;
+    align-items: center;
+    margin-bottom: 1.1rem;
+    box-shadow: 1px 1px 1px 7px $secondary-color;
+    border-radius: 5%;
+}
 
-  .input-field{
+.input-field{
   max-width: 100% !important;
 }
   
@@ -53,4 +56,34 @@
   font-weight: 600;
   font-size: 1rem;
   color: #333;
+}
+
+
+.box i{
+  position: absolute;
+  right: 0;
+  color: $primary-font-color;
+  background-color: $primary-color;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  border: 5px solid $secondary-color;
+  cursor: pointer;
+}
+
+.box i:hover{
+  color: gray;
+}
+
+.box img{
+  object-fit: cover;
+}
+
+.box{
+  align-items: center;
+  height: 200px;
+  width: 200px;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 1.6rem;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/interfaces/post';
@@ -29,8 +30,10 @@ export class UserProfileComponent implements OnInit {
   constructor(private httpService: HttpService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService) {
-    this.numberPagination = Array(12).fill(0).map((x, i) => i);
+    private toastr: ToastrService,
+    private titleService: Title) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.numberPagination = Array(9).fill(0).map((x, i) => i);
   }
 
   ngOnInit() {
@@ -38,6 +41,8 @@ export class UserProfileComponent implements OnInit {
       try {
         const username = params.username;
         this.username = username;
+        let title = this.titleService.getTitle();
+        this.titleService.setTitle(title+" - "+this.username);
         this.getPostUser();
       } catch (error) {
         this.router.navigate(['dashboard']).then(() => {
@@ -62,7 +67,8 @@ export class UserProfileComponent implements OnInit {
         this.totalPosts = data.count;
         this.nextUrl = data.next;
         this.previousUrl = data.previous;
-        this.posts = data as Post[];
+        this.posts = data.results as Post[];
+        
       },
       (error) => {
         this.loading = false;
@@ -84,7 +90,7 @@ export class UserProfileComponent implements OnInit {
           this.totalPosts = data.count;
           this.nextUrl = data.next;
           this.previousUrl = data.previous;
-          this.posts = data as Post[];
+          this.posts = data.results as Post[];
         },
         (error) => {
           this.loading = false;

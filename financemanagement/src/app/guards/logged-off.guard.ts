@@ -24,9 +24,11 @@ export class LoggedOffGuard implements CanActivate {
           this.loader = false;
         },
         (error) => {
-          this.loader = false;
 
-          this.router.navigate(['auth']);
+
+          this.router.navigate(['auth']).then(() => {
+            this.loader = false;
+          })
           resolve(false);
         }
       )

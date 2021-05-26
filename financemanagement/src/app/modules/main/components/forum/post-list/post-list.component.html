@@ -1,27 +1,31 @@
 <div class="card mt-4">
   <div class="image-container">
-    <img
-      src="https://images.pexels.com/photos/1161542/pexels-photo-1161542.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-      alt="">
+
+    <img *ngIf="post.tags.length > 0" [src]="post.tags[0].image" alt="" />
+    <img *ngIf="post.tags.length == 0" src="../../../../../../assets/img/defaultpost.png" alt="" />
   </div>
   <div class="card-content">
-      <div class="d-flex">
-        <span *ngFor="let item of post?.tags | slice:0:2; let i=index"  class="tag">{{ item.name }}</span>
+    <div class="d-flex">
+      <span *ngFor="let item of post?.tags | slice:0:2; let i=index" class="tag">
+      <span  class="cursor-pointer" [routerLink]="['/dashboard/post']" [queryParams]="{tag: item.id}">{{ item.name }}</span> 
+      </span>
 
-      </div>
-    <div [routerLink]="['/dashboard/post/',post?.id]" class="title">{{ (post?.title!.length>23)? (post?.title | slice:0:23)+'...':(post?.title) }}</div>
+    </div>
+    <div [routerLink]="['/dashboard/post/',post?.id]" class="title">
+      {{ (post?.title!.length>23)? (post?.title | slice:0:23)+'...':(post?.title) }}</div>
     <div class="user">
       <div class="user-like">
         <app-like-button (sendLike)="sendLike()" [countLike]="post?.likes" [showLoading]="showLikeLoader"
           [liked]="post?.is_like"></app-like-button>
       </div>
       <div class="user-info w-100">
-        <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span>@{{post?.author?.username}}</span></a>
+        <a class="text-light decoration fw-bold"
+          [routerLink]="['/dashboard/user/',post?.author?.username]"><span>@{{post?.author?.username}}</span></a>
         <small>{{ post?.created_at | amLocale:'es' | amTimeAgo }}</small>
       </div>
       <div *ngIf="post?.is_owner" class="user-delete">
         <div class="text-center ">
-            <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deletePostAction()"></app-delete-button>
+          <app-delete-button [showLoader]="showDeleteLoader" (sendDelete)="deletePostAction()"></app-delete-button>
         </div>
       </div>
     </div>

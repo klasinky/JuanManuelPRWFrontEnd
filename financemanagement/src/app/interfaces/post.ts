@@ -5,6 +5,7 @@ export interface Tag {
     name: string;
     color: string;
     checked?: boolean;
+    image?: string;
 }
 
 export interface TagDetail{

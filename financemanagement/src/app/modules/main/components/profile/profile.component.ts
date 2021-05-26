@@ -79,12 +79,15 @@ export class ProfileComponent implements OnInit {
    */
   getUserInfo() {
     const url: string = environment.endpoints.auth.profile;
+    this.imageURL = "";
     this.httpService.getAuth(url).subscribe(
       (data: User) => {
         this.user = data;
+        this.storageService.setItem(AuthConstants.DATAUSER, data);
         this.formProfile.get("name")?.setValue(this.user?.name);
         this.formProfile.get("email")?.setValue(this.user?.email);
-        this.formProfile.get("username")?.setValue(this.user?.username);
+        this.formProfile.get("username")?.setValue(this.user?.username);        
+        this.formProfile.get("currency")?.setValue(this.user?.currency?.id);
       },
       (error) => {
       }
@@ -109,14 +112,15 @@ export class ProfileComponent implements OnInit {
       } as User;
 
       if (this.imageURL) {
-        userNewData.profile_pic = this.imageURL;
+        userNewData.profile_pic = this.imageURL;     
       }
    
       this.httpService.patchAuth(url, userNewData).subscribe(
         (data: User) => {
-          this.storageService.setItem(AuthConstants.DATAUSER, data)
+          this.getUserInfo();
           this.showLoaderProfile = false;
-          this.toastr.success('Datos actualizados', '')
+          this.toastr.success('Datos actualizados', '');
+          this.clearFiles();
         },
         (error: any) => {
           this.showLoaderProfile = false;
@@ -173,10 +177,30 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   /**
    * 
    * @returns Retorna el formulario y las validaciones necesarias para el formulario formProfile
    */
+=======
+  deleteProfileImage(){
+    const url: string = environment.endpoints.auth.profile;
+    const dataImage = {
+      profile_pic: null
+    };
+
+    this.httpService.patchAuth(url, dataImage).subscribe(
+      (data: User)=>{
+        this.getUserInfo();
+        this.toastr.success("Has eliminado la foto de perfil");
+      },
+      (error) =>{
+        this.toastr.error("No se ha podido eliminar la de perfil");
+      }
+    )
+  }
+
+>>>>>>> 641afee9086b215a682a3867a79737d14d8484fc
   getFormProfile(): FormGroup {
     return this.fb.group({
       'email': ['', [Validators.required, Validators.email]],
@@ -229,6 +253,8 @@ export class ProfileComponent implements OnInit {
     this.newPasswordError = false;
     this.oldPasswordErrorMessage = [];
     this.newPasswordErrorMessage = [];
+
+    this.filename = "Selecciona un archivo.";
 
     this.emailError = false;
     this.usernameError = false;

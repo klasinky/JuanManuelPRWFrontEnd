@@ -68,3 +68,22 @@
     // overflow-wrap: break-word;
     line-break: auto;
 }
+
+:host ::ng-deep {
+
+  .p-button-outlined {
+    background-color: $secondary-color;
+    color: $primary-font-color;
+    border: none;
+
+    &:enabled:hover {
+      background-color: $primary-color-hover;
+      border: none;
+      color: $primary-font-color;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

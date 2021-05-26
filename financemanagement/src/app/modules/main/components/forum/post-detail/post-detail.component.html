@@ -16,7 +16,7 @@
 
               <div *ngIf="!loading" class=" my-1 ">
                 Autor: <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span
-                    class="fw-bold">@{{ post?.author?.username }}</span></a> | Última vez modificado
+                    class="fw-bold">@{{ post?.author?.username }}</span></a> | 
                 {{ post?.update_at| amLocale:'es' | amTimeAgo  }}
               </div>
             </div>
@@ -77,15 +77,22 @@
         <div *ngIf="!loadingRecommendation">
           <div *ngFor="let postR of postRecommendation" class="chat-vid anim" style="--delay: .4s">
             <div class="chat-vid__wrapper">
-              <img class="chat-vid__img" [routerLink]="['/dashboard/post/',postR?.id]" src="https://cdn.nohat.cc/thumb/f/720/3b55eddcfffa4e87897d.jpg" />
+              <img class="chat-vid__img img-fluid" [routerLink]="['/dashboard/post/',postR?.id]" *ngIf="postR.tags.length > 0" [src]="postR.tags[0].image" alt="" />
+              <img class="chat-vid__img img-fluid" [routerLink]="['/dashboard/post/',postR?.id]" *ngIf="postR.tags.length == 0" src="../../../../../../assets/img/defaultpost.png" alt="" />
               <div class="chat-vid__content">
                 <a class="chat-vid__name text-decoration-none" [routerLink]="['/dashboard/post/',postR?.id]">{{ postR?.title | titlecase }}</a>
                 <div class="chat-vid__by">
-                  <a class="text-light decoration" [routerLink]="['/dashboard/user/',post?.author?.username]"><span>@{{post?.author?.username}}</span></a>
+                  <a class="text-light decoration" [routerLink]="['/dashboard/user/',postR?.author?.username]"><span class="fw-bold">@{{postR?.author?.username}}</span></a>
                 </div>
-                <div class="chat-vid__info">{{ postR?.likes }} likes <span class="seperate"></span>{{ post?.created_at | amLocale:'es' | amTimeAgo }}</div>
+                <div class="chat-vid__info">{{ postR?.likes }} likes <span class="seperate"></span>{{ postR?.created_at | amLocale:'es' | amTimeAgo }}</div>
               </div>
             </div>
+          </div>
+        </div>
+        <div *ngIf="!loadingRecommendation && postRecommendation?.length == 0">
+          <div class="text-center">
+            <img src="../../../../../../assets/img/no-post.png" alt="No posts" class="img-fluid">
+            <h4 class="mt-2">No existen posts similares</h4>
           </div>
         </div>
         <div *ngIf="loadingRecommendation">
@@ -95,7 +102,7 @@
         <!-- <div class="chat-vid__button anim" style="--delay: .6s">See All related videos (32)</div> -->
       </div>
     </div>
-
+    
     <div class="col-md-12 ">
       <hr>
       <div class="row">
