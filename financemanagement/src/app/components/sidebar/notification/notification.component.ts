@@ -20,9 +20,11 @@ export class NotificationComponent implements OnInit {
   }
 
   toLink() {
+    
     let url = "";
     if (this.notification?.notification_type == 'comment'
-      || this.notification?.notification_type == 'post') {
+      || this.notification?.notification_type == 'post'
+      || this.notification?.notification_type == 'mention') {
 
       url = '/dashboard/post/' + this.notification.id_type;
     } else {

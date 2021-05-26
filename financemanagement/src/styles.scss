@@ -558,3 +558,12 @@ $angleActive: 25deg;
 .cursor-pointer{
   cursor: pointer;
 }
+
+.btn-ligth-fin{
+  background-color: $light-primary-color;
+  color: $primary-font-color;
+
+  &:hover{
+    background-color: darken( $light-primary-color, 25%); /* Color de fondo al pasar el cursor */
+  }
+}
